@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Health Reports</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FAFB", "teal": "#0D9488", "navy": "#1E3A5F", "coral": "#F87171", "amber": "#F59E0B", "safe": "#22C55E" }, fontFamily: { "sans": ["DM Sans", "sans-serif"], "display": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FAFB
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-navy overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical" role="main">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2"><button aria-label="Back"><span
+                    class="material-symbols-outlined !text-xl text-navy/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold">Health Reports</h1><button aria-label="Share"><span
+                    class="material-symbols-outlined !text-xl text-navy/20">share</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Summary Score -->
+            <div class="bg-white rounded-2xl shadow-sm p-5 text-center" role="region" aria-label="Health score">
+                <p class="text-[10px] text-navy/25 uppercase tracking-wider">Overall Health Score</p>
+                <div class="relative mx-auto w-24 h-24 my-3"><svg width="96" height="96" viewBox="0 0 96 96">
+                        <circle cx="48" cy="48" r="42" fill="none" stroke="#e8f0f2" stroke-width="6" />
+                        <circle cx="48" cy="48" r="42" fill="none" stroke="#0D9488" stroke-width="6"
+                            stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="34"
+                            transform="rotate(-90 48 48)" />
+                    </svg>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <p class="text-2xl font-display font-bold text-teal">87</p>
+                    </div>
+                </div>
+                <p class="text-xs text-safe font-bold">Good · ↑ 4 pts from last month</p>
+            </div>
+
+            <!-- Trend Charts -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <p class="text-[10px] text-navy/25 uppercase tracking-wider mb-2">Blood Pressure · 6 Months</p>
+                <canvas id="bpChart" class="w-full" style="height:90px"></canvas>
+                <div class="flex justify-between mt-1 text-[9px] text-navy/20">
+                    <span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-2 gap-2">
+                <div class="bg-white rounded-2xl shadow-sm p-3" role="region" aria-label="Heart rate">
+                    <p class="text-[10px] text-navy/25">Resting HR</p>
+                    <p class="text-xl font-display font-bold text-teal">68 <span
+                            class="text-[10px] text-navy/20">bpm</span></p>
+                    <p class="text-[9px] text-safe">Normal</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3" role="region" aria-label="BMI">
+                    <p class="text-[10px] text-navy/25">BMI</p>
+                    <p class="text-xl font-display font-bold">23.4</p>
+                    <p class="text-[9px] text-safe">Normal</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3" role="region" aria-label="Blood glucose">
+                    <p class="text-[10px] text-navy/25">Blood Glucose</p>
+                    <p class="text-xl font-display font-bold text-amber">102 <span
+                            class="text-[10px] text-navy/20">mg/dL</span></p>
+                    <p class="text-[9px] text-amber">Borderline</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3" role="region" aria-label="Cholesterol">
+                    <p class="text-[10px] text-navy/25">Cholesterol</p>
+                    <p class="text-xl font-display font-bold text-safe">185 <span
+                            class="text-[10px] text-navy/20">mg/dL</span></p>
+                    <p class="text-[9px] text-safe">Optimal</p>
+                </div>
+            </div>
+
+            <!-- Recent Labs -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <p class="text-[10px] text-navy/25 uppercase tracking-wider mb-2">Recent Lab Results</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3 p-2 bg-teal/5 rounded-xl"><span
+                            class="material-symbols-outlined !text-lg text-teal">science</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Complete Blood Count</p>
+                            <p class="text-[10px] text-navy/20">Jan 15, 2026 · Dr. Patel</p>
+                        </div><span class="px-2 py-0.5 bg-safe/10 rounded text-[9px] text-safe font-bold">Normal</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 bg-amber/5 rounded-xl"><span
+                            class="material-symbols-outlined !text-lg text-amber">biotech</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">A1C Test</p>
+                            <p class="text-[10px] text-navy/20">Jan 15, 2026 · Dr. Patel</p>
+                        </div><span
+                            class="px-2 py-0.5 bg-amber/10 rounded text-[9px] text-amber font-bold">Review</span>
+                    </div>
+                </div>
+            </div>
+
+            <button
+                class="w-full py-3 bg-teal text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2"><span
+                    class="material-symbols-outlined !text-lg">download</span> Export PDF Report</button>
+        </div>
+    </div>
+    <script>
+        const c = document.getElementById('bpChart'); c.width = c.offsetWidth * 2; c.height = 90 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2); const W = c.offsetWidth, H = 90;
+        const sys = [128, 132, 126, 130, 124, 122], dia = [82, 85, 80, 83, 78, 76];
+        const pts = 6;
+        function drawLine(d, color, a) { x.beginPath(); d.forEach((v, i) => { const px = i * W / (pts - 1), py = H - (v - 60) / (160 - 60) * H; i === 0 ? x.moveTo(px, py) : x.lineTo(px, py) }); x.strokeStyle = color; x.lineWidth = 2; x.globalAlpha = a; x.stroke(); x.globalAlpha = 1 }
+        drawLine(sys, '#0D9488', 0.7); drawLine(dia, '#F59E0B', 0.5);
+        x.fillStyle = 'rgba(13,148,136,0.5)'; x.font = 'bold 9px DM Sans'; x.fillText('Systolic', 5, 12);
+        x.fillStyle = 'rgba(245,158,11,0.5)'; x.fillText('Diastolic', 65, 12);
+    </script>
+</body>
+
+</html>

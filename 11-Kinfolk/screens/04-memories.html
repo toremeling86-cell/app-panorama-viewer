@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Photo Memories</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay {
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.06), -4px -4px 12px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 20px
+        }
+
+        .clay-sm {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05), -2px -2px 8px rgba(255, 255, 255, 0.7);
+            border-radius: 16px
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3px
+        }
+
+        .memory-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative
+        }
+
+        .memory-item .heart-emoji {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            font-size: 10px;
+            opacity: 0;
+            transition: opacity 0.3s
+        }
+
+        .memory-item:hover .heart-emoji {
+            opacity: 1
+        }
+
+        .featured {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 1
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <h1 class="text-xl font-display font-bold">Memories 📸</h1>
+            <div class="flex gap-2">
+                <button
+                    class="px-3 py-1.5 clay-sm bg-white text-[10px] font-display font-medium text-together">2026</button>
+                <button class="w-9 h-9 clay-sm bg-white flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-gray-400">filter_list</span></button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-4 pb-24">
+            <!-- Month -->
+            <p class="px-2 text-xs font-display font-semibold text-together/60 uppercase tracking-wider mb-2">February
+                2026</p>
+
+            <div class="memory-grid mb-4">
+                <!-- Featured -->
+                <div
+                    class="memory-item featured bg-gradient-to-br from-together/20 via-mama/10 to-warm/20 flex items-center justify-center relative">
+                    <span class="text-6xl">🎂</span>
+                    <div class="absolute bottom-2 left-3">
+                        <p class="text-xs font-display font-semibold text-white drop-shadow">Liam's Birthday!</p>
+                        <p class="text-[9px] text-white/80 drop-shadow">Feb 12 · All family</p>
+                    </div>
+                    <span class="heart-emoji">❤️</span>
+                </div>
+                <div class="memory-item bg-gradient-to-br from-papa/20 to-ocean/20 flex items-center justify-center">
+                    <span class="text-2xl">⛷️</span><span class="heart-emoji">❤️</span></div>
+                <div class="memory-item bg-gradient-to-br from-kid/20 to-kid/10 flex items-center justify-center"><span
+                        class="text-2xl">🎨</span><span class="heart-emoji">❤️</span></div>
+                <div class="memory-item bg-gradient-to-br from-mama/15 to-cherry/10 flex items-center justify-center">
+                    <span class="text-2xl">🍰</span></div>
+                <div class="memory-item bg-gradient-to-br from-warm/20 to-warm/10 flex items-center justify-center">
+                    <span class="text-2xl">🐕</span></div>
+            </div>
+
+            <p class="px-2 text-xs font-display font-semibold text-together/60 uppercase tracking-wider mb-2">January
+                2026</p>
+            <div class="memory-grid mb-4">
+                <div class="memory-item bg-gradient-to-br from-papa/20 to-together/10 flex items-center justify-center">
+                    <span class="text-2xl">🎿</span></div>
+                <div class="memory-item bg-gradient-to-br from-kid/15 to-kid/5 flex items-center justify-center"><span
+                        class="text-2xl">📚</span></div>
+                <div class="memory-item bg-gradient-to-br from-mama/20 to-mama/10 flex items-center justify-center">
+                    <span class="text-2xl">🧁</span></div>
+                <div
+                    class="memory-item featured bg-gradient-to-br from-together/30 via-papa/10 to-warm/20 flex items-center justify-center relative">
+                    <span class="text-6xl">🎉</span>
+                    <div class="absolute bottom-2 left-3">
+                        <p class="text-xs font-display font-semibold text-white drop-shadow">New Year's Eve!</p>
+                        <p class="text-[9px] text-white/80 drop-shadow">Dec 31 · Whole family</p>
+                    </div>
+                </div>
+                <div class="memory-item bg-gradient-to-br from-warm/15 to-warm/5 flex items-center justify-center"><span
+                        class="text-2xl">☃️</span></div>
+                <div class="memory-item bg-gradient-to-br from-kid/20 to-warm/10 flex items-center justify-center"><span
+                        class="text-2xl">🎮</span></div>
+                <div class="memory-item bg-gradient-to-br from-mama/10 to-together/10 flex items-center justify-center">
+                    <span class="text-2xl">🧶</span></div>
+            </div>
+
+            <!-- Throwback -->
+            <div class="bg-white clay p-4 mb-4">
+                <div class="flex items-center gap-2 mb-2"><span class="text-lg">💫</span>
+                    <p class="text-sm font-display font-semibold">1 Year Ago Today</p>
+                </div>
+                <div class="flex gap-2">
+                    <div
+                        class="w-20 h-20 rounded-xl bg-gradient-to-br from-together/20 to-kid/20 flex items-center justify-center text-2xl">
+                        🏖️</div>
+                    <div>
+                        <p class="text-xs font-medium">Beach Day with Family</p>
+                        <p class="text-[10px] text-gray-400">Feb 19, 2025</p>
+                        <p class="text-[10px] text-together mt-1 font-medium">View memory →</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-family/90 backdrop-blur border-t border-gray-100">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">home</span><span
+                        class="text-[10px] text-gray-300">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">calendar_month</span><span
+                        class="text-[10px] text-gray-300">Calendar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">task_alt</span><span
+                        class="text-[10px] text-gray-300">Chores</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-together"
+                        style="font-variation-settings:'FILL' 1">photo_library</span><span
+                        class="text-[10px] font-display font-medium text-together">Photos</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">settings</span><span
+                        class="text-[10px] text-gray-300">Settings</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Sleep Compare</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "midnight": "#0B0D1A", "indigo": "#4F46E5", "lavender": "#A78BFA", "luna": "#C4B5FD", "dawn": "#F472B6", "safe": "#22C55E", "warning": "#F59E0B" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0D1A
+        }
+
+        .glass-card {
+            background: rgba(79, 70, 229, 0.04);
+            border: 1px solid rgba(167, 139, 250, 0.08);
+            border-radius: 20px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-midnight">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider uppercase text-lavender/50">Weekly Compare</h1>
+            <button class="text-xs text-lavender/30">Month →</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Week Summary -->
+            <div class="glass-card p-5 text-center">
+                <p class="text-[10px] text-lavender/20 uppercase tracking-wider mb-1">This Week Average</p>
+                <p class="text-4xl font-bold">7h 24m</p>
+                <div class="flex items-center justify-center gap-1 mt-1"><span
+                        class="material-symbols-outlined !text-sm text-safe">trending_up</span><span
+                        class="text-xs text-safe">+32 min vs last week</span></div>
+            </div>
+
+            <!-- Daily Bars -->
+            <div class="glass-card p-4">
+                <p class="text-[10px] text-lavender/20 uppercase tracking-wider mb-3">Daily Breakdown</p>
+                <canvas id="weekChart" class="w-full" style="height:120px"></canvas>
+            </div>
+
+            <!-- Comparison Cards -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass-card p-3 text-center">
+                    <p class="text-[10px] text-lavender/20">Deep Sleep</p>
+                    <p class="text-lg font-bold text-indigo">1h 52m</p>
+                    <p class="text-[9px] text-safe">↑ 15%</p>
+                </div>
+                <div class="glass-card p-3 text-center">
+                    <p class="text-[10px] text-lavender/20">REM Sleep</p>
+                    <p class="text-lg font-bold text-dawn">2h 10m</p>
+                    <p class="text-[9px] text-safe">↑ 8%</p>
+                </div>
+                <div class="glass-card p-3 text-center">
+                    <p class="text-[10px] text-lavender/20">Sleep Score</p>
+                    <p class="text-lg font-bold text-luna">82</p>
+                    <p class="text-[9px] text-safe">↑ 5 pts</p>
+                </div>
+                <div class="glass-card p-3 text-center">
+                    <p class="text-[10px] text-lavender/20">Consistency</p>
+                    <p class="text-lg font-bold text-lavender">91%</p>
+                    <p class="text-[9px] text-warning">↓ 3%</p>
+                </div>
+            </div>
+
+            <!-- vs Your Average -->
+            <div class="glass-card p-4">
+                <p class="text-[10px] text-lavender/20 uppercase tracking-wider mb-3">vs. Your 30-Day Average</p>
+                <div class="space-y-2">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-lavender/30">Bedtime</span>
+                            <div><span class="text-lavender/50">11:15 PM</span><span
+                                    class="text-[10px] text-safe ml-2">22 min earlier</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-lavender/30">Wake Time</span>
+                            <div><span class="text-lavender/50">6:39 AM</span><span
+                                    class="text-[10px] text-safe ml-2">10 min later</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-lavender/30">Time to Fall
+                                Asleep</span>
+                            <div><span class="text-lavender/50">12 min</span><span class="text-[10px] text-safe ml-2">3
+                                    min faster</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-lavender/30">Night
+                                Wakings</span>
+                            <div><span class="text-lavender/50">1.2 avg</span><span
+                                    class="text-[10px] text-safe ml-2">0.5 fewer</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Tip -->
+            <div class="glass-card p-4 border-dawn/10">
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="material-symbols-outlined !text-sm text-dawn">tips_and_updates</span><span
+                        class="text-[10px] text-dawn font-bold uppercase">Insight</span></div>
+                <p class="text-xs text-white/25">Your earlier bedtimes this week correlated with 15% more deep sleep.
+                    Try maintaining 11 PM as your target!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('weekChart'); c.width = c.offsetWidth * 2; c.height = 120 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2); const W = c.offsetWidth, H = 120;
+        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const hrs = [6.5, 7.2, 7.8, 7.0, 8.0, 8.5, 7.0]; const maxH = 10;
+        const bw = (W - 60) / 7, gap = 6;
+        hrs.forEach((h, i) => {
+            const bh = (h / maxH) * (H - 30); const bx = 10 + i * (bw + gap); const by = H - bh - 15;
+            const g = x.createLinearGradient(0, by, 0, by + bh); g.addColorStop(0, 'rgba(167,139,250,0.6)'); g.addColorStop(1, 'rgba(79,70,229,0.2)');
+            x.fillStyle = g; x.beginPath(); x.roundRect(bx, by, bw - gap, bh, 6); x.fill();
+            x.fillStyle = 'rgba(167,139,250,0.3)'; x.font = '9px Plus Jakarta Sans'; x.textAlign = 'center';
+            x.fillText(days[i], bx + (bw - gap) / 2, H - 2);
+            x.fillStyle = 'rgba(196,181,253,0.5)'; x.font = 'bold 9px Plus Jakarta Sans';
+            x.fillText(h.toFixed(1) + 'h', bx + (bw - gap) / 2, by - 4);
+        });
+        x.setLineDash([3, 3]); x.strokeStyle = 'rgba(244,114,182,0.15)'; x.beginPath();
+        const avgY = H - ((7.4 / maxH) * (H - 30)) - 15; x.moveTo(0, avgY); x.lineTo(W, avgY); x.stroke();
+        x.fillStyle = 'rgba(244,114,182,0.3)'; x.font = '8px Plus Jakarta Sans'; x.textAlign = 'right'; x.fillText('avg 7.4h', W - 5, avgY - 4);
+    </script>
+</body>
+
+</html>

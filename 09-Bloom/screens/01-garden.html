@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — My Garden</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "chloro-light": "#4CAF50", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB;
+        }
+
+        .grain {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+
+        .leaf-shadow {
+            box-shadow: 0 8px 30px rgba(45, 139, 86, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .leaf-breathe {
+            animation: leafBreathe 4s ease-in-out infinite;
+        }
+
+        @keyframes leafBreathe {
+
+            0%,
+            100% {
+                transform: rotate(-2deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(2deg) scale(1.03);
+            }
+        }
+
+        .water-drop {
+            animation: dropFall 3s ease-in-out infinite;
+        }
+
+        @keyframes dropFall {
+            0% {
+                transform: translateY(-5px);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(15px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-bark grain overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-medium text-chloro tracking-[0.2em] uppercase">🌿 Bloom</p>
+                <h1 class="text-2xl font-serif font-bold mt-0.5 text-soil">My Garden</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="w-10 h-10 rounded-full bg-white leaf-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-bark/50">search</span></button>
+                <button class="w-10 h-10 rounded-full bg-white leaf-shadow flex items-center justify-center relative">
+                    <span class="material-symbols-outlined !text-xl text-bark/50">notifications</span>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-terra rounded-full"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Season Banner -->
+        <div
+            class="mx-6 mt-2 rounded-2xl overflow-hidden bg-gradient-to-r from-chloro to-chloro-light p-4 text-white relative">
+            <div class="absolute right-4 top-2 text-4xl leaf-breathe">🌱</div>
+            <p class="text-[10px] font-medium text-white/70 uppercase tracking-wider">Winter Season</p>
+            <h3 class="font-serif text-lg font-bold mt-1">6 plants need attention</h3>
+            <p class="text-xs text-white/80 mt-1">2 need watering · 1 needs repotting · 3 need light adjustment</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4 mt-4">
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white rounded-2xl p-3 leaf-shadow text-center">
+                    <p class="text-2xl font-serif font-bold text-chloro">14</p>
+                    <p class="text-[10px] text-bark/50 font-medium">Plants</p>
+                </div>
+                <div class="bg-white rounded-2xl p-3 leaf-shadow text-center">
+                    <p class="text-2xl font-serif font-bold text-terra">3</p>
+                    <p class="text-[10px] text-bark/50 font-medium">Need Care</p>
+                </div>
+                <div class="bg-white rounded-2xl p-3 leaf-shadow text-center">
+                    <p class="text-2xl font-serif font-bold text-amber">87%</p>
+                    <p class="text-[10px] text-bark/50 font-medium">Health</p>
+                </div>
+            </div>
+
+            <!-- Needs Attention -->
+            <div>
+                <h2 class="font-serif text-base font-bold text-soil mb-3">Needs Attention 💧</h2>
+                <div class="space-y-3">
+                    <div class="bg-white rounded-2xl p-4 leaf-shadow flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-chloro/10 flex items-center justify-center text-3xl">🪴
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-serif font-semibold text-soil">Monstera Deliciosa</h3>
+                            <p class="text-xs text-bark/50">Last watered 5 days ago</p>
+                            <div class="flex items-center gap-2 mt-1.5">
+                                <div class="flex-1 h-1.5 rounded-full bg-cream">
+                                    <div class="h-full rounded-full bg-terra" style="width:25%"></div>
+                                </div>
+                                <span class="text-[10px] font-mono text-terra font-medium">Low</span>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 rounded-full bg-chloro/10 flex items-center justify-center relative">
+                            <span class="material-symbols-outlined !text-xl text-chloro">water_drop</span>
+                            <span class="absolute w-1.5 h-1.5 bg-chloro rounded-full water-drop" style="top:0"></span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-4 leaf-shadow flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl bg-chloro/10 flex items-center justify-center text-3xl">🌵
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-serif font-semibold text-soil">Snake Plant</h3>
+                            <p class="text-xs text-bark/50">Needs more sunlight</p>
+                            <div class="flex items-center gap-2 mt-1.5">
+                                <div class="flex-1 h-1.5 rounded-full bg-cream">
+                                    <div class="h-full rounded-full bg-amber" style="width:50%"></div>
+                                </div>
+                                <span class="text-[10px] font-mono text-amber font-medium">Medium</span>
+                            </div>
+                        </div>
+                        <button class="w-10 h-10 rounded-full bg-amber/10 flex items-center justify-center">
+                            <span class="material-symbols-outlined !text-xl text-amber">light_mode</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thriving -->
+            <div>
+                <h2 class="font-serif text-base font-bold text-soil mb-3">Thriving 🌿</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white rounded-2xl p-4 leaf-shadow text-center">
+                        <div class="text-3xl mb-2">🌸</div>
+                        <p class="text-sm font-serif font-semibold text-soil">Orchid</p>
+                        <p class="text-[10px] text-chloro font-medium mt-1">● Excellent</p>
+                        <div class="h-1 rounded-full bg-cream mt-2">
+                            <div class="h-full rounded-full bg-chloro" style="width:95%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-4 leaf-shadow text-center">
+                        <div class="text-3xl mb-2">🌿</div>
+                        <p class="text-sm font-serif font-semibold text-soil">Pothos</p>
+                        <p class="text-[10px] text-chloro font-medium mt-1">● Thriving</p>
+                        <div class="h-1 rounded-full bg-cream mt-2">
+                            <div class="h-full rounded-full bg-chloro" style="width:88%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-4 leaf-shadow text-center">
+                        <div class="text-3xl mb-2">🌴</div>
+                        <p class="text-sm font-serif font-semibold text-soil">Palm</p>
+                        <p class="text-[10px] text-chloro font-medium mt-1">● Good</p>
+                        <div class="h-1 rounded-full bg-cream mt-2">
+                            <div class="h-full rounded-full bg-chloro" style="width:82%"></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl p-4 leaf-shadow text-center">
+                        <div class="text-3xl mb-2">🌻</div>
+                        <p class="text-sm font-serif font-semibold text-soil">Sunflower</p>
+                        <p class="text-[10px] text-chloro font-medium mt-1">● Growing</p>
+                        <div class="h-1 rounded-full bg-cream mt-2">
+                            <div class="h-full rounded-full bg-chloro-light" style="width:75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="bg-white rounded-2xl p-4 leaf-shadow border-l-4 border-chloro">
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="material-symbols-outlined !text-sm text-chloro">eco</span><span
+                        class="text-xs font-semibold text-chloro">Seasonal Tip</span></div>
+                <p class="text-xs text-bark/60 leading-relaxed font-serif italic">"Reduce watering frequency in winter.
+                    Most indoor plants need 50% less water during dormant months."</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-cream/90 backdrop-blur border-t border-bark/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-chloro"
+                        style="font-variation-settings: 'FILL' 1;">yard</span><span
+                        class="text-[10px] font-medium text-chloro">Garden</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">calendar_month</span><span
+                        class="text-[10px] text-bark/30">Calendar</span></button>
+                <button class="flex flex-col items-center gap-0.5 relative">
+                    <div class="w-12 h-12 -mt-4 rounded-full bg-chloro flex items-center justify-center leaf-shadow">
+                        <span class="material-symbols-outlined !text-2xl text-white">add</span></div><span
+                        class="text-[10px] text-bark/30 mt-0.5">Add</span>
+                </button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">menu_book</span><span
+                        class="text-[10px] text-bark/30">Guide</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">person</span><span
+                        class="text-[10px] text-bark/30">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

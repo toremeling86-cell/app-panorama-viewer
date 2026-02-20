@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Family Recipes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay-card {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.06), -3px -3px 10px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <h1 class="text-xl font-display font-bold">Family Recipes 👩‍🍳</h1><button
+                class="w-9 h-9 rounded-full bg-warm/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-warm">add</span></button>
+        </div>
+
+        <div class="flex gap-2 px-6 overflow-x-auto no-scrollbar pb-2">
+            <button
+                class="px-3 py-1.5 bg-warm text-white text-[10px] font-display font-bold rounded-full whitespace-nowrap">All</button>
+            <button
+                class="px-3 py-1.5 bg-white text-gray-300 text-[10px] rounded-full shadow-sm whitespace-nowrap">Grandma's</button>
+            <button
+                class="px-3 py-1.5 bg-white text-gray-300 text-[10px] rounded-full shadow-sm whitespace-nowrap">Dad's
+                BBQ</button>
+            <button
+                class="px-3 py-1.5 bg-white text-gray-300 text-[10px] rounded-full shadow-sm whitespace-nowrap">Holiday</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-1">
+            <!-- Featured -->
+            <div class="clay-card overflow-hidden">
+                <div class="h-36 bg-gradient-to-br from-warm/15 to-mama/10 flex items-center justify-center text-5xl">🥘
+                </div>
+                <div class="p-4">
+                    <div class="flex items-center gap-2"><span
+                            class="px-2 py-0.5 bg-warm/10 rounded text-[9px] text-warm font-bold">⭐ Family
+                            Favorite</span></div>
+                    <p class="text-lg font-display font-bold mt-1">Grandma's Sunday Stew</p>
+                    <p class="text-[10px] text-gray-300 mt-0.5">3 generations · Prep 20 min · Cook 2 hrs</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="w-5 h-5 rounded-full bg-mama/20 text-[8px] flex items-center justify-center">👵
+                        </div><span class="text-[10px] text-gray-300">Added by Grandma Rose · 1987</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div class="clay-card p-3">
+                    <div class="h-20 bg-papa/10 rounded-xl flex items-center justify-center text-3xl mb-2">🍖</div>
+                    <p class="text-sm font-display font-bold">Dad's Ribs</p>
+                    <p class="text-[9px] text-gray-300">BBQ · 4 hrs</p>
+                    <div class="flex items-center gap-1 mt-1">
+                        <div class="w-4 h-4 rounded-full bg-papa/20 text-[7px] flex items-center justify-center">👨
+                        </div><span class="text-[8px] text-gray-300">Dad</span>
+                    </div>
+                </div>
+                <div class="clay-card p-3">
+                    <div class="h-20 bg-warm/10 rounded-xl flex items-center justify-center text-3xl mb-2">🍪</div>
+                    <p class="text-sm font-display font-bold">Mom's Cookies</p>
+                    <p class="text-[9px] text-gray-300">Baking · 45 min</p>
+                    <div class="flex items-center gap-1 mt-1">
+                        <div class="w-4 h-4 rounded-full bg-mama/20 text-[7px] flex items-center justify-center">👩
+                        </div><span class="text-[8px] text-gray-300">Mom</span>
+                    </div>
+                </div>
+                <div class="clay-card p-3">
+                    <div class="h-20 bg-kid/10 rounded-xl flex items-center justify-center text-3xl mb-2">🥞</div>
+                    <p class="text-sm font-display font-bold">Emma's Pancakes</p>
+                    <p class="text-[9px] text-gray-300">Breakfast · 20 min</p>
+                    <div class="flex items-center gap-1 mt-1">
+                        <div class="w-4 h-4 rounded-full bg-kid/20 text-[7px] flex items-center justify-center">👧</div>
+                        <span class="text-[8px] text-gray-300">Emma</span>
+                    </div>
+                </div>
+                <div class="clay-card p-3">
+                    <div class="h-20 bg-together/10 rounded-xl flex items-center justify-center text-3xl mb-2">🫕</div>
+                    <p class="text-sm font-display font-bold">Holiday Fondue</p>
+                    <p class="text-[9px] text-gray-300">Special · 1 hr</p>
+                    <div class="flex items-center gap-1 mt-1">
+                        <div class="w-4 h-4 rounded-full bg-together/20 text-[7px] flex items-center justify-center">
+                            👨‍👩‍👧‍👦</div><span class="text-[8px] text-gray-300">Family</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Smart Alarm</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#6366F1", "lavender": "#C4B5FD", "night": "#0F0B2E", "moon": "#FDE68A" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0F0B2E;
+        }
+
+        .night-glow {
+            background: radial-gradient(ellipse at 50% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-active {
+            backdrop-filter: blur(20px);
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden night-glow">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-bold">Smart Alarm</h1>
+            <button
+                class="glass px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-1 text-primary"><span
+                    class="material-symbols-outlined !text-sm">add</span> New</button>
+        </div>
+
+        <!-- Main Alarm -->
+        <div class="mx-6 mb-4 glass-active rounded-2xl p-6 text-center">
+            <p class="text-xs text-primary tracking-widest uppercase font-medium mb-2">Primary Alarm</p>
+            <p class="text-6xl font-light font-mono text-lavender">07:00</p>
+            <p class="text-sm text-slate-500 mt-2">In 7h 45m · <span class="text-primary">Smart Wake Window</span></p>
+            <div class="flex items-center justify-center gap-1 mt-3">
+                <span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px]">Mon</span>
+                <span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px]">Tue</span>
+                <span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px]">Wed</span>
+                <span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px]">Thu</span>
+                <span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px]">Fri</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-600 text-[10px]">Sat</span>
+                <span class="px-2 py-0.5 rounded bg-white/5 text-slate-600 text-[10px]">Sun</span>
+            </div>
+            <div class="flex items-center justify-center gap-4 mt-4">
+                <span class="text-xs text-slate-500 flex items-center gap-1"><span
+                        class="material-symbols-outlined !text-sm text-primary">auto_awesome</span>Smart Wake</span>
+                <span class="text-xs text-slate-500 flex items-center gap-1"><span
+                        class="material-symbols-outlined !text-sm text-moon">wb_twilight</span>Sunrise tone</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Other Alarms -->
+            <div class="glass-bright rounded-xl p-4 flex items-center justify-between">
+                <div>
+                    <p class="text-2xl font-light font-mono">06:30</p>
+                    <p class="text-xs text-slate-500">Weekdays · Gentle Chimes</p>
+                </div>
+                <div class="w-12 h-7 rounded-full bg-white/10 flex items-center p-0.5">
+                    <div class="w-6 h-6 rounded-full bg-slate-500 transition-all"></div>
+                </div>
+            </div>
+
+            <div class="glass-bright rounded-xl p-4 flex items-center justify-between">
+                <div>
+                    <p class="text-2xl font-light font-mono text-lavender">08:30</p>
+                    <p class="text-xs text-slate-500">Weekends · Forest Birds</p>
+                </div>
+                <div class="w-12 h-7 rounded-full bg-primary/30 flex items-center justify-end p-0.5">
+                    <div class="w-6 h-6 rounded-full bg-primary transition-all"></div>
+                </div>
+            </div>
+
+            <div class="glass-bright rounded-xl p-4 flex items-center justify-between">
+                <div>
+                    <p class="text-2xl font-light font-mono">22:30</p>
+                    <p class="text-xs text-slate-500">Every day · Wind Down Reminder</p>
+                </div>
+                <div class="w-12 h-7 rounded-full bg-primary/30 flex items-center justify-end p-0.5">
+                    <div class="w-6 h-6 rounded-full bg-primary transition-all"></div>
+                </div>
+            </div>
+
+            <!-- Smart Wake Info -->
+            <div class="glass rounded-2xl p-4 border-l-2 border-primary mt-2">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-lg text-primary">auto_awesome</span><span
+                        class="text-xs font-display font-semibold text-primary">Smart Wake Technology</span></div>
+                <p class="text-xs text-slate-400 leading-relaxed">Smart Wake monitors your sleep cycles and wakes you
+                    during light sleep for a more natural, refreshed awakening. The alarm fires within a 30-minute
+                    window before your set time.</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">bedtime</span><span
+                        class="text-[10px] text-slate-500">Sleep</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">insights</span><span
+                        class="text-[10px] text-slate-500">Trends</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">music_note</span><span
+                        class="text-[10px] text-slate-500">Sounds</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">alarm</span><span
+                        class="text-[10px] font-medium text-primary">Alarm</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">person</span><span
+                        class="text-[10px] text-slate-500">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

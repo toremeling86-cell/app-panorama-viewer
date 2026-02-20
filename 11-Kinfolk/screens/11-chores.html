@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Chores</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay-card {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.06), -3px -3px 10px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <h1 class="text-xl font-display font-bold">Chores 🧹</h1><button
+                class="w-9 h-9 rounded-full bg-warm/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-warm">add</span></button>
+        </div>
+
+        <!-- Family members -->
+        <div class="flex gap-3 px-6 pb-2">
+            <button class="flex flex-col items-center gap-0.5">
+                <div class="w-10 h-10 rounded-full bg-papa/15 flex items-center justify-center text-sm">👨</div><span
+                    class="text-[8px] text-papa font-bold">Dad · 3</span>
+            </button>
+            <button class="flex flex-col items-center gap-0.5">
+                <div class="w-10 h-10 rounded-full bg-mama/15 flex items-center justify-center text-sm">👩</div><span
+                    class="text-[8px] text-mama font-bold">Mom · 2</span>
+            </button>
+            <button class="flex flex-col items-center gap-0.5">
+                <div class="w-10 h-10 rounded-full bg-kid/15 flex items-center justify-center text-sm">👧</div><span
+                    class="text-[8px] text-kid font-bold">Emma · 4</span>
+            </button>
+            <button class="flex flex-col items-center gap-0.5">
+                <div class="w-10 h-10 rounded-full bg-together/15 flex items-center justify-center text-sm">👦</div>
+                <span class="text-[8px] text-together font-bold">Jack · 2</span>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <p class="text-[10px] text-gray-300 font-display uppercase tracking-wider">Today · Feb 19</p>
+
+            <div class="clay-card p-3 flex items-center gap-3">
+                <div class="w-6 h-6 rounded-lg bg-kid/15 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-sm text-kid">check</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold line-through text-gray-300">Make bed</p>
+                    <p class="text-[9px] text-gray-200">Emma · Done 8:15 AM</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-kid/15 text-[8px] flex items-center justify-center">👧</div>
+            </div>
+
+            <div class="clay-card p-3 flex items-center gap-3">
+                <div class="w-6 h-6 rounded-lg bg-papa/15 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-sm text-papa">check</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold line-through text-gray-300">Dishes</p>
+                    <p class="text-[9px] text-gray-200">Dad · Done 9:30 AM</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-papa/15 text-[8px] flex items-center justify-center">👨</div>
+            </div>
+
+            <div class="clay-card p-3 flex items-center gap-3 border-2 border-warm/15">
+                <div class="w-6 h-6 rounded-lg bg-white border border-gray-100"></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Vacuum living room</p>
+                    <p class="text-[9px] text-gray-300">Emma · Due by 5 PM</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-kid/15 text-[8px] flex items-center justify-center">👧</div>
+            </div>
+
+            <div class="clay-card p-3 flex items-center gap-3">
+                <div class="w-6 h-6 rounded-lg bg-white border border-gray-100"></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Take out trash</p>
+                    <p class="text-[9px] text-gray-300">Jack · Due by 6 PM</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-together/15 text-[8px] flex items-center justify-center">👦</div>
+            </div>
+
+            <div class="clay-card p-3 flex items-center gap-3">
+                <div class="w-6 h-6 rounded-lg bg-white border border-gray-100"></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Fold laundry</p>
+                    <p class="text-[9px] text-gray-300">Mom · Due by 7 PM</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-mama/15 text-[8px] flex items-center justify-center">👩</div>
+            </div>
+
+            <!-- Weekly Stats -->
+            <div class="clay-card p-4 mt-1">
+                <p class="text-[10px] text-gray-300 font-display uppercase tracking-wider mb-2">This Week's Stars ⭐</p>
+                <div class="flex justify-between">
+                    <div class="text-center">
+                        <div class="w-10 h-10 rounded-full bg-kid/15 flex items-center justify-center text-sm mb-1">👧
+                        </div>
+                        <p class="text-xs font-display font-bold text-kid">12</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-10 h-10 rounded-full bg-papa/15 flex items-center justify-center text-sm mb-1">👨
+                        </div>
+                        <p class="text-xs font-display font-bold text-papa">9</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-10 h-10 rounded-full bg-mama/15 flex items-center justify-center text-sm mb-1">👩
+                        </div>
+                        <p class="text-xs font-display font-bold text-mama">8</p>
+                    </div>
+                    <div class="text-center">
+                        <div
+                            class="w-10 h-10 rounded-full bg-together/15 flex items-center justify-center text-sm mb-1">
+                            👦</div>
+                        <p class="text-xs font-display font-bold text-together">7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

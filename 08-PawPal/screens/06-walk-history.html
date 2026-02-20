@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Walk History</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "pawbg": "#FFF8F0", "bark": "#8B5E3C", "ocean": "#4A90D9", "leaf": "#5CB85C", "sunny": "#FFD93D", "rose": "#FF7E7E" }, fontFamily: { "display": ["Quicksand", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0
+        }
+
+        .paw-shadow {
+            box-shadow: 0 4px 16px rgba(139, 94, 60, 0.08)
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-pawbg">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-bark/40">arrow_back</span></button>
+            <h1 class="font-display text-base font-bold">Walk History 🐾</h1>
+            <button class="text-xs text-ocean font-display font-bold">This Week</button>
+        </div>
+
+        <!-- Weekly Summary -->
+        <div class="mx-6 bg-white rounded-2xl paw-shadow p-4 mb-3">
+            <div class="flex items-center justify-between mb-3">
+                <p class="text-xs font-display font-bold text-bark/40 uppercase tracking-wider">This Week</p>
+            </div>
+            <div class="grid grid-cols-4 gap-2 text-center">
+                <div>
+                    <p class="text-xl font-display font-bold text-ocean">14</p>
+                    <p class="text-[9px] text-bark/30">Walks</p>
+                </div>
+                <div>
+                    <p class="text-xl font-display font-bold text-leaf">18.4</p>
+                    <p class="text-[9px] text-bark/30">km</p>
+                </div>
+                <div>
+                    <p class="text-xl font-display font-bold text-sunny">4h12</p>
+                    <p class="text-[9px] text-bark/30">Time</p>
+                </div>
+                <div>
+                    <p class="text-xl font-display font-bold text-bark">🔥 7</p>
+                    <p class="text-[9px] text-bark/30">Day Streak</p>
+                </div>
+            </div>
+            <canvas id="weekChart" class="w-full mt-3" style="height:60px"></canvas>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <p class="text-[10px] font-display font-semibold text-bark/30 uppercase tracking-wider mb-1">Today</p>
+
+            <div class="bg-white rounded-2xl paw-shadow p-3 flex items-center gap-3">
+                <div
+                    class="w-12 h-12 rounded-xl bg-gradient-to-br from-ocean/20 to-ocean/5 flex items-center justify-center text-xl">
+                    🏞️</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Morning Walk</p>
+                    <div class="flex items-center gap-2 mt-0.5"><span class="text-[10px] text-bark/30">7:30
+                            AM</span><span class="text-[10px] text-bark/15">·</span><span
+                            class="text-[10px] text-bark/30">45 min</span><span
+                            class="text-[10px] text-bark/15">·</span><span class="text-[10px] text-bark/30">2.8
+                            km</span></div>
+                    <div class="flex gap-1 mt-1"><span
+                            class="px-1.5 py-0.5 bg-leaf/10 rounded text-[8px] text-leaf font-medium">🐾 8,400
+                            steps</span><span
+                            class="px-1.5 py-0.5 bg-sunny/10 rounded text-[8px] text-sunny font-medium">⚡ Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl paw-shadow p-3 flex items-center gap-3">
+                <div
+                    class="w-12 h-12 rounded-xl bg-gradient-to-br from-leaf/20 to-leaf/5 flex items-center justify-center text-xl">
+                    🌳</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Park Time</p>
+                    <div class="flex items-center gap-2 mt-0.5"><span class="text-[10px] text-bark/30">12:00
+                            PM</span><span class="text-[10px] text-bark/15">·</span><span
+                            class="text-[10px] text-bark/30">25 min</span><span
+                            class="text-[10px] text-bark/15">·</span><span class="text-[10px] text-bark/30">1.2
+                            km</span></div>
+                    <div class="flex gap-1 mt-1"><span
+                            class="px-1.5 py-0.5 bg-leaf/10 rounded text-[8px] text-leaf font-medium">🐾 4,200
+                            steps</span></div>
+                </div>
+            </div>
+
+            <p class="text-[10px] font-display font-semibold text-bark/20 uppercase tracking-wider mt-2 mb-1">Yesterday
+            </p>
+
+            <div class="bg-white/60 rounded-2xl paw-shadow p-3 flex items-center gap-3 opacity-70">
+                <div
+                    class="w-12 h-12 rounded-xl bg-gradient-to-br from-sunny/20 to-sunny/5 flex items-center justify-center text-xl">
+                    🌅</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Sunset Walk</p>
+                    <div class="flex items-center gap-2 mt-0.5"><span class="text-[10px] text-bark/25">5:30
+                            PM</span><span class="text-[10px] text-bark/10">·</span><span
+                            class="text-[10px] text-bark/25">55 min</span><span
+                            class="text-[10px] text-bark/10">·</span><span class="text-[10px] text-bark/25">3.4
+                            km</span></div>
+                </div>
+            </div>
+
+            <div class="bg-white/60 rounded-2xl paw-shadow p-3 flex items-center gap-3 opacity-70">
+                <div
+                    class="w-12 h-12 rounded-xl bg-gradient-to-br from-ocean/15 to-ocean/5 flex items-center justify-center text-xl">
+                    🏃</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Quick Loop</p>
+                    <div class="flex items-center gap-2 mt-0.5"><span class="text-[10px] text-bark/25">8:00
+                            AM</span><span class="text-[10px] text-bark/10">·</span><span
+                            class="text-[10px] text-bark/25">15 min</span><span
+                            class="text-[10px] text-bark/10">·</span><span class="text-[10px] text-bark/25">0.8
+                            km</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('weekChart'); c.width = c.offsetWidth * 2; c.height = 60 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2);
+        const W = c.offsetWidth, H = 60;
+        const d = [2.1, 3.4, 1.8, 2.8, 4.2, 3.1, 4.0];
+        const mx = Math.max(...d);
+        const bw = (W - 8 * 6) / 7;
+        d.forEach((v, i) => {
+            const bh = (v / mx) * (H - 16);
+            const bx = i * (bw + 8);
+            const by = H - bh - 4;
+            const g = x.createLinearGradient(0, by, 0, H - 4);
+            g.addColorStop(0, '#4A90D9'); g.addColorStop(1, 'rgba(74,144,217,0.3)');
+            x.fillStyle = g;
+            x.beginPath(); x.roundRect(bx, by, bw, bh, [4]); x.fill();
+            x.fillStyle = 'rgba(139,94,60,0.2)'; x.font = '8px Quicksand';
+            const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            x.fillText(labels[i], bx + bw / 2 - 8, H - 0);
+        });
+    </script>
+</body>
+
+</html>

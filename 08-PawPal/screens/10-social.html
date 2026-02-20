@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Pet Social</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "pawbg": "#FFF8F0", "bark": "#8B5E3C", "ocean": "#4A90D9", "leaf": "#5CB85C", "rose": "#FF7E7E", "sunny": "#FFD93D" }, fontFamily: { "display": ["Quicksand", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0
+        }
+
+        .paw-card {
+            box-shadow: 0 2px 12px rgba(139, 94, 60, 0.08);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-pawbg">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <h1 class="text-xl font-display font-bold">Paw Friends 🐾</h1><button
+                class="w-9 h-9 rounded-full bg-ocean/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-ocean">search</span></button>
+        </div>
+
+        <!-- Nearby -->
+        <div class="flex gap-3 px-6 overflow-x-auto no-scrollbar pb-3">
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-ocean to-leaf">
+                    <div class="w-full h-full rounded-full bg-pawbg flex items-center justify-center text-lg">🐕</div>
+                </div><span class="text-[8px] text-bark/30">Max</span><span class="text-[7px] text-leaf">0.2 mi</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-rose to-sunny">
+                    <div class="w-full h-full rounded-full bg-pawbg flex items-center justify-center text-lg">🐈</div>
+                </div><span class="text-[8px] text-bark/30">Luna</span><span class="text-[7px] text-leaf">0.5 mi</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-sunny to-ocean">
+                    <div class="w-full h-full rounded-full bg-pawbg flex items-center justify-center text-lg">🐕‍🦺
+                    </div>
+                </div><span class="text-[8px] text-bark/30">Charlie</span><span class="text-[7px] text-leaf">0.8
+                    mi</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-leaf to-ocean">
+                    <div class="w-full h-full rounded-full bg-pawbg flex items-center justify-center text-lg">🐩</div>
+                </div><span class="text-[8px] text-bark/30">Bella</span><span class="text-[7px] text-leaf">1.2 mi</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Post -->
+            <div class="paw-card p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-ocean/15 flex items-center justify-center text-sm">🐕</div>
+                    <div class="flex-1">
+                        <p class="text-xs font-display font-bold">Max's Human</p>
+                        <p class="text-[9px] text-bark/20">30 min ago · Park Walk</p>
+                    </div>
+                </div>
+                <div
+                    class="h-36 bg-gradient-to-br from-leaf/10 to-ocean/5 rounded-xl flex items-center justify-center text-5xl mb-2">
+                    🐕🌳</div>
+                <p class="text-xs text-bark/40">Max made a new friend at Central Park! They played fetch for an hour 🎾
+                </p>
+                <div class="flex items-center gap-4 mt-2"><button class="flex items-center gap-1 text-rose"><span
+                            class="text-sm">❤️</span><span class="text-[10px]">48</span></button><button
+                        class="flex items-center gap-1 text-bark/20"><span class="text-sm">💬</span><span
+                            class="text-[10px]">12</span></button><button
+                        class="flex items-center gap-1 text-bark/20"><span class="text-sm">🔗</span></button></div>
+            </div>
+
+            <!-- Playdate -->
+            <div class="paw-card p-4 border border-ocean/10">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-sm text-ocean">event</span><span
+                        class="text-[10px] text-ocean font-display font-bold">UPCOMING PLAYDATE</span></div>
+                <p class="text-sm font-display font-bold">Dog Park Meetup</p>
+                <p class="text-[10px] text-bark/25 mt-0.5">Saturday · 10 AM · Riverside Park</p>
+                <div class="flex -space-x-1.5 mt-2">
+                    <div
+                        class="w-7 h-7 rounded-full bg-ocean/10 border-2 border-white text-[10px] flex items-center justify-center">
+                        🐕</div>
+                    <div
+                        class="w-7 h-7 rounded-full bg-rose/10 border-2 border-white text-[10px] flex items-center justify-center">
+                        🐈</div>
+                    <div
+                        class="w-7 h-7 rounded-full bg-sunny/10 border-2 border-white text-[10px] flex items-center justify-center">
+                        🐕‍🦺</div><span class="px-2 text-[9px] text-bark/20">+5 going</span>
+                </div>
+                <button class="w-full mt-2 py-2 bg-ocean/10 text-ocean font-display font-bold rounded-xl text-xs">Join
+                    Meetup</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Exercise Library</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00F0FF", "bg-void": "#050B14", "violet": "#A855F7", "pink": "#EC4899" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #050B14;
+        }
+
+        .bio-glow {
+            background: radial-gradient(ellipse at 70% 10%, rgba(0, 240, 255, 0.06) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bio-glow">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-bold">Exercise Library</h1>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">filter_list</span></button>
+        </div>
+
+        <!-- Search -->
+        <div class="px-6 pb-4">
+            <div class="glass rounded-xl px-4 py-3 flex items-center gap-3">
+                <span class="material-symbols-outlined !text-xl text-slate-500">search</span>
+                <input type="text" placeholder="Search exercises..."
+                    class="bg-transparent text-sm outline-none w-full placeholder-slate-600" />
+            </div>
+        </div>
+
+        <!-- Muscle Group Chips -->
+        <div class="px-6 pb-4">
+            <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium bg-primary/20 text-primary whitespace-nowrap">All</button>
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">Chest</button>
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">Back</button>
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">Legs</button>
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">Shoulders</button>
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">Arms</button>
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">Core</button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Exercise Cards -->
+            <div class="glass-bright rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined !text-3xl text-primary">fitness_center</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Barbell Bench Press</h3>
+                    <p class="text-xs text-slate-500">Chest · Compound</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">PR: 100kg</span>
+                        <span class="text-[9px] bg-violet/10 text-violet px-1.5 py-0.5 rounded-full">Intermediate</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-violet/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined !text-3xl text-violet">exercise</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Pull-Ups</h3>
+                    <p class="text-xs text-slate-500">Back · Bodyweight</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">PR: 15
+                            reps</span>
+                        <span class="text-[9px] bg-pink/10 text-pink px-1.5 py-0.5 rounded-full">Advanced</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-pink/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined !text-3xl text-pink">directions_run</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Barbell Squat</h3>
+                    <p class="text-xs text-slate-500">Legs · Compound</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">PR: 120kg</span>
+                        <span class="text-[9px] bg-violet/10 text-violet px-1.5 py-0.5 rounded-full">Intermediate</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined !text-3xl text-amber-400">sports_martial_arts</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Romanian Deadlift</h3>
+                    <p class="text-xs text-slate-500">Hamstrings · Compound</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">PR: 100kg</span>
+                        <span class="text-[9px] bg-violet/10 text-violet px-1.5 py-0.5 rounded-full">Intermediate</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined !text-3xl text-green-400">self_improvement</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Overhead Press</h3>
+                    <p class="text-xs text-slate-500">Shoulders · Compound</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">PR: 60kg</span>
+                        <span
+                            class="text-[9px] bg-green-500/10 text-green-400 px-1.5 py-0.5 rounded-full">Beginner</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center gap-4">
+                <div class="w-16 h-16 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                    <span class="material-symbols-outlined !text-3xl text-blue-400">sports_gymnastics</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Cable Lateral Raise</h3>
+                    <p class="text-xs text-slate-500">Shoulders · Isolation</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="text-[9px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full">PR: 12kg</span>
+                        <span class="text-[9px] bg-violet/10 text-violet px-1.5 py-0.5 rounded-full">Intermediate</span>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">home</span><span
+                        class="text-[10px] text-slate-500">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">fitness_center</span><span
+                        class="text-[10px] text-slate-500">Workout</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">monitoring</span><span
+                        class="text-[10px] text-slate-500">Progress</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">exercise</span><span
+                        class="text-[10px] font-medium text-primary">Library</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">person</span><span
+                        class="text-[10px] text-slate-500">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

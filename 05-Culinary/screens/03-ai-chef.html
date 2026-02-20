@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — AI Chef</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "primary": "#16A249", "cream": "#FFFBF3", "accent": "#E8590C" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFFBF3;
+        }
+
+        .glass-warm {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 251, 243, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .typing-dot {
+            animation: blink 1.4s infinite both;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 0.2;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined !text-xl text-white">auto_awesome</span></div>
+                <div>
+                    <h1 class="text-lg font-serif font-bold">AI Chef</h1>
+                    <p class="text-[10px] text-gray-500">Powered by Culinary Intelligence</p>
+                </div>
+            </div>
+            <button class="w-10 h-10 rounded-full bg-white card-shadow flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-gray-600">more_vert</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- AI Welcome -->
+            <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1"><span
+                        class="material-symbols-outlined !text-sm text-white">auto_awesome</span></div>
+                <div class="bg-white rounded-2xl rounded-tl-md p-4 card-shadow max-w-[85%]">
+                    <p class="text-sm leading-relaxed">Hi Jordan! 👋 I'm your AI Chef. I can help you with:</p>
+                    <ul class="text-sm text-gray-600 mt-2 space-y-1">
+                        <li class="flex items-center gap-2"><span class="text-primary">🍳</span> Create recipes from
+                            your ingredients</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">🥗</span> Meal plans tailored to
+                            your diet</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">🎯</span> Nutritional guidance
+                            and tips</li>
+                        <li class="flex items-center gap-2"><span class="text-primary">🔄</span> Ingredient
+                            substitutions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- User Message -->
+            <div class="flex justify-end">
+                <div class="bg-primary text-white rounded-2xl rounded-tr-md px-4 py-3 max-w-[80%]">
+                    <p class="text-sm">I have chicken, broccoli, garlic and rice. What can I make for dinner?</p>
+                </div>
+            </div>
+
+            <!-- AI Response -->
+            <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1"><span
+                        class="material-symbols-outlined !text-sm text-white">auto_awesome</span></div>
+                <div class="bg-white rounded-2xl rounded-tl-md p-4 card-shadow max-w-[85%]">
+                    <p class="text-sm leading-relaxed">Great ingredients! Here are 3 recipes I can make:</p>
+                    <!-- Mini Recipe Cards -->
+                    <div class="space-y-2 mt-3">
+                        <button class="w-full flex items-center gap-3 bg-primary/5 rounded-xl p-3 text-left">
+                            <span class="text-2xl">🍗</span>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold">Garlic Butter Chicken & Rice</p>
+                                <p class="text-[10px] text-gray-500">25 min · 480 kcal</p>
+                            </div>
+                            <span class="material-symbols-outlined !text-lg text-primary">chevron_right</span>
+                        </button>
+                        <button class="w-full flex items-center gap-3 bg-primary/5 rounded-xl p-3 text-left">
+                            <span class="text-2xl">🥘</span>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold">Chicken Broccoli Stir Fry</p>
+                                <p class="text-[10px] text-gray-500">20 min · 350 kcal</p>
+                            </div>
+                            <span class="material-symbols-outlined !text-lg text-primary">chevron_right</span>
+                        </button>
+                        <button class="w-full flex items-center gap-3 bg-primary/5 rounded-xl p-3 text-left">
+                            <span class="text-2xl">🍲</span>
+                            <div class="flex-1">
+                                <p class="text-sm font-semibold">Chicken Rice Bowl</p>
+                                <p class="text-[10px] text-gray-500">30 min · 520 kcal</p>
+                            </div>
+                            <span class="material-symbols-outlined !text-lg text-primary">chevron_right</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-3">Tap any recipe for full instructions ✨</p>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1"><span
+                        class="material-symbols-outlined !text-sm text-white">auto_awesome</span></div>
+            </div>
+        </div>
+
+        <!-- Input Bar -->
+        <div class="absolute bottom-0 left-0 right-0 glass-warm px-6 pt-3 pb-8">
+            <div class="flex items-center gap-3">
+                <button
+                    class="w-10 h-10 rounded-full bg-white card-shadow flex items-center justify-center flex-shrink-0"><span
+                        class="material-symbols-outlined !text-xl text-primary">photo_camera</span></button>
+                <div class="flex-1 bg-white rounded-2xl px-4 py-3 flex items-center gap-2 card-shadow">
+                    <input type="text" placeholder="Ask AI Chef anything..."
+                        class="bg-transparent text-sm outline-none w-full placeholder-gray-400" />
+                </div>
+                <button class="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span
+                        class="material-symbols-outlined !text-xl text-white">send</span></button>
+            </div>
+            <div class="flex items-center justify-center gap-3 mt-3">
+                <button class="text-[10px] text-gray-400 bg-gray-100 px-3 py-1 rounded-full">🥗 Meal plan</button>
+                <button class="text-[10px] text-gray-400 bg-gray-100 px-3 py-1 rounded-full">📸 Scan food</button>
+                <button class="text-[10px] text-gray-400 bg-gray-100 px-3 py-1 rounded-full">🔄 Substitute</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-[#FAFAFA]">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3"><button><span
+                    class="material-symbols-outlined !text-xl text-silver">arrow_back</span></button>
+            <h1 class="font-serif text-sm font-bold tracking-wider uppercase">Contact</h1>
+            <div></div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Header -->
+            <div class="text-center py-4">
+                <p class="text-3xl font-serif font-bold leading-tight">Let's work<br /><span
+                        class="italic text-coral">together.</span></p>
+                <p class="text-xs text-silver mt-2">Available for freelance projects · Mar 2026</p>
+            </div>
+
+            <!-- Form -->
+            <div class="space-y-3">
+                <div><label class="text-[10px] text-silver uppercase tracking-widest">Name</label><input
+                        class="w-full mt-1 py-2.5 px-3 bg-white rounded-xl border border-gray-100 text-sm outline-none focus:border-coral/30"
+                        placeholder="Your name" /></div>
+                <div><label class="text-[10px] text-silver uppercase tracking-widest">Email</label><input
+                        class="w-full mt-1 py-2.5 px-3 bg-white rounded-xl border border-gray-100 text-sm outline-none focus:border-coral/30"
+                        placeholder="email@example.com" type="email" /></div>
+                <div><label class="text-[10px] text-silver uppercase tracking-widest">Project Type</label>
+                    <div class="flex flex-wrap gap-1.5 mt-1"><button
+                            class="px-3 py-1.5 bg-coral/5 border border-coral/20 text-coral text-[10px] rounded-lg font-semibold">Brand
+                            Identity</button><button
+                            class="px-3 py-1.5 bg-white border border-gray-100 text-silver text-[10px] rounded-lg">Web
+                            Design</button><button
+                            class="px-3 py-1.5 bg-white border border-gray-100 text-silver text-[10px] rounded-lg">Mobile
+                            App</button><button
+                            class="px-3 py-1.5 bg-white border border-gray-100 text-silver text-[10px] rounded-lg">Illustration</button>
+                    </div>
+                </div>
+                <div><label class="text-[10px] text-silver uppercase tracking-widest">Message</label><textarea
+                        class="w-full mt-1 py-2.5 px-3 bg-white rounded-xl border border-gray-100 text-sm outline-none focus:border-coral/30 resize-none"
+                        placeholder="Tell me about your project..." rows="3"></textarea></div>
+                <button class="w-full py-3 bg-ink text-white font-serif font-bold rounded-xl text-sm">Send
+                    Message</button>
+            </div>
+
+            <!-- Social -->
+            <div class="flex justify-center gap-4 pt-2">
+                <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-silver">
+                    <span class="material-symbols-outlined !text-lg">mail</span></div>
+                <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-silver">
+                    <span class="material-symbols-outlined !text-lg">link</span></div>
+                <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-silver">
+                    <span class="material-symbols-outlined !text-lg">code</span></div>
+                <div class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-silver">
+                    <span class="material-symbols-outlined !text-lg">brush</span></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Water Calculator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "water": "#5B9BD5", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+
+        .plant-card {
+            box-shadow: 0 1px 4px rgba(60, 40, 20, 0.06);
+            border: 1px solid rgba(92, 64, 51, 0.04);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-soil overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="px-6 pt-14 pb-2">
+            <h1 class="font-serif text-lg font-bold">Water Schedule 💧</h1>
+            <p class="text-[10px] text-bark/25 mt-0.5">Smart watering based on plant needs & weather</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-1">
+            <!-- Today's Tasks -->
+            <div class="plant-card p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-xs font-serif font-bold text-water">🚿 Water Today · 5 plants</p><span
+                        class="text-[10px] text-chloro font-bold">2/5 done</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-chloro/10 flex items-center justify-center text-lg">🌿</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Monstera Deliciosa</p>
+                            <p class="text-[10px] text-bark/25">~200ml · Last watered 4 days ago</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-lg bg-chloro/20 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-chloro">check</span></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-chloro/10 flex items-center justify-center text-lg">🪴</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Fiddle Leaf Fig</p>
+                            <p class="text-[10px] text-bark/25">~300ml · Last watered 5 days ago</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-lg bg-chloro/20 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-chloro">check</span></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-water/10 flex items-center justify-center text-lg">🌺</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Peace Lily</p>
+                            <p class="text-[10px] text-bark/25">~150ml · Soil moisture: Low</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-lg border border-bark/10"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-water/10 flex items-center justify-center text-lg">🌵</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Snake Plant</p>
+                            <p class="text-[10px] text-bark/25">~100ml · Last watered 10 days ago</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-lg border border-bark/10"></div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-water/10 flex items-center justify-center text-lg">🌱</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Pothos</p>
+                            <p class="text-[10px] text-bark/25">~100ml · Drooping slightly</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-lg border border-bark/10"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weather Factor -->
+            <div class="plant-card p-4 border-water/10">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-sm text-water">cloud</span><span
+                        class="text-[10px] text-water font-serif font-bold uppercase tracking-wider">Weather
+                        Adjustment</span></div>
+                <p class="text-xs text-bark/40">It's been humid (78%) and overcast today. <span
+                        class="text-chloro font-medium">Water amounts reduced by 15%</span> from standard
+                    recommendations.</p>
+            </div>
+
+            <!-- Upcoming -->
+            <div class="plant-card p-4">
+                <p class="text-xs font-serif font-bold text-bark/30 mb-2">📅 Coming Up</p>
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-between"><span
+                            class="text-xs text-bark/40">Tomorrow</span><span class="text-xs text-bark/20">3 plants —
+                            Aloe, Orchid, Cactus</span></div>
+                    <div class="flex items-center justify-between"><span
+                            class="text-xs text-bark/40">Thursday</span><span class="text-xs text-bark/20">2 plants —
+                            Fern, Ivy</span></div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-bark/40">Friday</span><span
+                            class="text-xs text-bark/15">1 plant — Succulents</span></div>
+                </div>
+            </div>
+
+            <!-- Water all -->
+            <button
+                class="w-full py-3 bg-water text-white font-serif font-bold rounded-xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">💧
+                Water All Remaining</button>
+        </div>
+    </div>
+</body>
+
+</html>

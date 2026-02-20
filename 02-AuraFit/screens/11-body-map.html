@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Body Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#05070F", "cyan": "#00F0FF", "magenta": "#B24BF3", "rose": "#FF3CAC", "lime": "#84CC16", "amber": "#F59E0B" }, fontFamily: { "display": ["Outfit", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #05070F
+        }
+
+        .glass-c {
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.06);
+            border-radius: 18px
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider uppercase text-cyan/60">Body Map</h1>
+            <button class="text-xs text-cyan/30">History</button>
+        </div>
+
+        <!-- Body Canvas -->
+        <div class="mx-6 rounded-2xl bg-white/2 border border-cyan/5 p-4 relative" style="min-height:280px">
+            <canvas id="bodyMap" class="w-full" style="height:260px"></canvas>
+            <div class="absolute top-6 right-6 text-right">
+                <p class="text-[9px] text-cyan/20">Tap to log soreness</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3">
+            <!-- Muscle Recovery -->
+            <div class="glass-c p-4">
+                <p class="text-[10px] text-cyan/20 font-display uppercase tracking-wider mb-3">Recovery Status</p>
+                <div class="space-y-2">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-white/30">Chest</span><span
+                                class="text-lime text-[10px]">Recovered</span></div>
+                        <div class="h-1.5 rounded-full bg-white/5">
+                            <div class="h-full rounded-full bg-lime" style="width:100%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-white/30">Legs</span><span
+                                class="text-amber text-[10px]">48h remaining</span></div>
+                        <div class="h-1.5 rounded-full bg-white/5">
+                            <div class="h-full rounded-full bg-amber" style="width:40%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-white/30">Shoulders</span><span
+                                class="text-rose text-[10px]">Sore</span></div>
+                        <div class="h-1.5 rounded-full bg-white/5">
+                            <div class="h-full rounded-full bg-rose" style="width:20%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-white/30">Back</span><span
+                                class="text-lime text-[10px]">Recovered</span></div>
+                        <div class="h-1.5 rounded-full bg-white/5">
+                            <div class="h-full rounded-full bg-lime" style="width:95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-white/30">Arms</span><span
+                                class="text-cyan text-[10px]">24h remaining</span></div>
+                        <div class="h-1.5 rounded-full bg-white/5">
+                            <div class="h-full rounded-full bg-cyan" style="width:65%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendation -->
+            <div class="glass-c p-4 border-cyan/10">
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="material-symbols-outlined !text-sm text-cyan">smart_toy</span><span
+                        class="text-[10px] text-cyan font-display font-bold">AI RECOMMENDATION</span></div>
+                <p class="text-xs text-white/25">Your legs and shoulders are still recovering. Today is ideal for <span
+                        class="text-cyan font-medium">upper body pull</span> (back & biceps) or a <span
+                        class="text-cyan font-medium">light cardio session</span>.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const c = document.getElementById('bodyMap'); c.width = c.offsetWidth * 2; c.height = 260 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2); const W = c.offsetWidth, H = 260, cx = W / 2;
+        // Head
+        x.beginPath(); x.arc(cx, 30, 16, 0, Math.PI * 2); x.fillStyle = 'rgba(0,240,255,0.15)'; x.fill(); x.strokeStyle = 'rgba(0,240,255,0.2)'; x.lineWidth = 1; x.stroke();
+        // Neck
+        x.fillStyle = 'rgba(0,240,255,0.1)'; x.fillRect(cx - 5, 46, 10, 12);
+        // Torso
+        x.beginPath(); x.moveTo(cx - 30, 58); x.lineTo(cx + 30, 58); x.lineTo(cx + 25, 130); x.lineTo(cx - 25, 130); x.closePath(); x.fillStyle = 'rgba(132,204,22,0.08)'; x.fill(); x.strokeStyle = 'rgba(132,204,22,0.2)'; x.stroke();
+        // Shoulders - sore
+        x.beginPath(); x.arc(cx - 38, 68, 10, 0, Math.PI * 2); x.fillStyle = 'rgba(255,60,172,0.15)'; x.fill(); x.strokeStyle = 'rgba(255,60,172,0.3)'; x.stroke();
+        x.beginPath(); x.arc(cx + 38, 68, 10, 0, Math.PI * 2); x.fillStyle = 'rgba(255,60,172,0.15)'; x.fill(); x.strokeStyle = 'rgba(255,60,172,0.3)'; x.stroke();
+        // Arms
+        x.fillStyle = 'rgba(0,240,255,0.08)'; x.strokeStyle = 'rgba(0,240,255,0.15)';
+        x.fillRect(cx - 52, 78, 14, 55); x.strokeRect(cx - 52, 78, 14, 55);
+        x.fillRect(cx + 38, 78, 14, 55); x.strokeRect(cx + 38, 78, 14, 55);
+        // Legs - recovering
+        x.fillStyle = 'rgba(245,158,11,0.1)'; x.strokeStyle = 'rgba(245,158,11,0.2)';
+        x.fillRect(cx - 22, 135, 18, 70); x.strokeRect(cx - 22, 135, 18, 70);
+        x.fillRect(cx + 4, 135, 18, 70); x.strokeRect(cx + 4, 135, 18, 70);
+        // Lower legs
+        x.fillRect(cx - 20, 210, 16, 40); x.strokeRect(cx - 20, 210, 16, 40);
+        x.fillRect(cx + 5, 210, 16, 40); x.strokeRect(cx + 5, 210, 16, 40);
+        // Labels
+        x.font = 'bold 8px Outfit'; x.textAlign = 'center';
+        x.fillStyle = 'rgba(255,60,172,0.5)'; x.fillText('SORE', cx - 38, 90);
+        x.fillStyle = 'rgba(245,158,11,0.5)'; x.fillText('48H', cx - 12, 175);
+        x.fillStyle = 'rgba(132,204,22,0.5)'; x.fillText('OK', cx, 100);
+    </script>
+</body>
+
+</html>

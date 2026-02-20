@@ -1,0 +1,390 @@
+/* ══════════════════════════════════════════════════════
+   DESIGN STUDIO — Missing CSS (tab bar, tabs, indicators)
+   ══════════════════════════════════════════════════════ */
+
+/* Tab strip for sub-tools */
+.bg-tab-bar {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 10px;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.bg-tab {
+    flex: 1;
+    padding: 6px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: #52525b;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.bg-tab:hover {
+    color: #a1a1aa;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.bg-tab.active {
+    background: rgba(139, 92, 246, 0.12);
+    border-color: rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+}
+
+/* Screen indicator */
+.bg-screen-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    margin-bottom: 8px;
+    background: rgba(139, 92, 246, 0.06);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    border-radius: 6px;
+    font-size: 11px;
+    color: #a1a1aa;
+}
+
+.bg-screen-clear {
+    margin-left: auto;
+    font-size: 10px;
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.bg-screen-clear:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #a1a1aa;
+}
+
+/* Target chip for element targeting */
+.ds-target-chip {
+    padding: 3px 8px;
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.ds-target-chip:hover {
+    background: rgba(139, 92, 246, 0.08);
+    border-color: rgba(139, 92, 246, 0.15);
+    color: #a1a1aa;
+}
+
+.ds-target-chip.active {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.25);
+    color: #c4b5fd;
+}
+
+.ds-target-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: #52525b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Palette editor for UI Elements mode */
+.ds-pal-role {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    margin-bottom: 3px;
+}
+
+.ds-pal-role-label {
+    font-size: 10px;
+    color: #a1a1aa;
+    flex: 1;
+    font-weight: 500;
+}
+
+.ds-pal-role-hex {
+    font-size: 9px;
+    color: #52525b;
+    font-family: 'SF Mono', 'Cascadia Code', monospace;
+}
+
+.ds-pal-preview {
+    display: flex;
+    height: 24px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 6px 0;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ds-pal-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 6px;
+}
+
+.ds-pal-actions button {
+    flex: 1;
+    padding: 5px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#ds-pal-apply {
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+}
+
+#ds-pal-apply:hover {
+    background: rgba(139, 92, 246, 0.2);
+}
+
+#ds-pal-save {
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    color: #6ee7b7;
+}
+
+#ds-pal-save:hover {
+    background: rgba(52, 211, 153, 0.2);
+}
+
+.ds-pal-load-wrap {
+    margin-top: 8px;
+}
+
+#ds-pal-load {
+    width: 100%;
+    padding: 4px 6px;
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 5px;
+    color: #a1a1aa;
+    cursor: pointer;
+}
+
+#ds-pal-name {
+    width: 100%;
+    padding: 4px 6px;
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 5px;
+    color: #d4d4d8;
+    margin-bottom: 6px;
+}
+
+#ds-pal-name:focus {
+    outline: none;
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* ══════════════════════════════════════════════════════
+   SCREEN EDITOR — Right panel tab bar (Design/Effects/Inspect)
+   ══════════════════════════════════════════════════════ */
+
+.se-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 10px;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+}
+
+.se-tab {
+    flex: 1;
+    padding: 7px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: #52525b;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.se-tab .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.se-tab:hover {
+    color: #a1a1aa;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.se-tab.active {
+    background: rgba(139, 92, 246, 0.12);
+    border-color: rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+}
+
+/* Inspect tab content */
+.se-inspect-section { margin-bottom: 14px; }
+.se-inspect-label {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .5px; color: #71717a; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 4px;
+}
+.se-inspect-label .material-symbols-outlined { font-size: 12px; }
+.se-token-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+.se-token-swatch {
+    width: 24px; height: 24px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.08); cursor: pointer;
+    position: relative; transition: all 0.15s;
+}
+.se-token-swatch:hover { transform: scale(1.15); border-color: var(--accent); }
+.se-token-item {
+    display: flex; align-items: center; gap: 6px;
+    padding: 4px 6px; background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04); border-radius: 5px;
+    margin-bottom: 3px; font-size: 10px; color: #a1a1aa;
+}
+.se-token-item span:first-child { color: #71717a; font-weight: 600; min-width: 50px; }
+.se-inspect-empty {
+    padding: 20px; text-align: center; font-size: 11px;
+    color: #52525b; border: 1px dashed rgba(255,255,255,0.06);
+    border-radius: 8px;
+}
+
+/* FX effects card in UI Elements mode */
+.ds-effect-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 4px;
+}
+
+.ds-effect-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.ds-effect-card.active {
+    background: rgba(139, 92, 246, 0.08);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+/* Atmosphere grid (used in Gallery) */
+.bg-atmo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.bg-atmo-card {
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.bg-atmo-card:hover {
+    border-color: rgba(52, 211, 153, 0.2);
+    transform: translateY(-1px);
+}
+
+.bg-atmo-card.active {
+    border-color: #34d399;
+    box-shadow: 0 0 10px rgba(52, 211, 153, 0.15);
+}
+
+.bg-atmo-preview {
+    height: 28px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.bg-atmo-name {
+    font-size: 9px;
+    color: #a1a1aa;
+    font-weight: 500;
+}
+
+/* Builder action buttons */
+.bg-builder-actions {
+    display: flex;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.bg-builder-actions button {
+    flex: 1;
+    padding: 6px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#bg-builder-apply {
+    background: rgba(52, 211, 153, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    color: #6ee7b7;
+}
+
+#bg-builder-apply:hover {
+    background: rgba(52, 211, 153, 0.2);
+}
+
+#bg-builder-save {
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #c4b5fd;
+}
+
+#bg-builder-save:hover {
+    background: rgba(139, 92, 246, 0.2);
+}
+
+#bg-builder-copy {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #71717a;
+}
+
+#bg-builder-copy:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #a1a1aa;
+}

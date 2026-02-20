@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Walk Tracker</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "primary": "#F59E0B", "primary-dark": "#D97706", "accent": "#EC4899", "bg-warm": "#FFF8F0", "teal": "#14B8A6", "blue": "#3B82F6" }, fontFamily: { "display": ["Nunito", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0;
+        }
+
+        .glass-warm {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 248, 240, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .map-area {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 30%, #A5D6A7 60%, #81C784 100%);
+            position: relative;
+        }
+
+        .route-dot {
+            animation: routePulse 2s infinite;
+        }
+
+        @keyframes routePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.4);
+            }
+
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 0 10px rgba(20, 184, 166, 0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-bg-warm">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4 relative z-10">
+            <div class="flex items-center gap-3">
+                <button class="w-10 h-10 rounded-full bg-white card-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-gray-500">arrow_back</span></button>
+                <h1 class="text-lg font-bold">Walk with Luna 🐾</h1>
+            </div>
+            <button class="w-10 h-10 rounded-full bg-white card-shadow flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-gray-500">share</span></button>
+        </div>
+
+        <!-- Map Area -->
+        <div class="mx-6 rounded-3xl overflow-hidden card-shadow mb-4">
+            <div class="map-area h-52 relative">
+                <!-- Simulated route -->
+                <svg width="100%" height="100%" viewBox="0 0 400 200" class="absolute inset-0">
+                    <path d="M 50,150 Q 100,50 180,80 T 300,60 T 380,120" fill="none" stroke="#14B8A6" stroke-width="3"
+                        stroke-linecap="round" stroke-dasharray="8,4" />
+                    <circle cx="50" cy="150" r="6" fill="#3B82F6" stroke="white" stroke-width="2" />
+                    <circle cx="380" cy="120" r="8" fill="#14B8A6" stroke="white" stroke-width="3" class="route-dot" />
+                </svg>
+                <!-- Labels on map -->
+                <div class="absolute top-3 left-3 bg-white/90 backdrop-blur rounded-lg px-2.5 py-1.5 card-shadow">
+                    <p class="text-[10px] font-bold text-teal flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">timer</span> 28:14</p>
+                </div>
+                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur rounded-lg px-2.5 py-1.5 card-shadow">
+                    <p class="text-[10px] font-bold text-blue flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">location_on</span> LIVE</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Walk Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-white rounded-2xl p-4 card-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-teal">straighten</span>
+                    <p class="text-xl font-extrabold mt-1">2.4</p>
+                    <p class="text-[10px] text-gray-400 font-bold">KM</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 card-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-primary">timer</span>
+                    <p class="text-xl font-extrabold mt-1">28:14</p>
+                    <p class="text-[10px] text-gray-400 font-bold">TIME</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 card-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-accent">local_fire_department</span>
+                    <p class="text-xl font-extrabold mt-1">186</p>
+                    <p class="text-[10px] text-gray-400 font-bold">KCAL</p>
+                </div>
+            </div>
+
+            <!-- Pace Chart -->
+            <div class="bg-white rounded-2xl p-5 card-shadow">
+                <h3 class="text-sm font-bold mb-3">Pace</h3>
+                <div class="flex items-end justify-between h-16 gap-1.5">
+                    <div class="flex-1 bg-teal/30 rounded-t" style="height:40%"></div>
+                    <div class="flex-1 bg-teal/40 rounded-t" style="height:55%"></div>
+                    <div class="flex-1 bg-teal/60 rounded-t" style="height:70%"></div>
+                    <div class="flex-1 bg-teal/50 rounded-t" style="height:60%"></div>
+                    <div class="flex-1 bg-teal/80 rounded-t" style="height:90%"></div>
+                    <div class="flex-1 bg-teal/40 rounded-t" style="height:50%"></div>
+                    <div class="flex-1 bg-teal/70 rounded-t" style="height:80%"></div>
+                    <div class="flex-1 bg-teal/60 rounded-t" style="height:65%"></div>
+                    <div class="flex-1 bg-teal/50 rounded-t" style="height:55%"></div>
+                    <div class="flex-1 bg-teal/80 rounded-t" style="height:85%"></div>
+                    <div class="flex-1 bg-teal rounded-t" style="height:100%"></div>
+                    <div class="flex-1 bg-teal/70 rounded-t" style="height:75%"></div>
+                </div>
+                <div class="flex items-center justify-between mt-2">
+                    <span class="text-[9px] text-gray-400">Start</span>
+                    <span class="text-[9px] text-gray-400">Avg: 5'23"/km</span>
+                    <span class="text-[9px] text-teal font-bold">Now</span>
+                </div>
+            </div>
+
+            <!-- Dog Activity -->
+            <div class="bg-white rounded-2xl p-4 card-shadow flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-2xl">🐕</div>
+                <div class="flex-1">
+                    <p class="text-sm font-bold">Luna's Activity</p>
+                    <p class="text-xs text-gray-500">Energy: High 🔥 · Mood: Playful 🎾</p>
+                    <div class="flex gap-2 mt-1.5">
+                        <span class="text-[10px] bg-teal/10 text-teal px-2 py-0.5 rounded-full font-bold">3 sniff
+                            stops</span>
+                        <span class="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">2 pee
+                            breaks</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control -->
+            <button
+                class="w-full py-4 bg-coral text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform card-shadow"
+                style="background: #F43F5E;">
+                <span class="material-symbols-outlined !text-lg">stop_circle</span> End Walk
+            </button>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass-warm border-t border-black/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">home</span><span
+                        class="text-[10px] text-gray-400">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">insights</span><span
+                        class="text-[10px] text-gray-400">Health</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-teal"
+                        style="font-variation-settings: 'FILL' 1;">map</span><span
+                        class="text-[10px] font-bold text-teal">Walk</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">shopping_bag</span><span
+                        class="text-[10px] text-gray-400">Shop</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">groups</span><span
+                        class="text-[10px] text-gray-400">Social</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

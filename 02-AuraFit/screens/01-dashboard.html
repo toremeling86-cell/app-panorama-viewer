@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Today's Overview</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00F0FF", "bg-void": "#050B14", "card": "#0A1628", "profit": "#10B981", "red": "#EF4444", "violet": "#A855F7", "pink": "#EC4899" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #050B14;
+        }
+
+        .bio-glow {
+            background: radial-gradient(ellipse at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 100%, rgba(168, 85, 247, 0.06) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-cyan {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 240, 255, 0.04);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), 0 0 40px rgba(0, 240, 255, 0.1);
+        }
+
+        .ring-pulse {
+            animation: ringPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes ringPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.6));
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00F0FF;
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+
+            75% {
+                transform: translateY(10px) translateX(-15px);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bio-glow">
+        <!-- Floating particles -->
+        <div class="particle" style="top:15%;left:20%;animation-delay:0s"></div>
+        <div class="particle" style="top:30%;left:75%;animation-delay:1s"></div>
+        <div class="particle" style="top:60%;left:10%;animation-delay:2s"></div>
+        <div class="particle" style="top:45%;left:85%;animation-delay:3s"></div>
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-light text-slate-500 tracking-widest uppercase">Good Morning</p>
+                <h1 class="text-2xl font-bold mt-0.5">Jordan <span class="text-primary">💪</span></h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center relative">
+                    <span class="material-symbols-outlined !text-xl text-slate-400">notifications</span>
+                    <div class="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary rounded-full"></div>
+                </button>
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet flex items-center justify-center text-sm font-bold">
+                    J</div>
+            </div>
+        </div>
+
+        <!-- Activity Ring -->
+        <div class="flex justify-center py-6 relative">
+            <svg width="180" height="180" viewBox="0 0 180 180" class="ring-pulse">
+                <!-- Outer: Calories -->
+                <circle cx="90" cy="90" r="80" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="10" />
+                <circle cx="90" cy="90" r="80" fill="none" stroke="#00F0FF" stroke-width="10" stroke-linecap="round"
+                    stroke-dasharray="377" stroke-dashoffset="113" transform="rotate(-90 90 90)" />
+                <!-- Middle: Exercise -->
+                <circle cx="90" cy="90" r="65" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="10" />
+                <circle cx="90" cy="90" r="65" fill="none" stroke="#A855F7" stroke-width="10" stroke-linecap="round"
+                    stroke-dasharray="308" stroke-dashoffset="154" transform="rotate(-90 90 90)" />
+                <!-- Inner: Steps -->
+                <circle cx="90" cy="90" r="50" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="10" />
+                <circle cx="90" cy="90" r="50" fill="none" stroke="#EC4899" stroke-width="10" stroke-linecap="round"
+                    stroke-dasharray="236" stroke-dashoffset="59" transform="rotate(-90 90 90)" />
+            </svg>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <p class="text-3xl font-bold">482</p>
+                <p class="text-[10px] text-slate-500 tracking-wider">KCAL</p>
+            </div>
+        </div>
+
+        <!-- Ring Legend -->
+        <div class="flex items-center justify-center gap-6 px-6 pb-4">
+            <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-primary"></div><span class="text-[10px] text-slate-400">Calories
+                    70%</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-violet"></div><span class="text-[10px] text-slate-400">Exercise
+                    50%</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-pink"></div><span class="text-[10px] text-slate-400">Steps
+                    75%</span>
+            </div>
+        </div>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="glass-cyan rounded-xl p-3 text-center">
+                    <span class="material-symbols-outlined !text-2xl text-primary">directions_walk</span>
+                    <p class="text-lg font-bold mt-1">7,821</p>
+                    <p class="text-[10px] text-slate-500">Steps</p>
+                </div>
+                <div class="glass rounded-xl p-3 text-center">
+                    <span class="material-symbols-outlined !text-2xl text-violet">timer</span>
+                    <p class="text-lg font-bold mt-1">42<span class="text-xs text-slate-500">min</span></p>
+                    <p class="text-[10px] text-slate-500">Active</p>
+                </div>
+                <div class="glass rounded-xl p-3 text-center">
+                    <span class="material-symbols-outlined !text-2xl text-pink">favorite</span>
+                    <p class="text-lg font-bold mt-1">72<span class="text-xs text-slate-500">bpm</span></p>
+                    <p class="text-[10px] text-slate-500">Heart Rate</p>
+                </div>
+            </div>
+
+            <!-- Today's Workout -->
+            <div class="glass-cyan rounded-2xl p-5 neon-glow">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <p class="text-xs text-primary tracking-widest uppercase font-light">Ready To Start</p>
+                        <h3 class="text-lg font-bold mt-0.5">Upper Body Power</h3>
+                        <p class="text-xs text-slate-500">45 min · 12 exercises · Advanced</p>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-3xl text-primary">fitness_center</span>
+                    </div>
+                </div>
+                <button
+                    class="w-full py-3 bg-primary text-bg-void font-bold rounded-xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined !text-lg">play_arrow</span> Start Workout
+                </button>
+            </div>
+
+            <!-- Weekly Summary -->
+            <div class="glass rounded-2xl p-5">
+                <h3 class="text-sm font-semibold text-slate-300 mb-3">This Week</h3>
+                <div class="flex items-end justify-between h-20 gap-2">
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-primary/60" style="height:60%"></div><span
+                            class="text-[9px] text-slate-500">Mon</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-primary/60" style="height:80%"></div><span
+                            class="text-[9px] text-slate-500">Tue</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-primary/40" style="height:30%"></div><span
+                            class="text-[9px] text-slate-500">Wed</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-primary" style="height:100%"></div><span
+                            class="text-[9px] text-primary font-medium">Thu</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-white/5" style="height:5%"></div><span
+                            class="text-[9px] text-slate-600">Fri</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-white/5" style="height:5%"></div><span
+                            class="text-[9px] text-slate-600">Sat</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1">
+                        <div class="w-6 rounded-t-md bg-white/5" style="height:5%"></div><span
+                            class="text-[9px] text-slate-600">Sun</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/5">
+                    <span class="text-xs text-slate-500">4 of 5 workouts completed</span>
+                    <span class="text-xs font-mono text-primary">🔥 4-day streak</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Tab Bar -->
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">home</span><span
+                        class="text-[10px] font-medium text-primary">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">fitness_center</span><span
+                        class="text-[10px] text-slate-500">Workout</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">monitoring</span><span
+                        class="text-[10px] text-slate-500">Progress</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">exercise</span><span
+                        class="text-[10px] text-slate-500">Library</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">person</span><span
+                        class="text-[10px] text-slate-500">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

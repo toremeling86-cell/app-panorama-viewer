@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Pet Profile</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "pawbg": "#FFF8F0", "bark": "#8B5E3C", "ocean": "#4A90D9", "blush": "#FF8BA7", "leaf": "#5CB85C", "sunny": "#FFD93D" }, fontFamily: { "display": ["Quicksand", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0
+        }
+
+        .paw-shadow {
+            box-shadow: 0 4px 16px rgba(139, 94, 60, 0.08)
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-pawbg">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-bark/40">arrow_back</span></button>
+            <h1 class="font-display text-base font-bold">Pet Profile</h1>
+            <button><span class="material-symbols-outlined !text-xl text-bark/40">edit</span></button>
+        </div>
+
+        <!-- Avatar Area -->
+        <div class="flex flex-col items-center pb-4">
+            <div
+                class="w-24 h-24 rounded-full bg-gradient-to-br from-bark/20 to-sunny/20 flex items-center justify-center text-5xl paw-shadow border-4 border-white">
+                🐕</div>
+            <h2 class="font-display text-xl font-bold mt-3">Max</h2>
+            <p class="text-xs text-bark/40">Golden Retriever · Male</p>
+            <div class="flex gap-2 mt-2">
+                <span class="badge bg-bark/10 text-bark">3 years old</span>
+                <span class="badge bg-leaf/10 text-leaf">Healthy ✅</span>
+                <span class="badge bg-ocean/10 text-ocean">28 kg</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-white rounded-2xl paw-shadow p-3 text-center">
+                    <p class="text-lg font-display font-bold text-bark">847</p>
+                    <p class="text-[9px] text-bark/40">Walks</p>
+                </div>
+                <div class="bg-white rounded-2xl paw-shadow p-3 text-center">
+                    <p class="text-lg font-display font-bold text-ocean">12</p>
+                    <p class="text-[9px] text-bark/40">Vet Visits</p>
+                </div>
+                <div class="bg-white rounded-2xl paw-shadow p-3 text-center">
+                    <p class="text-lg font-display font-bold text-leaf">5/5</p>
+                    <p class="text-[9px] text-bark/40">Vaccines</p>
+                </div>
+            </div>
+
+            <!-- Info Sections -->
+            <div class="bg-white rounded-2xl paw-shadow p-4">
+                <h3 class="text-xs font-display font-bold text-bark/30 uppercase tracking-wider mb-3">Details</h3>
+                <div class="space-y-2.5">
+                    <div class="flex justify-between"><span class="text-sm text-bark/50">Birthday</span><span
+                            class="text-sm font-medium">Mar 15, 2023</span></div>
+                    <div class="flex justify-between"><span class="text-sm text-bark/50">Microchip</span><span
+                            class="text-sm font-medium font-mono text-ocean">985112030429</span></div>
+                    <div class="flex justify-between"><span class="text-sm text-bark/50">Weight</span><span
+                            class="text-sm font-medium">28.4 kg <span class="text-[10px] text-leaf">↓ 0.2</span></span>
+                    </div>
+                    <div class="flex justify-between"><span class="text-sm text-bark/50">Neutered</span><span
+                            class="text-sm font-medium">Yes</span></div>
+                    <div class="flex justify-between"><span class="text-sm text-bark/50">Blood Type</span><span
+                            class="text-sm font-medium">DEA 1.1+</span></div>
+                </div>
+            </div>
+
+            <!-- Vet -->
+            <div class="bg-white rounded-2xl paw-shadow p-4">
+                <h3 class="text-xs font-display font-bold text-bark/30 uppercase tracking-wider mb-3">Veterinarian</h3>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-ocean/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-lg text-ocean">local_hospital</span></div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Dr. Sarah Martinez</p>
+                        <p class="text-[10px] text-bark/40">Happy Paws Veterinary · (555) 012-3456</p>
+                    </div>
+                    <button class="w-8 h-8 rounded-full bg-ocean/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-ocean">call</span></button>
+                </div>
+            </div>
+
+            <!-- Allergies -->
+            <div class="bg-blush/5 rounded-2xl paw-shadow p-4 border border-blush/10">
+                <h3 class="text-xs font-display font-bold text-blush uppercase tracking-wider mb-2">⚠️ Allergies & Notes
+                </h3>
+                <div class="space-y-1.5">
+                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blush"></span><span
+                            class="text-sm">Chicken (mild reaction)</span></div>
+                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blush"></span><span
+                            class="text-sm">Sensitive stomach — grain-free diet</span></div>
+                    <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-sunny"></span><span
+                            class="text-sm">Loves belly rubs & tennis balls 🎾</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-pawbg/90 backdrop-blur border-t border-bark/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">pets</span><span
+                        class="text-[10px] text-bark/30">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">smart_toy</span><span
+                        class="text-[10px] text-bark/30">AI Vet</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">vaccines</span><span
+                        class="text-[10px] text-bark/30">Vaccines</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-ocean"
+                        style="font-variation-settings:'FILL' 1">badge</span><span
+                        class="text-[10px] font-display font-bold text-ocean">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

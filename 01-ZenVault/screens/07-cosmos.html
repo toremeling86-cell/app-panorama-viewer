@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Wealth Cosmos</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00D4AA", "accent": "#7C3AED", "aurora": "#00C9FF", "bg-void": "#0B0F1A" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0F1A;
+            margin: 0;
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(0,212,170,0); } 50% { box-shadow: 0 0 20px 4px rgba(0,212,170,0.15); } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .orbit-legend-dot { animation: breathe 3s ease-in-out infinite; }
+        .sphere-container { animation: pulseGlow 4s ease-in-out infinite; border-radius: 50%; }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+          [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden">
+        <!-- CANVAS PARTICLE SYSTEM -->
+        <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+        <!-- Status Bar -->
+        <div class="h-12 w-full" aria-hidden="true"></div>
+
+        <!-- Header -->
+        <header class="flex items-center justify-between px-6 pb-2 relative z-10" data-animate style="animation-delay:0ms">
+            <div>
+                <p class="text-xs font-light text-primary/60 tracking-[0.3em] uppercase">Wealth Cosmos</p>
+                <h1 class="text-2xl font-bold mt-0.5">Net Worth Galaxy</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="glass btn-press w-10 h-10 rounded-full flex items-center justify-center" aria-label="Settings">
+                    <span class="material-symbols-outlined !text-xl text-slate-400" aria-hidden="true">tune</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Central Wealth Sphere -->
+        <section aria-label="Net worth visualization" class="flex justify-center py-6 relative z-10" data-animate="scale" style="animation-delay:80ms">
+            <div class="relative sphere-container">
+                <svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+                    <!-- Orbital rings -->
+                    <ellipse cx="100" cy="100" rx="95" ry="40" fill="none" stroke="rgba(0,212,170,0.08)" stroke-width="0.5" transform="rotate(-15 100 100)">
+                        <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="30s" repeatCount="indefinite" />
+                    </ellipse>
+                    <ellipse cx="100" cy="100" rx="75" ry="30" fill="none" stroke="rgba(124,58,237,0.1)" stroke-width="0.5" transform="rotate(25 100 100)">
+                        <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="25s" repeatCount="indefinite" />
+                    </ellipse>
+                    <!-- Core sphere -->
+                    <circle cx="100" cy="100" r="55" fill="url(#sphereGrad)" opacity="0.9" />
+                    <circle cx="100" cy="100" r="55" fill="none" stroke="rgba(0,212,170,0.3)" stroke-width="1" />
+                    <!-- Orbiting assets -->
+                    <circle r="8" fill="#00D4AA" opacity="0.8">
+                        <animateMotion dur="8s" repeatCount="indefinite" path="M100,60 A40,40 0 1,1 99.9,60" />
+                    </circle>
+                    <circle r="6" fill="#7C3AED" opacity="0.8">
+                        <animateMotion dur="12s" repeatCount="indefinite" path="M100,35 A65,65 0 1,1 99.9,35" />
+                    </circle>
+                    <circle r="5" fill="#00C9FF" opacity="0.6">
+                        <animateMotion dur="15s" repeatCount="indefinite" path="M100,15 A85,85 0 1,0 99.9,15" />
+                    </circle>
+                    <defs>
+                        <radialGradient id="sphereGrad">
+                            <stop offset="0%" stop-color="#00D4AA" stop-opacity="0.3" />
+                            <stop offset="50%" stop-color="#7C3AED" stop-opacity="0.15" />
+                            <stop offset="100%" stop-color="#0B0F1A" stop-opacity="0.8" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                    <p class="text-3xl font-bold text-primary" data-count-to="284" data-prefix="$" data-suffix="K">$0K</p>
+                    <p class="text-[10px] text-slate-500">Total Net Worth</p>
+                </div>
+            </div>
+        </section>
+
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-4 relative z-10">
+            <!-- Asset Orbits (legend) -->
+            <section aria-label="Asset allocation breakdown" data-animate style="animation-delay:160ms">
+                <div class="glass-bright card-interactive shadow-layered rounded-2xl p-4">
+                    <h3 class="text-xs font-medium text-slate-400 mb-3 tracking-wider uppercase">Asset Orbits</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3" data-animate style="animation-delay:240ms">
+                            <div class="w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/30 orbit-legend-dot"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium">Stocks & ETFs</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-mono font-medium text-primary" data-count-to="142380" data-prefix="$" data-decimals="0">$0</p>
+                                <p class="text-[10px] text-emerald-400 font-mono">+8.4%</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3" data-animate style="animation-delay:320ms">
+                            <div class="w-4 h-4 rounded-full bg-accent shadow-lg shadow-accent/30 orbit-legend-dot" style="animation-delay:1s"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium">Crypto</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-mono font-medium text-accent" data-count-to="68200" data-prefix="$" data-decimals="0">$0</p>
+                                <p class="text-[10px] text-emerald-400 font-mono">+24.1%</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3" data-animate style="animation-delay:400ms">
+                            <div class="w-4 h-4 rounded-full bg-aurora shadow-lg shadow-aurora/30 orbit-legend-dot" style="animation-delay:2s"></div>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium">Real Estate</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-mono font-medium text-aurora" data-count-to="73420" data-prefix="$" data-decimals="0">$0</p>
+                                <p class="text-[10px] text-emerald-400 font-mono">+3.2%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portfolio Gravity -->
+            <section aria-label="AI portfolio recommendation" data-animate style="animation-delay:480ms">
+                <div class="glass card-interactive shadow-layered rounded-2xl p-4 border-l-2 border-primary">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">auto_awesome</span>
+                        <span class="text-xs font-display font-semibold text-primary">Portfolio Gravity AI</span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">Your crypto allocation has grown to 24% — above your
+                        20% target. Consider rebalancing $11,400 into bonds to maintain your risk profile. <span class="text-primary font-medium cursor-pointer btn-press">Rebalance now →</span></p>
+                </div>
+            </section>
+        </main>
+
+        <nav role="navigation" aria-label="Main navigation" class="absolute bottom-0 left-0 right-0 glass border-t border-white/5 z-10">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Home">
+                    <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">dashboard</span>
+                    <span class="text-[10px] text-slate-500">Home</span>
+                </button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Cosmos, current page" aria-current="page">
+                    <span class="material-symbols-outlined !text-xl text-primary" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">public</span>
+                    <span class="text-[10px] font-medium text-primary">Cosmos</span>
+                </button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Goals">
+                    <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">savings</span>
+                    <span class="text-[10px] text-slate-500">Goals</span>
+                </button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Analytics">
+                    <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">insights</span>
+                    <span class="text-[10px] text-slate-500">Analytics</span>
+                </button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Profile">
+                    <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">person</span>
+                    <span class="text-[10px] text-slate-500">Profile</span>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // === INTERACTIVE PARTICLE SYSTEM ===
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const PARTICLE_COUNT = 80;
+
+        function resize() {
+            const container = canvas.parentElement;
+            canvas.width = container.offsetWidth;
+            canvas.height = container.offsetHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.4 + 0.1;
+                this.color = ['#00D4AA', '#7C3AED', '#00C9FF'][Math.floor(Math.random() * 3)];
+                this.pulseSpeed = Math.random() * 0.02 + 0.005;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+            }
+            update(time) {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                this.currentAlpha = this.alpha * (0.5 + 0.5 * Math.sin(time * this.pulseSpeed + this.pulsePhase));
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.currentAlpha;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) { particles.push(new Particle()); }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = particles[i].color;
+                        ctx.globalAlpha = (1 - dist / 100) * 0.08;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                        ctx.globalAlpha = 1;
+                    }
+                }
+            }
+        }
+
+        function animate(time) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(time); p.draw(); });
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+
+        // === ANIMATION & COUNTER SYSTEM ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+            // Animated counters
+            function animateCount(el) {
+                const target = parseFloat(el.dataset.countTo);
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+                const duration = 1200;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = prefix + (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+            const countObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+            }, { threshold: 0.3 });
+            document.querySelectorAll('[data-count-to]').forEach(el => countObs.observe(el));
+        });
+    </script>
+</body>
+
+</html>

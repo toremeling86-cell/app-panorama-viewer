@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Interaction Checker</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FFFE", "trust": "#0D9488", "attention": "#D97706", "critical": "#DC2626", "safe": "#16A34A" }, fontFamily: { "display": ["Figtree", "sans-serif"], "body": ["Noto Sans", "sans-serif"], "mono": ["IBM Plex Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FFFE
+        }
+
+        .medical-card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(13, 148, 136, 0.08);
+            border-radius: 16px
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button aria-label="Go back"><span
+                    class="material-symbols-outlined !text-xl text-gray-400">arrow_back</span></button>
+            <h1 class="font-display text-base font-bold">Interaction Checker</h1>
+            <div></div>
+        </div>
+
+        <!-- Search -->
+        <div class="px-6 pb-4">
+            <div class="bg-white medical-card px-4 py-3 flex items-center gap-2">
+                <span class="material-symbols-outlined !text-xl text-gray-300">search</span>
+                <input type="text" value="Ibuprofen" class="flex-1 text-sm bg-transparent outline-none"
+                    aria-label="Search medication" />
+                <span class="material-symbols-outlined !text-lg text-gray-300 cursor-pointer">close</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Result Header -->
+            <div class="bg-white medical-card p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-attention/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-2xl text-attention">medication</span></div>
+                    <div>
+                        <p class="text-lg font-display font-bold">Ibuprofen (Advil)</p>
+                        <p class="text-xs text-gray-400">NSAID · Pain relief / Anti-inflammatory</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactions Found -->
+            <div class="medical-card bg-critical/5 border border-critical/20 p-4" role="alert">
+                <div class="flex items-center gap-2 mb-3"><span
+                        class="material-symbols-outlined !text-lg text-critical">warning</span><span
+                        class="text-sm font-display font-bold text-critical">2 Interactions Found</span></div>
+
+                <!-- Interaction 1 -->
+                <div class="bg-white rounded-xl p-4 border border-critical/10 mb-2">
+                    <div class="flex items-center gap-2"><span
+                            class="px-2 py-0.5 bg-critical text-white text-[9px] font-bold rounded-full">SERIOUS</span>
+                        <p class="text-sm font-display font-bold">Ibuprofen + Aspirin</p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">Concurrent use may reduce the cardioprotective
+                        effect of aspirin. Ibuprofen can block aspirin's ability to thin the blood.</p>
+                    <div class="mt-2 bg-gray-50 rounded-lg p-2">
+                        <p class="text-[10px] text-gray-500"><span class="font-semibold">Recommendation:</span> Take
+                            aspirin at least 30 minutes before ibuprofen, or use acetaminophen instead.</p>
+                    </div>
+                </div>
+
+                <!-- Interaction 2 -->
+                <div class="bg-white rounded-xl p-4 border border-attention/10">
+                    <div class="flex items-center gap-2"><span
+                            class="px-2 py-0.5 bg-attention text-white text-[9px] font-bold rounded-full">MODERATE</span>
+                        <p class="text-sm font-display font-bold">Ibuprofen + Lisinopril</p>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-2 leading-relaxed">NSAIDs may reduce the blood pressure lowering
+                        effect of ACE inhibitors. May also increase risk of kidney problems.</p>
+                    <div class="mt-2 bg-gray-50 rounded-lg p-2">
+                        <p class="text-[10px] text-gray-500"><span class="font-semibold">Recommendation:</span> Monitor
+                            blood pressure closely. Consider acetaminophen as an alternative.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safe Combinations -->
+            <div class="medical-card bg-safe/30 border border-safe/50 p-4">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-lg text-safe">check_circle</span><span
+                        class="text-sm font-display font-bold text-safe">Safe with 2 medications</span></div>
+                <div class="space-y-1.5 text-sm">
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-sm text-safe">check</span><span>Ibuprofen + Metformin
+                            — No interaction</span></div>
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-sm text-safe">check</span><span>Ibuprofen + Vitamin
+                            D3 — No interaction</span></div>
+                </div>
+            </div>
+
+            <!-- Alternative Suggestion -->
+            <div class="medical-card bg-white p-4 border-l-4 border-trust">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-lg text-trust">lightbulb</span><span
+                        class="text-sm font-display font-semibold text-trust">Safer Alternative</span></div>
+                <p class="text-xs text-gray-500 leading-relaxed">Consider <span class="font-semibold">Acetaminophen
+                        (Tylenol)</span> for pain relief. It has no interactions with your current medications.</p>
+                <button class="mt-2 text-xs text-trust font-semibold">Check Acetaminophen →</button>
+            </div>
+
+            <p class="text-[10px] text-gray-300 text-center">⚕️ Always consult your doctor before making medication
+                changes</p>
+        </div>
+    </div>
+</body>
+
+</html>

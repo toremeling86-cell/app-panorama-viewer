@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Destination</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "parchment": "#F5EDE0", "leather": "#6B4C3B", "compass": "#C4953A", "ocean": "#3D5A73", "ink": "#2C1810", "cherry": "#C8365E" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F5EDE0;
+        }
+
+        .map-shadow {
+            box-shadow: 0 4px 20px rgba(107, 76, 59, 0.1), 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <!-- Hero -->
+        <div
+            class="h-52 bg-gradient-to-b from-cherry/20 via-cherry/10 to-parchment relative flex items-end justify-center pb-4">
+            <span class="text-7xl">🗼</span>
+            <div class="absolute top-12 left-4"><button
+                    class="w-10 h-10 rounded-full bg-white/70 backdrop-blur map-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-ink/60">arrow_back</span></button></div>
+            <div class="absolute top-12 right-4"><button
+                    class="w-10 h-10 rounded-full bg-white/70 backdrop-blur map-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-cherry">bookmark</span></button></div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 -mt-2 space-y-4">
+            <div class="bg-white/50 rounded-2xl p-5 map-shadow border border-leather/10">
+                <div class="flex items-center gap-2"><span class="text-sm">🇯🇵</span><span
+                        class="text-[10px] text-leather/50 font-display uppercase tracking-widest">Japan</span></div>
+                <h1 class="text-2xl font-display font-bold text-ink mt-1">Tokyo</h1>
+                <p class="text-xs text-leather/50 mt-1 leading-relaxed">Where ancient tradition meets neon-lit futurism.
+                    A city of contrasts, from serene temples to bustling Shibuya crossing.</p>
+
+                <!-- Quick facts -->
+                <div class="grid grid-cols-3 gap-3 mt-4">
+                    <div class="text-center"><span
+                            class="material-symbols-outlined !text-xl text-compass">payments</span>
+                        <p class="text-sm font-display font-bold text-ink mt-1">$$</p>
+                        <p class="text-[9px] text-leather/40">Cost Level</p>
+                    </div>
+                    <div class="text-center"><span class="material-symbols-outlined !text-xl text-ocean">flight</span>
+                        <p class="text-sm font-display font-bold text-ink mt-1">11h</p>
+                        <p class="text-[9px] text-leather/40">Flight Time</p>
+                    </div>
+                    <div class="text-center"><span
+                            class="material-symbols-outlined !text-xl text-cherry">thermostat</span>
+                        <p class="text-sm font-display font-bold text-ink mt-1">5°C</p>
+                        <p class="text-[9px] text-leather/40">Feb Avg</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Best time -->
+            <div class="bg-white/40 rounded-2xl p-4 map-shadow border border-leather/5">
+                <h3 class="font-display text-xs font-bold text-ink uppercase tracking-wider mb-3">Best Time to Visit
+                </h3>
+                <div class="flex gap-1">
+                    <div class="flex-1 py-2 rounded-lg text-center text-[9px] font-mono bg-ocean/5 text-ocean">Jan</div>
+                    <div class="flex-1 py-2 rounded-lg text-center text-[9px] font-mono bg-ocean/5 text-ocean">Feb</div>
+                    <div
+                        class="flex-1 py-2 rounded-lg text-center text-[9px] font-mono bg-cherry/20 text-cherry font-bold">
+                        Mar</div>
+                    <div
+                        class="flex-1 py-2 rounded-lg text-center text-[9px] font-mono bg-cherry/30 text-cherry font-bold">
+                        Apr</div>
+                    <div class="flex-1 py-2 rounded-lg text-center text-[9px] font-mono bg-compass/20 text-compass">May
+                    </div>
+                    <div class="flex-1 py-2 rounded-lg text-center text-[9px] font-mono bg-leather/5 text-leather/40">
+                        Jun</div>
+                </div>
+                <p class="text-[10px] text-leather/40 mt-2 italic">🌸 Cherry blossom season: late March — mid April</p>
+            </div>
+
+            <!-- Highlights -->
+            <div class="bg-white/40 rounded-2xl p-4 map-shadow border border-leather/5">
+                <h3 class="font-display text-xs font-bold text-ink uppercase tracking-wider mb-3">Must Visit</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3 p-2 rounded-lg bg-parchment/50">
+                        <span class="text-xl">⛩️</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-ink">Senso-ji Temple</p>
+                            <p class="text-[10px] text-leather/40">Asakusa · Free Entry</p>
+                        </div>
+                        <span class="px-2 py-0.5 bg-compass/10 text-compass text-[9px] font-bold rounded-full">Top
+                            Pick</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-lg">
+                        <span class="text-xl">🏔️</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-ink">Meiji Shrine</p>
+                            <p class="text-[10px] text-leather/40">Harajuku · Free Entry</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-lg">
+                        <span class="text-xl">🌆</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-ink">Shibuya Crossing</p>
+                            <p class="text-[10px] text-leather/40">Shibuya · Iconic</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-lg">
+                        <span class="text-xl">🐟</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-ink">Tsukiji Outer Market</p>
+                            <p class="text-[10px] text-leather/40">Chuo · Fresh Sushi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button
+                class="w-full py-4 bg-compass text-white font-display font-bold rounded-2xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform map-shadow uppercase tracking-wider">
+                <span class="material-symbols-outlined !text-lg">add</span> Plan a Trip Here
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

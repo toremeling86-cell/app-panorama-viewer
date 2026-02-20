@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Community</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "bark": "#5C4033", "water": "#5B9BD5" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-bark overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <h1 class="font-serif text-xl font-bold">Community 🌱</h1><button
+                class="w-9 h-9 rounded-full bg-chloro/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-chloro">edit</span></button>
+        </div>
+
+        <div class="flex gap-2 px-6 overflow-x-auto no-scrollbar pb-2">
+            <button class="px-3 py-1.5 bg-chloro text-white text-[10px] font-semibold rounded-full">Feed</button>
+            <button class="px-3 py-1.5 bg-white text-bark/25 text-[10px] rounded-full shadow-sm">Q&A</button>
+            <button class="px-3 py-1.5 bg-white text-bark/25 text-[10px] rounded-full shadow-sm">Marketplace</button>
+            <button class="px-3 py-1.5 bg-white text-bark/25 text-[10px] rounded-full shadow-sm">Events</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-1">
+            <!-- Post -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-chloro/15 flex items-center justify-center text-sm">🌻</div>
+                    <div class="flex-1">
+                        <p class="text-xs font-serif font-bold">PlantMom_Lisa</p>
+                        <p class="text-[9px] text-bark/20">3h ago</p>
+                    </div>
+                </div>
+                <div class="h-32 bg-chloro/5 rounded-xl flex items-center justify-center text-4xl mb-2">🌿✨</div>
+                <p class="text-xs text-bark/40 leading-relaxed">My Monstera just unfurled a new leaf with beautiful
+                    fenestration! 6 months of patience 🥹 Any tips on getting even more splits?</p>
+                <div class="flex items-center gap-4 mt-2"><button class="flex items-center gap-1 text-terra"><span
+                            class="text-sm">❤️</span><span class="text-[10px]">234</span></button><button
+                        class="flex items-center gap-1 text-bark/20"><span class="text-sm">💬</span><span
+                            class="text-[10px]">42</span></button><button
+                        class="flex items-center gap-1 text-bark/20"><span class="text-sm">🔖</span></button></div>
+            </div>
+
+            <!-- Q&A -->
+            <div class="bg-white rounded-2xl shadow-sm p-4 border-l-4 border-water">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="px-2 py-0.5 bg-water/10 rounded text-[9px] text-water font-bold">QUESTION</span></div>
+                <p class="text-sm font-serif font-bold">Why are my Peace Lily's leaves turning yellow?</p>
+                <p class="text-xs text-bark/25 mt-1">Could be overwatering — check if soil is soggy. Peace Lilies prefer
+                    slightly moist but well-drained soil.</p>
+                <div class="flex items-center gap-2 mt-2"><span class="text-[9px] text-chloro font-bold">✅ 3
+                        answers</span><span class="text-[9px] text-bark/15">· Asked by @GreenThumb</span></div>
+            </div>
+
+            <!-- Trade -->
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-3">
+                <div class="w-14 h-14 rounded-xl bg-terra/10 flex items-center justify-center text-2xl">🪴</div>
+                <div class="flex-1"><span
+                        class="px-2 py-0.5 bg-terra/10 rounded text-[9px] text-terra font-bold">TRADE</span>
+                    <p class="text-sm font-serif font-bold mt-0.5">Pothos Cuttings</p>
+                    <p class="text-[10px] text-bark/20">Trading for succulents · NYC area</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

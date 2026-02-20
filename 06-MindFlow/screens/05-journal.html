@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Gratitude Journal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0", "deep": "#2D1810", "rose": "#D4736A" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+
+        .journal-card {
+            background: rgba(45, 24, 16, 0.6);
+            border: 1px solid rgba(255, 140, 66, 0.06);
+            border-radius: 16px
+        }
+
+        .streak-glow {
+            text-shadow: 0 0 20px rgba(255, 140, 66, 0.4)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="font-serif text-base font-bold text-dawn/80">Gratitude Journal</h1>
+            <button><span class="material-symbols-outlined !text-xl text-glow/40">calendar_today</span></button>
+        </div>
+
+        <!-- Streak -->
+        <div class="px-6 py-3 flex items-center justify-center gap-3">
+            <span class="text-3xl streak-glow">🔥</span>
+            <div>
+                <p class="text-2xl font-serif font-bold text-glow">14 Days</p>
+                <p class="text-[10px] text-dawn/30">Your longest streak!</p>
+            </div>
+        </div>
+
+        <!-- Today's Prompt -->
+        <div class="mx-6 journal-card p-5 mb-3">
+            <p class="text-[10px] text-glow/40 font-medium uppercase tracking-widest mb-2">Today's Prompt</p>
+            <p class="text-lg font-serif font-light italic text-dawn/70 leading-relaxed">"What small moment brought you
+                unexpected joy today?"</p>
+            <button class="mt-3 text-xs text-glow font-medium flex items-center gap-1"><span
+                    class="material-symbols-outlined !text-sm">refresh</span> New prompt</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Today's Entry -->
+            <div class="journal-card p-4 border-l-2 border-glow/40">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-glow/50 font-medium">Today
+                        · 8:32 AM</span><span class="text-lg">☀️</span></div>
+                <p class="text-sm text-dawn/60 leading-relaxed">The morning sun through the kitchen window while making
+                    coffee. The way the light caught the steam rising from my cup — such a simple, beautiful moment.</p>
+                <div class="flex gap-2 mt-3"><span
+                        class="px-2 py-1 bg-glow/10 rounded-full text-[9px] text-glow/60">Mindful</span><span
+                        class="px-2 py-1 bg-sage/10 rounded-full text-[9px] text-sage/60">Nature</span></div>
+            </div>
+
+            <!-- Yesterday -->
+            <div class="journal-card p-4">
+                <div class="flex items-center justify-between mb-2"><span
+                        class="text-xs text-white/20 font-medium">Yesterday · 9:15 PM</span><span
+                        class="text-lg">🌙</span></div>
+                <p class="text-sm text-dawn/40 leading-relaxed">Grateful for the phone call with Mom. She told me about
+                    her garden and it reminded me of summers growing up.</p>
+                <div class="flex gap-2 mt-3"><span
+                        class="px-2 py-1 bg-rose/10 rounded-full text-[9px] text-rose/60">Family</span><span
+                        class="px-2 py-1 bg-dawn/10 rounded-full text-[9px] text-dawn/40">Memories</span></div>
+            </div>
+
+            <!-- Older -->
+            <div class="journal-card p-4">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-white/20 font-medium">Feb
+                        16 · 7:45 AM</span><span class="text-lg">🎶</span></div>
+                <p class="text-sm text-dawn/40 leading-relaxed">That new song that came on shuffle during my walk — it
+                    perfectly matched the mood of the rainy morning.</p>
+                <div class="flex gap-2 mt-3"><span
+                        class="px-2 py-1 bg-glow/10 rounded-full text-[9px] text-glow/40">Music</span></div>
+            </div>
+
+            <div class="journal-card p-4 opacity-50">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-white/15 font-medium">Feb
+                        15 · 6:30 PM</span><span class="text-lg">🍽️</span></div>
+                <p class="text-sm text-dawn/30 leading-relaxed">Cooking dinner with a friend — we laughed the whole time
+                    and the pasta turned out amazing.</p>
+            </div>
+        </div>
+
+        <!-- FAB -->
+        <button
+            class="fixed bottom-24 right-8 w-14 h-14 bg-glow rounded-full flex items-center justify-center shadow-xl shadow-glow/20 active:scale-90 transition-transform">
+            <span class="material-symbols-outlined !text-2xl text-ember">edit</span>
+        </button>
+    </div>
+</body>
+
+</html>

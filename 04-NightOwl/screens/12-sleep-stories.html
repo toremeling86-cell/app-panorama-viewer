@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Sleep Stories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "midnight": "#0B0D1A", "indigo": "#4F46E5", "lavender": "#A78BFA", "luna": "#C4B5FD", "dawn": "#F472B6", "gold": "#FFD700" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0D1A
+        }
+
+        .glass-m {
+            background: rgba(79, 70, 229, 0.04);
+            border: 1px solid rgba(167, 139, 250, 0.08);
+            border-radius: 20px
+        }
+
+        @keyframes float-stars {
+
+            0%,
+            100% {
+                opacity: 0.3
+            }
+
+            50% {
+                opacity: 0.7
+            }
+        }
+
+        .star {
+            animation: float-stars 3s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-midnight">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider text-luna/50">Sleep Stories</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">bookmark_border</span></button>
+        </div>
+
+        <!-- Featured -->
+        <div class="mx-6 glass-m p-5 relative overflow-hidden">
+            <div class="absolute top-3 right-5 text-lg star">✨</div>
+            <span class="px-2 py-0.5 bg-gold/10 text-gold text-[9px] font-bold rounded">NEW</span>
+            <p class="text-xl font-bold mt-2">The Enchanted Forest</p>
+            <p class="text-xs text-luna/25 mt-1">A gentle journey through a moonlit woodland</p>
+            <div class="flex items-center gap-3 mt-3"><span class="text-[10px] text-luna/15">🎙️ Narrated by James
+                    Earl</span><span class="text-[10px] text-luna/15">⏱️ 25 min</span></div>
+            <button
+                class="w-full mt-3 py-2.5 bg-indigo text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2"><span
+                    class="material-symbols-outlined !text-lg">play_arrow</span> Play Story</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2 mt-3">
+            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                <button
+                    class="px-3 py-1.5 bg-indigo/20 text-lavender text-[10px] font-bold rounded-full whitespace-nowrap">All</button>
+                <button
+                    class="px-3 py-1.5 bg-white/3 text-white/15 text-[10px] rounded-full whitespace-nowrap">Nature</button>
+                <button
+                    class="px-3 py-1.5 bg-white/3 text-white/15 text-[10px] rounded-full whitespace-nowrap">Fantasy</button>
+                <button
+                    class="px-3 py-1.5 bg-white/3 text-white/15 text-[10px] rounded-full whitespace-nowrap">Travel</button>
+                <button
+                    class="px-3 py-1.5 bg-white/3 text-white/15 text-[10px] rounded-full whitespace-nowrap">Sci-Fi</button>
+            </div>
+
+            <div class="glass-m p-3 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-indigo/10 flex items-center justify-center text-2xl">🌊</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Ocean Voyage</p>
+                    <p class="text-[10px] text-luna/15">20 min · Travel</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/20">play_arrow</span>
+            </div>
+
+            <div class="glass-m p-3 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-dawn/10 flex items-center justify-center text-2xl">🏰</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">The Castle in the Clouds</p>
+                    <p class="text-[10px] text-luna/15">30 min · Fantasy</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/20">play_arrow</span>
+            </div>
+
+            <div class="glass-m p-3 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-lavender/10 flex items-center justify-center text-2xl">🌌</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Galactic Drift</p>
+                    <p class="text-[10px] text-luna/15">35 min · Sci-Fi</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/20">play_arrow</span>
+            </div>
+
+            <div class="glass-m p-3 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-luna/10 flex items-center justify-center text-2xl">🌧️</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Rainy Cabin</p>
+                    <p class="text-[10px] text-luna/15">22 min · Nature</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/20">play_arrow</span>
+            </div>
+
+            <div class="glass-m p-3 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gold/10 flex items-center justify-center text-2xl">🏜️</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Desert Stargazing</p>
+                    <p class="text-[10px] text-luna/15">28 min · Travel</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/20">play_arrow</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

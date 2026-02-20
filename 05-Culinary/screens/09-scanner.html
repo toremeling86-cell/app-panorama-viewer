@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Ingredient Scanner</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "panna": "#FDF8F0", "saffron": "#E8A838", "basil": "#3A7D44", "plum": "#6B3A6B", "espresso": "#3C2415", "cream": "#F5EBD9", "danger": "#DC2626" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Lato", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FDF8F0
+        }
+
+        .scanner-frame {
+            border: 2px dashed rgba(232, 168, 56, 0.4);
+            border-radius: 24px;
+            position: relative
+        }
+
+        .scanner-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: #E8A838;
+            border-style: solid;
+            border-width: 0
+        }
+
+        .corner-tl {
+            top: -1px;
+            left: -1px;
+            border-top-width: 3px;
+            border-left-width: 3px;
+            border-radius: 8px 0 0 0
+        }
+
+        .corner-tr {
+            top: -1px;
+            right: -1px;
+            border-top-width: 3px;
+            border-right-width: 3px;
+            border-radius: 0 8px 0 0
+        }
+
+        .corner-bl {
+            bottom: -1px;
+            left: -1px;
+            border-bottom-width: 3px;
+            border-left-width: 3px;
+            border-radius: 0 0 0 8px
+        }
+
+        .corner-br {
+            bottom: -1px;
+            right: -1px;
+            border-bottom-width: 3px;
+            border-right-width: 3px;
+            border-radius: 0 0 8px 0
+        }
+
+        @keyframes scanLine {
+            0% {
+                top: 10%
+            }
+
+            100% {
+                top: 85%
+            }
+        }
+
+        .scan-line {
+            position: absolute;
+            left: 8%;
+            right: 8%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #E8A838, transparent);
+            animation: scanLine 2s ease-in-out infinite alternate
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-espresso overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-panna">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-espresso/30">arrow_back</span></button>
+            <h1 class="text-sm font-serif font-bold">Scan Ingredients 📷</h1>
+            <button><span class="material-symbols-outlined !text-xl text-espresso/30">history</span></button>
+        </div>
+
+        <!-- Camera Viewfinder -->
+        <div class="mx-6 mt-2 scanner-frame bg-gradient-to-b from-cream to-espresso/5 flex items-center justify-center"
+            style="height:200px">
+            <div class="scanner-corner corner-tl"></div>
+            <div class="scanner-corner corner-tr"></div>
+            <div class="scanner-corner corner-bl"></div>
+            <div class="scanner-corner corner-br"></div>
+            <div class="scan-line"></div>
+            <div class="text-center">
+                <span class="material-symbols-outlined !text-4xl text-saffron/30">photo_camera</span>
+                <p class="text-[10px] text-espresso/20 mt-1">Point at ingredients list</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3">
+            <!-- Detected Ingredients -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-xs font-serif font-bold text-basil">✅ Detected Ingredients</p>
+                    <span class="text-[10px] text-espresso/20">12 found</span>
+                </div>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 bg-basil/10 rounded-full text-xs text-basil">🍅 Tomatoes</span>
+                    <span class="px-2.5 py-1 bg-basil/10 rounded-full text-xs text-basil">🧅 Onion</span>
+                    <span class="px-2.5 py-1 bg-basil/10 rounded-full text-xs text-basil">🧄 Garlic</span>
+                    <span class="px-2.5 py-1 bg-basil/10 rounded-full text-xs text-basil">🫒 Olive Oil</span>
+                    <span class="px-2.5 py-1 bg-basil/10 rounded-full text-xs text-basil">🌿 Basil</span>
+                    <span class="px-2.5 py-1 bg-basil/10 rounded-full text-xs text-basil">🧂 Salt</span>
+                    <span class="px-2.5 py-1 bg-saffron/10 rounded-full text-xs text-saffron">🧀 Parmesan</span>
+                    <span class="px-2.5 py-1 bg-saffron/10 rounded-full text-xs text-saffron">🍝 Pasta</span>
+                </div>
+            </div>
+
+            <!-- Allergen Alert -->
+            <div class="bg-danger/5 border border-danger/15 rounded-2xl p-3 flex items-center gap-3">
+                <span class="material-symbols-outlined !text-lg text-danger">warning</span>
+                <div>
+                    <p class="text-xs font-serif font-bold text-danger">Allergen Detected</p>
+                    <p class="text-[10px] text-danger/50">Contains dairy (Parmesan) — matches your profile alert</p>
+                </div>
+            </div>
+
+            <!-- Matching Recipes -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <p class="text-xs font-serif font-bold text-espresso/60 mb-3">🍽️ Matching Recipes</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3 p-2 bg-cream/50 rounded-xl">
+                        <div class="w-12 h-12 rounded-lg bg-saffron/10 flex items-center justify-center text-2xl">🍝
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Pasta al Pomodoro</p>
+                            <p class="text-[10px] text-espresso/30">12/12 ingredients · 25 min</p>
+                        </div>
+                        <span class="px-2 py-0.5 bg-basil/10 rounded text-[9px] text-basil font-bold">100%</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 bg-cream/50 rounded-xl">
+                        <div class="w-12 h-12 rounded-lg bg-plum/10 flex items-center justify-center text-2xl">🍕</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Margherita Pizza</p>
+                            <p class="text-[10px] text-espresso/30">10/12 ingredients · 45 min</p>
+                        </div>
+                        <span class="px-2 py-0.5 bg-saffron/10 rounded text-[9px] text-saffron font-bold">83%</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 bg-cream/50 rounded-xl">
+                        <div class="w-12 h-12 rounded-lg bg-basil/10 flex items-center justify-center text-2xl">🥗</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Caprese Salad</p>
+                            <p class="text-[10px] text-espresso/30">8/12 ingredients · 10 min</p>
+                        </div>
+                        <span class="px-2 py-0.5 bg-saffron/10 rounded text-[9px] text-saffron font-bold">67%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrition Summary -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <p class="text-xs font-serif font-bold text-espresso/60 mb-2">📊 Estimated Nutrition</p>
+                <div class="grid grid-cols-4 gap-2 text-center">
+                    <div>
+                        <p class="text-lg font-serif font-bold text-saffron">480</p>
+                        <p class="text-[8px] text-espresso/20">kcal</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-serif font-bold text-basil">22g</p>
+                        <p class="text-[8px] text-espresso/20">Protein</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-serif font-bold text-plum">58g</p>
+                        <p class="text-[8px] text-espresso/20">Carbs</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-serif font-bold text-espresso/60">18g</p>
+                        <p class="text-[8px] text-espresso/20">Fat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

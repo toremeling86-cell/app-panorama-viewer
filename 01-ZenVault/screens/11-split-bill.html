@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Split Bill</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "vault": "#0C0F1A", "primary": "#00D4AA", "secondary": "#7B61FF", "rose": "#FF6B8A", "gold": "#FFD700", "panel": "#141829" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["DM Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0C0F1A
+        }
+
+        .glass-bright {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .split-tab-active { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2); color: #00D4AA; font-weight: 700; }
+        .tip-btn-active { background: rgba(0,212,170,0.1); color: #00D4AA; font-weight: 700; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-vault">
+        <!-- Status Bar -->
+        <div aria-hidden="true" class="flex items-center justify-between px-6 pt-3 pb-0">
+            <span class="text-xs text-white/20 font-medium">9:41</span>
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">signal_cellular_alt</span>
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">wifi</span>
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">battery_full</span>
+            </div>
+        </div>
+
+        <header class="flex items-center justify-between px-6 pt-4 pb-3" data-animate style="animation-delay:0ms">
+            <button class="btn-press" aria-label="Close split bill"><span class="material-symbols-outlined !text-xl text-white/20" aria-hidden="true">close</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-white/60">Split Bill</h1>
+            <button class="text-xs text-primary/60 btn-press">History</button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Total -->
+            <section aria-label="Bill total" class="glass-bright card-interactive shadow-layered p-5 text-center" data-animate style="animation-delay:80ms">
+                <p class="text-[10px] text-white/20 uppercase tracking-wider mb-1">Total Bill</p>
+                <p class="text-4xl font-display font-bold" id="totalBill" data-count-to="284.50" data-prefix="$" data-decimals="2">$0.00</p>
+                <p class="text-xs text-white/20 mt-1">Sakura Japanese Restaurant</p>
+            </section>
+
+            <!-- Split Type -->
+            <div class="flex gap-2" data-animate style="animation-delay:160ms" id="splitTabs">
+                <button
+                    class="flex-1 py-2.5 rounded-xl text-xs font-display text-center btn-press split-tab-active" data-split="equal">Equal</button>
+                <button class="flex-1 py-2.5 glass-bright text-xs text-white/20 text-center btn-press rounded-xl" data-split="custom">Custom</button>
+                <button class="flex-1 py-2.5 glass-bright text-xs text-white/20 text-center btn-press rounded-xl" data-split="item">By Item</button>
+            </div>
+
+            <!-- People Count Control -->
+            <section aria-label="Number of people" class="glass-bright card-interactive shadow-layered p-4" data-animate style="animation-delay:240ms">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-[10px] text-white/20 uppercase tracking-wider font-display">Split Between</p>
+                    <div class="flex items-center gap-3">
+                        <button class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center btn-press" id="removePerson" aria-label="Remove person">
+                            <span class="material-symbols-outlined !text-sm text-white/30" aria-hidden="true">remove</span>
+                        </button>
+                        <span class="text-xs text-primary/60 font-display font-bold" id="peopleCount">4 people</span>
+                        <button class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center btn-press" id="addPerson" aria-label="Add person">
+                            <span class="material-symbols-outlined !text-sm text-white/30" aria-hidden="true">add</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="space-y-2" id="peopleList">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-sm" aria-hidden="true">😊</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">You</p>
+                        </div>
+                        <p class="text-sm font-display font-bold text-primary person-share">$71.13</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-secondary/10 flex items-center justify-center text-sm" aria-hidden="true">👨</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Alex</p>
+                            <p class="text-[9px] text-white/15">alex@mail.com</p>
+                        </div>
+                        <p class="text-sm font-display font-bold person-share">$71.13</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-rose/10 flex items-center justify-center text-sm" aria-hidden="true">👩</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Maya</p>
+                            <p class="text-[9px] text-white/15">Venmo · @maya</p>
+                        </div>
+                        <p class="text-sm font-display font-bold person-share">$71.12</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full bg-gold/10 flex items-center justify-center text-sm" aria-hidden="true">🧑</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Jordan</p>
+                            <p class="text-[9px] text-white/15">Zelle · (555) 123</p>
+                        </div>
+                        <p class="text-sm font-display font-bold person-share">$71.12</p>
+                    </div>
+                </div>
+                <button
+                    class="w-full mt-3 py-2 border border-dashed border-white/10 rounded-xl text-xs text-white/15 flex items-center justify-center gap-1 btn-press" aria-label="Add a person to the bill"><span
+                        class="material-symbols-outlined !text-sm" aria-hidden="true">person_add</span> Add person</button>
+            </section>
+
+            <!-- Tip & Tax -->
+            <section aria-label="Adjustments and tip" class="glass-bright card-interactive shadow-layered p-4" data-animate style="animation-delay:320ms">
+                <p class="text-[10px] text-white/20 uppercase tracking-wider font-display mb-3">Adjustments</p>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between"><span
+                            class="text-xs text-white/30">Subtotal</span><span
+                            class="text-xs font-medium" id="subtotalDisplay">$248.00</span></div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-white/30">Tax
+                            (8.5%)</span><span class="text-xs font-medium" id="taxDisplay">$21.08</span></div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-white/30">Tip</span>
+                        <div class="flex gap-1.5" id="tipButtons">
+                            <button class="px-2.5 py-1 bg-white/5 rounded text-[10px] btn-press" data-tip="15">15%</button>
+                            <button class="px-2.5 py-1 tip-btn-active rounded text-[10px] btn-press" data-tip="18">18%</button>
+                            <button class="px-2.5 py-1 bg-white/5 rounded text-[10px] btn-press" data-tip="20">20%</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-white/5"><span
+                            class="text-xs text-white/50 font-medium">Tip Amount</span><span
+                            class="text-xs font-display font-bold text-primary" id="tipAmountDisplay">$15.42</span></div>
+                </div>
+            </section>
+
+            <!-- Payment Status -->
+            <section aria-label="Payment status" class="glass-bright card-interactive shadow-layered p-4" data-animate style="animation-delay:400ms">
+                <p class="text-[10px] text-white/20 uppercase tracking-wider font-display mb-2">Payment Status</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-primary" style="animation: breathe 2s ease infinite"></div><span class="text-xs">You — <span
+                                class="text-primary">Paid</span></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-gold" style="animation: breathe 2s ease infinite 0.3s"></div><span class="text-xs text-white/30">Alex — <span
+                                class="text-gold">Pending</span></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-white/10"></div><span class="text-xs text-white/20">Maya —
+                            Requested</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-white/10"></div><span class="text-xs text-white/20">Jordan —
+                            Requested</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-vault/95 backdrop-blur border-t border-white/3 px-6 py-4 pb-8" data-animate style="animation-delay:480ms">
+            <button
+                class="w-full py-3.5 bg-primary text-vault font-display font-bold rounded-xl text-sm btn-press">Send
+                Payment Requests</button>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* -- Intersection Observer for animations -- */
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+        /* -- Animated counters -- */
+        function animateCount(el) {
+            const target = parseFloat(el.dataset.countTo);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+            const duration = 1200;
+            const start = performance.now();
+            function tick(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = prefix + (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        const countObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('[data-count-to]').forEach(el => countObs.observe(el));
+
+        /* -- Bill split logic -- */
+        const SUBTOTAL = 248.00;
+        const TAX_RATE = 0.085;
+        let tipPercent = 18;
+        let numPeople = 4;
+
+        const people = [
+            { name: 'You', emoji: '😊', color: 'primary', detail: '' },
+            { name: 'Alex', emoji: '👨', color: 'secondary', detail: 'alex@mail.com' },
+            { name: 'Maya', emoji: '👩', color: 'rose', detail: 'Venmo · @maya' },
+            { name: 'Jordan', emoji: '🧑', color: 'gold', detail: 'Zelle · (555) 123' },
+            { name: 'Sam', emoji: '👤', color: 'primary', detail: 'sam@mail.com' },
+            { name: 'Riley', emoji: '🧑‍🦱', color: 'secondary', detail: 'Venmo · @riley' },
+        ];
+
+        function recalculate() {
+            const tax = SUBTOTAL * TAX_RATE;
+            const tip = SUBTOTAL * (tipPercent / 100);
+            const total = SUBTOTAL + tax + tip;
+            const perPerson = total / numPeople;
+
+            document.getElementById('totalBill').textContent = '$' + total.toFixed(2);
+            document.getElementById('subtotalDisplay').textContent = '$' + SUBTOTAL.toFixed(2);
+            document.getElementById('taxDisplay').textContent = '$' + tax.toFixed(2);
+            document.getElementById('tipAmountDisplay').textContent = '$' + tip.toFixed(2);
+            document.getElementById('peopleCount').textContent = numPeople + ' people';
+
+            /* Rebuild people list */
+            const list = document.getElementById('peopleList');
+            list.innerHTML = '';
+            for (let i = 0; i < numPeople; i++) {
+                const p = people[i] || { name: 'Person ' + (i+1), emoji: '👤', color: 'primary', detail: '' };
+                const share = i === 0 ? Math.ceil(perPerson * 100) / 100 : (i < numPeople - 1 ? Math.floor(perPerson * 100) / 100 : (total - Math.ceil(perPerson * 100) / 100 - Math.floor(perPerson * 100) / 100 * (numPeople - 2)).toFixed(2));
+                const isYou = i === 0;
+                const row = document.createElement('div');
+                row.className = 'flex items-center gap-3';
+                row.innerHTML = `
+                    <div class="w-9 h-9 rounded-full bg-${p.color}/10 flex items-center justify-center text-sm" aria-hidden="true">${p.emoji}</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium">${p.name}</p>
+                        ${p.detail ? `<p class="text-[9px] text-white/15">${p.detail}</p>` : ''}
+                    </div>
+                    <p class="text-sm font-display font-bold ${isYou ? 'text-primary' : ''} person-share">$${(perPerson).toFixed(2)}</p>
+                `;
+                list.appendChild(row);
+            }
+
+            /* Animate the shares */
+            document.querySelectorAll('.person-share').forEach(el => {
+                el.style.transition = 'transform 200ms ease';
+                el.style.transform = 'scale(1.1)';
+                setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+            });
+        }
+
+        /* People +/- buttons */
+        document.getElementById('addPerson').addEventListener('click', () => {
+            if (numPeople < 6) { numPeople++; recalculate(); }
+        });
+        document.getElementById('removePerson').addEventListener('click', () => {
+            if (numPeople > 2) { numPeople--; recalculate(); }
+        });
+
+        /* Split type tabs */
+        document.getElementById('splitTabs').addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-split]');
+            if (!btn) return;
+            document.querySelectorAll('#splitTabs button').forEach(b => {
+                b.className = 'flex-1 py-2.5 glass-bright text-xs text-white/20 text-center btn-press rounded-xl';
+            });
+            btn.className = 'flex-1 py-2.5 rounded-xl text-xs font-display text-center btn-press split-tab-active';
+        });
+
+        /* Tip buttons */
+        document.getElementById('tipButtons').addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-tip]');
+            if (!btn) return;
+            tipPercent = parseInt(btn.dataset.tip);
+            document.querySelectorAll('#tipButtons button').forEach(b => {
+                b.className = 'px-2.5 py-1 bg-white/5 rounded text-[10px] btn-press';
+            });
+            btn.className = 'px-2.5 py-1 tip-btn-active rounded text-[10px] btn-press';
+            recalculate();
+        });
+    });
+    </script>
+</body>
+
+</html>

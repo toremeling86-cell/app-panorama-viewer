@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Discover</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#EC4899", "secondary": "#8B5CF6", "accent": "#06B6D4", "bg-void": "#0A0A12", "neon": "#F0ABFC" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A12;
+        }
+
+        .sonic-glow {
+            background: radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card-hover {
+            transition: transform 0.2s;
+        }
+
+        .card-hover:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden sonic-glow">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-light text-neon/40 tracking-[0.3em] uppercase">Explore</p>
+                <h1 class="text-2xl font-bold mt-0.5">Discover 🎵</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-slate-400">search</span></button>
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-sm font-bold">
+                    J</div>
+            </div>
+        </div>
+
+        <!-- AI Mood Selector -->
+        <div class="px-6 py-3">
+            <div class="glass-bright rounded-2xl p-4">
+                <div class="flex items-center gap-2 mb-3"><span
+                        class="material-symbols-outlined !text-lg text-primary">auto_awesome</span><span
+                        class="text-xs font-semibold text-neon/60 tracking-wider uppercase">AI Mood Engine</span></div>
+                <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-gradient-to-r from-primary to-secondary text-white whitespace-nowrap">✨
+                        For You</button>
+                    <button class="px-4 py-2 rounded-full text-xs font-medium glass text-slate-400 whitespace-nowrap">🌙
+                        Chill</button>
+                    <button class="px-4 py-2 rounded-full text-xs font-medium glass text-slate-400 whitespace-nowrap">⚡
+                        Energy</button>
+                    <button class="px-4 py-2 rounded-full text-xs font-medium glass text-slate-400 whitespace-nowrap">🎯
+                        Focus</button>
+                    <button class="px-4 py-2 rounded-full text-xs font-medium glass text-slate-400 whitespace-nowrap">💔
+                        Melancholy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-5">
+            <!-- Featured Mix -->
+            <div class="relative rounded-3xl overflow-hidden card-hover">
+                <div class="h-44 bg-gradient-to-br from-primary via-secondary to-accent relative">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute top-4 left-4"><span
+                            class="text-[10px] bg-white/20 text-white font-medium px-2 py-1 rounded-full backdrop-blur">🔥
+                            Trending</span></div>
+                    <div class="absolute bottom-4 left-4 right-4">
+                        <h3 class="text-lg font-bold">Neon Nocturne Mix</h3>
+                        <p class="text-xs text-white/60 mt-0.5">AI-curated · 2h 14m · 42 tracks</p>
+                        <div class="flex items-center gap-3 mt-2">
+                            <button
+                                class="px-4 py-2 bg-white text-bg-void font-semibold rounded-full text-xs flex items-center gap-1"><span
+                                    class="material-symbols-outlined !text-sm">play_arrow</span> Play</button>
+                            <span class="text-xs text-white/50">1.2M plays</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spatial Playlists -->
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="text-sm font-semibold tracking-wider uppercase text-neon/40">Spatial Audio</h2>
+                    <button class="text-xs text-primary">See all →</button>
+                </div>
+                <div class="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
+                    <div class="min-w-[130px] glass rounded-2xl p-3 card-hover">
+                        <div
+                            class="w-full aspect-square rounded-xl bg-gradient-to-br from-violet-500 to-purple-700 flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined !text-3xl text-white/80">spatial_audio</span>
+                        </div>
+                        <p class="text-sm font-medium">Deep Space</p>
+                        <p class="text-[10px] text-slate-500">Ambient · 3D</p>
+                    </div>
+                    <div class="min-w-[130px] glass rounded-2xl p-3 card-hover">
+                        <div
+                            class="w-full aspect-square rounded-xl bg-gradient-to-br from-pink-400 to-rose-600 flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined !text-3xl text-white/80">headphones</span>
+                        </div>
+                        <p class="text-sm font-medium">Synthwave</p>
+                        <p class="text-[10px] text-slate-500">Electronic · 3D</p>
+                    </div>
+                    <div class="min-w-[130px] glass rounded-2xl p-3 card-hover">
+                        <div
+                            class="w-full aspect-square rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined !text-3xl text-white/80">waves</span>
+                        </div>
+                        <p class="text-sm font-medium">Ocean Drift</p>
+                        <p class="text-[10px] text-slate-500">Lo-Fi · 3D</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Releases -->
+            <div>
+                <h2 class="text-sm font-semibold tracking-wider uppercase text-neon/40 mb-3">Fresh Drops</h2>
+                <div class="space-y-2">
+                    <div class="glass-bright rounded-xl p-3 flex items-center gap-3 card-hover">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-lg flex-shrink-0">
+                            🌿</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Forest Frequencies</p>
+                            <p class="text-[10px] text-slate-500">Verdant · New Album</p>
+                        </div>
+                        <span class="text-[10px] text-primary font-mono">3:18</span>
+                        <button class="w-8 h-8 rounded-full glass flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-primary">play_arrow</span></button>
+                    </div>
+                    <div class="glass-bright rounded-xl p-3 flex items-center gap-3 card-hover">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center text-lg flex-shrink-0">
+                            🌅</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Golden Hour</p>
+                            <p class="text-[10px] text-slate-500">Luna Park · Single</p>
+                        </div>
+                        <span class="text-[10px] text-primary font-mono">4:05</span>
+                        <button class="w-8 h-8 rounded-full glass flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-primary">play_arrow</span></button>
+                    </div>
+                    <div class="glass-bright rounded-xl p-3 flex items-center gap-3 card-hover">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-gradient-to-br from-rose-400 to-pink-600 flex items-center justify-center text-lg flex-shrink-0">
+                            💫</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Stardust</p>
+                            <p class="text-[10px] text-slate-500">NOVA · EP</p>
+                        </div>
+                        <span class="text-[10px] text-primary font-mono">2:47</span>
+                        <button class="w-8 h-8 rounded-full glass flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-primary">play_arrow</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mini Player -->
+        <div class="absolute bottom-16 left-3 right-3 glass-bright rounded-2xl px-4 py-3 flex items-center gap-3">
+            <div
+                class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <span class="material-symbols-outlined !text-lg text-white">music_note</span></div>
+            <div class="flex-1">
+                <p class="text-sm font-medium">Midnight Drives</p>
+                <p class="text-[10px] text-slate-500">Stellar Frequencies</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-primary">pause</span></button>
+            <button><span class="material-symbols-outlined !text-xl text-slate-400">skip_next</span></button>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">home</span><span
+                        class="text-[10px] text-slate-500">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">explore</span><span
+                        class="text-[10px] font-medium text-primary">Discover</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">play_circle</span><span
+                        class="text-[10px] text-slate-500">Playing</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">library_music</span><span
+                        class="text-[10px] text-slate-500">Library</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

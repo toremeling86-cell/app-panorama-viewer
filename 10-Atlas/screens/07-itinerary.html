@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Itinerary</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "parchment": "#1A1510", "vintage": "#D4A574", "terra": "#C67B5C", "linen": "#F5E6D3", "ink": "#2D2318", "forest": "#4A7C59", "ocean": "#4A8DB7" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1510
+        }
+
+        .glass-vintage {
+            background: rgba(212, 165, 116, 0.04);
+            border: 1px solid rgba(212, 165, 116, 0.08);
+            border-radius: 16px
+        }
+
+        .day-active {
+            background: rgba(212, 165, 116, 0.15);
+            border: 2px solid rgba(212, 165, 116, 0.3)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-linen overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-linen/30">arrow_back</span></button>
+            <h1 class="font-display text-sm font-bold tracking-wider">Marrakech Trip</h1>
+            <button class="text-xs text-vintage font-medium">Share</button>
+        </div>
+
+        <!-- Day Selector -->
+        <div class="flex gap-2 px-6 pb-3 overflow-x-auto no-scrollbar">
+            <button class="px-4 py-2 rounded-xl day-active text-xs font-display font-bold text-vintage min-w-[60px]">Day
+                1<br /><span class="text-[9px] text-vintage/40">Mar 15</span></button>
+            <button class="px-4 py-2 rounded-xl glass-vintage text-xs font-display text-linen/30 min-w-[60px]">Day
+                2<br /><span class="text-[9px] text-linen/15">Mar 16</span></button>
+            <button class="px-4 py-2 rounded-xl glass-vintage text-xs font-display text-linen/30 min-w-[60px]">Day
+                3<br /><span class="text-[9px] text-linen/15">Mar 17</span></button>
+            <button class="px-4 py-2 rounded-xl glass-vintage text-xs font-display text-linen/15 min-w-[60px]">Day
+                4<br /><span class="text-[9px] text-linen/10">Mar 18</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24">
+            <!-- Timeline -->
+            <div class="relative pl-6">
+                <div class="absolute left-[11px] top-0 bottom-0 w-0.5 bg-vintage/10"></div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-vintage/20 flex items-center justify-center">
+                        <span class="text-[10px]">✈️</span></div>
+                    <div class="glass-vintage p-3 ml-3">
+                        <p class="text-[9px] text-vintage/40 font-display uppercase">8:00 AM</p>
+                        <p class="text-sm font-display font-bold mt-0.5">Arrive at Marrakech Menara</p>
+                        <p class="text-[10px] text-linen/30 mt-0.5">Flight MK420 · Terminal 1</p>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-ocean/10 rounded text-[9px] text-ocean">✈️
+                            Transport</span>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-vintage/20 flex items-center justify-center">
+                        <span class="text-[10px]">🏨</span></div>
+                    <div class="glass-vintage p-3 ml-3">
+                        <p class="text-[9px] text-vintage/40 font-display uppercase">10:00 AM</p>
+                        <p class="text-sm font-display font-bold mt-0.5">Check in — Hotel Marrakech</p>
+                        <p class="text-[10px] text-linen/30 mt-0.5">Confirmation: #MRK2026-447</p>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-vintage/10 rounded text-[9px] text-vintage">🏨
+                            Accommodation</span>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-terra/20 flex items-center justify-center">
+                        <span class="text-[10px]">🕌</span></div>
+                    <div class="glass-vintage p-3 ml-3 border-vintage/15">
+                        <p class="text-[9px] text-vintage/40 font-display uppercase">12:00 PM</p>
+                        <p class="text-sm font-display font-bold mt-0.5">Explore Jemaa el-Fnaa</p>
+                        <p class="text-[10px] text-linen/30 mt-0.5">The famous main square — food stalls, performers,
+                            snake charmers</p>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-terra/10 rounded text-[9px] text-terra">🗺️
+                            Sightseeing</span>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-forest/20 flex items-center justify-center">
+                        <span class="text-[10px]">🍽️</span></div>
+                    <div class="glass-vintage p-3 ml-3">
+                        <p class="text-[9px] text-vintage/40 font-display uppercase">2:00 PM</p>
+                        <p class="text-sm font-display font-bold mt-0.5">Lunch at Café Clock</p>
+                        <p class="text-[10px] text-linen/30 mt-0.5">World-famous camel burger · Rooftop views</p>
+                        <div class="flex items-center gap-2 mt-1"><span
+                                class="inline-block px-2 py-0.5 bg-forest/10 rounded text-[9px] text-forest">🍽️
+                                Food</span><span class="text-[9px] text-vintage/20">~$15 pp</span></div>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-vintage/20 flex items-center justify-center">
+                        <span class="text-[10px]">🛍️</span></div>
+                    <div class="glass-vintage p-3 ml-3">
+                        <p class="text-[9px] text-vintage/40 font-display uppercase">4:00 PM</p>
+                        <p class="text-sm font-display font-bold mt-0.5">Souk Shopping</p>
+                        <p class="text-[10px] text-linen/30 mt-0.5">Navigate the labyrinthine medina souks for spices,
+                            leather, and ceramics</p>
+                        <span class="inline-block mt-1 px-2 py-0.5 bg-vintage/10 rounded text-[9px] text-vintage">🛍️
+                            Shopping</span>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-terra/30 flex items-center justify-center">
+                        <span class="text-[10px]">🌅</span></div>
+                    <div class="glass-vintage p-3 ml-3">
+                        <p class="text-[9px] text-vintage/40 font-display uppercase">7:00 PM</p>
+                        <p class="text-sm font-display font-bold mt-0.5">Sunset at Bahia Palace</p>
+                        <p class="text-[10px] text-linen/30 mt-0.5">19th century palace · Best light for photography</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Activity FAB -->
+        <button
+            class="fixed bottom-24 right-8 w-14 h-14 bg-vintage rounded-full flex items-center justify-center shadow-xl shadow-vintage/20 active:scale-90 transition-transform"><span
+                class="material-symbols-outlined !text-2xl text-parchment">add</span></button>
+    </div>
+</body>
+
+</html>

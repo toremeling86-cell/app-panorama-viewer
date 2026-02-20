@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Screen Panorama Viewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="viewer/styles.css">
+    <link rel="stylesheet" href="viewer/design-studio.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+        <div id="sidebar-header">
+            <h1><span class="material-symbols-outlined">phone_iphone</span> App Panorama</h1>
+            <p>158 screens · 13 apps · drag & annotate</p>
+        </div>
+        <div id="app-list"></div>
+        <div id="sidebar-footer">
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-v" id="s-total">0</div>
+                    <div class="stat-l">Screens</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v" id="s-annotated">0</div>
+                    <div class="stat-l">Annotated</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-v" id="s-starred">0</div>
+                    <div class="stat-l">Starred</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- APP OVERLAY -->
+    <div id="app-overlay">
+        <div class="ao-backdrop" id="ao-backdrop"></div>
+        <div class="ao-content">
+            <div class="ao-header">
+                <h2><span class="material-symbols-outlined">phone_iphone</span> App Panorama</h2>
+                <div class="ao-tabs" id="ao-tabs"></div>
+                <input type="text" class="ao-search" id="ao-search" placeholder="Search apps...">
+            </div>
+            <div class="ao-grid" id="ao-grid"></div>
+            <div class="ao-footer">
+                <div class="ao-footer-stats">
+                    <div class="ao-stat"><div class="ao-stat-v" id="ao-total">0</div><div class="ao-stat-l">Screens</div></div>
+                    <div class="ao-stat"><div class="ao-stat-v" id="ao-annotated">0</div><div class="ao-stat-l">Annotated</div></div>
+                    <div class="ao-stat"><div class="ao-stat-v" id="ao-starred">0</div><div class="ao-stat-l">Starred</div></div>
+                </div>
+                <button class="ao-close" id="ao-close"><span class="material-symbols-outlined" style="font-size:13px">close</span> Close <kbd style="font-size:9px;opacity:.5;margin-left:2px">Esc</kbd></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOPBAR -->
+    <header id="topbar">
+        <!-- LEFT: Menu + App Info -->
+        <div class="tb-group tb-left">
+            <button class="tb" id="btn-hamburger" title="App Menu (M)">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <span id="app-title"><span class="material-symbols-outlined" style="font-size:16px">apps</span> Select an
+                app</span>
+            <span id="screen-count"></span>
+        </div>
+
+        <!-- CENTER: Search + Layout + Zoom + Snap + Interact -->
+        <div class="tb-group tb-center">
+            <input type="text" id="search-input" placeholder="Search screens...">
+            <div class="tbsep"></div>
+            <div class="tbg">
+                <button class="tb" id="btn-lt" title="Tight strip (Key: 1)"><span
+                        class="material-symbols-outlined">density_small</span></button>
+                <button class="tb" id="btn-lg" title="Grid layout (Key: 2)"><span
+                        class="material-symbols-outlined">grid_view</span></button>
+                <button class="tb" id="btn-lf" title="User flow (Key: 3)"><span
+                        class="material-symbols-outlined">account_tree</span></button>
+            </div>
+            <div class="tbsep"></div>
+            <div class="tbg">
+                <span class="material-symbols-outlined"
+                    style="font-size:12px;color:var(--muted);padding:0 3px">zoom_out</span>
+                <input type="range" id="zoom-slider" min="6" max="100" value="35">
+                <span id="zoom-val">35%</span>
+                <span class="material-symbols-outlined"
+                    style="font-size:12px;color:var(--muted);padding:0 3px">zoom_in</span>
+            </div>
+            <div class="tbsep"></div>
+            <button class="tb on" id="btn-snap" title="Snap to grid (Key: S)"><span
+                    class="material-symbols-outlined">grid_on</span> Snap</button>
+            <button class="tb" id="btn-interact" title="Interact with screens"><span
+                    class="material-symbols-outlined">touch_app</span></button>
+        </div>
+
+        <!-- RIGHT: Design Tools + View Tools -->
+        <div class="tb-group tb-right">
+            <button class="tb" id="btn-inspect" title="Element Inspector (Key: I)"><span
+                    class="material-symbols-outlined">search</span></button>
+            <button class="tb" id="btn-tokens" title="Design Tokens (Key: T)"><span
+                    class="material-symbols-outlined">palette</span></button>
+            <button class="tb" id="btn-presets" title="Style Presets"><span
+                    class="material-symbols-outlined">style</span></button>
+            <button class="tb" id="btn-bg" title="Screen Editor (D)"><span
+                    class="material-symbols-outlined">edit_square</span></button>
+            <button class="tb" id="btn-a11y" title="Accessibility Scanner (Key: A)"><span
+                    class="material-symbols-outlined">accessibility_new</span></button>
+            <button class="tb" id="btn-responsive" title="Responsive Preview (Key: R)"><span
+                    class="material-symbols-outlined">devices</span></button>
+            <button class="tb" id="btn-code-export" title="Code Export"><span
+                    class="material-symbols-outlined">code</span></button>
+            <div class="tbsep"></div>
+            <button class="tb" id="btn-compare" title="Compare Screens"><span
+                    class="material-symbols-outlined">compare</span></button>
+            <button class="tb" id="btn-pres" title="Presentation mode (Key: P)"><span
+                    class="material-symbols-outlined">slideshow</span></button>
+            <button class="tb" id="btn-fit" title="Fit all (Key: F)"><span
+                    class="material-symbols-outlined">fit_screen</span></button>
+            <button class="tb" id="btn-reset" title="Reset positions"><span
+                    class="material-symbols-outlined">restart_alt</span></button>
+            <button class="tb" id="btn-export" title="Export"><span
+                    class="material-symbols-outlined">download</span></button>
+        </div>
+    </header>
+
+    <!-- CANVAS -->
+    <div id="canvas-area">
+        <div id="canvas"></div>
+        <div id="rubber-band"></div>
+    </div>
+
+    <!-- ANNOTATION PANEL -->
+    <aside id="ann-panel">
+        <div id="ph">
+            <div>
+                <div id="pt">Screen</div>
+                <div id="ps">App</div>
+            </div>
+            <button class="pc" id="btn-pc"><span class="material-symbols-outlined"
+                    style="font-size:14px">close</span></button>
+        </div>
+        <div id="pb">
+            <div>
+                <div class="pl"><span class="material-symbols-outlined">star</span> Rating</div>
+                <div class="pa">
+                    <button class="pa-star" id="btn-star"><span class="material-symbols-outlined" style="font-size:13px">star_border</span> Star</button>
+                    <button class="pa-g" data-g="A">A</button>
+                    <button class="pa-g" data-g="B">B</button>
+                    <button class="pa-g" data-g="C">C</button>
+                    <button class="pa-g" data-g="D">D</button>
+                </div>
+            </div>
+            <div>
+                <div class="pl"><span class="material-symbols-outlined">flag</span> Status</div>
+                <div class="status-sel">
+                    <button class="status-btn" data-s="approved"><span class="material-symbols-outlined" style="font-size:13px">check</span> Approved</button>
+                    <button class="status-btn" data-s="wip"><span class="material-symbols-outlined" style="font-size:13px">bolt</span> WIP</button>
+                    <button class="status-btn" data-s="needs-work"><span class="material-symbols-outlined" style="font-size:13px">close</span> Needs Work</button>
+                    <button class="status-btn" data-s="review"><span class="material-symbols-outlined" style="font-size:13px">visibility</span> Review</button>
+                </div>
+            </div>
+            <div>
+                <div class="pl"><span class="material-symbols-outlined">edit_note</span> Notes</div>
+                <textarea id="pn" placeholder="Add design notes, feedback, UX observations..."></textarea>
+                <div id="psaved"><span class="material-symbols-outlined" style="font-size:13px">check</span> Saved</div>
+            </div>
+            <div>
+                <div class="pl"><span class="material-symbols-outlined">label</span> Tags (Enter to add)</div>
+                <input id="ptag" placeholder="e.g. needs-fixing, approved, animation, a11y">
+                <div id="ptags"></div>
+            </div>
+            <div>
+                <div class="pl"><span class="material-symbols-outlined">image</span> Attachments</div>
+                <div id="img-drop">
+                    <div class="di"><span class="material-symbols-outlined" style="font-size:14px">attach_file</span></div>
+                    Drop screenshots or click to upload
+                    <small>PNG, JPG — stored in browser</small>
+                </div>
+                <input type="file" id="img-file" accept="image/*" multiple>
+                <div id="img-grid"></div>
+            </div>
+            <div>
+                <div class="pl"><span class="material-symbols-outlined">info</span> Screen Info</div>
+                <div id="pinfo"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MINIMAP -->
+    <div id="minimap">
+        <canvas id="mm-canvas"></canvas>
+        <div id="mm-vp"></div>
+    </div>
+
+    <!-- PRESENTATION MODE -->
+    <div id="pres-overlay">
+        <div id="pres-bar">
+            <button class="pres-btn" id="pres-prev"><span class="material-symbols-outlined" style="font-size:14px">arrow_back</span> Prev</button>
+            <span id="pres-title"></span>
+            <span id="pres-counter"></span>
+            <button class="pres-btn" id="pres-next">Next <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></button>
+            <button class="pres-btn" id="pres-close"><span class="material-symbols-outlined" style="font-size:14px">close</span></button>
+        </div>
+        <div id="pres-frame"></div>
+        <div id="pres-nav"></div>
+    </div>
+
+    <!-- FOCUSED DESIGN MODE (Screen Editor) -->
+    <div id="focused-overlay">
+        <div id="focused-bar">
+            <button class="focused-btn" id="focused-prev"><span class="material-symbols-outlined" style="font-size:14px">arrow_back</span> Prev</button>
+            <span id="focused-title"></span>
+            <span id="focused-counter"></span>
+            <button class="focused-btn" id="focused-next">Next <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></button>
+            <button class="focused-btn" id="focused-toggle-filmstrip" title="Toggle filmstrip"><span class="material-symbols-outlined" style="font-size:14px">movie</span> Screens</button>
+            <button class="focused-btn" id="focused-toggle-info" title="Toggle info"><span class="material-symbols-outlined" style="font-size:14px">info</span> Info</button>
+            <button class="focused-btn" id="focused-toggle-panel" title="Toggle panel"><span class="material-symbols-outlined" style="font-size:14px">tune</span> Panel</button>
+            <button class="focused-btn focused-btn-close" id="focused-close"><span class="material-symbols-outlined" style="font-size:14px">close</span></button>
+        </div>
+        <div id="focused-content">
+            <aside id="focused-info-panel">
+                <div class="focused-info-header">
+                    <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">info</span>
+                    <span class="focused-info-title">Screen Info</span>
+                </div>
+                <div id="focused-info-body"></div>
+            </aside>
+            <div id="focused-frame"><!-- iframe rendered dynamically --></div>
+            <aside id="focused-design-panel">
+                <div id="focused-bg-body"></div>
+            </aside>
+        </div>
+        <div id="focused-filmstrip">
+            <button class="film-arrow" id="film-prev">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <div class="film-track" id="film-track"></div>
+            <button class="film-arrow" id="film-next">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+        </div>
+        <div id="focused-nav"><!-- dot navigation rendered dynamically --></div>
+    </div>
+
+    <!-- CONTEXT MENU -->
+    <div id="ctx">
+        <div class="ci" data-a="annotate"><span class="material-symbols-outlined">edit</span> Annotate</div>
+        <div class="ci" data-a="inspect"><span class="material-symbols-outlined">search</span> Inspect Element</div>
+        <div class="ci" data-a="star"><span class="material-symbols-outlined">star</span> Toggle Star</div>
+        <div class="ci" data-a="present"><span class="material-symbols-outlined">slideshow</span> Present from here
+        </div>
+        <div class="ci" data-a="focused"><span class="material-symbols-outlined">edit_square</span> Screen Editor</div>
+        <div class="ci" data-a="open"><span class="material-symbols-outlined">open_in_new</span> Open in Tab</div>
+        <div class="csep"></div>
+        <div class="ci" data-a="connect"><span class="material-symbols-outlined">link</span> Connect to...</div>
+        <div class="ci" data-a="front"><span class="material-symbols-outlined">flip_to_front</span> Bring to Front</div>
+        <div class="ci" data-a="back"><span class="material-symbols-outlined">flip_to_back</span> Send to Back</div>
+        <div class="csep"></div>
+        <div class="ci" data-a="reset"><span class="material-symbols-outlined">restart_alt</span> Reset Position</div>
+    </div>
+
+    <!-- ANNOTATION CANVAS (fullscreen overlay, hidden by default) -->
+    <div id="ann-canvas-wrapper">
+        <div class="ann-canvas-area">
+            <div class="ann-canvas-inner" id="ann-inner">
+                <img id="ann-bg-img" alt="Screenshot" draggable="false" style="display:none">
+                <svg id="ann-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <div class="ann-zoom-info" id="ann-zoom-info">100%</div>
+            <!-- Properties bar (bottom center, visible when shape selected) -->
+            <div class="ann-properties-bar" id="ann-properties-bar">
+                <label>Intent:
+                    <select id="ann-intent-select">
+                        <option value="">—</option>
+                        <option value="fix">Fix</option>
+                        <option value="question">Question</option>
+                        <option value="suggestion">Suggestion</option>
+                        <option value="approved">Approved</option>
+                    </select>
+                </label>
+                <label>Severity:
+                    <select id="ann-severity-select">
+                        <option value="">—</option>
+                        <option value="blocking">Blocking</option>
+                        <option value="minor">Minor</option>
+                        <option value="cosmetic">Cosmetic</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <!-- Floating shapes panel -->
+        <div id="ann-shapes-panel">
+            <div class="ann-shapes-title">Shapes</div>
+            <div id="ann-canvas-list"></div>
+        </div>
+
+        <!-- 48px icon toolbar (identical to gallery) -->
+        <div id="ann-toolbar">
+            <!-- Tools -->
+            <button class="ann-tool-btn active" data-tool="select" title="Select (V)">&#9654;</button>
+            <button class="ann-tool-btn" data-tool="rect" title="Rectangle (R)">&#9645;</button>
+            <button class="ann-tool-btn" data-tool="highlight" title="Highlight (H)">&#9632;</button>
+            <button class="ann-tool-btn" data-tool="ellipse" title="Ellipse (E)">&#9711;</button>
+            <button class="ann-tool-btn" data-tool="callout" title="Callout (C)">&#9312;</button>
+            <button class="ann-tool-btn" data-tool="arrow" title="Arrow (A)">&#8599;</button>
+            <button class="ann-tool-btn" data-tool="line" title="Line (L)">&#8212;</button>
+            <button class="ann-tool-btn" data-tool="freehand" title="Freehand (D)">&#9998;</button>
+            <button class="ann-tool-btn" data-tool="text" title="Text (T)">T</button>
+            <div class="ann-toolbar-sep"></div>
+            <!-- Colors -->
+            <button class="ann-color-btn active" data-color="#ef4444" title="Red (1) Change needed"
+                style="background:#ef4444"></button>
+            <button class="ann-color-btn" data-color="#22c55e" title="Green (2) Keep as-is"
+                style="background:#22c55e"></button>
+            <button class="ann-color-btn" data-color="#3b82f6" title="Blue (3) Reference"
+                style="background:#3b82f6"></button>
+            <button class="ann-color-btn" data-color="#f59e0b" title="Amber (4) Attention"
+                style="background:#f59e0b"></button>
+            <button class="ann-color-btn" data-color="#8b5cf6" title="Purple (5) Custom"
+                style="background:#8b5cf6"></button>
+            <div class="ann-toolbar-sep"></div>
+            <!-- Stroke width -->
+            <button class="ann-stroke-btn" data-sw="2" title="Thin (2px)"><span
+                    style="width:16px;height:1px;"></span></button>
+            <button class="ann-stroke-btn active" data-sw="3" title="Medium (3px)"><span
+                    style="width:16px;height:2px;"></span></button>
+            <button class="ann-stroke-btn" data-sw="5" title="Thick (5px)"><span
+                    style="width:16px;height:4px;"></span></button>
+            <div class="ann-toolbar-sep"></div>
+            <!-- Actions -->
+            <button class="ann-action-btn" id="ann-btn-undo" title="Undo (Ctrl+Z)">&#8630;</button>
+            <button class="ann-action-btn" id="ann-btn-redo" title="Redo (Ctrl+Y)">&#8631;</button>
+            <button class="ann-action-btn" id="ann-btn-delete" title="Delete (Del)">&#128465;</button>
+            <div class="ann-toolbar-sep"></div>
+            <!-- Export -->
+            <button class="ann-action-btn" id="ann-btn-export-png" title="Export PNG">&#128190;</button>
+            <button class="ann-action-btn" id="ann-btn-export-json" title="Export JSON">&#123;&#125;</button>
+            <div class="ann-toolbar-sep"></div>
+            <!-- List toggle -->
+            <button class="ann-action-btn" id="ann-btn-list-toggle" title="Toggle shapes list">&#9776;</button>
+            <!-- Exit -->
+            <button class="ann-action-btn ann-exit-btn" id="ann-btn-exit" title="Exit (Esc)">&#10005;</button>
+        </div>
+    </div>
+
+    <!-- ELEMENT INSPECTOR PANEL (floating, draggable) -->
+    <div id="ei-panel">
+        <div class="ei-header" id="ei-drag-handle">
+            <div class="ei-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">search</span>
+                <span class="ei-title">Inspector</span>
+            </div>
+            <button class="ei-close" id="ei-close"><span class="material-symbols-outlined"
+                    style="font-size:14px">close</span></button>
+        </div>
+        <div class="ei-body" id="ei-body">
+            <div class="ei-empty">Select an element to inspect</div>
+        </div>
+        <div class="ei-footer" id="ei-footer">
+            <button class="ei-btn" id="ei-copy-css" title="Copy computed CSS">
+                <span class="material-symbols-outlined" style="font-size:13px">content_copy</span> CSS
+            </button>
+            <button class="ei-btn" id="ei-copy-tw" title="Copy Tailwind classes">
+                <span class="material-symbols-outlined" style="font-size:13px">code</span> TW
+            </button>
+            <button class="ei-btn ei-btn-accent" id="ei-pick-style" title="Pick this element's style">
+                <span class="material-symbols-outlined" style="font-size:13px">colorize</span> Pick
+            </button>
+            <button class="ei-btn ei-btn-success" id="ei-apply-style" title="Apply picked style here">
+                <span class="material-symbols-outlined" style="font-size:13px">format_paint</span> Apply
+            </button>
+            <button class="ei-btn" id="ei-undo-style" title="Undo style change">
+                <span class="material-symbols-outlined" style="font-size:13px">undo</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- INSPECTOR MODE BAR (top notification when inspector is active) -->
+    <div id="ei-mode-bar">
+        <span class="material-symbols-outlined" style="font-size:15px">search</span>
+        <span class="ei-mode-label">Inspector Mode</span>
+        <span class="ei-mode-hint">Click elements to inspect · <kbd>Esc</kbd> to exit</span>
+        <button class="ei-mode-exit" id="ei-mode-exit">Exit</button>
+    </div>
+
+    <!-- STYLE TRANSFER CHIP (floating, shown when a style is picked) -->
+    <div id="ei-style-chip">
+        <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">colorize</span>
+        <span id="ei-chip-label">Style picked</span>
+        <button class="ei-chip-clear"
+            onclick="document.getElementById('ei-style-chip').classList.remove('show')">&times;</button>
+    </div>
+
+    <!-- DESIGN TOKENS PANEL (slide-out from right) -->
+    <aside id="dt-panel">
+        <div class="dt-header">
+            <div class="dt-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">palette</span>
+                <span class="dt-title">Design Tokens</span>
+                <span class="dt-edit-badge" id="dt-edit-badge" style="display:none">0</span>
+            </div>
+            <div class="dt-header-actions">
+                <button class="dt-hdr-btn" id="dt-undo" title="Undo edit (Ctrl+Z)" style="opacity:0.3">
+                    <span class="material-symbols-outlined" style="font-size:14px">undo</span>
+                </button>
+                <button class="dt-hdr-btn" id="dt-redo" title="Redo edit (Ctrl+Y)" style="opacity:0.3">
+                    <span class="material-symbols-outlined" style="font-size:14px">redo</span>
+                </button>
+                <button class="dt-hdr-btn" id="dt-reset-edits" title="Reset all edits">
+                    <span class="material-symbols-outlined" style="font-size:14px">restart_alt</span>
+                </button>
+                <div style="width:1px;height:16px;background:var(--border);margin:0 2px"></div>
+                <button class="dt-hdr-btn" id="dt-rescan" title="Re-scan">
+                    <span class="material-symbols-outlined" style="font-size:14px">refresh</span>
+                </button>
+                <button class="dt-hdr-btn" id="dt-export" title="Export JSON">
+                    <span class="material-symbols-outlined" style="font-size:14px">download</span>
+                </button>
+                <button class="dt-hdr-btn" id="dt-close" title="Close">
+                    <span class="material-symbols-outlined" style="font-size:14px">close</span>
+                </button>
+            </div>
+        </div>
+        <div class="dt-edit-hint" style="padding:4px 12px;font-size:10px;color:var(--dim);background:var(--s2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;">
+            <span class="material-symbols-outlined" style="font-size:12px">edit</span>
+            Double-click any token to edit · Changes apply live to all screens
+        </div>
+        <div class="dt-body" id="dt-body">
+            <div class="dt-empty">Click <strong>Re-scan</strong> to analyze design tokens</div>
+        </div>
+    </aside>
+
+    <!-- STYLE PRESETS PANEL (slide-out from right) -->
+    <aside id="sp-panel">
+        <div class="sp-header">
+            <div class="sp-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">style</span>
+                <span class="sp-title">Style Presets</span>
+            </div>
+            <div class="sp-header-actions">
+                <button class="sp-hdr-btn" id="sp-save-new" title="Save new preset">
+                    <span class="material-symbols-outlined" style="font-size:14px">add</span>
+                </button>
+                <button class="sp-hdr-btn" id="sp-undo" title="Undo last apply">
+                    <span class="material-symbols-outlined" style="font-size:14px">undo</span>
+                </button>
+                <button class="sp-hdr-btn" id="sp-undo-all" title="Undo all">
+                    <span class="material-symbols-outlined" style="font-size:14px">restart_alt</span>
+                </button>
+                <button class="sp-hdr-btn" id="sp-import" title="Import presets">
+                    <span class="material-symbols-outlined" style="font-size:14px">upload</span>
+                </button>
+                <button class="sp-hdr-btn" id="sp-export-all" title="Export all presets">
+                    <span class="material-symbols-outlined" style="font-size:14px">download</span>
+                </button>
+                <button class="sp-hdr-btn" id="sp-close" title="Close">
+                    <span class="material-symbols-outlined" style="font-size:14px">close</span>
+                </button>
+            </div>
+        </div>
+        <div class="sp-search-row">
+            <input type="text" id="sp-search" class="sp-search-input" placeholder="Search presets…">
+        </div>
+        <div class="sp-body" id="sp-body">
+            <div class="sp-empty">No presets yet — use Inspector's <strong>Pick</strong>, then <strong>Save
+                    Preset</strong></div>
+        </div>
+    </aside>
+
+    <!-- SCREEN BACKGROUNDS PANEL -->
+    <aside id="bg-panel">
+        <div class="bg-header">
+            <div class="bg-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">wallpaper</span>
+                <span class="bg-title">Screen Backgrounds</span>
+            </div>
+            <button class="bg-hdr-btn" id="bg-close" title="Close">
+                <span class="material-symbols-outlined" style="font-size:14px">close</span>
+            </button>
+        </div>
+        <div class="bg-body" id="bg-body">
+            <div class="bg-empty">Choose a background preset or enter custom CSS</div>
+        </div>
+    </aside>
+
+    <!-- DESIGN COMPARISON OVERLAY -->
+    <div id="dc-overlay"></div>
+
+    <!-- ACCESSIBILITY SCANNER PANEL (slide-out from right) -->
+    <aside id="a11y-panel">
+        <div class="a11y-header">
+            <div class="a11y-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:var(--ok)">accessibility_new</span>
+                <span class="a11y-title">Accessibility Scanner</span>
+            </div>
+            <div class="a11y-header-actions">
+                <button class="a11y-hdr-btn" id="a11y-rescan" title="Re-scan">
+                    <span class="material-symbols-outlined" style="font-size:14px">refresh</span>
+                </button>
+                <button class="a11y-hdr-btn" id="a11y-export" title="Export JSON">
+                    <span class="material-symbols-outlined" style="font-size:14px">download</span>
+                </button>
+                <button class="a11y-hdr-btn" id="a11y-close" title="Close">
+                    <span class="material-symbols-outlined" style="font-size:14px">close</span>
+                </button>
+            </div>
+        </div>
+        <div class="a11y-body" id="a11y-body">
+            <div class="a11y-empty">Click <strong>Re-scan</strong> to audit accessibility</div>
+        </div>
+    </aside>
+
+    <!-- CODE EXPORT PANEL: self-created by code-export.js -->
+    <!-- RESPONSIVE PREVIEW: self-created by responsive-preview.js -->
+
+    <div id="toast"></div>
+    <script src="viewer/design-tokens.js"></script>
+    <script src="viewer/style-presets.js"></script>
+    <script src="viewer/screen-backgrounds.js"></script>
+    <script src="viewer/design-compare.js"></script>
+    <script src="viewer/element-inspector.js"></script>
+    <script src="viewer/annotate.js"></script>
+    <script src="viewer/accessibility-scanner.js"></script>
+    <script src="viewer/responsive-preview.js"></script>
+    <script src="viewer/code-export.js"></script>
+    <script src="viewer/engine.js"></script>
+</body>
+
+</html>

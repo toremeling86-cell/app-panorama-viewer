@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Contact</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "gallery": "#FAFAFA", "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"], "mono": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA
+        }
+
+        .editorial-line {
+            border-top: 1px solid #0A0A0A
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-gallery">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-ink">arrow_back</span></button>
+            <span class="font-serif text-sm font-bold">Folio<span class="text-coral">.</span></span>
+            <div></div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-20">
+            <div class="pt-8 pb-6">
+                <h1 class="font-serif text-5xl font-bold leading-[1.05] tracking-tight">
+                    Let's<br />Work<br />Together<span class="text-coral">.</span></h1>
+                <p class="text-sm text-silver mt-4 leading-relaxed font-light">Currently accepting new projects for Q2
+                    2026. Interested in branding, product design, and creative direction opportunities.</p>
+            </div>
+
+            <div class="editorial-line pt-6 space-y-5">
+                <div>
+                    <label class="text-[10px] font-mono text-silver uppercase tracking-[0.3em]">Name</label>
+                    <input type="text"
+                        class="w-full mt-2 pb-2 border-0 border-b border-ink/10 bg-transparent text-sm font-sans focus:border-coral focus:ring-0 placeholder-silver/40 transition-colors"
+                        placeholder="Your name" />
+                </div>
+                <div>
+                    <label class="text-[10px] font-mono text-silver uppercase tracking-[0.3em]">Email</label>
+                    <input type="email"
+                        class="w-full mt-2 pb-2 border-0 border-b border-ink/10 bg-transparent text-sm font-sans focus:border-coral focus:ring-0 placeholder-silver/40 transition-colors"
+                        placeholder="hello@company.com" />
+                </div>
+                <div>
+                    <label class="text-[10px] font-mono text-silver uppercase tracking-[0.3em]">Project Type</label>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                        <button
+                            class="px-4 py-2 border border-ink/10 rounded-none text-xs font-mono text-ink hover:bg-ink hover:text-white transition-colors">Branding</button>
+                        <button class="px-4 py-2 bg-ink text-white rounded-none text-xs font-mono">UI/UX</button>
+                        <button
+                            class="px-4 py-2 border border-ink/10 rounded-none text-xs font-mono text-ink hover:bg-ink hover:text-white transition-colors">Motion</button>
+                        <button
+                            class="px-4 py-2 border border-ink/10 rounded-none text-xs font-mono text-ink hover:bg-ink hover:text-white transition-colors">Creative
+                            Dir.</button>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-mono text-silver uppercase tracking-[0.3em]">Message</label>
+                    <textarea rows="3"
+                        class="w-full mt-2 pb-2 border-0 border-b border-ink/10 bg-transparent text-sm font-sans focus:border-coral focus:ring-0 placeholder-silver/40 transition-colors resize-none"
+                        placeholder="Tell me about your project..."></textarea>
+                </div>
+            </div>
+
+            <button
+                class="mt-6 w-full py-4 bg-ink text-white font-mono text-sm uppercase tracking-[0.3em] hover:bg-coral transition-colors active:scale-[0.98]">Send
+                Inquiry</button>
+
+            <!-- Social -->
+            <div class="editorial-line mt-8 pt-4 flex items-center justify-center gap-6 pb-8">
+                <span class="text-xs font-mono text-silver">Dribbble</span>
+                <span class="text-xs font-mono text-silver">Behance</span>
+                <span class="text-xs font-mono text-silver">LinkedIn</span>
+                <span class="text-xs font-mono text-silver">X</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

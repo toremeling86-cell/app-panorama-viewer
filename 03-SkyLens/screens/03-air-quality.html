@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Air Quality</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#7C3AED" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        .sky-gradient {
+            background: linear-gradient(180deg, #1E1B4B 0%, #312E81 40%, #4338CA 100%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .aqi-ring {
+            animation: breathe 3s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.7));
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden sky-gradient">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <div class="flex items-center gap-3"><button
+                    class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl">arrow_back</span></button>
+                <h1 class="text-xl font-semibold">Air Quality</h1>
+            </div>
+            <span class="text-xs text-white/50">Oslo · Now</span>
+        </div>
+
+        <!-- AQI Circle -->
+        <div class="flex justify-center py-8">
+            <div class="relative">
+                <svg width="200" height="200" viewBox="0 0 200 200" class="aqi-ring">
+                    <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8" />
+                    <circle cx="100" cy="100" r="85" fill="none" stroke="#10B981" stroke-width="8"
+                        stroke-linecap="round" stroke-dasharray="320" stroke-dashoffset="100"
+                        transform="rotate(-90 100 100)" />
+                </svg>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                    <p class="text-5xl font-bold text-emerald-400">42</p>
+                    <p class="text-sm text-emerald-400 font-medium">Good</p>
+                    <p class="text-[10px] text-white/40 mt-1">AQI Index</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Recommendation -->
+            <div class="glass-bright rounded-2xl p-4 border-l-2 border-emerald-400">
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="material-symbols-outlined !text-lg text-emerald-400">check_circle</span><span
+                        class="text-sm font-semibold text-emerald-400">Safe Outdoors</span></div>
+                <p class="text-xs text-white/60">Air quality is good. Ideal for outdoor activities and exercise.</p>
+            </div>
+
+            <!-- Pollutant Grid -->
+            <h3 class="text-sm font-semibold text-white/60">Pollutants</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass rounded-xl p-4">
+                    <p class="text-xs text-white/40">PM2.5</p>
+                    <p class="text-xl font-bold mt-1">12 <span class="text-xs text-white/40">µg/m³</span></p>
+                    <div class="w-full h-1.5 rounded-full bg-white/5 mt-2">
+                        <div class="h-full rounded-full bg-emerald-400" style="width:24%"></div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <p class="text-xs text-white/40">PM10</p>
+                    <p class="text-xl font-bold mt-1">28 <span class="text-xs text-white/40">µg/m³</span></p>
+                    <div class="w-full h-1.5 rounded-full bg-white/5 mt-2">
+                        <div class="h-full rounded-full bg-emerald-400" style="width:35%"></div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <p class="text-xs text-white/40">O₃</p>
+                    <p class="text-xl font-bold mt-1">35 <span class="text-xs text-white/40">µg/m³</span></p>
+                    <div class="w-full h-1.5 rounded-full bg-white/5 mt-2">
+                        <div class="h-full rounded-full bg-yellow-400" style="width:45%"></div>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <p class="text-xs text-white/40">NO₂</p>
+                    <p class="text-xl font-bold mt-1">18 <span class="text-xs text-white/40">µg/m³</span></p>
+                    <div class="w-full h-1.5 rounded-full bg-white/5 mt-2">
+                        <div class="h-full rounded-full bg-emerald-400" style="width:20%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AQI Scale -->
+            <div class="glass rounded-xl p-4">
+                <p class="text-xs text-white/40 mb-3">AQI Scale</p>
+                <div class="flex gap-1">
+                    <div class="flex-1 h-6 rounded-l-md bg-emerald-500 flex items-center justify-center"><span
+                            class="text-[8px] font-medium">Good</span></div>
+                    <div class="flex-1 h-6 bg-yellow-500 flex items-center justify-center"><span
+                            class="text-[8px] font-medium text-black">Fair</span></div>
+                    <div class="flex-1 h-6 bg-orange-500 flex items-center justify-center"><span
+                            class="text-[8px] font-medium">Mod</span></div>
+                    <div class="flex-1 h-6 bg-red-500 flex items-center justify-center"><span
+                            class="text-[8px] font-medium">Poor</span></div>
+                    <div class="flex-1 h-6 rounded-r-md bg-purple-700 flex items-center justify-center"><span
+                            class="text-[8px] font-medium">Haz</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">cloud</span><span
+                        class="text-[10px] text-white/40">Sky Now</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">calendar_month</span><span
+                        class="text-[10px] text-white/40">Forecast</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white"
+                        style="font-variation-settings: 'FILL' 1;">air</span><span
+                        class="text-[10px] font-medium text-white">Air</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">radar</span><span
+                        class="text-[10px] text-white/40">Radar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">bookmark</span><span
+                        class="text-[10px] text-white/40">Places</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

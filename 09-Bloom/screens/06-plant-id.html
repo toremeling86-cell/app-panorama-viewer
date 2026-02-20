@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Plant ID</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #3E2723
+        }
+
+        .camera-frame {
+            border: 3px solid rgba(45, 139, 86, 0.4);
+            border-radius: 24px;
+            box-shadow: 0 0 30px rgba(45, 139, 86, 0.1)
+        }
+
+        .corner {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-color: #2D8B56;
+            border-style: solid;
+            border-width: 0
+        }
+
+        .corner-tl {
+            top: -2px;
+            left: -2px;
+            border-top-width: 3px;
+            border-left-width: 3px;
+            border-top-left-radius: 8px
+        }
+
+        .corner-tr {
+            top: -2px;
+            right: -2px;
+            border-top-width: 3px;
+            border-right-width: 3px;
+            border-top-right-radius: 8px
+        }
+
+        .corner-bl {
+            bottom: -2px;
+            left: -2px;
+            border-bottom-width: 3px;
+            border-left-width: 3px;
+            border-bottom-left-radius: 8px
+        }
+
+        .corner-br {
+            bottom: -2px;
+            right: -2px;
+            border-bottom-width: 3px;
+            border-right-width: 3px;
+            border-bottom-right-radius: 8px
+        }
+
+        .pulse-ring {
+            animation: pulseRing 2s ease-in-out infinite
+        }
+
+        @keyframes pulseRing {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(45, 139, 86, 0.3)
+            }
+
+            50% {
+                box-shadow: 0 0 0 12px rgba(45, 139, 86, 0)
+            }
+        }
+
+        .result-slide {
+            animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-soil">
+        <!-- Camera Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-3 relative z-20">
+            <button><span class="material-symbols-outlined !text-xl text-white/50">close</span></button>
+            <h1 class="text-sm font-serif font-bold text-white/80">Plant ID</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/50">flash_on</span></button>
+        </div>
+
+        <!-- Viewfinder -->
+        <div class="flex-1 flex items-center justify-center px-8">
+            <div
+                class="w-full aspect-square bg-gradient-to-br from-chloro/30 via-soil to-chloro/10 rounded-3xl relative flex items-center justify-center camera-frame">
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
+
+                <!-- Plant in viewfinder -->
+                <div class="text-center">
+                    <span class="text-7xl">🌿</span>
+                    <div
+                        class="mt-4 w-16 h-16 rounded-full border-2 border-chloro/40 mx-auto pulse-ring flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-2xl text-chloro">center_focus_strong</span>
+                    </div>
+                </div>
+
+                <!-- Scanning indicator -->
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-chloro animate-pulse"></div>
+                    <span class="text-xs text-chloro/70 font-medium">Analyzing...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Panel -->
+        <div class="bg-cream rounded-t-3xl p-6 pb-10 result-slide text-soil">
+            <div class="w-10 h-1 bg-bark/10 rounded-full mx-auto mb-4"></div>
+
+            <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-chloro/10 flex items-center justify-center text-3xl">🌿</div>
+                <div class="flex-1">
+                    <div class="flex items-center gap-2">
+                        <p class="text-lg font-serif font-bold text-soil">Monstera Deliciosa</p><span
+                            class="material-symbols-outlined !text-lg text-chloro">verified</span>
+                    </div>
+                    <p class="text-xs text-bark/40 italic">Swiss Cheese Plant</p>
+                    <div class="flex items-center gap-1 mt-1">
+                        <span class="text-[9px] px-2 py-0.5 bg-chloro/10 text-chloro font-bold rounded-full">98%
+                            Match</span>
+                        <span class="text-[9px] px-2 py-0.5 bg-amber/10 text-amber font-bold rounded-full">Easy
+                            Care</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Care Info -->
+            <div class="grid grid-cols-4 gap-2 mt-4">
+                <div class="bg-cream border border-bark/5 rounded-xl p-2 text-center"><span class="text-lg">💧</span>
+                    <p class="text-[9px] text-bark/40 mt-0.5">Weekly</p>
+                </div>
+                <div class="bg-cream border border-bark/5 rounded-xl p-2 text-center"><span class="text-lg">☀️</span>
+                    <p class="text-[9px] text-bark/40 mt-0.5">Indirect</p>
+                </div>
+                <div class="bg-cream border border-bark/5 rounded-xl p-2 text-center"><span class="text-lg">🌡️</span>
+                    <p class="text-[9px] text-bark/40 mt-0.5">65-85°F</p>
+                </div>
+                <div class="bg-cream border border-bark/5 rounded-xl p-2 text-center"><span class="text-lg">💨</span>
+                    <p class="text-[9px] text-bark/40 mt-0.5">Moderate</p>
+                </div>
+            </div>
+
+            <button
+                class="mt-4 w-full py-3.5 bg-chloro text-white font-serif font-bold rounded-2xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                <span class="material-symbols-outlined !text-lg">add</span> Add to Garden
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Family Hub</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"], "ui": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED;
+        }
+
+        .clay {
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.06), -4px -4px 12px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+        }
+
+        .clay-sm {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05), -2px -2px 8px rgba(255, 255, 255, 0.7), inset 1px 1px 0 rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+        }
+
+        .clay-press:active {
+            box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.05), inset -2px -2px 6px rgba(255, 255, 255, 0.5);
+            transform: scale(0.97);
+        }
+
+        .wobble {
+            animation: wobble 2s ease-in-out infinite;
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: rotate(-3deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .avatar-ring {
+            position: relative;
+        }
+
+        .avatar-ring::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 3px solid var(--ring-color);
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-display text-together/70 tracking-wider">Good Morning! 🌞</p>
+                <h1 class="text-2xl font-display font-bold mt-0.5">The Johnson Family</h1>
+            </div>
+            <button
+                class="w-10 h-10 clay-sm bg-white flex items-center justify-center transition-transform clay-press"><span
+                    class="material-symbols-outlined !text-xl text-warm">notifications</span></button>
+        </div>
+
+        <!-- Family Members -->
+        <div class="flex items-center justify-center gap-5 py-4 px-6">
+            <button class="flex flex-col items-center gap-1 bounce-in" style="animation-delay:0s">
+                <div
+                    class="w-14 h-14 rounded-full bg-papa/20 flex items-center justify-center text-2xl ring-[3px] ring-papa ring-offset-2 ring-offset-family">
+                    👨</div>
+                <span class="text-[10px] font-display font-medium text-papa">Dad</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 bounce-in" style="animation-delay:0.1s">
+                <div
+                    class="w-14 h-14 rounded-full bg-mama/20 flex items-center justify-center text-2xl ring-[3px] ring-mama ring-offset-2 ring-offset-family">
+                    👩</div>
+                <span class="text-[10px] font-display font-medium text-mama">Mom</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 bounce-in" style="animation-delay:0.2s">
+                <div
+                    class="w-14 h-14 rounded-full bg-kid/20 flex items-center justify-center text-2xl ring-[3px] ring-kid ring-offset-2 ring-offset-family wobble">
+                    👧</div>
+                <span class="text-[10px] font-display font-medium text-kid">Emma</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 bounce-in" style="animation-delay:0.3s">
+                <div class="w-14 h-14 rounded-full bg-warm/20 flex items-center justify-center text-2xl ring-[3px] ring-warm ring-offset-2 ring-offset-family wobble"
+                    style="animation-delay:0.5s">👦</div>
+                <span class="text-[10px] font-display font-medium text-warm">Liam</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 bounce-in" style="animation-delay:0.4s">
+                <div
+                    class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-xl border-2 border-dashed border-gray-200">
+                    +</div>
+                <span class="text-[10px] font-display text-gray-300">Add</span>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Today's Schedule -->
+            <div class="bg-white clay p-5">
+                <h3 class="font-display text-base font-semibold mb-3">Today's Schedule 📅</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 p-2 rounded-xl bg-papa/5">
+                        <div class="w-1.5 h-10 rounded-full bg-papa"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Team Meeting</p>
+                            <p class="text-[10px] text-gray-400">9:00 AM · Dad</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-full bg-papa/20 flex items-center justify-center text-xs">👨</div>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-xl bg-kid/5">
+                        <div class="w-1.5 h-10 rounded-full bg-kid"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Dance Practice</p>
+                            <p class="text-[10px] text-gray-400">3:30 PM · Emma</p>
+                        </div>
+                        <div class="w-7 h-7 rounded-full bg-kid/20 flex items-center justify-center text-xs">👧</div>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-xl bg-together/5">
+                        <div class="w-1.5 h-10 rounded-full bg-together"></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Family Movie Night</p>
+                            <p class="text-[10px] text-gray-400">7:00 PM · Everyone</p>
+                        </div>
+                        <div class="flex -space-x-1.5">
+                            <div
+                                class="w-6 h-6 rounded-full bg-papa/20 flex items-center justify-center text-[9px] ring-1 ring-white">
+                                👨</div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-mama/20 flex items-center justify-center text-[9px] ring-1 ring-white">
+                                👩</div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-kid/20 flex items-center justify-center text-[9px] ring-1 ring-white">
+                                👧</div>
+                            <div
+                                class="w-6 h-6 rounded-full bg-warm/20 flex items-center justify-center text-[9px] ring-1 ring-white">
+                                👦</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chore Board -->
+            <div class="bg-white clay p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-display text-base font-semibold">Chore Board ✨</h3><span
+                        class="text-xs text-together font-medium">See all</span>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="clay-sm bg-kid/5 p-3 text-center clay-press transition-all cursor-pointer">
+                        <span class="text-2xl">🧹</span>
+                        <p class="text-xs font-semibold mt-1">Clean Room</p>
+                        <p class="text-[9px] text-kid font-medium mt-0.5">Emma · Due today</p>
+                        <div class="mt-2 h-1.5 rounded-full bg-family">
+                            <div class="h-full rounded-full bg-kid" style="width:75%"></div>
+                        </div>
+                    </div>
+                    <div class="clay-sm bg-warm/5 p-3 text-center clay-press transition-all cursor-pointer">
+                        <span class="text-2xl">🐕</span>
+                        <p class="text-xs font-semibold mt-1">Walk Dog</p>
+                        <p class="text-[9px] text-warm font-medium mt-0.5">Liam · 4:00 PM</p>
+                        <div class="mt-2 h-1.5 rounded-full bg-family">
+                            <div class="h-full rounded-full bg-warm" style="width:0%"></div>
+                        </div>
+                    </div>
+                    <div class="clay-sm bg-mama/5 p-3 text-center clay-press transition-all cursor-pointer">
+                        <span class="text-2xl">🍳</span>
+                        <p class="text-xs font-semibold mt-1">Cook Dinner</p>
+                        <p class="text-[9px] text-mama font-medium mt-0.5">Mom · 6:00 PM</p>
+                        <div class="mt-2 h-1.5 rounded-full bg-family">
+                            <div class="h-full rounded-full bg-mama" style="width:30%"></div>
+                        </div>
+                    </div>
+                    <div class="clay-sm bg-papa/5 p-3 text-center clay-press transition-all cursor-pointer">
+                        <span class="text-2xl">🔧</span>
+                        <p class="text-xs font-semibold mt-1">Fix Faucet</p>
+                        <p class="text-[9px] text-papa font-medium mt-0.5">Dad · Weekend</p>
+                        <div class="mt-2 h-1.5 rounded-full bg-family">
+                            <div class="h-full rounded-full bg-papa" style="width:0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping List Quick View -->
+            <div class="bg-white clay p-5">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-display text-base font-semibold">Shopping List 🛒</h3><span
+                        class="px-2 py-0.5 bg-warm/10 text-warm text-[10px] font-bold rounded-full">12 items</span>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                    <span class="px-3 py-1.5 clay-sm bg-white text-xs font-medium">🥛 Milk</span>
+                    <span class="px-3 py-1.5 clay-sm bg-white text-xs font-medium">🍞 Bread</span>
+                    <span class="px-3 py-1.5 clay-sm bg-white text-xs font-medium">🥚 Eggs</span>
+                    <span class="px-3 py-1.5 clay-sm bg-white text-xs font-medium">🧀 Cheese</span>
+                    <span class="px-3 py-1.5 clay-sm bg-white text-xs text-gray-300">+8 more</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-family/90 backdrop-blur border-t border-gray-100">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-together"
+                        style="font-variation-settings: 'FILL' 1;">home</span><span
+                        class="text-[10px] font-display font-medium text-together">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">calendar_month</span><span
+                        class="text-[10px] text-gray-300">Calendar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">chat</span><span
+                        class="text-[10px] text-gray-300">Chat</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">photo_library</span><span
+                        class="text-[10px] text-gray-300">Photos</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">settings</span><span
+                        class="text-[10px] text-gray-300">Settings</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

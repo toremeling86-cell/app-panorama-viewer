@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Trip Timeline</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "parchment": "#F5EDE0", "leather": "#6B4C3B", "compass": "#C4953A", "ocean": "#3D5A73", "ink": "#2C1810", "sepia": "#8B7355" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F5EDE0;
+        }
+
+        .contour-bg {
+            background-image: repeating-conic-gradient(rgba(107, 76, 59, 0.02) 0% 25%, transparent 0% 50%);
+            background-size: 60px 60px;
+        }
+
+        .map-shadow {
+            box-shadow: 0 4px 20px rgba(107, 76, 59, 0.1), 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .topo-lines {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='rgba(107,76,59,0.04)' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='rgba(107,76,59,0.03)' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='25' fill='none' stroke='rgba(107,76,59,0.02)' stroke-width='0.5'/%3E%3C/svg%3E");
+        }
+
+        .stamp {
+            animation: stampIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes stampIn {
+            0% {
+                transform: scale(2) rotate(-20deg);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .compass-spin {
+            animation: compassSpin 20s linear infinite;
+        }
+
+        @keyframes compassSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div
+        class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-parchment contour-bg topo-lines">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-[10px] font-display text-compass tracking-[0.4em] uppercase">Atlas</p>
+                <h1 class="text-xl font-display font-bold mt-0.5 text-ink">My Journeys</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="w-10 h-10 rounded-full bg-white/60 map-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-leather">add</span></button>
+            </div>
+        </div>
+
+        <!-- World Map Stats -->
+        <div class="mx-6 mt-2 bg-white/50 rounded-2xl p-4 map-shadow border border-leather/10 relative overflow-hidden">
+            <div class="absolute top-3 right-3 w-10 h-10 opacity-10 compass-spin">
+                <svg viewBox="0 0 40 40">
+                    <polygon points="20,2 24,18 20,14 16,18" fill="#C4953A" />
+                    <polygon points="20,38 24,22 20,26 16,22" fill="#6B4C3B" />
+                </svg>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-center">
+                    <p class="text-3xl font-display font-bold text-compass">7</p>
+                    <p class="text-[10px] text-leather/50 uppercase tracking-wider">Countries</p>
+                </div>
+                <div class="w-px h-10 bg-leather/10"></div>
+                <div class="text-center">
+                    <p class="text-3xl font-display font-bold text-ocean">12</p>
+                    <p class="text-[10px] text-leather/50 uppercase tracking-wider">Cities</p>
+                </div>
+                <div class="w-px h-10 bg-leather/10"></div>
+                <div class="text-center">
+                    <p class="text-3xl font-display font-bold text-leather">84</p>
+                    <p class="text-[10px] text-leather/50 uppercase tracking-wider">Days</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-5 relative">
+            <!-- Timeline -->
+            <div class="relative pl-6 border-l-2 border-leather/15 space-y-5">
+                <!-- Trip 1 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] w-4 h-4 rounded-full bg-compass border-2 border-parchment"></div>
+                    <div class="bg-white/60 rounded-2xl p-4 map-shadow border border-leather/10">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-xs font-display text-compass uppercase tracking-wider">Current Trip</span>
+                            <span
+                                class="px-2 py-0.5 bg-compass/10 text-compass text-[9px] font-bold rounded-full stamp">ACTIVE</span>
+                        </div>
+                        <h3 class="font-display text-base font-bold text-ink">Tokyo, Japan 🇯🇵</h3>
+                        <p class="text-xs text-leather/60 mt-1">Feb 14 — Feb 21, 2026</p>
+                        <div class="flex items-center gap-3 mt-3">
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-7 h-7 rounded-full bg-ocean/20 border-2 border-white flex items-center justify-center text-[10px]">
+                                    📸</div>
+                                <div
+                                    class="w-7 h-7 rounded-full bg-compass/20 border-2 border-white flex items-center justify-center text-[10px]">
+                                    📸</div>
+                                <div
+                                    class="w-7 h-7 rounded-full bg-leather/20 border-2 border-white flex items-center justify-center text-[10px]">
+                                    📸</div>
+                            </div>
+                            <span class="text-[10px] text-leather/40 font-mono">42 photos</span>
+                            <div class="ml-auto flex items-center gap-1 text-compass"><span
+                                    class="material-symbols-outlined !text-sm">arrow_forward</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trip 2 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] w-4 h-4 rounded-full bg-ocean border-2 border-parchment"></div>
+                    <div class="bg-white/40 rounded-2xl p-4 map-shadow border border-leather/5">
+                        <h3 class="font-display text-sm font-bold text-ink">Barcelona, Spain 🇪🇸</h3>
+                        <p class="text-xs text-leather/50 mt-0.5">Oct 3 — Oct 10, 2025</p>
+                        <p class="text-xs text-leather/40 mt-2 leading-relaxed italic">"Gaudí's architecture blew my
+                            mind. The Sagrada Familia at sunset was everything..."</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-[10px] text-leather/40 font-mono">67 photos</span>
+                            <span class="text-[10px] text-leather/40">·</span>
+                            <span class="text-[10px] text-leather/40 font-mono">8 journal entries</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trip 3 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] w-4 h-4 rounded-full bg-leather/40 border-2 border-parchment">
+                    </div>
+                    <div class="bg-white/40 rounded-2xl p-4 map-shadow border border-leather/5">
+                        <h3 class="font-display text-sm font-bold text-ink">Reykjavik, Iceland 🇮🇸</h3>
+                        <p class="text-xs text-leather/50 mt-0.5">Jul 15 — Jul 22, 2025</p>
+                        <p class="text-xs text-leather/40 mt-2 leading-relaxed italic">"Northern lights in summer!
+                            Golden Circle was a life-changing experience."</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-[10px] text-leather/40 font-mono">89 photos</span>
+                            <span class="text-[10px] text-leather/40">·</span>
+                            <span class="text-[10px] text-leather/40 font-mono">5 journal entries</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trip 4 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] w-4 h-4 rounded-full bg-sepia/40 border-2 border-parchment"></div>
+                    <div class="bg-white/30 rounded-2xl p-4 map-shadow border border-leather/5">
+                        <h3 class="font-display text-sm font-bold text-ink/70">Marrakech, Morocco 🇲🇦</h3>
+                        <p class="text-xs text-leather/40 mt-0.5">Mar 1 — Mar 8, 2025</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-[10px] text-leather/30 font-mono">54 photos</span>
+                            <span class="text-[10px] text-leather/30">·</span>
+                            <span class="text-[10px] text-leather/30 font-mono">3 journal entries</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trip 5 -->
+                <div class="relative">
+                    <div class="absolute -left-[31px] w-4 h-4 rounded-full bg-sepia/30 border-2 border-parchment"></div>
+                    <div class="bg-white/20 rounded-2xl p-4 map-shadow border border-leather/5">
+                        <h3 class="font-display text-sm font-bold text-ink/60">Kyoto, Japan 🇯🇵</h3>
+                        <p class="text-xs text-leather/30 mt-0.5">Nov 10 — Nov 18, 2024</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <span class="text-[10px] text-leather/30 font-mono">76 photos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-parchment/90 backdrop-blur border-t border-leather/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-compass"
+                        style="font-variation-settings: 'FILL' 1;">timeline</span><span
+                        class="text-[10px] font-display text-compass">Journey</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">explore</span><span
+                        class="text-[10px] text-leather/30">Discover</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">backpack</span><span
+                        class="text-[10px] text-leather/30">Packing</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">photo_library</span><span
+                        class="text-[10px] text-leather/30">Photos</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">person</span><span
+                        class="text-[10px] text-leather/30">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

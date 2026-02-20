@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Breathing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0", "aqua": "#4DD0E1" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(0.6);
+                opacity: 0.3
+            }
+
+            25% {
+                transform: scale(1);
+                opacity: 0.6
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 0.6
+            }
+
+            75% {
+                transform: scale(0.6);
+                opacity: 0.3
+            }
+        }
+
+        .breath-circle {
+            animation: breathe 8s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-dawn/20">arrow_back</span></button>
+            <h1 class="font-serif text-base font-semibold text-dawn/70">Breathing Guide</h1>
+            <button><span class="material-symbols-outlined !text-xl text-dawn/20">settings</span></button>
+        </div>
+
+        <!-- Breathing Visualizer -->
+        <div class="flex-1 flex flex-col items-center justify-center relative px-6">
+            <div class="relative w-48 h-48 flex items-center justify-center">
+                <div class="absolute w-48 h-48 rounded-full bg-glow/5 breath-circle"></div>
+                <div class="absolute w-36 h-36 rounded-full bg-glow/8 breath-circle" style="animation-delay:0.3s"></div>
+                <div class="absolute w-24 h-24 rounded-full bg-glow/12 breath-circle" style="animation-delay:0.6s">
+                </div>
+                <p id="breathText" class="text-xl font-serif font-semibold text-glow/60 z-10">Breathe In</p>
+            </div>
+
+            <!-- Technique -->
+            <div class="mt-8 text-center">
+                <p class="text-sm font-serif font-semibold text-dawn/40">Box Breathing</p>
+                <p class="text-xs text-dawn/15 mt-1">4 · 4 · 4 · 4</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="flex items-center justify-center gap-6 mt-6">
+                <button class="w-12 h-12 rounded-full bg-glow/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-glow/30">remove</span></button>
+                <button
+                    class="w-16 h-16 rounded-full bg-glow flex items-center justify-center shadow-lg shadow-glow/20"><span
+                        class="material-symbols-outlined !text-2xl text-ember">pause</span></button>
+                <button class="w-12 h-12 rounded-full bg-glow/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-glow/30">add</span></button>
+            </div>
+
+            <p class="text-xs text-dawn/10 mt-4">Cycle 3 of 10 · 2:15 remaining</p>
+        </div>
+
+        <!-- Techniques -->
+        <div class="px-6 pb-8 space-y-2">
+            <p class="text-[10px] text-dawn/15 font-serif uppercase tracking-wider">Techniques</p>
+            <div class="flex gap-2 overflow-x-auto no-scrollbar">
+                <div class="min-w-[120px] bg-glow/5 border border-glow/10 rounded-xl p-3">
+                    <p class="text-xs font-serif font-bold text-glow/50">Box</p>
+                    <p class="text-[9px] text-dawn/15">4-4-4-4</p>
+                </div>
+                <div class="min-w-[120px] bg-white/2 border border-white/5 rounded-xl p-3">
+                    <p class="text-xs font-serif font-bold text-dawn/25">4-7-8</p>
+                    <p class="text-[9px] text-dawn/15">Deep calm</p>
+                </div>
+                <div class="min-w-[120px] bg-white/2 border border-white/5 rounded-xl p-3">
+                    <p class="text-xs font-serif font-bold text-dawn/25">Wim Hof</p>
+                    <p class="text-[9px] text-dawn/15">Energy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const txt = document.getElementById('breathText');
+        const phases = ['Breathe In', 'Hold', 'Breathe Out', 'Hold'];
+        let i = 0; setInterval(() => { i = (i + 1) % 4; txt.textContent = phases[i] }, 2000);
+    </script>
+</body>
+
+</html>

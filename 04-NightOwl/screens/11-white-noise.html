@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — White Noise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "midnight": "#0B0D1A", "indigo": "#4F46E5", "lavender": "#A78BFA", "luna": "#C4B5FD", "dawn": "#F472B6" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0D1A
+        }
+
+        .glass-m {
+            background: rgba(79, 70, 229, 0.04);
+            border: 1px solid rgba(167, 139, 250, 0.08);
+            border-radius: 20px
+        }
+
+        @keyframes wave-flow {
+            0% {
+                background-position: 0% 50%
+            }
+
+            100% {
+                background-position: 100% 50%
+            }
+        }
+
+        .wave-bg {
+            background: linear-gradient(90deg, rgba(79, 70, 229, 0.05), rgba(167, 139, 250, 0.08), rgba(79, 70, 229, 0.05));
+            background-size: 200% 100%;
+            animation: wave-flow 3s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-midnight">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider text-luna/50">White Noise</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">timer</span></button>
+        </div>
+
+        <!-- Now Playing -->
+        <div class="mx-6 glass-m p-6 wave-bg text-center">
+            <span class="text-5xl">🌊</span>
+            <p class="text-xl font-bold mt-3">Ocean Waves</p>
+            <p class="text-xs text-luna/25 mt-1">Gentle coastal breeze</p>
+            <div class="flex items-center justify-center gap-6 mt-5">
+                <button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-luna/30">skip_previous</span></button>
+                <button
+                    class="w-14 h-14 rounded-full bg-indigo flex items-center justify-center shadow-lg shadow-indigo/20"><span
+                        class="material-symbols-outlined !text-2xl text-white">pause</span></button>
+                <button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-luna/30">skip_next</span></button>
+            </div>
+            <div class="flex items-center gap-3 mt-4"><span
+                    class="material-symbols-outlined !text-sm text-luna/20">volume_down</span>
+                <div class="flex-1 h-1 rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-lavender/50" style="width:65%"></div>
+                </div><span class="material-symbols-outlined !text-sm text-luna/20">volume_up</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2 mt-4">
+            <!-- Timer -->
+            <div class="glass-m p-3 flex items-center gap-3"><span
+                    class="material-symbols-outlined !text-sm text-dawn">bedtime</span>
+                <div class="flex-1">
+                    <p class="text-xs text-dawn/50">Sleep Timer</p>
+                </div>
+                <div class="flex gap-1.5"><button class="px-2.5 py-1 bg-white/5 rounded text-[10px]">30m</button><button
+                        class="px-2.5 py-1 bg-indigo/20 text-lavender rounded text-[10px] font-bold">1h</button><button
+                        class="px-2.5 py-1 bg-white/5 rounded text-[10px]">2h</button></div>
+            </div>
+
+            <p class="text-[10px] text-luna/15 uppercase tracking-wider mt-2">All Sounds</p>
+
+            <div class="glass-m p-3 flex items-center gap-3"><span class="text-xl">🌧️</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Rain</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/15">play_arrow</span>
+            </div>
+            <div class="glass-m p-3 flex items-center gap-3"><span class="text-xl">🔥</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Fireplace</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/15">play_arrow</span>
+            </div>
+            <div class="glass-m p-3 flex items-center gap-3"><span class="text-xl">🌲</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Forest</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/15">play_arrow</span>
+            </div>
+            <div class="glass-m p-3 flex items-center gap-3"><span class="text-xl">💨</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Wind</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/15">play_arrow</span>
+            </div>
+            <div class="glass-m p-3 flex items-center gap-3"><span class="text-xl">🦗</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Night Crickets</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/15">play_arrow</span>
+            </div>
+            <div class="glass-m p-3 flex items-center gap-3"><span class="text-xl">📻</span>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Pink Noise</p>
+                </div><span class="material-symbols-outlined !text-sm text-luna/15">play_arrow</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

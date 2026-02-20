@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Stats</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0", "deep": "#2D1810" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+
+        .stat-card {
+            background: rgba(45, 24, 16, 0.6);
+            border: 1px solid rgba(255, 140, 66, 0.06);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="font-serif text-base font-bold text-dawn/80">Meditation Stats</h1>
+            <button class="text-xs text-glow/40">This Month</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Big Stats -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="stat-card p-4 text-center">
+                    <p class="text-3xl font-serif font-bold text-glow">42</p>
+                    <p class="text-[10px] text-dawn/25">Sessions</p>
+                </div>
+                <div class="stat-card p-4 text-center">
+                    <p class="text-3xl font-serif font-bold text-dawn/80">18<span class="text-lg">h</span></p>
+                    <p class="text-[10px] text-dawn/25">Total Time</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2">
+                <div class="stat-card p-3 text-center">
+                    <p class="text-lg font-serif font-bold text-glow/80">14</p>
+                    <p class="text-[9px] text-dawn/20">Day Streak</p>
+                </div>
+                <div class="stat-card p-3 text-center">
+                    <p class="text-lg font-serif font-bold text-sage/80">26</p>
+                    <p class="text-[9px] text-dawn/20">Avg Min</p>
+                </div>
+                <div class="stat-card p-3 text-center">
+                    <p class="text-lg font-serif font-bold text-dawn/60">4.8</p>
+                    <p class="text-[9px] text-dawn/20">Mood ↑</p>
+                </div>
+            </div>
+
+            <!-- Heatmap Calendar -->
+            <div class="stat-card p-4">
+                <h3 class="text-xs font-serif font-semibold text-dawn/30 mb-3">February Practice</h3>
+                <div class="grid grid-cols-7 gap-1.5">
+                    <span class="text-[8px] text-center text-dawn/15">M</span><span
+                        class="text-[8px] text-center text-dawn/15">T</span><span
+                        class="text-[8px] text-center text-dawn/15">W</span><span
+                        class="text-[8px] text-center text-dawn/15">T</span><span
+                        class="text-[8px] text-center text-dawn/15">F</span><span
+                        class="text-[8px] text-center text-dawn/15">S</span><span
+                        class="text-[8px] text-center text-dawn/15">S</span>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="aspect-square rounded-sm bg-glow/60"></div>
+                    <div class="aspect-square rounded-sm bg-glow/30"></div>
+                    <div class="aspect-square rounded-sm bg-glow/80"></div>
+                    <div class="aspect-square rounded-sm bg-glow/40"></div>
+                    <div class="aspect-square rounded-sm bg-glow"></div>
+                    <div class="aspect-square rounded-sm bg-glow/50"></div>
+                    <div class="aspect-square rounded-sm bg-glow/70"></div>
+                    <div class="aspect-square rounded-sm bg-white/3"></div>
+                    <div class="aspect-square rounded-sm bg-glow/20"></div>
+                    <div class="aspect-square rounded-sm bg-glow/60"></div>
+                    <div class="aspect-square rounded-sm bg-glow/90"></div>
+                    <div class="aspect-square rounded-sm bg-glow"></div>
+                    <div class="aspect-square rounded-sm bg-glow/50"></div>
+                    <div class="aspect-square rounded-sm bg-glow/70"></div>
+                    <div class="aspect-square rounded-sm bg-glow/40"></div>
+                    <div class="aspect-square rounded-sm bg-glow/80"></div>
+                    <div class="aspect-square rounded-sm bg-glow"></div>
+                    <div class="aspect-square rounded-sm bg-glow/60"></div>
+                    <div class="aspect-square rounded-sm bg-glow/90"></div>
+                    <div class="aspect-square rounded-sm bg-glow"></div>
+                    <div class="aspect-square rounded-sm border border-glow/40 bg-glow/30"></div>
+                </div>
+                <div class="flex items-center justify-end gap-1 mt-2">
+                    <span class="text-[8px] text-dawn/15">Less</span>
+                    <div class="w-2 h-2 rounded-sm bg-glow/10"></div>
+                    <div class="w-2 h-2 rounded-sm bg-glow/30"></div>
+                    <div class="w-2 h-2 rounded-sm bg-glow/60"></div>
+                    <div class="w-2 h-2 rounded-sm bg-glow"></div>
+                    <span class="text-[8px] text-dawn/15">More</span>
+                </div>
+            </div>
+
+            <!-- Category Breakdown -->
+            <div class="stat-card p-4">
+                <h3 class="text-xs font-serif font-semibold text-dawn/30 mb-3">Session Types</h3>
+                <div class="space-y-2">
+                    <div>
+                        <div class="flex justify-between text-xs mb-0.5"><span
+                                class="text-dawn/40">Breathing</span><span class="text-glow/60">38%</span></div>
+                        <div class="h-2 rounded-full bg-white/3">
+                            <div class="h-full rounded-full bg-glow/60" style="width:38%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-0.5"><span class="text-dawn/40">Body
+                                Scan</span><span class="text-sage/60">28%</span></div>
+                        <div class="h-2 rounded-full bg-white/3">
+                            <div class="h-full rounded-full bg-sage/60" style="width:28%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-0.5"><span class="text-dawn/40">Guided</span><span
+                                class="text-dawn/40">22%</span></div>
+                        <div class="h-2 rounded-full bg-white/3">
+                            <div class="h-full rounded-full bg-dawn/40" style="width:22%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-0.5"><span class="text-dawn/40">Silent</span><span
+                                class="text-dawn/25">12%</span></div>
+                        <div class="h-2 rounded-full bg-white/3">
+                            <div class="h-full rounded-full bg-dawn/25" style="width:12%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Milestone -->
+            <div class="stat-card p-4 border border-glow/10 bg-glow/3">
+                <div class="flex items-center gap-3">
+                    <span class="text-3xl">🏆</span>
+                    <div>
+                        <p class="text-sm font-serif font-bold text-glow">Mindful Warrior</p>
+                        <p class="text-[10px] text-dawn/30">Complete 50 sessions to unlock</p>
+                    </div>
+                    <span class="text-xs text-glow/40 font-serif">42/50</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

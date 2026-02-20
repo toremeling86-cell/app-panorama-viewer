@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Equalizer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "plasma": "#FF6B2B" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(255, 45, 120, 0.5), 0 0 30px rgba(255, 45, 120, 0.2)
+        }
+
+        .vinyl-groove {
+            box-shadow: inset 0 0 30px rgba(255, 45, 120, 0.05), 0 0 40px rgba(139, 92, 246, 0.1)
+        }
+
+        .eq-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 6px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 3px;
+            outline: none;
+            writing-mode: bt-lr;
+            -webkit-writing-mode: vertical-lr
+        }
+
+        .eq-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF2D78, #8B5CF6);
+            box-shadow: 0 0 10px rgba(255, 45, 120, 0.5);
+            cursor: pointer
+        }
+
+        .eq-slider::-webkit-slider-runnable-track {
+            border-radius: 3px
+        }
+
+        .preset-active {
+            background: linear-gradient(135deg, rgba(255, 45, 120, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(255, 45, 120, 0.4)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/30">arrow_back</span></button>
+            <h1 class="font-display text-xs font-bold tracking-widest uppercase neon-text">Equalizer</h1>
+            <button class="text-xs text-neon font-medium">Reset</button>
+        </div>
+
+        <!-- Canvas Visualizer -->
+        <div class="mx-6 rounded-2xl vinyl-groove overflow-hidden relative" style="height:100px">
+            <canvas id="eqViz" class="w-full h-full"></canvas>
+        </div>
+
+        <!-- EQ Bands -->
+        <div class="px-6 mt-4">
+            <div class="flex items-end justify-between px-2" style="height:160px">
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="65" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">32</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="72" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">64</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="58" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">125</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="80" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">250</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="55" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">500</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="45" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">1k</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="60" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">2k</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="70" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">4k</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="75" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">8k</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <input type="range" min="0" max="100" value="68" class="eq-slider" orient="vertical" />
+                    <span class="text-[9px] font-display text-white/30">16k</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="px-6 mt-5">
+            <p class="text-[10px] text-white/20 font-display uppercase tracking-widest mb-3">Presets</p>
+            <div class="grid grid-cols-3 gap-2">
+                <button class="preset-active py-3 rounded-xl text-xs font-medium text-neon text-center">Bass
+                    Boost</button>
+                <button class="py-3 rounded-xl bg-white/3 text-xs text-white/30 text-center">Vocal</button>
+                <button class="py-3 rounded-xl bg-white/3 text-xs text-white/30 text-center">Treble</button>
+                <button class="py-3 rounded-xl bg-white/3 text-xs text-white/30 text-center">Night</button>
+                <button class="py-3 rounded-xl bg-white/3 text-xs text-white/30 text-center">Live</button>
+                <button class="py-3 rounded-xl bg-white/3 text-xs text-white/30 text-center">Custom</button>
+            </div>
+        </div>
+
+        <!-- Audio FX -->
+        <div class="px-6 mt-5 space-y-3">
+            <p class="text-[10px] text-white/20 font-display uppercase tracking-widest">Audio Effects</p>
+            <div class="flex items-center justify-between py-2">
+                <div class="flex items-center gap-3"><span
+                        class="material-symbols-outlined !text-lg text-violet">spatial_audio</span><span
+                        class="text-sm">Spatial Audio</span></div>
+                <div class="w-11 h-6 bg-neon/30 rounded-full relative">
+                    <div class="w-5 h-5 bg-neon rounded-full absolute right-0.5 top-0.5 shadow-lg shadow-neon/50"></div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between py-2">
+                <div class="flex items-center gap-3"><span
+                        class="material-symbols-outlined !text-lg text-electric">surround_sound</span><span
+                        class="text-sm">Bass Enhancer</span></div>
+                <div class="w-11 h-6 bg-white/5 rounded-full relative">
+                    <div class="w-5 h-5 bg-white/20 rounded-full absolute left-0.5 top-0.5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('eqViz');
+        canvas.width = canvas.offsetWidth * 2;
+        canvas.height = 100 * 2;
+        const ctx = canvas.getContext('2d');
+        ctx.scale(2, 2);
+        const W = canvas.offsetWidth, H = 100;
+        let t = 0;
+        function drawViz() {
+            ctx.clearRect(0, 0, W, H);
+            const bars = 40;
+            const barW = W / bars - 2;
+            for (let i = 0; i < bars; i++) {
+                const x = i * (W / bars) + 1;
+                const freq = Math.sin(i * 0.3 + t * 2) * 0.3 + Math.sin(i * 0.15 + t * 3) * 0.2 + 0.5;
+                const h = freq * H * 0.8;
+                const grad = ctx.createLinearGradient(x, H, x, H - h);
+                grad.addColorStop(0, 'rgba(255,45,120,0.8)');
+                grad.addColorStop(0.5, 'rgba(139,92,246,0.6)');
+                grad.addColorStop(1, 'rgba(6,182,212,0.3)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(x, H - h, barW, h);
+            }
+            t += 0.02;
+            requestAnimationFrame(drawViz);
+        }
+        drawViz();
+    </script>
+</body>
+
+</html>

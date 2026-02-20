@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Phrase Book</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "parchment": "#1A1510", "vintage": "#D4A574", "terra": "#C67B5C", "linen": "#F5E6D3", "forest": "#4A7C59" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1510
+        }
+
+        .glass-vintage {
+            background: rgba(212, 165, 116, 0.04);
+            border: 1px solid rgba(212, 165, 116, 0.08);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-linen overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-linen/20">arrow_back</span></button>
+            <div class="text-center">
+                <h1 class="font-display text-sm font-bold tracking-wider">Phrase Book</h1>
+                <p class="text-[9px] text-vintage/30">🇯🇵 Japanese</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-linen/20">translate</span></button>
+        </div>
+
+        <!-- Categories -->
+        <div class="flex gap-2 px-6 overflow-x-auto no-scrollbar pb-2">
+            <button
+                class="px-3 py-1.5 bg-vintage/20 text-vintage text-[10px] font-display font-bold rounded-full whitespace-nowrap">Essential</button>
+            <button
+                class="px-3 py-1.5 bg-white/3 text-linen/20 text-[10px] rounded-full whitespace-nowrap">Food</button>
+            <button
+                class="px-3 py-1.5 bg-white/3 text-linen/20 text-[10px] rounded-full whitespace-nowrap">Transport</button>
+            <button
+                class="px-3 py-1.5 bg-white/3 text-linen/20 text-[10px] rounded-full whitespace-nowrap">Emergency</button>
+            <button
+                class="px-3 py-1.5 bg-white/3 text-linen/20 text-[10px] rounded-full whitespace-nowrap">Shopping</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2 mt-2">
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">Hello</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">こんにちは</p>
+                        <p class="text-xs text-vintage/30 italic">Konnichiwa</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">Thank you</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">ありがとうございます</p>
+                        <p class="text-xs text-vintage/30 italic">Arigatō gozaimasu</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">Excuse me</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">すみません</p>
+                        <p class="text-xs text-vintage/30 italic">Sumimasen</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">Where is…?</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">…はどこですか？</p>
+                        <p class="text-xs text-vintage/30 italic">…wa doko desu ka?</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">How much?</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">いくらですか？</p>
+                        <p class="text-xs text-vintage/30 italic">Ikura desu ka?</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">I don't understand</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">わかりません</p>
+                        <p class="text-xs text-vintage/30 italic">Wakarimasen</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+
+            <div class="glass-vintage p-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-sans font-semibold">Please</p>
+                        <p class="text-lg font-display text-vintage mt-0.5">お願いします</p>
+                        <p class="text-xs text-vintage/30 italic">Onegaishimasu</p>
+                    </div><button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">volume_up</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

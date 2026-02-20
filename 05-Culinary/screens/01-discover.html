@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Discover</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "primary": "#16A249", "primary-dark": "#0D7A35", "warm": "#F5F0E8", "cream": "#FFFBF3", "accent": "#E8590C", "brown": "#78350F" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Inter", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFFBF3;
+        }
+
+        .glass-warm {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 251, 243, 0.85);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-medium text-primary tracking-widest uppercase">Good morning</p>
+                <h1 class="font-serif text-2xl font-bold mt-0.5">What's cooking? 🍳</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="w-10 h-10 rounded-full bg-white card-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-gray-600">notifications</span></button>
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-sm font-bold text-white">
+                    J</div>
+            </div>
+        </div>
+
+        <!-- Search -->
+        <div class="px-6 py-3">
+            <div class="bg-white rounded-2xl px-4 py-3 flex items-center gap-3 card-shadow">
+                <span class="material-symbols-outlined !text-xl text-gray-400">search</span>
+                <input type="text" placeholder="Search recipes, ingredients..."
+                    class="bg-transparent text-sm outline-none w-full placeholder-gray-400" />
+                <button class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-primary">tune</span></button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto pb-24">
+            <!-- Category Pills -->
+            <div class="px-6 pb-4">
+                <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-primary text-white whitespace-nowrap">All</button>
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-white text-gray-600 card-shadow whitespace-nowrap">🍝
+                        Pasta</button>
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-white text-gray-600 card-shadow whitespace-nowrap">🥗
+                        Salad</button>
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-white text-gray-600 card-shadow whitespace-nowrap">🍖
+                        Meat</button>
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-white text-gray-600 card-shadow whitespace-nowrap">🍣
+                        Asian</button>
+                    <button
+                        class="px-4 py-2 rounded-full text-xs font-medium bg-white text-gray-600 card-shadow whitespace-nowrap">🍰
+                        Dessert</button>
+                </div>
+            </div>
+
+            <!-- Featured Recipe -->
+            <div class="px-6 mb-4">
+                <div
+                    class="bg-gradient-to-br from-primary to-primary-dark rounded-3xl p-6 text-white relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/10 -translate-y-1/2 translate-x-1/2">
+                    </div>
+                    <span class="text-[10px] font-medium bg-white/20 px-2 py-1 rounded-full">⭐ Chef's Pick</span>
+                    <h3 class="font-serif text-xl font-bold mt-3">Truffle Mushroom Risotto</h3>
+                    <p class="text-sm text-white/70 mt-1">Creamy Arborio with porcini & truffle oil</p>
+                    <div class="flex items-center gap-4 mt-4">
+                        <span class="text-xs flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-sm">timer</span> 35 min</span>
+                        <span class="text-xs flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-sm">local_fire_department</span> 420 kcal</span>
+                        <span class="text-xs flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-sm">group</span> 4 serv</span>
+                    </div>
+                    <button
+                        class="mt-4 px-5 py-2.5 bg-white text-primary font-semibold rounded-xl text-sm flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-lg">play_arrow</span> Start Cooking</button>
+                </div>
+            </div>
+
+            <!-- Quick Recipes Grid -->
+            <div class="px-6">
+                <div class="flex items-center justify-between mb-3">
+                    <h2 class="font-serif text-lg font-semibold">Quick & Easy</h2>
+                    <button class="text-xs text-primary font-medium">See all →</button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-white rounded-2xl overflow-hidden card-shadow">
+                        <div
+                            class="h-28 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-4xl">
+                            🥑</div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-semibold">Avocado Toast</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">10 min · 280 kcal</p>
+                            <div class="flex items-center gap-1 mt-2"><span
+                                    class="text-amber-400 text-xs">★★★★★</span><span
+                                    class="text-[10px] text-gray-400">4.9</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden card-shadow">
+                        <div
+                            class="h-28 bg-gradient-to-br from-red-100 to-pink-100 flex items-center justify-center text-4xl">
+                            🍝</div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-semibold">Aglio e Olio</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">15 min · 350 kcal</p>
+                            <div class="flex items-center gap-1 mt-2"><span
+                                    class="text-amber-400 text-xs">★★★★★</span><span
+                                    class="text-[10px] text-gray-400">4.8</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden card-shadow">
+                        <div
+                            class="h-28 bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center text-4xl">
+                            🥗</div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-semibold">Greek Salad</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">8 min · 180 kcal</p>
+                            <div class="flex items-center gap-1 mt-2"><span
+                                    class="text-amber-400 text-xs">★★★★☆</span><span
+                                    class="text-[10px] text-gray-400">4.6</span></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl overflow-hidden card-shadow">
+                        <div
+                            class="h-28 bg-gradient-to-br from-yellow-100 to-amber-100 flex items-center justify-center text-4xl">
+                            🍲</div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-semibold">Miso Soup</h3>
+                            <p class="text-xs text-gray-500 mt-0.5">12 min · 120 kcal</p>
+                            <div class="flex items-center gap-1 mt-2"><span
+                                    class="text-amber-400 text-xs">★★★★★</span><span
+                                    class="text-[10px] text-gray-400">4.7</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Tab Bar -->
+        <div class="absolute bottom-0 left-0 right-0 glass-warm border-t border-black/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">explore</span><span
+                        class="text-[10px] font-medium text-primary">Discover</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">search</span><span
+                        class="text-[10px] text-gray-400">Search</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">auto_awesome</span><span
+                        class="text-[10px] text-gray-400">AI Chef</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">menu_book</span><span
+                        class="text-[10px] text-gray-400">My Book</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">shopping_cart</span><span
+                        class="text-[10px] text-gray-400">Grocery</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

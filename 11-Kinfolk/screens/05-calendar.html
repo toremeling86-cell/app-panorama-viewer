@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Family Calendar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay {
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.06), -4px -4px 12px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 20px
+        }
+
+        .clay-sm {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05), -2px -2px 8px rgba(255, 255, 255, 0.7);
+            border-radius: 16px
+        }
+
+        .today-ring {
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3)
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-gray-300">arrow_back</span></button>
+            <h1 class="text-lg font-display font-bold">February 2026 📅</h1>
+            <button><span class="material-symbols-outlined !text-xl text-gray-300">add</span></button>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="mx-6 bg-white clay p-4 mb-3">
+            <div class="grid grid-cols-7 gap-1 mb-2">
+                <span class="text-[9px] text-center text-gray-300 font-display">Mon</span><span
+                    class="text-[9px] text-center text-gray-300 font-display">Tue</span><span
+                    class="text-[9px] text-center text-gray-300 font-display">Wed</span><span
+                    class="text-[9px] text-center text-gray-300 font-display">Thu</span><span
+                    class="text-[9px] text-center text-gray-300 font-display">Fri</span><span
+                    class="text-[9px] text-center text-gray-300 font-display">Sat</span><span
+                    class="text-[9px] text-center text-gray-300 font-display">Sun</span>
+            </div>
+            <div class="grid grid-cols-7 gap-1">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">1</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">2</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">3</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">4</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">5</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">6</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">7</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">8</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">9</span></div>
+                <div class="text-center py-1.5 relative"><span class="text-xs text-gray-400">10</span><span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-papa"></span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">11</span></div>
+                <div class="text-center py-1.5 relative"><span class="text-xs text-mama">12</span><span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-mama"></span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">13</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">14</span></div>
+                <div class="text-center py-1.5 relative"><span class="text-xs text-gray-400">15</span><span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-kid"></span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">16</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">17</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">18</span></div>
+                <div class="text-center py-1.5 rounded-full bg-together today-ring"><span
+                        class="text-xs font-bold text-white">19</span></div>
+                <div class="text-center py-1.5 relative"><span class="text-xs text-gray-400">20</span><span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-together"></span>
+                </div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">21</span></div>
+                <div class="text-center py-1.5 relative"><span class="text-xs text-gray-400">22</span><span
+                        class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-papa"></span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">23</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">24</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">25</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">26</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">27</span></div>
+                <div class="text-center py-1.5"><span class="text-xs text-gray-400">28</span></div>
+            </div>
+        </div>
+
+        <!-- Today's Events -->
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <p class="text-xs font-display font-semibold text-together/60 mb-1">Today, Feb 19</p>
+
+            <div class="bg-white clay-sm p-3 flex items-center gap-3 border-l-4 border-mama">
+                <div class="w-10 h-10 rounded-xl bg-mama/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-mama">school</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Liam's Parent-Teacher</p>
+                    <p class="text-[10px] text-gray-400">3:30 PM · Maple Elementary</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-mama/20 flex items-center justify-center text-[10px]">👩</div>
+            </div>
+
+            <div class="bg-white clay-sm p-3 flex items-center gap-3 border-l-4 border-kid">
+                <div class="w-10 h-10 rounded-xl bg-kid/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-kid">sports_soccer</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Soccer Practice</p>
+                    <p class="text-[10px] text-gray-400">5:00 PM · City Park Field 3</p>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-kid/20 flex items-center justify-center text-[10px]">👦</div>
+            </div>
+
+            <div class="bg-white clay-sm p-3 flex items-center gap-3 border-l-4 border-together">
+                <div class="w-10 h-10 rounded-xl bg-together/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-together">restaurant</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Family Dinner Night</p>
+                    <p class="text-[10px] text-gray-400">7:00 PM · Pizza place 🍕</p>
+                </div>
+                <div class="flex -space-x-1">
+                    <div class="w-5 h-5 rounded-full bg-papa/20 flex items-center justify-center text-[8px]">👨</div>
+                    <div class="w-5 h-5 rounded-full bg-mama/20 flex items-center justify-center text-[8px]">👩</div>
+                    <div class="w-5 h-5 rounded-full bg-kid/20 flex items-center justify-center text-[8px]">👦</div>
+                </div>
+            </div>
+
+            <p class="text-xs font-display font-semibold text-gray-300 mt-2 mb-1">Tomorrow</p>
+            <div class="bg-white/50 clay-sm p-3 flex items-center gap-3 border-l-4 border-together/30">
+                <div class="w-10 h-10 rounded-xl bg-together/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-together/40">movie</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-medium text-gray-400">Movie Night</p>
+                    <p class="text-[10px] text-gray-300">8:00 PM · Home</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-family/90 backdrop-blur border-t border-gray-100">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">home</span><span
+                        class="text-[10px] text-gray-300">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-together"
+                        style="font-variation-settings:'FILL' 1">calendar_month</span><span
+                        class="text-[10px] font-display font-bold text-together">Calendar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">task_alt</span><span
+                        class="text-[10px] text-gray-300">Chores</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">photo_library</span><span
+                        class="text-[10px] text-gray-300">Photos</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">settings</span><span
+                        class="text-[10px] text-gray-300">Settings</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

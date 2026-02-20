@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Vaccination Tracker</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "pawbg": "#FFF8F0", "bark": "#8B5E3C", "ocean": "#4A90D9", "blush": "#FF8BA7", "leaf": "#5CB85C", "sunny": "#FFD93D" }, fontFamily: { "display": ["Quicksand", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0
+        }
+
+        .paw-shadow {
+            box-shadow: 0 4px 16px rgba(139, 94, 60, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04)
+        }
+
+        .timeline-dot {
+            position: relative
+        }
+
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--dot-color, #5CB85C);
+            background: white
+        }
+
+        .timeline-done::before {
+            background: var(--dot-color, #5CB85C)
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-pawbg">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-bark/40">arrow_back</span></button>
+            <h1 class="font-display text-base font-bold">Vaccinations 💉</h1>
+            <button class="text-xs text-ocean font-bold">+ Add</button>
+        </div>
+
+        <!-- Pet Selector -->
+        <div class="flex gap-3 px-6 pb-3">
+            <button class="flex items-center gap-2 px-4 py-2 bg-bark/10 rounded-full"><span
+                    class="text-lg">🐕</span><span class="text-xs font-display font-bold text-bark">Max</span></button>
+            <button class="flex items-center gap-2 px-4 py-2 bg-white rounded-full paw-shadow"><span
+                    class="text-lg">🐈</span><span
+                    class="text-xs font-display font-medium text-bark/40">Luna</span></button>
+        </div>
+
+        <!-- Status Banner -->
+        <div class="mx-6 bg-leaf/10 rounded-2xl p-4 flex items-center gap-3 paw-shadow">
+            <div class="w-12 h-12 rounded-xl bg-leaf/20 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-2xl text-leaf">verified</span></div>
+            <div>
+                <p class="text-sm font-display font-bold text-leaf">All Up to Date! ✅</p>
+                <p class="text-xs text-gray-400">Next vaccination: Bordetella — Mar 15, 2026</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-4">
+            <!-- Timeline -->
+            <div class="relative pl-8 border-l-2 border-leaf/20 space-y-4">
+                <!-- Upcoming -->
+                <div class="timeline-dot" style="--dot-color:#FFD93D">
+                    <div class="bg-sunny/10 rounded-2xl p-4 paw-shadow border border-sunny/20">
+                        <div class="flex items-center justify-between mb-1"><span
+                                class="text-xs font-display font-bold text-bark">Bordetella</span><span
+                                class="px-2 py-0.5 bg-sunny/20 text-sunny text-[9px] font-bold rounded-full">UPCOMING</span>
+                        </div>
+                        <p class="text-xs text-gray-400">Kennel Cough · Due Mar 15, 2026</p>
+                        <p class="text-[10px] text-gray-300 mt-1">📍 Happy Paws Vet · Dr. Martinez</p>
+                        <button class="mt-2 text-xs text-ocean font-bold">Schedule Appointment →</button>
+                    </div>
+                </div>
+
+                <!-- Completed -->
+                <div class="timeline-dot timeline-done" style="--dot-color:#5CB85C">
+                    <div class="bg-white rounded-2xl p-4 paw-shadow">
+                        <div class="flex items-center justify-between mb-1"><span
+                                class="text-xs font-display font-bold text-bark">Rabies (3-year)</span><span
+                                class="px-2 py-0.5 bg-leaf/10 text-leaf text-[9px] font-bold rounded-full">DONE</span>
+                        </div>
+                        <p class="text-xs text-gray-400">Jan 10, 2026 · Valid until Jan 2029</p>
+                        <p class="text-[10px] text-gray-300 mt-1">📍 Happy Paws Vet · Dr. Martinez</p>
+                    </div>
+                </div>
+
+                <div class="timeline-dot timeline-done" style="--dot-color:#5CB85C">
+                    <div class="bg-white rounded-2xl p-4 paw-shadow">
+                        <div class="flex items-center justify-between mb-1"><span
+                                class="text-xs font-display font-bold text-bark">DHPP</span><span
+                                class="px-2 py-0.5 bg-leaf/10 text-leaf text-[9px] font-bold rounded-full">DONE</span>
+                        </div>
+                        <p class="text-xs text-gray-400">Distemper combo · Nov 5, 2025</p>
+                        <p class="text-[10px] text-gray-300 mt-1">📍 PetCare Central · Dr. Lee</p>
+                    </div>
+                </div>
+
+                <div class="timeline-dot timeline-done" style="--dot-color:#5CB85C">
+                    <div class="bg-white rounded-2xl p-4 paw-shadow">
+                        <div class="flex items-center justify-between mb-1"><span
+                                class="text-xs font-display font-bold text-bark">Lyme Disease</span><span
+                                class="px-2 py-0.5 bg-leaf/10 text-leaf text-[9px] font-bold rounded-full">DONE</span>
+                        </div>
+                        <p class="text-xs text-gray-400">Aug 20, 2025</p>
+                    </div>
+                </div>
+
+                <div class="timeline-dot timeline-done" style="--dot-color:#5CB85C">
+                    <div class="bg-white/50 rounded-2xl p-4 paw-shadow opacity-50">
+                        <div class="flex items-center justify-between mb-1"><span
+                                class="text-xs font-display font-bold text-bark/50">Canine Influenza</span><span
+                                class="px-2 py-0.5 bg-leaf/10 text-leaf text-[9px] font-bold rounded-full">DONE</span>
+                        </div>
+                        <p class="text-xs text-gray-300">May 12, 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-pawbg/90 backdrop-blur border-t border-bark/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">pets</span><span
+                        class="text-[10px] text-bark/30">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">smart_toy</span><span
+                        class="text-[10px] text-bark/30">AI Vet</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-ocean"
+                        style="font-variation-settings:'FILL' 1">vaccines</span><span
+                        class="text-[10px] font-display font-bold text-ocean">Vaccines</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">directions_walk</span><span
+                        class="text-[10px] text-bark/30">Walks</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

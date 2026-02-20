@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Soil Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "bark": "#5C4033", "soil": "#3E2723", "water": "#5B9BD5" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-soil overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2"><button><span
+                    class="material-symbols-outlined !text-xl text-bark/20">arrow_back</span></button>
+            <h1 class="font-serif text-lg font-bold">Soil Guide 🌱</h1><button><span
+                    class="material-symbols-outlined !text-xl text-bark/20">info_outline</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- pH Meter -->
+            <div class="bg-white rounded-2xl shadow-sm p-5 text-center">
+                <p class="text-[10px] text-bark/25 font-serif uppercase tracking-wider mb-2">Current Soil pH</p>
+                <div
+                    class="h-3 rounded-full bg-gradient-to-r from-red-400 via-yellow-300 via-green-400 via-blue-400 to-purple-500 mx-4 relative">
+                    <div class="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2 border-chloro shadow-md"
+                        style="left:55%"></div>
+                </div>
+                <div class="flex justify-between text-[8px] text-bark/20 mt-1 px-4"><span>Acidic (4)</span><span>Neutral
+                        (7)</span><span>Alkaline (10)</span></div>
+                <p class="text-2xl font-serif font-bold text-chloro mt-2">6.5</p>
+                <p class="text-[10px] text-chloro">Slightly Acidic — Ideal for most plants</p>
+            </div>
+
+            <!-- Soil Types -->
+            <p class="text-[10px] text-bark/25 font-serif uppercase tracking-wider">Soil Types</p>
+            <div class="grid grid-cols-2 gap-2">
+                <div class="bg-white rounded-2xl shadow-sm p-3 text-center border-2 border-chloro/20"><span
+                        class="text-2xl">🪴</span>
+                    <p class="text-sm font-serif font-bold mt-1">Loamy</p>
+                    <p class="text-[9px] text-chloro">Best for most plants</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3 text-center"><span class="text-2xl">🏜️</span>
+                    <p class="text-sm font-serif font-bold mt-1">Sandy</p>
+                    <p class="text-[9px] text-bark/20">Drains quickly</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3 text-center"><span class="text-2xl">🧱</span>
+                    <p class="text-sm font-serif font-bold mt-1">Clay</p>
+                    <p class="text-[9px] text-bark/20">Retains moisture</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3 text-center"><span class="text-2xl">🌿</span>
+                    <p class="text-sm font-serif font-bold mt-1">Peat</p>
+                    <p class="text-[9px] text-bark/20">High organic matter</p>
+                </div>
+            </div>
+
+            <!-- Nutrient Levels -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <p class="text-[10px] text-bark/25 font-serif uppercase tracking-wider mb-2">Nutrient Levels</p>
+                <div class="space-y-2">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-bark/30">Nitrogen
+                                (N)</span><span class="text-chloro font-bold">High</span></div>
+                        <div class="h-2 rounded-full bg-cream">
+                            <div class="h-full rounded-full bg-chloro" style="width:85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-bark/30">Phosphorus
+                                (P)</span><span class="text-terra font-bold">Medium</span></div>
+                        <div class="h-2 rounded-full bg-cream">
+                            <div class="h-full rounded-full bg-terra" style="width:55%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-bark/30">Potassium
+                                (K)</span><span class="text-chloro font-bold">Good</span></div>
+                        <div class="h-2 rounded-full bg-cream">
+                            <div class="h-full rounded-full bg-chloro" style="width:70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tip -->
+            <div class="bg-chloro/5 border border-chloro/10 rounded-2xl p-3 flex items-center gap-3"><span
+                    class="material-symbols-outlined !text-lg text-chloro">lightbulb</span>
+                <div>
+                    <p class="text-xs font-serif font-bold text-chloro">Tip</p>
+                    <p class="text-[10px] text-bark/30">Add compost to improve soil structure and nutrient content. Mix
+                        2 inches into top 6 inches of soil.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

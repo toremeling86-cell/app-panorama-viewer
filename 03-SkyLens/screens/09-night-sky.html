@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Night Sky</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "sky-dark": "#060818", "nebula": "#8B5CF6", "star": "#FBBF24", "luna": "#C4B5FD", "comet": "#38BDF8", "mars": "#EF4444" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #060818
+        }
+
+        .star-field {
+            position: relative;
+            overflow: hidden
+        }
+
+        .star-field::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.6), transparent), radial-gradient(1px 1px at 60% 10%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1px 1px at 80% 60%, rgba(255, 255, 255, 0.3), transparent), radial-gradient(1px 1px at 40% 80%, rgba(255, 255, 255, 0.5), transparent), radial-gradient(1px 1px at 10% 50%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(2px 2px at 70% 40%, rgba(251, 191, 36, 0.6), transparent), radial-gradient(1.5px 1.5px at 50% 75%, rgba(139, 92, 246, 0.5), transparent)
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-sky-dark">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3 relative z-10">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-luna/50">Night Sky ✨</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">settings</span></button>
+        </div>
+
+        <!-- Star Map -->
+        <div
+            class="mx-6 h-52 rounded-2xl star-field bg-gradient-to-b from-nebula/5 via-sky-dark to-comet/5 border border-white/3 flex items-center justify-center relative">
+            <canvas id="starMap" class="absolute inset-0 w-full h-full rounded-2xl"></canvas>
+            <div class="relative z-10 text-center">
+                <p class="text-xs text-luna/30">Tilt your phone to explore</p>
+            </div>
+            <div
+                class="absolute bottom-3 left-3 bg-black/40 backdrop-blur rounded-lg px-2 py-1 text-[9px] text-luna/40 z-10">
+                N ← → S</div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3 relative z-10">
+            <!-- Tonight's Highlights -->
+            <p class="text-[10px] text-nebula/30 font-display uppercase tracking-wider">Tonight's Highlights</p>
+
+            <div class="bg-white/3 border border-nebula/10 rounded-2xl p-4">
+                <div class="flex items-center gap-3 mb-3"><span class="text-2xl">🌕</span>
+                    <div>
+                        <p class="text-sm font-display font-bold">Full Moon</p>
+                        <p class="text-[10px] text-luna/25">Rises at 6:42 PM · 99% illumination</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 mb-3"><span class="text-2xl">⭐</span>
+                    <div>
+                        <p class="text-sm font-display font-bold">ISS Flyover</p>
+                        <p class="text-[10px] text-comet/40">8:23 PM · SW to NE · Magnitude -3.8</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3"><span class="text-2xl">🔴</span>
+                    <div>
+                        <p class="text-sm font-display font-bold">Mars Visible</p>
+                        <p class="text-[10px] text-mars/40">Look east after sunset · Magnitude 0.4</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Constellations -->
+            <p class="text-[10px] text-star/20 font-display uppercase tracking-wider">Visible Constellations</p>
+            <div class="grid grid-cols-2 gap-2">
+                <div class="bg-white/3 rounded-2xl p-3 text-center"><span class="text-2xl">♈</span>
+                    <p class="text-xs font-display font-semibold mt-1">Orion</p>
+                    <p class="text-[9px] text-luna/15">South · Best at 9 PM</p>
+                </div>
+                <div class="bg-white/3 rounded-2xl p-3 text-center"><span class="text-2xl">♊</span>
+                    <p class="text-xs font-display font-semibold mt-1">Gemini</p>
+                    <p class="text-[9px] text-luna/15">East · Best at 10 PM</p>
+                </div>
+                <div class="bg-white/3 rounded-2xl p-3 text-center"><span class="text-2xl">♌</span>
+                    <p class="text-xs font-display font-semibold mt-1">Canis Major</p>
+                    <p class="text-[9px] text-luna/15">South · Sirius visible</p>
+                </div>
+                <div class="bg-white/3 rounded-2xl p-3 text-center"><span class="text-2xl">♓</span>
+                    <p class="text-xs font-display font-semibold mt-1">Taurus</p>
+                    <p class="text-[9px] text-luna/15">West · Setting by 11</p>
+                </div>
+            </div>
+
+            <!-- Viewing Conditions -->
+            <div class="bg-white/3 rounded-2xl p-4">
+                <p class="text-[10px] text-luna/20 font-display uppercase tracking-wider mb-2">Viewing Conditions</p>
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div>
+                        <p class="text-lg font-display font-bold text-star">Bortle 4</p>
+                        <p class="text-[9px] text-luna/15">Light Pollution</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-display font-bold text-comet">82%</p>
+                        <p class="text-[9px] text-luna/15">Transparency</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-display font-bold text-nebula">3/5</p>
+                        <p class="text-[9px] text-luna/15">Seeing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('starMap'); c.width = c.offsetWidth * 2; c.height = c.offsetHeight * 2;
+        const x = c.getContext('2d'); x.scale(2, 2); const W = c.offsetWidth, H = c.offsetHeight;
+        for (let i = 0; i < 80; i++) {
+            const px = Math.random() * W, py = Math.random() * H, r = Math.random() * 1.5 + 0.3;
+            x.beginPath(); x.arc(px, py, r, 0, Math.PI * 2); x.fillStyle = `rgba(255,255,255,${Math.random() * 0.5 + 0.1})`; x.fill();
+        }
+        const cons = [[0.3, 0.4], [0.35, 0.35], [0.4, 0.3], [0.42, 0.45], [0.38, 0.5], [0.33, 0.48], [0.3, 0.4]];
+        x.beginPath(); cons.forEach((p, i) => {
+            const px = p[0] * W, py = p[1] * H; i === 0 ? x.moveTo(px, py) : x.lineTo(px, py);
+            x.fillStyle = 'rgba(251,191,36,0.8)'; x.fillRect(px - 2, py - 2, 4, 4);
+        });
+        x.strokeStyle = 'rgba(139,92,246,0.2)'; x.lineWidth = 1; x.stroke();
+    </script>
+</body>
+
+</html>

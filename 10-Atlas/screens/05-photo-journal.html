@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Photo Journal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "parchment": "#F5EDE0", "leather": "#6B4C3B", "compass": "#C4953A", "ocean": "#3D5A73", "ink": "#2C1810", "cherry": "#C8365E" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F5EDE0
+        }
+
+        .map-shadow {
+            box-shadow: 0 4px 20px rgba(107, 76, 59, 0.1)
+        }
+
+        .polaroid {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transform: rotate(var(--rot, 0deg));
+            transition: transform 0.3s ease
+        }
+
+        .polaroid:active {
+            transform: scale(1.05) rotate(0deg)
+        }
+
+        .masonry {
+            columns: 2;
+            column-gap: 12px
+        }
+
+        .masonry>* {
+            break-inside: avoid;
+            margin-bottom: 12px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-leather/50">arrow_back</span></button>
+            <div class="text-center">
+                <p class="font-display text-xs font-bold uppercase tracking-widest text-ink">Photo Journal</p>
+                <p class="text-[10px] text-leather/40 font-mono">Tokyo · Feb 2026</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-compass">add_a_photo</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-4 pb-24">
+            <!-- Day Separator -->
+            <div class="flex items-center gap-3 my-3">
+                <div class="flex-1 h-px bg-leather/10"></div><span
+                    class="text-[10px] font-display text-leather/40 tracking-wider uppercase">Day 3 · Feb 16</span>
+                <div class="flex-1 h-px bg-leather/10"></div>
+            </div>
+
+            <div class="masonry">
+                <!-- Polaroid 1 -->
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:-2deg">
+                    <div
+                        class="aspect-[4/3] bg-gradient-to-br from-cherry/20 via-compass/10 to-ocean/20 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">⛩️</span>
+                    </div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Senso-ji at sunrise
+                        ✨</p>
+                </div>
+
+                <!-- Polaroid 2 -->
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:1.5deg">
+                    <div
+                        class="aspect-square bg-gradient-to-br from-ocean/20 to-ink/10 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🍣</span>
+                    </div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Tsukiji omakase 🤤
+                    </p>
+                </div>
+
+                <!-- Polaroid 3 -->
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:-1deg">
+                    <div
+                        class="aspect-[3/4] bg-gradient-to-b from-cherry/30 to-parchment rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🌸</span>
+                    </div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Early cherry
+                        blossoms!</p>
+                </div>
+
+                <!-- Polaroid 4 -->
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:2deg">
+                    <div
+                        class="aspect-[4/5] bg-gradient-to-br from-ink/80 to-ink/50 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🌆</span>
+                    </div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Shibuya night vibes
+                    </p>
+                </div>
+
+                <!-- Polaroid 5 -->
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:-2.5deg">
+                    <div
+                        class="aspect-square bg-gradient-to-br from-compass/20 to-leather/10 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🍜</span>
+                    </div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Best ramen ever</p>
+                </div>
+            </div>
+
+            <!-- Day Separator -->
+            <div class="flex items-center gap-3 my-3">
+                <div class="flex-1 h-px bg-leather/10"></div><span
+                    class="text-[10px] font-display text-leather/40 tracking-wider uppercase">Day 2 · Feb 15</span>
+                <div class="flex-1 h-px bg-leather/10"></div>
+            </div>
+
+            <div class="masonry">
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:1deg">
+                    <div
+                        class="aspect-[4/3] bg-gradient-to-b from-ocean/30 to-ocean/10 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🏔️</span></div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Mt. Fuji view from
+                        Arakurayama</p>
+                </div>
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:-1.5deg">
+                    <div
+                        class="aspect-square bg-gradient-to-br from-cherry/10 to-compass/20 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🎌</span></div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Harajuku fashion
+                        street</p>
+                </div>
+                <div class="polaroid bg-white p-2 pb-10 rounded-sm relative" style="--rot:2.5deg">
+                    <div
+                        class="aspect-[3/4] bg-gradient-to-b from-ink/5 to-leather/10 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🎎</span></div>
+                    <p class="absolute bottom-2 left-3 text-[10px] text-leather/50 italic font-sans">Meiji Shrine garden
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-parchment/90 backdrop-blur border-t border-leather/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">timeline</span><span
+                        class="text-[10px] text-leather/30">Journey</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">explore</span><span
+                        class="text-[10px] text-leather/30">Discover</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">backpack</span><span
+                        class="text-[10px] text-leather/30">Packing</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-compass"
+                        style="font-variation-settings:'FILL' 1">photo_library</span><span
+                        class="text-[10px] font-display text-compass">Photos</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-leather/30">person</span><span
+                        class="text-[10px] text-leather/30">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

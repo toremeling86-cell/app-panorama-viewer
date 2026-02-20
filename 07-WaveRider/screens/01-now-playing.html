@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Now Playing</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#EC4899", "secondary": "#8B5CF6", "accent": "#06B6D4", "bg-void": "#0A0A12", "neon": "#F0ABFC" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A12;
+        }
+
+        .sonic-glow {
+            background: radial-gradient(ellipse at 50% 35%, rgba(236, 72, 153, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-pink {
+            backdrop-filter: blur(20px);
+            background: rgba(236, 72, 153, 0.06);
+            border: 1px solid rgba(236, 72, 153, 0.15);
+        }
+
+        .vinyl-spin {
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .wave-bar {
+            animation: waveBar 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes waveBar {
+            from {
+                transform: scaleY(0.3);
+            }
+
+            to {
+                transform: scaleY(1);
+            }
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.5), 0 0 40px rgba(236, 72, 153, 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden sonic-glow">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">keyboard_arrow_down</span></button>
+            <p class="text-xs font-medium text-neon/60 tracking-[0.3em] uppercase">Now Playing</p>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">more_horiz</span></button>
+        </div>
+
+        <!-- Vinyl Record -->
+        <div class="flex justify-center py-8 relative">
+            <div class="relative">
+                <svg width="240" height="240" viewBox="0 0 240 240" class="vinyl-spin">
+                    <circle cx="120" cy="120" r="115" fill="#1A1A2E" stroke="rgba(236,72,153,0.1)" stroke-width="0.5" />
+                    <circle cx="120" cy="120" r="100" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" />
+                    <circle cx="120" cy="120" r="85" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" />
+                    <circle cx="120" cy="120" r="70" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" />
+                    <circle cx="120" cy="120" r="55" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.5" />
+                    <circle cx="120" cy="120" r="35" fill="url(#vinylCenter)" stroke="rgba(236,72,153,0.2)"
+                        stroke-width="1" />
+                    <circle cx="120" cy="120" r="5" fill="#0A0A12" />
+                    <defs>
+                        <radialGradient id="vinylCenter">
+                            <stop offset="0%" stop-color="#EC4899" stop-opacity="0.3" />
+                            <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.1" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+                <!-- Floating Song Info -->
+                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 glass-pink rounded-full px-4 py-1.5">
+                    <p class="text-[10px] text-neon font-mono">320kbps · Spatial</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Song Info -->
+        <div class="text-center px-6 pb-4">
+            <h2 class="text-2xl font-bold glow-text">Midnight Drives</h2>
+            <p class="text-sm text-slate-400 mt-1">Stellar Frequencies · <span class="text-accent">Dreampop</span></p>
+        </div>
+
+        <!-- Audio Visualizer -->
+        <div class="flex items-end justify-center gap-[3px] h-12 px-8 mb-6">
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:20px;animation-delay:0s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:30px;animation-delay:0.1s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:45px;animation-delay:0.05s"></div>
+            <div class="w-1 bg-secondary rounded-full wave-bar" style="height:35px;animation-delay:0.15s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:48px;animation-delay:0.08s"></div>
+            <div class="w-1 bg-secondary rounded-full wave-bar" style="height:25px;animation-delay:0.2s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:40px;animation-delay:0.12s"></div>
+            <div class="w-1 bg-accent rounded-full wave-bar" style="height:30px;animation-delay:0.18s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:42px;animation-delay:0.03s"></div>
+            <div class="w-1 bg-secondary rounded-full wave-bar" style="height:28px;animation-delay:0.22s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:38px;animation-delay:0.07s"></div>
+            <div class="w-1 bg-accent rounded-full wave-bar" style="height:45px;animation-delay:0.13s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:32px;animation-delay:0.17s"></div>
+            <div class="w-1 bg-secondary rounded-full wave-bar" style="height:48px;animation-delay:0.09s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:22px;animation-delay:0.25s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:35px;animation-delay:0.11s"></div>
+            <div class="w-1 bg-accent rounded-full wave-bar" style="height:40px;animation-delay:0.06s"></div>
+            <div class="w-1 bg-secondary rounded-full wave-bar" style="height:28px;animation-delay:0.19s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:44px;animation-delay:0.14s"></div>
+            <div class="w-1 bg-primary rounded-full wave-bar" style="height:30px;animation-delay:0.21s"></div>
+        </div>
+
+        <!-- Progress -->
+        <div class="px-8 mb-6">
+            <div class="w-full h-1 rounded-full bg-white/5 relative">
+                <div class="absolute h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width:38%">
+                </div>
+                <div class="absolute w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50 -mt-1"
+                    style="left:38%"></div>
+            </div>
+            <div class="flex justify-between mt-2"><span class="text-[10px] text-slate-500 font-mono">1:24</span><span
+                    class="text-[10px] text-slate-500 font-mono">3:42</span></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-center gap-6 px-6 mb-6">
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">shuffle</span></button>
+            <button class="glass w-12 h-12 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-2xl text-slate-300">skip_previous</span></button>
+            <button
+                class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/40 active:scale-95 transition-transform"><span
+                    class="material-symbols-outlined !text-3xl text-white">pause</span></button>
+            <button class="glass w-12 h-12 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-2xl text-slate-300">skip_next</span></button>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">repeat</span></button>
+        </div>
+
+        <!-- Extras -->
+        <div class="flex items-center justify-center gap-6 px-6 pb-6">
+            <button class="flex items-center gap-1.5 text-xs text-neon/50"><span
+                    class="material-symbols-outlined !text-sm">spatial_audio</span> Spatial Audio</button>
+            <button class="flex items-center gap-1.5 text-xs text-accent"><span
+                    class="material-symbols-outlined !text-sm">lyrics</span> Lyrics</button>
+            <button class="flex items-center gap-1.5 text-xs text-neon/50"><span
+                    class="material-symbols-outlined !text-sm">queue_music</span> Queue</button>
+            <button class="flex items-center gap-1.5 text-xs text-neon/50"><span
+                    class="material-symbols-outlined !text-sm">cast</span> Cast</button>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">home</span><span
+                        class="text-[10px] text-slate-500">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">explore</span><span
+                        class="text-[10px] text-slate-500">Discover</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">play_circle</span><span
+                        class="text-[10px] font-medium text-primary">Playing</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">library_music</span><span
+                        class="text-[10px] text-slate-500">Library</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Wearable Sync</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FAFB", "teal": "#0D9488", "navy": "#1E3A5F", "safe": "#22C55E", "amber": "#F59E0B", "red": "#EF4444" }, fontFamily: { "sans": ["DM Sans", "sans-serif"], "display": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FAFB
+        }
+
+        @keyframes sync-spin {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .syncing {
+            animation: sync-spin 2s linear infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-navy overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical" role="main">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2"><button aria-label="Back"><span
+                    class="material-symbols-outlined !text-xl text-navy/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold">Devices</h1><button aria-label="Add device"><span
+                    class="material-symbols-outlined !text-xl text-navy/20">add</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Connected Device -->
+            <div class="bg-teal/5 border border-teal/10 rounded-2xl p-4" role="region" aria-label="Connected device">
+                <div class="flex items-center gap-3">
+                    <div class="w-14 h-14 rounded-2xl bg-teal/10 flex items-center justify-center text-3xl">⌚</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold">Apple Watch Series 9</p>
+                        <p class="text-[10px] text-navy/25">Connected · Last sync: 2 min ago</p>
+                        <div class="flex items-center gap-1 mt-0.5">
+                            <div class="w-2 h-2 rounded-full bg-safe"></div><span
+                                class="text-[10px] text-safe font-bold">Active</span><span
+                                class="text-[10px] text-navy/15 ml-2">🔋 78%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mt-3">
+                    <div class="bg-white rounded-xl p-2 text-center"><span
+                            class="material-symbols-outlined !text-lg text-teal">favorite</span>
+                        <p class="text-xs font-display font-bold mt-0.5">72</p>
+                        <p class="text-[8px] text-navy/15">BPM</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-2 text-center"><span
+                            class="material-symbols-outlined !text-lg text-teal">directions_walk</span>
+                        <p class="text-xs font-display font-bold mt-0.5">8,412</p>
+                        <p class="text-[8px] text-navy/15">Steps</p>
+                    </div>
+                    <div class="bg-white rounded-xl p-2 text-center"><span
+                            class="material-symbols-outlined !text-lg text-teal">local_fire_department</span>
+                        <p class="text-xs font-display font-bold mt-0.5">342</p>
+                        <p class="text-[8px] text-navy/15">Cal</p>
+                    </div>
+                </div>
+                <button
+                    class="w-full mt-3 py-2 bg-teal/10 text-teal font-bold rounded-xl text-xs flex items-center justify-center gap-2"><span
+                        class="material-symbols-outlined !text-sm syncing">sync</span> Sync Now</button>
+            </div>
+
+            <!-- Other Device -->
+            <div class="bg-white rounded-2xl shadow-sm p-4 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-navy/5 flex items-center justify-center text-2xl">🩺</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Withings BPM Core</p>
+                    <p class="text-[10px] text-navy/20">Blood pressure · Last sync: 3 days ago</p>
+                </div>
+                <span class="w-2 h-2 rounded-full bg-amber"></span>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm p-4 flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-navy/5 flex items-center justify-center text-2xl">🏋️</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Oura Ring Gen 3</p>
+                    <p class="text-[10px] text-navy/20">Sleep · Last sync: Yesterday</p>
+                </div>
+                <span class="w-2 h-2 rounded-full bg-safe"></span>
+            </div>
+
+            <!-- Data Sharing -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <p class="text-[10px] text-navy/20 uppercase tracking-wider mb-2">Data Permissions</p>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between"><span class="text-xs text-navy/40">Heart Rate</span>
+                        <div class="w-8 h-4 rounded-full bg-teal relative">
+                            <div class="absolute right-0.5 top-0.5 w-3 h-3 rounded-full bg-white"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-navy/40">Sleep Data</span>
+                        <div class="w-8 h-4 rounded-full bg-teal relative">
+                            <div class="absolute right-0.5 top-0.5 w-3 h-3 rounded-full bg-white"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-navy/40">Blood
+                            Oxygen</span>
+                        <div class="w-8 h-4 rounded-full bg-teal relative">
+                            <div class="absolute right-0.5 top-0.5 w-3 h-3 rounded-full bg-white"></div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-navy/40">Location</span>
+                        <div class="w-8 h-4 rounded-full bg-gray-200 relative">
+                            <div class="absolute left-0.5 top-0.5 w-3 h-3 rounded-full bg-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Case Study</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-[#FAFAFA]">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3"><button><span
+                    class="material-symbols-outlined !text-xl text-silver">arrow_back</span></button>
+            <h1 class="font-serif text-sm font-bold tracking-wider uppercase">Case Study</h1><button><span
+                    class="material-symbols-outlined !text-xl text-silver">share</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Hero -->
+            <div class="bg-ink rounded-2xl p-6 text-white">
+                <p class="text-[10px] text-coral uppercase tracking-widest font-sans">Mobile App · 2024</p>
+                <p class="text-2xl font-serif font-bold mt-2 leading-tight">Redesigning Luxe: A 340% Conversion Lift</p>
+                <p class="text-xs text-white/30 mt-2">8 min read · UX Research, Visual Design, Prototyping</p>
+            </div>
+
+            <!-- Overview -->
+            <div>
+                <p class="text-xs font-serif font-bold text-coral uppercase tracking-wider mb-1">The Challenge</p>
+                <p class="text-sm text-ink/50 leading-relaxed">Luxe, a luxury e-commerce app, struggled with a 1.2%
+                    conversion rate and high cart abandonment. Users found the checkout flow confusing and the browse
+                    experience uninspiring.</p>
+            </div>
+
+            <!-- Metrics -->
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-white rounded-xl shadow-sm p-3 text-center">
+                    <p class="text-xl font-serif font-bold text-coral">340%</p>
+                    <p class="text-[8px] text-silver">Conversion ↑</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-3 text-center">
+                    <p class="text-xl font-serif font-bold">-62%</p>
+                    <p class="text-[8px] text-silver">Cart Drop ↓</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm p-3 text-center">
+                    <p class="text-xl font-serif font-bold">4.8★</p>
+                    <p class="text-[8px] text-silver">App Rating</p>
+                </div>
+            </div>
+
+            <!-- Process -->
+            <div>
+                <p class="text-xs font-serif font-bold text-coral uppercase tracking-wider mb-2">Process</p>
+                <div class="space-y-2">
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 rounded-full bg-coral/10 flex items-center justify-center text-[10px] font-serif font-bold text-coral mt-0.5">
+                            1</div>
+                        <div>
+                            <p class="text-sm font-semibold">Research & Audit</p>
+                            <p class="text-[10px] text-ink/30">Heuristic evaluation, user interviews (n=24), analytics
+                                deep-dive</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 rounded-full bg-coral/10 flex items-center justify-center text-[10px] font-serif font-bold text-coral mt-0.5">
+                            2</div>
+                        <div>
+                            <p class="text-sm font-semibold">Define & Ideate</p>
+                            <p class="text-[10px] text-ink/30">Journey mapping, pain point prioritization, design
+                                sprints</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 rounded-full bg-coral/10 flex items-center justify-center text-[10px] font-serif font-bold text-coral mt-0.5">
+                            3</div>
+                        <div>
+                            <p class="text-sm font-semibold">Design & Test</p>
+                            <p class="text-[10px] text-ink/30">High-fidelity prototypes, A/B testing with 5,000 users
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div
+                            class="w-6 h-6 rounded-full bg-coral/10 flex items-center justify-center text-[10px] font-serif font-bold text-coral mt-0.5">
+                            4</div>
+                        <div>
+                            <p class="text-sm font-semibold">Launch & Measure</p>
+                            <p class="text-[10px] text-ink/30">Phased rollout, real-time KPI monitoring, iteration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outcome -->
+            <div class="bg-coral/5 rounded-2xl p-4">
+                <p class="text-xs font-serif font-bold text-coral uppercase tracking-wider mb-1">Key Takeaway</p>
+                <p class="text-sm text-ink/40 italic">"The biggest win wasn't visual — it was reducing checkout from 5
+                    steps to 2. Simplicity drove conversion more than aesthetics."</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

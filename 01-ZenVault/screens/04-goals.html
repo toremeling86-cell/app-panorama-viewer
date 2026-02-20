@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Wealth Milestones</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00D4AA", "bg-void": "#0A0E1A", "profit": "#10B981", "violet": "#7C3AED", "amber": "#F59E0B" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "sans": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0E1A;
+        }
+
+        .aurora-glow {
+            background: radial-gradient(ellipse at 60% 20%, rgba(0, 212, 170, 0.12) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .progress-ring {
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Animation Library */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+        .tx-row { transition: background 150ms ease; cursor: pointer; }
+        .tx-row:hover { background: rgba(255,255,255,0.06); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden aurora-glow">
+        <!-- Status Bar -->
+        <div aria-hidden="true"></div>
+
+        <!-- Header -->
+        <header class="flex items-center justify-between px-6 pt-14 pb-4" data-animate style="animation-delay:0ms">
+            <div class="flex items-center gap-3">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center btn-press" aria-label="Go back"><span
+                        class="material-symbols-outlined !text-xl text-slate-400" aria-hidden="true">arrow_back</span></button>
+                <h1 class="font-display text-xl font-bold">Goals</h1>
+            </div>
+            <button
+                class="glass px-3 py-1.5 rounded-full text-xs font-display font-medium flex items-center gap-1 text-primary btn-press" aria-label="Create new goal"><span
+                    class="material-symbols-outlined !text-sm" aria-hidden="true">add</span> New Goal</button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Goal 1: Emergency Fund -->
+            <section aria-label="Emergency Fund goal">
+                <div class="glass-bright rounded-2xl p-5 relative overflow-hidden card-interactive shadow-layered" data-animate style="animation-delay:80ms">
+                    <div
+                        class="absolute top-0 right-0 w-24 h-24 rounded-full bg-primary/5 -translate-y-1/2 translate-x-1/2">
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="relative">
+                            <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="75% progress">
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.06)"
+                                    stroke-width="4" />
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="#00D4AA" stroke-width="4"
+                                    stroke-linecap="round" stroke-dasharray="176" data-target-offset="44"
+                                    stroke-dashoffset="176"
+                                    class="progress-ring" transform="rotate(-90 32 32)" />
+                            </svg>
+                            <span
+                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-display font-bold text-primary">75%</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">shield</span>
+                                <h3 class="text-sm font-display font-semibold">Emergency Fund</h3>
+                            </div>
+                            <p class="text-xs text-slate-500">$15,000 of $20,000</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <span class="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">Mar
+                                    2026</span>
+                                <span class="text-[10px] text-slate-500">&#8226; On track</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goal 2: Vacation Fund -->
+            <section aria-label="Japan Trip goal">
+                <div class="glass-bright rounded-2xl p-5 card-interactive shadow-layered" data-animate style="animation-delay:160ms">
+                    <div class="flex items-start gap-4">
+                        <div class="relative">
+                            <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="40% progress">
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.06)"
+                                    stroke-width="4" />
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="#7C3AED" stroke-width="4"
+                                    stroke-linecap="round" stroke-dasharray="176" data-target-offset="106"
+                                    stroke-dashoffset="176"
+                                    class="progress-ring" transform="rotate(-90 32 32)" />
+                            </svg>
+                            <span
+                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-display font-bold text-violet">40%</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1"><span
+                                    class="material-symbols-outlined !text-lg text-violet" aria-hidden="true">flight</span>
+                                <h3 class="text-sm font-display font-semibold">Japan Trip 2026</h3>
+                            </div>
+                            <p class="text-xs text-slate-500">$2,000 of $5,000</p>
+                            <div class="flex items-center gap-2 mt-2"><span
+                                    class="text-[10px] font-mono text-violet bg-violet/10 px-2 py-0.5 rounded-full">Jul
+                                    2026</span><span class="text-[10px] text-slate-500">&#8226; On track</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goal 3: New Car -->
+            <section aria-label="New Car Fund goal">
+                <div class="glass-bright rounded-2xl p-5 card-interactive shadow-layered" data-animate style="animation-delay:240ms">
+                    <div class="flex items-start gap-4">
+                        <div class="relative">
+                            <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="20% progress">
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.06)"
+                                    stroke-width="4" />
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="#3B82F6" stroke-width="4"
+                                    stroke-linecap="round" stroke-dasharray="176" data-target-offset="141"
+                                    stroke-dashoffset="176"
+                                    class="progress-ring" transform="rotate(-90 32 32)" />
+                            </svg>
+                            <span
+                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-display font-bold text-blue-500">20%</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1"><span
+                                    class="material-symbols-outlined !text-lg text-blue-400" aria-hidden="true">directions_car</span>
+                                <h3 class="text-sm font-display font-semibold">New Car Fund</h3>
+                            </div>
+                            <p class="text-xs text-slate-500">$7,000 of $35,000</p>
+                            <div class="flex items-center gap-2 mt-2"><span
+                                    class="text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-full">Dec
+                                    2027</span><span class="text-[10px] text-amber">&#8226; Behind</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Goal 4: Investment -->
+            <section aria-label="100K Portfolio goal">
+                <div class="glass-bright rounded-2xl p-5 card-interactive shadow-layered" data-animate style="animation-delay:320ms">
+                    <div class="flex items-start gap-4">
+                        <div class="relative">
+                            <svg width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="90% progress">
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="rgba(255,255,255,0.06)"
+                                    stroke-width="4" />
+                                <circle cx="32" cy="32" r="28" fill="none" stroke="#10B981" stroke-width="4"
+                                    stroke-linecap="round" stroke-dasharray="176" data-target-offset="18"
+                                    stroke-dashoffset="176"
+                                    class="progress-ring" transform="rotate(-90 32 32)" />
+                            </svg>
+                            <span
+                                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-display font-bold text-profit">90%</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1"><span
+                                    class="material-symbols-outlined !text-lg text-profit" aria-hidden="true">rocket_launch</span>
+                                <h3 class="text-sm font-display font-semibold">$100K Portfolio</h3>
+                            </div>
+                            <p class="text-xs text-slate-500">$90,000 of $100,000</p>
+                            <div class="flex items-center gap-2 mt-2"><span
+                                    class="text-[10px] font-mono text-profit bg-profit/10 px-2 py-0.5 rounded-full">Almost
+                                    there!</span><span class="text-[10px] text-profit">&#8226; Ahead</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Recommendation -->
+            <section aria-label="AI smart suggestion">
+                <div class="glass rounded-2xl p-4 border-l-2 border-primary card-interactive shadow-layered" data-animate style="animation-delay:400ms">
+                    <div class="flex items-center gap-2 mb-2"><span
+                            class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">auto_awesome</span><span
+                            class="text-xs font-display font-semibold text-primary">Smart Suggestion</span></div>
+                    <p class="text-xs text-slate-300 leading-relaxed">Move $200 from your checking overflow to the New Car
+                        fund to get back on track. <span class="text-primary font-medium underline cursor-pointer btn-press" id="apply-suggestion" role="button" tabindex="0">Apply &#x2192;</span></p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Tab Bar -->
+        <nav role="navigation" aria-label="Main navigation" class="absolute bottom-0 left-0 right-0 glass-bright border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Home"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">home</span><span
+                        class="text-[10px] text-slate-500">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Portfolio"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">pie_chart</span><span
+                        class="text-[10px] text-slate-500">Portfolio</span></button>
+                <button class="flex flex-col items-center gap-0.5 -mt-4 btn-press" aria-label="Add new transaction">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-violet flex items-center justify-center shadow-lg shadow-primary/30">
+                        <span class="material-symbols-outlined !text-2xl text-white" aria-hidden="true">add</span></div>
+                </button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Budget"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">savings</span><span
+                        class="text-[10px] text-slate-500">Budget</span></button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Analytics"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">analytics</span><span
+                        class="text-[10px] text-slate-500">Analytics</span></button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // IntersectionObserver for staggered entry
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+        // Progress ring animation: start at full dashoffset (176 = full circle), animate to target
+        const ringObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const ring = e.target.querySelector('.progress-ring[data-target-offset]');
+                    if (ring) {
+                        setTimeout(() => {
+                            ring.style.strokeDashoffset = ring.getAttribute('data-target-offset');
+                        }, 200);
+                    }
+                    ringObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.progress-ring[data-target-offset]').forEach(ring => {
+            const card = ring.closest('[data-animate]');
+            if (card) ringObs.observe(card);
+        });
+
+        // "Apply" link click confirmation
+        const applyBtn = document.getElementById('apply-suggestion');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', () => {
+                const original = applyBtn.innerHTML;
+                applyBtn.innerHTML = '&#x2714; Applied!';
+                applyBtn.style.color = '#10B981';
+                applyBtn.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    applyBtn.innerHTML = original;
+                    applyBtn.style.color = '';
+                    applyBtn.style.pointerEvents = '';
+                }, 2000);
+            });
+            applyBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); applyBtn.click(); }
+            });
+        }
+    });
+    </script>
+</body>
+
+</html>

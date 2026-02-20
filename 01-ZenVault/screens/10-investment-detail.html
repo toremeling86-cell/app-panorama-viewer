@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Investment Detail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "vault": "#0C0F1A", "primary": "#00D4AA", "secondary": "#7B61FF", "rose": "#FF6B8A", "gold": "#FFD700", "panel": "#141829" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["DM Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0C0F1A
+        }
+
+        .glass-bright {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        .aurora-glow {
+            position: relative
+        }
+
+        .aurora-glow::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 140%;
+            height: 60%;
+            background: radial-gradient(ellipse, rgba(0, 212, 170, 0.06) 0%, rgba(123, 97, 255, 0.03) 40%, transparent 70%);
+            pointer-events: none
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        @keyframes chartDraw { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+        @keyframes favPop { 0% { transform: scale(1); } 30% { transform: scale(1.3); } 60% { transform: scale(0.9); } 100% { transform: scale(1); } }
+        @keyframes statReveal { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .fav-pop { animation: favPop 0.4s ease; }
+        .stat-row { opacity: 0; animation: statReveal 0.4s ease both; }
+        .tab-active { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2); color: #00D4AA; font-weight: 700; }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+          [data-animate] { opacity: 1 !important; }
+          .stat-row { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-vault aurora-glow">
+        <!-- Status Bar -->
+        <div class="h-12 w-full" aria-hidden="true"></div>
+
+        <!-- Header -->
+        <header class="flex items-center justify-between px-6 pb-2 relative z-10" data-animate style="animation-delay:0ms">
+            <button class="btn-press" aria-label="Go back">
+                <span class="material-symbols-outlined !text-xl text-white/20" aria-hidden="true">arrow_back</span>
+            </button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-white/60">AAPL</h1>
+            <button class="btn-press" aria-label="Toggle favorite" id="favBtn">
+                <span class="material-symbols-outlined !text-xl text-white/20" id="favIcon" aria-hidden="true">favorite_border</span>
+            </button>
+        </header>
+
+        <!-- Price Header -->
+        <section aria-label="Stock price" class="px-6 py-4 relative z-10" data-animate style="animation-delay:80ms">
+            <p class="text-xs text-white/30">Apple Inc.</p>
+            <div class="flex items-end gap-3 mt-1">
+                <span class="text-4xl font-display font-bold" data-count-to="187.44" data-prefix="$" data-decimals="2">$0.00</span>
+                <span class="text-sm font-medium text-primary">+$3.21 (1.74%)</span>
+            </div>
+            <p class="text-[10px] text-white/15 mt-1">After hours: $187.80 (+$0.36)</p>
+        </section>
+
+        <!-- Chart -->
+        <section aria-label="Price chart" data-animate="scale" style="animation-delay:160ms">
+            <div class="mx-6 glass-bright card-interactive shadow-layered p-4 mb-3">
+                <canvas id="stockChart" class="w-full" style="height:120px" aria-label="AAPL stock price chart, 1 month view"></canvas>
+                <div class="flex gap-2 mt-3 justify-center" role="tablist" aria-label="Chart time range" id="chartTabs">
+                    <button class="px-3 py-1 text-[10px] text-white/20 rounded-full btn-press" role="tab" data-range="1D">1D</button>
+                    <button class="px-3 py-1 text-[10px] text-white/20 rounded-full btn-press" role="tab" data-range="1W">1W</button>
+                    <button class="px-3 py-1 text-[10px] tab-active rounded-full btn-press" role="tab" aria-selected="true" data-range="1M">1M</button>
+                    <button class="px-3 py-1 text-[10px] text-white/20 rounded-full btn-press" role="tab" data-range="3M">3M</button>
+                    <button class="px-3 py-1 text-[10px] text-white/20 rounded-full btn-press" role="tab" data-range="1Y">1Y</button>
+                    <button class="px-3 py-1 text-[10px] text-white/20 rounded-full btn-press" role="tab" data-range="ALL">ALL</button>
+                </div>
+            </div>
+        </section>
+
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 relative z-10">
+            <!-- Your Position -->
+            <section aria-label="Your investment position" data-animate style="animation-delay:240ms">
+                <div class="glass-bright card-interactive shadow-layered p-4">
+                    <h3 class="text-[10px] text-white/20 uppercase tracking-wider mb-2 font-display">Your Position</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <p class="text-[10px] text-white/20">Shares</p>
+                            <p class="text-sm font-display font-bold" data-count-to="15" data-decimals="0">0</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-white/20">Avg Cost</p>
+                            <p class="text-sm font-display font-bold" data-count-to="165.20" data-prefix="$" data-decimals="2">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-white/20">Market Value</p>
+                            <p class="text-sm font-display font-bold" data-count-to="2811.60" data-prefix="$" data-decimals="2">$0.00</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-white/20">Total Return</p>
+                            <p class="text-sm font-display font-bold text-primary"><span data-count-to="333.60" data-prefix="+$" data-decimals="2">+$0.00</span> <span class="text-[10px]">(13.5%)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Stats -->
+            <section aria-label="Key statistics" data-animate style="animation-delay:320ms">
+                <div class="glass-bright card-interactive shadow-layered p-4">
+                    <h3 class="text-[10px] text-white/20 uppercase tracking-wider mb-2 font-display">Key Statistics</h3>
+                    <div class="grid grid-cols-2 gap-x-6 gap-y-2" id="statsGrid">
+                        <div class="flex justify-between stat-row" style="animation-delay:400ms"><span class="text-xs text-white/20">Open</span><span class="text-xs font-medium">$184.23</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:450ms"><span class="text-xs text-white/20">Prev Close</span><span class="text-xs font-medium">$184.23</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:500ms"><span class="text-xs text-white/20">Day High</span><span class="text-xs font-medium">$188.01</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:550ms"><span class="text-xs text-white/20">Day Low</span><span class="text-xs font-medium">$183.89</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:600ms"><span class="text-xs text-white/20">52W High</span><span class="text-xs font-medium">$199.62</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:650ms"><span class="text-xs text-white/20">52W Low</span><span class="text-xs font-medium">$143.50</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:700ms"><span class="text-xs text-white/20">P/E</span><span class="text-xs font-medium">30.2</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:750ms"><span class="text-xs text-white/20">Mkt Cap</span><span class="text-xs font-medium">$2.91T</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:800ms"><span class="text-xs text-white/20">Div Yield</span><span class="text-xs font-medium text-gold">0.52%</span></div>
+                        <div class="flex justify-between stat-row" style="animation-delay:850ms"><span class="text-xs text-white/20">Volume</span><span class="text-xs font-medium">48.2M</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Insight -->
+            <section aria-label="AI investment insight" data-animate style="animation-delay:400ms">
+                <div class="glass-bright card-interactive shadow-layered p-4 border-secondary/10">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined !text-sm text-secondary" aria-hidden="true">auto_awesome</span>
+                        <span class="text-[10px] text-secondary font-display font-bold uppercase tracking-wider">AI Insight</span>
+                    </div>
+                    <p class="text-xs text-white/40">AAPL is trading 6% below its 52-week high. Analyst consensus is <span class="text-primary font-medium">Strong Buy</span> with a median price target of $210. Your position is up 13.5%.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Trade Buttons -->
+        <nav aria-label="Trade actions" class="absolute bottom-0 left-0 right-0 bg-vault/95 backdrop-blur border-t border-white/3 px-6 py-4 pb-8 flex gap-3" data-animate style="animation-delay:480ms">
+            <button class="flex-1 py-3 bg-primary text-vault font-display font-bold rounded-xl text-sm btn-press shadow-layered" aria-label="Buy AAPL shares">Buy</button>
+            <button class="flex-1 py-3 bg-white/5 border border-white/10 text-white font-display font-bold rounded-xl text-sm btn-press" aria-label="Sell AAPL shares">Sell</button>
+        </nav>
+    </div>
+
+    <script>
+        // === CHART DRAW ANIMATION ===
+        const c = document.getElementById('stockChart');
+        c.width = c.offsetWidth * 2; c.height = 120 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2);
+        const W = c.offsetWidth, H = 120;
+        const pts = [165, 168, 172, 170, 175, 178, 174, 179, 183, 181, 184, 187];
+        const mn = Math.min(...pts) - 3, mx = Math.max(...pts) + 3;
+
+        let chartProgress = 0;
+        function drawAnimatedChart() {
+            x.clearRect(0, 0, W, H);
+            const count = Math.floor(chartProgress * pts.length);
+            if (count < 2) { chartProgress += 0.03; if (chartProgress < 1) requestAnimationFrame(drawAnimatedChart); return; }
+            const slice = pts.slice(0, count);
+            x.beginPath();
+            x.strokeStyle = '#00D4AA';
+            x.lineWidth = 2;
+            x.lineJoin = 'round';
+            slice.forEach((v, i) => {
+                const px = (i / (pts.length - 1)) * W;
+                const py = H - ((v - mn) / (mx - mn)) * (H - 20) - 10;
+                i === 0 ? x.moveTo(px, py) : x.lineTo(px, py);
+            });
+            x.stroke();
+
+            // Gradient fill
+            const g = x.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, 'rgba(0,212,170,0.15)'); g.addColorStop(1, 'rgba(0,212,170,0)');
+            const lastX = ((count - 1) / (pts.length - 1)) * W;
+            const lastY = H - ((slice[slice.length - 1] - mn) / (mx - mn)) * (H - 20) - 10;
+            x.lineTo(lastX, H); x.lineTo(0, H); x.closePath(); x.fillStyle = g; x.fill();
+
+            // End dot
+            if (chartProgress >= 1) {
+                x.beginPath(); x.arc(lastX, lastY, 4, 0, Math.PI * 2); x.fillStyle = '#00D4AA'; x.fill();
+                x.beginPath(); x.arc(lastX, lastY, 8, 0, Math.PI * 2); x.fillStyle = 'rgba(0,212,170,0.2)'; x.fill();
+            }
+            chartProgress += 0.03;
+            if (chartProgress < 1.01) requestAnimationFrame(drawAnimatedChart);
+        }
+        requestAnimationFrame(drawAnimatedChart);
+
+        // === DOM READY ===
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for animations
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+            // Animated counters
+            function animateCount(el) {
+                const target = parseFloat(el.dataset.countTo);
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+                const duration = 1200;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = prefix + (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+            const countObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+            }, { threshold: 0.3 });
+            document.querySelectorAll('[data-count-to]').forEach(el => countObs.observe(el));
+
+            // Stat rows observer
+            const statObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; statObs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.stat-row').forEach(el => { el.style.animationPlayState = 'paused'; statObs.observe(el); });
+
+            // Favorite toggle
+            let isFavorited = false;
+            const favBtn = document.getElementById('favBtn');
+            const favIcon = document.getElementById('favIcon');
+            favBtn.addEventListener('click', () => {
+                isFavorited = !isFavorited;
+                favIcon.textContent = isFavorited ? 'favorite' : 'favorite_border';
+                favIcon.style.color = isFavorited ? '#FF6B8A' : '';
+                favIcon.style.fontVariationSettings = isFavorited ? "'FILL' 1" : "'FILL' 0";
+                favIcon.classList.add('fav-pop');
+                setTimeout(() => favIcon.classList.remove('fav-pop'), 400);
+            });
+
+            // Chart tab selectors
+            const tabs = document.querySelectorAll('#chartTabs [role="tab"]');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('tab-active');
+                        t.classList.add('text-white/20');
+                        t.removeAttribute('aria-selected');
+                    });
+                    tab.classList.add('tab-active');
+                    tab.classList.remove('text-white/20');
+                    tab.setAttribute('aria-selected', 'true');
+                    // Re-trigger chart animation
+                    chartProgress = 0;
+                    requestAnimationFrame(drawAnimatedChart);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Plant Detail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB;
+        }
+
+        .leaf-shadow {
+            box-shadow: 0 8px 30px rgba(45, 139, 86, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-bark overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <!-- Hero -->
+        <div class="relative">
+            <div class="h-56 bg-gradient-to-b from-chloro/10 to-cream flex items-center justify-center">
+                <span class="text-8xl">🪴</span>
+            </div>
+            <div class="absolute top-12 left-4"><button
+                    class="w-10 h-10 rounded-full bg-white/80 backdrop-blur leaf-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-bark/60">arrow_back</span></button></div>
+            <div class="absolute top-12 right-4 flex gap-2">
+                <button
+                    class="w-10 h-10 rounded-full bg-white/80 backdrop-blur leaf-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-terra">favorite</span></button>
+                <button
+                    class="w-10 h-10 rounded-full bg-white/80 backdrop-blur leaf-shadow flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-bark/60">more_vert</span></button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 -mt-8 relative z-10">
+            <!-- Name & Status -->
+            <div class="bg-white rounded-3xl p-6 leaf-shadow">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <h1 class="text-2xl font-serif font-bold text-soil">Monstera Deliciosa</h1>
+                        <p class="text-xs text-bark/50 mt-0.5 italic font-serif">Swiss Cheese Plant</p>
+                    </div>
+                    <span class="px-3 py-1 bg-amber/10 text-amber text-[10px] font-medium rounded-full">Needs
+                        water</span>
+                </div>
+
+                <!-- Health Ring -->
+                <div class="flex items-center gap-4 mt-4">
+                    <svg width="70" height="70" viewBox="0 0 70 70">
+                        <circle cx="35" cy="35" r="30" fill="none" stroke="#F6F1EB" stroke-width="5" />
+                        <circle cx="35" cy="35" r="30" fill="none" stroke="#2D8B56" stroke-width="5"
+                            stroke-linecap="round" stroke-dasharray="188" stroke-dashoffset="30"
+                            transform="rotate(-90 35 35)" />
+                    </svg>
+                    <div>
+                        <p class="text-3xl font-serif font-bold text-chloro">84%</p>
+                        <p class="text-xs text-bark/40">Overall Health</p>
+                    </div>
+                    <div class="ml-auto text-right">
+                        <p class="text-xs text-bark/40">Added</p>
+                        <p class="text-sm font-medium text-soil">Mar 2024</p>
+                        <p class="text-xs text-chloro mt-0.5">1 year, 11 months</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Care Metrics -->
+            <div class="grid grid-cols-4 gap-2 mt-4">
+                <div class="bg-white rounded-xl p-3 leaf-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-blue-400">water_drop</span>
+                    <p class="text-sm font-mono font-medium text-soil mt-1">25%</p>
+                    <p class="text-[9px] text-bark/40">Water</p>
+                </div>
+                <div class="bg-white rounded-xl p-3 leaf-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-amber">light_mode</span>
+                    <p class="text-sm font-mono font-medium text-soil mt-1">Med</p>
+                    <p class="text-[9px] text-bark/40">Light</p>
+                </div>
+                <div class="bg-white rounded-xl p-3 leaf-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-terra">thermostat</span>
+                    <p class="text-sm font-mono font-medium text-soil mt-1">22°C</p>
+                    <p class="text-[9px] text-bark/40">Temp</p>
+                </div>
+                <div class="bg-white rounded-xl p-3 leaf-shadow text-center">
+                    <span class="material-symbols-outlined !text-xl text-chloro">humidity_percentage</span>
+                    <p class="text-sm font-mono font-medium text-soil mt-1">60%</p>
+                    <p class="text-[9px] text-bark/40">Humidity</p>
+                </div>
+            </div>
+
+            <!-- Care Schedule -->
+            <div class="bg-white rounded-2xl p-5 leaf-shadow mt-4">
+                <h3 class="font-serif font-semibold text-soil mb-3">Care Schedule</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 p-2 rounded-lg bg-terra/5">
+                        <span class="material-symbols-outlined !text-lg text-terra">water_drop</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-soil">Water</p>
+                            <p class="text-[10px] text-bark/40">Every 7 days · Last: 5 days ago</p>
+                        </div>
+                        <span class="text-xs font-mono text-terra font-medium">Overdue!</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-lg">
+                        <span class="material-symbols-outlined !text-lg text-chloro">compost</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-soil">Fertilize</p>
+                            <p class="text-[10px] text-bark/40">Every 30 days · Last: 12 days ago</p>
+                        </div>
+                        <span class="text-xs font-mono text-chloro">18 days</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-lg">
+                        <span class="material-symbols-outlined !text-lg text-amber">rotate_right</span>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-soil">Rotate</p>
+                            <p class="text-[10px] text-bark/40">Every 14 days · Last: 3 days ago</p>
+                        </div>
+                        <span class="text-xs font-mono text-chloro">11 days</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth Log -->
+            <div class="bg-white rounded-2xl p-5 leaf-shadow mt-4">
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="font-serif font-semibold text-soil">Growth Log</h3><button
+                        class="text-xs text-chloro font-medium">+ Add Photo</button>
+                </div>
+                <div class="flex gap-2 overflow-x-auto pb-1">
+                    <div class="min-w-[80px] rounded-xl bg-chloro/5 p-2 text-center">
+                        <div class="text-2xl mb-1">📸</div>
+                        <p class="text-[9px] text-bark/40 font-mono">Feb 15</p>
+                        <p class="text-[9px] text-chloro">New leaf!</p>
+                    </div>
+                    <div class="min-w-[80px] rounded-xl bg-chloro/5 p-2 text-center">
+                        <div class="text-2xl mb-1">📸</div>
+                        <p class="text-[9px] text-bark/40 font-mono">Jan 22</p>
+                        <p class="text-[9px] text-bark/40">Repotted</p>
+                    </div>
+                    <div class="min-w-[80px] rounded-xl bg-chloro/5 p-2 text-center">
+                        <div class="text-2xl mb-1">📸</div>
+                        <p class="text-[9px] text-bark/40 font-mono">Dec 14</p>
+                        <p class="text-[9px] text-bark/40">Growth</p>
+                    </div>
+                    <div class="min-w-[80px] rounded-xl bg-bark/5 p-2 text-center flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-2xl text-bark/20">add_photo_alternate</span></div>
+                </div>
+            </div>
+
+            <!-- Water Button -->
+            <button
+                class="mt-4 w-full py-4 bg-chloro text-white font-semibold rounded-2xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform leaf-shadow">
+                <span class="material-symbols-outlined !text-lg">water_drop</span> Water Now
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

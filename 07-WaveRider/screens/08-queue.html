@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Queue</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "plasma": "#FF6B2B" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        .track-row {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            transition: background 0.2s
+        }
+
+        .track-row:active {
+            background: rgba(255, 255, 255, 0.05)
+        }
+
+        .track-playing {
+            background: rgba(255, 45, 120, 0.05);
+            border: 1px solid rgba(255, 45, 120, 0.1)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-neon/50">Up Next</h1>
+            <button class="text-xs text-neon/30">Clear</button>
+        </div>
+
+        <!-- Now Playing Mini -->
+        <div class="mx-6 track-row track-playing p-3 flex items-center gap-3 mb-2">
+            <div
+                class="w-11 h-11 rounded-lg bg-gradient-to-br from-neon/20 to-violet/10 flex items-center justify-center">
+                <span class="material-symbols-outlined !text-lg text-neon">graphic_eq</span></div>
+            <div class="flex-1">
+                <p class="text-sm font-semibold text-neon">Runaway</p>
+                <p class="text-[10px] text-white/20">AURORA · 3:45</p>
+            </div>
+            <span class="text-[9px] text-neon/30">NOW</span>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24">
+            <p class="text-[10px] text-white/10 uppercase tracking-wider mb-2 mt-2">Next · 8 songs · 32 min</p>
+            <div class="space-y-1">
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">1</span>
+                    <div class="w-10 h-10 rounded-lg bg-violet/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Blinding Lights</p>
+                        <p class="text-[10px] text-white/15">The Weeknd · 3:20</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">2</span>
+                    <div class="w-10 h-10 rounded-lg bg-electric/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Levitating</p>
+                        <p class="text-[10px] text-white/15">Dua Lipa · 3:23</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">3</span>
+                    <div class="w-10 h-10 rounded-lg bg-plasma/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Save Your Tears</p>
+                        <p class="text-[10px] text-white/15">The Weeknd · 3:35</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">4</span>
+                    <div class="w-10 h-10 rounded-lg bg-neon/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Midnight Sky</p>
+                        <p class="text-[10px] text-white/15">Miley Cyrus · 3:43</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">5</span>
+                    <div class="w-10 h-10 rounded-lg bg-violet/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Physical</p>
+                        <p class="text-[10px] text-white/15">Dua Lipa · 3:13</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">6</span>
+                    <div class="w-10 h-10 rounded-lg bg-electric/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Don't Start Now</p>
+                        <p class="text-[10px] text-white/15">Dua Lipa · 3:03</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">7</span>
+                    <div class="w-10 h-10 rounded-lg bg-neon/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">Watermelon Sugar</p>
+                        <p class="text-[10px] text-white/15">Harry Styles · 2:54</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+
+                <div class="track-row p-3 flex items-center gap-3"><span
+                        class="text-[10px] text-white/10 w-4 text-right font-display">8</span>
+                    <div class="w-10 h-10 rounded-lg bg-plasma/10 flex items-center justify-center text-lg">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm">positions</p>
+                        <p class="text-[10px] text-white/15">Ariana Grande · 2:52</p>
+                    </div><span class="material-symbols-outlined !text-lg text-white/8">drag_indicator</span>
+                </div>
+            </div>
+
+            <button
+                class="w-full mt-4 py-3 border border-dashed border-neon/10 rounded-xl text-xs text-neon/20 flex items-center justify-center gap-1"><span
+                    class="material-symbols-outlined !text-sm">add</span> Add to Queue</button>
+        </div>
+    </div>
+</body>
+
+</html>

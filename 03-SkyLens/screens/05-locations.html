@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Saved Locations</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#7C3AED" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        .sky-gradient {
+            background: linear-gradient(180deg, #1E1B4B 0%, #312E81 40%, #4338CA 100%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .current-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden sky-gradient">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-semibold">Saved Places</h1>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl">add</span></button>
+        </div>
+
+        <!-- Search -->
+        <div class="px-6 pb-4">
+            <div class="glass rounded-xl px-4 py-3 flex items-center gap-3">
+                <span class="material-symbols-outlined !text-xl text-white/40">search</span>
+                <input type="text" placeholder="Search locations..."
+                    class="bg-transparent text-sm outline-none w-full placeholder-white/30" />
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Current Location -->
+            <div class="current-glass rounded-2xl p-5">
+                <div class="flex items-center gap-2 mb-3"><span
+                        class="material-symbols-outlined !text-sm text-primary">my_location</span><span
+                        class="text-[10px] text-primary tracking-widest uppercase font-medium">Current Location</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold">Oslo, Norway</h3>
+                        <p class="text-sm text-white/50">Partly Cloudy</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-3xl font-light">-3°</p>
+                        <span class="material-symbols-outlined !text-2xl text-white/60">partly_cloudy_day</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved locations -->
+            <div class="glass-bright rounded-2xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-xl text-white">wb_sunny</span></div>
+                    <div>
+                        <h3 class="text-sm font-semibold">Barcelona, Spain</h3>
+                        <p class="text-xs text-white/50">Sunny</p>
+                    </div>
+                </div>
+                <p class="text-2xl font-light">18°</p>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-xl text-white">cloud</span></div>
+                    <div>
+                        <h3 class="text-sm font-semibold">London, UK</h3>
+                        <p class="text-xs text-white/50">Overcast</p>
+                    </div>
+                </div>
+                <p class="text-2xl font-light">8°</p>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-xl text-white">rainy</span></div>
+                    <div>
+                        <h3 class="text-sm font-semibold">Tokyo, Japan</h3>
+                        <p class="text-xs text-white/50">Light Rain</p>
+                    </div>
+                </div>
+                <p class="text-2xl font-light">12°</p>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-xl text-white">ac_unit</span></div>
+                    <div>
+                        <h3 class="text-sm font-semibold">Tromsø, Norway</h3>
+                        <p class="text-xs text-white/50">Snow</p>
+                    </div>
+                </div>
+                <p class="text-2xl font-light">-12°</p>
+            </div>
+
+            <div class="glass-bright rounded-2xl p-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-red-500 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-xl text-white">wb_sunny</span></div>
+                    <div>
+                        <h3 class="text-sm font-semibold">Dubai, UAE</h3>
+                        <p class="text-xs text-white/50">Clear</p>
+                    </div>
+                </div>
+                <p class="text-2xl font-light">28°</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">cloud</span><span
+                        class="text-[10px] text-white/40">Sky Now</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">calendar_month</span><span
+                        class="text-[10px] text-white/40">Forecast</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">air</span><span
+                        class="text-[10px] text-white/40">Air</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">radar</span><span
+                        class="text-[10px] text-white/40">Radar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white"
+                        style="font-variation-settings: 'FILL' 1;">bookmark</span><span
+                        class="text-[10px] font-medium text-white">Places</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Lyrics</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "plasma": "#FF6B2B" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        .lyric-active {
+            color: white;
+            font-size: 18px;
+            font-weight: 600
+        }
+
+        .lyric-past {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 16px
+        }
+
+        .lyric-future {
+            color: rgba(255, 255, 255, 0.08);
+            font-size: 16px
+        }
+
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255, 45, 120, 0.3)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <!-- Background Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-neon/5 via-void to-violet/5 pointer-events-none"></div>
+
+        <div class="relative z-10 flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">expand_more</span></button>
+            <div class="text-center">
+                <p class="text-[10px] text-neon/40 font-display uppercase tracking-wider">Now Playing</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">share</span></button>
+        </div>
+
+        <!-- Album Art Mini -->
+        <div class="relative z-10 flex items-center gap-3 mx-6 mb-6">
+            <div
+                class="w-12 h-12 rounded-lg bg-gradient-to-br from-neon/20 via-violet/10 to-void flex items-center justify-center text-xl">
+                🎵</div>
+            <div class="flex-1">
+                <p class="text-sm font-bold">Runaway</p>
+                <p class="text-[10px] text-white/20">AURORA · The Gods We Can Touch</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-lg text-neon"
+                    style="font-variation-settings:'FILL' 1">favorite</span></button>
+        </div>
+
+        <!-- Lyrics -->
+        <div class="relative z-10 flex-1 overflow-y-auto px-6 pb-32 space-y-4">
+            <p class="lyric-past">I was listenin' to the ocean</p>
+            <p class="lyric-past">I saw a face in the sand</p>
+            <p class="lyric-past">But when I picked it up</p>
+            <p class="lyric-past">Then it vanished away from my hands</p>
+            <p class="mt-4"></p>
+            <p class="lyric-active glow-text">I had a dream I was seven</p>
+            <p class="lyric-active glow-text">Climbin' my way in a tree</p>
+            <p class="lyric-future mt-4">I saw a piece of heaven</p>
+            <p class="lyric-future">Waitin' impatient for me</p>
+            <p class="lyric-future mt-4">And I was runnin' far away</p>
+            <p class="lyric-future">Would I run off the world someday?</p>
+            <p class="lyric-future">Nobody knows, nobody knows</p>
+            <p class="lyric-future">And I was dancing in the rain</p>
+            <p class="lyric-future">I felt alive and I can't complain</p>
+            <p class="lyric-future mt-4">No</p>
+            <p class="lyric-future">But now take me home</p>
+            <p class="lyric-future">Take me home where I belong</p>
+            <p class="lyric-future">I can't take it anymore</p>
+        </div>
+
+        <!-- Player Controls -->
+        <div
+            class="absolute bottom-0 left-0 right-0 bg-void/90 backdrop-blur-xl border-t border-white/3 px-6 pt-3 pb-8 z-20">
+            <div class="flex items-center gap-1 mb-3">
+                <div class="flex-1 h-1 rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-neon" style="width:35%"></div>
+                </div>
+            </div>
+            <div class="flex items-center justify-between text-[9px] text-white/15 mb-2">
+                <span>1:18</span><span>3:45</span></div>
+            <div class="flex items-center justify-center gap-8">
+                <button><span class="material-symbols-outlined !text-xl text-white/30">skip_previous</span></button>
+                <button class="w-14 h-14 rounded-full bg-neon flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-2xl text-void">pause</span></button>
+                <button><span class="material-symbols-outlined !text-xl text-white/30">skip_next</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

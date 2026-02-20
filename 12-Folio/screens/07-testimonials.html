@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Testimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,400&family=Jost:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA
+        }
+
+        .qm {
+            font-size: 64px;
+            color: rgba(232, 85, 61, 0.1);
+            font-family: 'Bodoni Moda', serif;
+            line-height: 1
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-[#FAFAFA]">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3"><button><span
+                    class="material-symbols-outlined !text-xl text-silver">arrow_back</span></button>
+            <h1 class="font-serif text-sm font-bold tracking-wider uppercase">Testimonials</h1><button><span
+                    class="material-symbols-outlined !text-xl text-silver">add</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <div class="bg-ink text-white rounded-2xl p-6 relative"><span
+                    class="qm absolute top-2 left-4 text-white/5">"</span>
+                <p class="text-sm italic leading-relaxed z-10 relative">"Working with this designer was transformative.
+                    Our conversion rate increased 340% after the redesign."</p>
+                <div class="flex items-center gap-3 mt-4">
+                    <div class="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center text-sm">👩</div>
+                    <div>
+                        <p class="text-sm font-serif font-bold">Sarah Chen</p>
+                        <p class="text-xs text-white/40">CEO, Luxe Brand · 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm relative"><span class="qm absolute top-1 left-3">"</span>
+                <div class="flex mb-1"><span class="text-coral text-sm">★★★★★</span></div>
+                <p class="text-sm leading-relaxed text-ink/60 z-10 relative">"The attention to typography and whitespace
+                    was remarkable. Every pixel served a purpose."</p>
+                <div class="flex items-center gap-3 mt-3">
+                    <div class="w-9 h-9 rounded-full bg-silver/10 flex items-center justify-center text-sm">👨</div>
+                    <div>
+                        <p class="text-sm font-serif font-bold">Marcus Webb</p>
+                        <p class="text-xs text-silver">CTO, Atlas Travel · 2024</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm relative"><span class="qm absolute top-1 left-3">"</span>
+                <div class="flex mb-1"><span class="text-coral text-sm">★★★★★</span></div>
+                <p class="text-sm leading-relaxed text-ink/60 z-10 relative">"Delivered on time, on budget, and beyond
+                    scope. The design system saved us hundreds of hours."</p>
+                <div class="flex items-center gap-3 mt-3">
+                    <div class="w-9 h-9 rounded-full bg-coral/10 flex items-center justify-center text-sm">👩</div>
+                    <div>
+                        <p class="text-sm font-serif font-bold">Emily Nakamura</p>
+                        <p class="text-xs text-silver">Head of Product, Flow · 2023</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-5 shadow-sm relative"><span class="qm absolute top-1 left-3">"</span>
+                <div class="flex mb-1"><span class="text-coral text-sm">★★★★★</span></div>
+                <p class="text-sm leading-relaxed text-ink/60 z-10 relative">"The mobile app design was world-class.
+                    Innovative micro-interactions and a cohesive visual language."</p>
+                <div class="flex items-center gap-3 mt-3">
+                    <div class="w-9 h-9 rounded-full bg-ink/5 flex items-center justify-center text-sm">🧑</div>
+                    <div>
+                        <p class="text-sm font-serif font-bold">James Rodriguez</p>
+                        <p class="text-xs text-silver">VP Design, StartupX · 2023</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-coral/5 rounded-2xl p-4 text-center">
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <p class="text-2xl font-serif font-bold text-coral">4.9</p>
+                        <p class="text-[9px] text-silver">Avg Rating</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-serif font-bold">47</p>
+                        <p class="text-[9px] text-silver">Reviews</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-serif font-bold">100%</p>
+                        <p class="text-[9px] text-silver">Rehire</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

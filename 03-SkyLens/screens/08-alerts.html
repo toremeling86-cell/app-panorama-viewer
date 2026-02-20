@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Severe Alerts</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "sky-dark": "#0c1523", "sky-blue": "#4A90D9", "danger": "#EF4444", "warning": "#F59E0B", "safe": "#22C55E", "frost": "#A0C4E8" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0c1523
+        }
+
+        .alert-extreme {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-left: 4px solid #EF4444;
+            border-radius: 16px
+        }
+
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.06);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-left: 4px solid #F59E0B;
+            border-radius: 16px
+        }
+
+        .alert-watch {
+            background: rgba(74, 144, 217, 0.06);
+            border: 1px solid rgba(74, 144, 217, 0.1);
+            border-left: 4px solid #4A90D9;
+            border-radius: 16px
+        }
+
+        @keyframes alertPulse {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.5
+            }
+        }
+
+        .pulse-dot {
+            animation: alertPulse 1.5s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-sky-dark">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-danger pulse-dot"></div>
+                <h1 class="text-sm font-display font-bold tracking-wider uppercase text-danger/80">Active Alerts</h1>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">tune</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Extreme Alert -->
+            <div class="alert-extreme p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined !text-lg text-danger">warning</span>
+                    <span class="text-xs font-display font-bold text-danger uppercase tracking-wider">Extreme · Tornado
+                        Warning</span>
+                </div>
+                <p class="text-sm font-medium">Tornado Warning for Douglas County</p>
+                <p class="text-xs text-white/40 mt-1">A confirmed tornado has been spotted near Lawrence, KS moving NE
+                    at 35 mph. Take shelter immediately in an interior room on the lowest floor.</p>
+                <div class="flex items-center gap-3 mt-3 pt-3 border-t border-danger/10">
+                    <div>
+                        <p class="text-[9px] text-danger/40">Issued</p>
+                        <p class="text-xs font-display font-bold">3:45 PM</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] text-danger/40">Expires</p>
+                        <p class="text-xs font-display font-bold">5:15 PM</p>
+                    </div>
+                    <div class="flex-1"></div>
+                    <button
+                        class="px-3 py-1.5 bg-danger/20 text-danger text-xs font-display font-bold rounded-full">Details
+                        →</button>
+                </div>
+            </div>
+
+            <!-- Warning -->
+            <div class="alert-warning p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined !text-lg text-warning">storm</span>
+                    <span class="text-xs font-display font-bold text-warning uppercase tracking-wider">Warning · Severe
+                        Thunderstorm</span>
+                </div>
+                <p class="text-sm font-medium">Severe Thunderstorm Warning</p>
+                <p class="text-xs text-white/40 mt-1">Large hail up to 2" in diameter and wind gusts up to 70 mph
+                    expected. Move indoors and away from windows.</p>
+                <div class="flex items-center gap-3 mt-3 pt-3 border-t border-warning/10">
+                    <div>
+                        <p class="text-[9px] text-warning/40">Issued</p>
+                        <p class="text-xs font-display font-bold">2:30 PM</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] text-warning/40">Expires</p>
+                        <p class="text-xs font-display font-bold">6:00 PM</p>
+                    </div>
+                    <div class="flex-1"></div>
+                    <button
+                        class="px-3 py-1.5 bg-warning/15 text-warning text-xs font-display font-bold rounded-full">Details
+                        →</button>
+                </div>
+            </div>
+
+            <!-- Watch -->
+            <div class="alert-watch p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined !text-lg text-sky-blue">visibility</span>
+                    <span class="text-xs font-display font-bold text-sky-blue uppercase tracking-wider">Watch · Flash
+                        Flood</span>
+                </div>
+                <p class="text-sm font-medium">Flash Flood Watch</p>
+                <p class="text-xs text-white/40 mt-1">2-4 inches of rain expected over the next 6 hours. Low-lying areas
+                    and urban areas may experience flooding.</p>
+                <div class="flex items-center gap-3 mt-3 pt-3 border-t border-sky-blue/10">
+                    <div>
+                        <p class="text-[9px] text-sky-blue/30">Until</p>
+                        <p class="text-xs font-display font-bold">Tomorrow 6 AM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safety Checklist -->
+            <div class="bg-white/3 border border-white/5 rounded-2xl p-4 mt-2">
+                <div class="flex items-center gap-2 mb-3"><span
+                        class="material-symbols-outlined !text-sm text-safe">shield</span><span
+                        class="text-xs font-display font-bold text-safe/60 uppercase tracking-wider">Safety
+                        Checklist</span></div>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-safe/20 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-safe">check</span></div><span
+                            class="text-xs text-white/40">Emergency kit prepared</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-safe/20 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-safe">check</span></div><span
+                            class="text-xs text-white/40">Phone charged to 100%</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-white/5 flex items-center justify-center"></div><span
+                            class="text-xs text-white/20">Shelter location identified</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-white/5 flex items-center justify-center"></div><span
+                            class="text-xs text-white/20">Family members notified</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Clear -->
+            <div class="bg-safe/5 border border-safe/10 rounded-2xl p-4 text-center opacity-40">
+                <span class="text-2xl">✅</span>
+                <p class="text-xs text-safe/60 mt-1 font-display font-medium">No expired alerts</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

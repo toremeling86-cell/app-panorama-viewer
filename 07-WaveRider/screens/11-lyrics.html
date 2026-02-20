@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Lyrics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        @keyframes glow-line {
+
+            0%,
+            100% {
+                text-shadow: 0 0 8px rgba(255, 45, 120, 0.3)
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(255, 45, 120, 0.6)
+            }
+        }
+
+        .active-line {
+            animation: glow-line 2s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">expand_more</span></button>
+            <h1 class="text-sm font-display tracking-wider text-neon/50">LYRICS</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">share</span></button>
+        </div>
+
+        <!-- Now Playing Mini -->
+        <div class="mx-6 bg-white/3 rounded-xl p-3 flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-neon/15 flex items-center justify-center text-lg">🎵</div>
+            <div class="flex-1">
+                <p class="text-xs font-semibold">Blinding Lights</p>
+                <p class="text-[9px] text-white/15">The Weeknd</p>
+            </div>
+            <span class="text-[10px] text-white/10">2:18 / 3:22</span>
+        </div>
+
+        <!-- Lyrics -->
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-4">
+            <div class="space-y-4 text-center">
+                <p class="text-sm text-white/8 leading-relaxed">I've been tryna call</p>
+                <p class="text-sm text-white/8 leading-relaxed">I've been on my own for long enough</p>
+                <p class="text-sm text-white/10 leading-relaxed">Maybe you can show me how to love, maybe</p>
+                <p class="text-sm text-white/12 leading-relaxed">I'm going through withdrawals</p>
+                <p class="text-sm text-white/15 leading-relaxed">You don't even have to do too much</p>
+                <p class="text-base text-white/30 leading-relaxed font-medium">You can turn me on with just a touch,
+                    baby</p>
+
+                <p class="text-lg text-neon font-semibold leading-relaxed active-line">I look around and Sin City's cold
+                    and empty</p>
+                <p class="text-lg text-neon/80 font-semibold leading-relaxed">No one's around to judge me</p>
+
+                <p class="text-base text-white/20 leading-relaxed">I can't see clearly when you're gone</p>
+                <p class="text-sm text-white/12 leading-relaxed">I said, ooh, I'm blinded by the lights</p>
+                <p class="text-sm text-white/10 leading-relaxed">No, I can't sleep until I feel your touch</p>
+                <p class="text-sm text-white/8 leading-relaxed">I said, ooh, I'm drowning in the night</p>
+                <p class="text-sm text-white/5 leading-relaxed">Oh, when I'm like this, you're the one I trust</p>
+            </div>
+        </div>
+
+        <!-- Progress -->
+        <div class="absolute bottom-0 left-0 right-0 bg-void/95 backdrop-blur px-6 py-4 pb-8">
+            <div class="h-1 rounded-full bg-white/5">
+                <div class="h-full rounded-full bg-neon" style="width:67%"></div>
+            </div>
+            <div class="flex items-center justify-center gap-6 mt-3">
+                <button><span class="material-symbols-outlined !text-xl text-white/15">skip_previous</span></button>
+                <button class="w-12 h-12 rounded-full bg-neon flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-void">pause</span></button>
+                <button><span class="material-symbols-outlined !text-xl text-white/15">skip_next</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Weather Radar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#7C3AED" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0F172A;
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .radar-sweep {
+            animation: sweep 4s linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes sweep {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .map-bg {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden map-bg">
+        <!-- Floating Header -->
+        <div class="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-6 pt-14 pb-4">
+            <div class="flex items-center gap-3"><button
+                    class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl">arrow_back</span></button>
+                <h1 class="text-xl font-semibold">Radar</h1>
+            </div>
+            <div class="flex gap-2">
+                <button class="glass px-3 py-1.5 rounded-full text-xs font-medium">Precipitation</button>
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl">layers</span></button>
+            </div>
+        </div>
+
+        <!-- Map Area with Radar -->
+        <div class="flex-1 relative flex items-center justify-center overflow-hidden">
+            <!-- Grid Lines (simulated map) -->
+            <svg class="absolute inset-0 w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.5" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+
+            <!-- Precipitation Overlays -->
+            <div class="absolute w-32 h-24 rounded-full bg-blue-500/20 blur-xl" style="top:30%;left:20%"></div>
+            <div class="absolute w-48 h-32 rounded-full bg-green-500/15 blur-2xl" style="top:45%;left:45%"></div>
+            <div class="absolute w-20 h-20 rounded-full bg-yellow-500/20 blur-lg" style="top:35%;left:60%"></div>
+            <div class="absolute w-16 h-16 rounded-full bg-red-500/15 blur-lg" style="top:55%;left:30%"></div>
+
+            <!-- Radar Sweep -->
+            <svg width="300" height="300" viewBox="0 0 300 300" class="z-10">
+                <circle cx="150" cy="150" r="100" fill="none" stroke="rgba(124,58,237,0.3)" stroke-width="0.5"
+                    stroke-dasharray="4 4" />
+                <circle cx="150" cy="150" r="60" fill="none" stroke="rgba(124,58,237,0.2)" stroke-width="0.5"
+                    stroke-dasharray="4 4" />
+                <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(124,58,237,0.15)" stroke-width="0.5"
+                    stroke-dasharray="4 4" />
+                <!-- Center pin -->
+                <circle cx="150" cy="150" r="6" fill="#7C3AED" stroke="white" stroke-width="2" />
+                <circle cx="150" cy="150" r="12" fill="none" stroke="rgba(124,58,237,0.5)" stroke-width="1">
+                    <animate attributeName="r" values="12;20;12" dur="2s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
+                </circle>
+                <!-- Sweep line -->
+                <line x1="150" y1="150" x2="150" y2="10" stroke="rgba(124,58,237,0.6)" stroke-width="1"
+                    class="radar-sweep" />
+            </svg>
+
+            <!-- Location Label -->
+            <div class="absolute z-20 glass px-3 py-1.5 rounded-full text-xs" style="top:48%;left:55%">Oslo</div>
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="absolute bottom-20 left-0 right-0 px-6 z-20">
+            <!-- Legend -->
+            <div class="glass rounded-xl p-3 flex items-center justify-between">
+                <div class="flex items-center gap-1">
+                    <div class="w-3 h-3 rounded bg-green-500/60"></div><span
+                        class="text-[9px] text-white/50">Light</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="w-3 h-3 rounded bg-blue-500/60"></div><span
+                        class="text-[9px] text-white/50">Moderate</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="w-3 h-3 rounded bg-yellow-500/60"></div><span
+                        class="text-[9px] text-white/50">Heavy</span>
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="w-3 h-3 rounded bg-red-500/60"></div><span
+                        class="text-[9px] text-white/50">Extreme</span>
+                </div>
+            </div>
+            <!-- Timeline slider -->
+            <div class="glass rounded-xl p-3 mt-2 flex items-center gap-3">
+                <button><span class="material-symbols-outlined !text-lg text-primary">play_arrow</span></button>
+                <div class="flex-1 h-1 rounded-full bg-white/10 relative">
+                    <div class="absolute h-full bg-primary rounded-full" style="width:40%"></div>
+                    <div class="absolute w-3 h-3 rounded-full bg-primary -top-1" style="left:40%"></div>
+                </div>
+                <span class="text-[10px] font-mono text-white/50">+2h</span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5 z-30">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">cloud</span><span
+                        class="text-[10px] text-white/40">Sky Now</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">calendar_month</span><span
+                        class="text-[10px] text-white/40">Forecast</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">air</span><span
+                        class="text-[10px] text-white/40">Air</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white"
+                        style="font-variation-settings: 'FILL' 1;">radar</span><span
+                        class="text-[10px] font-medium text-white">Radar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">bookmark</span><span
+                        class="text-[10px] text-white/40">Places</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

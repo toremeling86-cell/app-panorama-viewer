@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Social Feed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#05070F", "cyan": "#00F0FF", "magenta": "#B24BF3", "rose": "#FF3CAC", "lime": "#84CC16" }, fontFamily: { "display": ["Outfit", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #05070F
+        }
+
+        .glass-c {
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.06);
+            border-radius: 18px
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <h1 class="text-lg font-display font-bold">Community 💪</h1>
+            <button class="w-9 h-9 rounded-full bg-cyan/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-cyan">add</span></button>
+        </div>
+
+        <!-- Stories -->
+        <div class="flex gap-3 px-6 overflow-x-auto no-scrollbar pb-3">
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-cyan to-magenta">
+                    <div class="w-full h-full rounded-full bg-bg-void flex items-center justify-center text-lg">🏋️
+                    </div>
+                </div><span class="text-[8px] text-white/20">You</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-rose to-magenta">
+                    <div class="w-full h-full rounded-full bg-bg-void flex items-center justify-center text-lg">💪</div>
+                </div><span class="text-[8px] text-white/20">Alex K.</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-lime to-cyan">
+                    <div class="w-full h-full rounded-full bg-bg-void flex items-center justify-center text-lg">🧘</div>
+                </div><span class="text-[8px] text-white/20">Sarah M.</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <div class="w-14 h-14 rounded-full p-0.5 bg-gradient-to-br from-cyan to-lime">
+                    <div class="w-full h-full rounded-full bg-bg-void flex items-center justify-center text-lg">🏃</div>
+                </div><span class="text-[8px] text-white/20">Jordan</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Post 1 -->
+            <div class="glass-c p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-rose/15 flex items-center justify-center text-sm">💪</div>
+                    <div class="flex-1">
+                        <p class="text-xs font-display font-bold">Alex K.</p>
+                        <p class="text-[9px] text-white/15">2h ago</p>
+                    </div><span class="material-symbols-outlined !text-sm text-white/10">more_horiz</span>
+                </div>
+                <div class="bg-gradient-to-br from-rose/10 to-magenta/5 rounded-xl p-4 mb-3 text-center">
+                    <p class="text-3xl">🏆</p>
+                    <p class="text-sm font-display font-bold text-rose mt-1">New PR!</p>
+                    <p class="text-xs text-white/20">Deadlift · 315 lbs</p>
+                </div>
+                <p class="text-xs text-white/25 leading-relaxed">Finally hit 315 on deadlift! 6 months of consistent
+                    training. Thanks to the AuraFit progressive overload program! 🔥</p>
+                <div class="flex items-center gap-4 mt-3"><button class="flex items-center gap-1 text-rose"><span
+                            class="material-symbols-outlined !text-sm"
+                            style="font-variation-settings:'FILL' 1">favorite</span><span
+                            class="text-[10px]">142</span></button><button
+                        class="flex items-center gap-1 text-white/15"><span
+                            class="material-symbols-outlined !text-sm">chat_bubble_outline</span><span
+                            class="text-[10px]">23</span></button><button
+                        class="flex items-center gap-1 text-white/15"><span
+                            class="material-symbols-outlined !text-sm">share</span></button></div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="glass-c p-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-lime/15 flex items-center justify-center text-sm">🧘</div>
+                    <div class="flex-1">
+                        <p class="text-xs font-display font-bold">Sarah M.</p>
+                        <p class="text-[9px] text-white/15">5h ago</p>
+                    </div><span class="material-symbols-outlined !text-sm text-white/10">more_horiz</span>
+                </div>
+                <p class="text-xs text-white/25 leading-relaxed">30-day yoga challenge completed! ✅ My flexibility and
+                    balance have improved so much. Who's joining me for the next round?</p>
+                <div class="flex gap-1 mt-2"><span
+                        class="px-2 py-0.5 bg-lime/10 rounded text-[9px] text-lime">Yoga</span><span
+                        class="px-2 py-0.5 bg-cyan/10 rounded text-[9px] text-cyan">Challenge</span></div>
+                <div class="flex items-center gap-4 mt-3"><button class="flex items-center gap-1 text-white/15"><span
+                            class="material-symbols-outlined !text-sm">favorite_border</span><span
+                            class="text-[10px]">89</span></button><button
+                        class="flex items-center gap-1 text-white/15"><span
+                            class="material-symbols-outlined !text-sm">chat_bubble_outline</span><span
+                            class="text-[10px]">12</span></button><button
+                        class="flex items-center gap-1 text-white/15"><span
+                            class="material-symbols-outlined !text-sm">share</span></button></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Recurring</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "vault": "#0C0F1A", "primary": "#00D4AA", "secondary": "#7B61FF", "rose": "#FF6B8A", "amber": "#F59E0B", "panel": "#141829" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["DM Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0C0F1A
+        }
+
+        .glass-b {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        @keyframes swipeHint { 0% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(-8px); opacity: 0.6; } 100% { transform: translateX(0); opacity: 1; } }
+        @keyframes cancelSlide { from { max-height: 80px; opacity: 1; margin-bottom: 12px; } to { max-height: 0; opacity: 0; margin-bottom: 0; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .swipe-hint { animation: swipeHint 2s ease infinite; animation-delay: 2s; }
+
+        .sub-card { position: relative; overflow: hidden; }
+        .sub-card .cancel-action {
+            position: absolute; right: 0; top: 0; bottom: 0; width: 80px;
+            background: rgba(255,107,138,0.15); display: flex; align-items: center; justify-content: center;
+            transform: translateX(100%); transition: transform 200ms ease; border-radius: 0 16px 16px 0;
+        }
+        .sub-card.swiped .cancel-action { transform: translateX(0); }
+        .sub-card .sub-content { transition: transform 200ms ease; }
+        .sub-card.swiped .sub-content { transform: translateX(-80px); }
+
+        .toggle-track { width: 36px; height: 20px; border-radius: 10px; padding: 2px; cursor: pointer; transition: background 200ms ease; }
+        .toggle-track.on { background: rgba(0,212,170,0.3); }
+        .toggle-track.off { background: rgba(255,255,255,0.1); }
+        .toggle-knob { width: 16px; height: 16px; border-radius: 50%; transition: transform 200ms ease, background 200ms ease; }
+        .toggle-track.on .toggle-knob { transform: translateX(16px); background: #00D4AA; }
+        .toggle-track.off .toggle-knob { transform: translateX(0); background: rgba(255,255,255,0.3); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-vault">
+        <!-- Status Bar -->
+        <div aria-hidden="true" class="flex items-center justify-between px-6 pt-3 pb-0">
+            <span class="text-xs text-white/20 font-medium">9:41</span>
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">signal_cellular_alt</span>
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">wifi</span>
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">battery_full</span>
+            </div>
+        </div>
+
+        <header class="flex items-center justify-between px-6 pt-4 pb-3" data-animate style="animation-delay:0ms">
+            <button class="btn-press" aria-label="Go back"><span class="material-symbols-outlined !text-xl text-white/20" aria-hidden="true">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-white/60">Subscriptions</h1>
+            <button class="btn-press" aria-label="Add subscription"><span class="material-symbols-outlined !text-xl text-white/20" aria-hidden="true">add</span></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Monthly Total -->
+            <section aria-label="Monthly subscription total" class="glass-b card-interactive shadow-layered p-5 text-center" data-animate style="animation-delay:80ms">
+                <p class="text-[10px] text-white/15 uppercase tracking-wider">Monthly Recurring</p>
+                <p class="text-3xl font-display font-bold mt-1" id="monthlyTotal"><span data-count-to="247.84" data-prefix="$" data-decimals="2">$0.00</span></p>
+                <p class="text-[10px] text-rose mt-1" id="changeLabel">^ $12.99 from last month</p>
+            </section>
+
+            <!-- Upcoming -->
+            <p class="text-[10px] text-white/10 font-display uppercase tracking-wider" data-animate style="animation-delay:160ms">Due This Week</p>
+            <section aria-label="Spotify Premium subscription" class="glass-b card-interactive shadow-layered p-3 flex items-center gap-3 border-amber/10 sub-card" data-animate style="animation-delay:240ms" data-sub="spotify" data-amount="16.99">
+                <div class="sub-content flex items-center gap-3 flex-1">
+                    <div class="w-10 h-10 rounded-xl bg-rose/10 flex items-center justify-center text-lg" aria-hidden="true">🎵</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Spotify Premium</p>
+                        <p class="text-[9px] text-white/15">Family Plan · Feb 21</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="toggle-track on" data-toggle="spotify" aria-label="Toggle Spotify subscription">
+                            <div class="toggle-knob"></div>
+                        </div>
+                        <p class="text-sm font-display font-bold text-rose">$16.99</p>
+                    </div>
+                </div>
+                <div class="cancel-action" aria-label="Cancel Spotify subscription">
+                    <span class="material-symbols-outlined text-rose !text-xl" aria-hidden="true">delete</span>
+                </div>
+            </section>
+
+            <p class="text-[10px] text-white/10 font-display uppercase tracking-wider" data-animate style="animation-delay:320ms">
+                All Subscriptions
+                <span class="text-white/5 ml-1 swipe-hint inline-block">swipe to cancel</span>
+            </p>
+
+            <section aria-label="Netflix subscription" class="glass-b card-interactive shadow-layered p-3 sub-card" data-animate style="animation-delay:400ms" data-sub="netflix" data-amount="15.49">
+                <div class="sub-content flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-lg" aria-hidden="true">📺</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Netflix</p>
+                        <p class="text-[9px] text-white/15">Standard · Mar 1</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="toggle-track on" data-toggle="netflix" aria-label="Toggle Netflix subscription">
+                            <div class="toggle-knob"></div>
+                        </div>
+                        <p class="text-sm font-display font-bold">$15.49</p>
+                    </div>
+                </div>
+                <div class="cancel-action" aria-label="Cancel Netflix subscription">
+                    <span class="material-symbols-outlined text-rose !text-xl" aria-hidden="true">delete</span>
+                </div>
+            </section>
+
+            <section aria-label="iCloud+ subscription" class="glass-b card-interactive shadow-layered p-3 sub-card" data-animate style="animation-delay:480ms" data-sub="icloud" data-amount="9.99">
+                <div class="sub-content flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-lg" aria-hidden="true">☁️</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">iCloud+</p>
+                        <p class="text-[9px] text-white/15">2TB · Mar 5</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="toggle-track on" data-toggle="icloud" aria-label="Toggle iCloud subscription">
+                            <div class="toggle-knob"></div>
+                        </div>
+                        <p class="text-sm font-display font-bold">$9.99</p>
+                    </div>
+                </div>
+                <div class="cancel-action" aria-label="Cancel iCloud subscription">
+                    <span class="material-symbols-outlined text-rose !text-xl" aria-hidden="true">delete</span>
+                </div>
+            </section>
+
+            <section aria-label="Gym Membership subscription" class="glass-b card-interactive shadow-layered p-3 sub-card" data-animate style="animation-delay:560ms" data-sub="gym" data-amount="49.99">
+                <div class="sub-content flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center text-lg" aria-hidden="true">🏋️</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Gym Membership</p>
+                        <p class="text-[9px] text-white/15">Annual · Mar 15</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="toggle-track on" data-toggle="gym" aria-label="Toggle Gym subscription">
+                            <div class="toggle-knob"></div>
+                        </div>
+                        <p class="text-sm font-display font-bold">$49.99</p>
+                    </div>
+                </div>
+                <div class="cancel-action" aria-label="Cancel Gym subscription">
+                    <span class="material-symbols-outlined text-rose !text-xl" aria-hidden="true">delete</span>
+                </div>
+            </section>
+
+            <section aria-label="NYT Digital subscription" class="glass-b card-interactive shadow-layered p-3 sub-card" data-animate style="animation-delay:640ms" data-sub="nyt" data-amount="17.00">
+                <div class="sub-content flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-rose/10 flex items-center justify-center text-lg" aria-hidden="true">📰</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">NYT Digital</p>
+                        <p class="text-[9px] text-white/15">Monthly · Mar 8</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="toggle-track on" data-toggle="nyt" aria-label="Toggle NYT subscription">
+                            <div class="toggle-knob"></div>
+                        </div>
+                        <p class="text-sm font-display font-bold">$17.00</p>
+                    </div>
+                </div>
+                <div class="cancel-action" aria-label="Cancel NYT subscription">
+                    <span class="material-symbols-outlined text-rose !text-xl" aria-hidden="true">delete</span>
+                </div>
+            </section>
+
+            <section aria-label="Xbox Game Pass cancelled subscription" class="glass-b p-3 flex items-center gap-3 opacity-40" data-animate style="animation-delay:720ms">
+                <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-lg" aria-hidden="true">🎮</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Xbox Game Pass</p>
+                    <p class="text-[9px] text-white/15">Cancelled · Ends Mar 30</p>
+                </div>
+                <p class="text-sm font-display font-bold line-through">$14.99</p>
+            </section>
+
+            <!-- Insight -->
+            <section aria-label="AI spending insight" class="glass-b card-interactive shadow-layered p-3 border-primary/10" data-animate style="animation-delay:800ms">
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="material-symbols-outlined !text-sm text-primary" aria-hidden="true">smart_toy</span><span
+                        class="text-[10px] text-primary font-display font-bold">INSIGHT</span></div>
+                <p class="text-xs text-white/20" id="insightText">You've spent <span class="text-white/40 font-bold" data-count-to="2974" data-prefix="$">$0</span> on subscriptions this year. Consider reviewing your NYT and iCloud plans — similar free alternatives exist.</p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* -- Intersection Observer for animations -- */
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+        /* -- Animated counters -- */
+        function animateCount(el) {
+            const target = parseFloat(el.dataset.countTo);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+            const duration = 1200;
+            const start = performance.now();
+            function tick(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = prefix + (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        const countObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('[data-count-to]').forEach(el => countObs.observe(el));
+
+        /* -- Toggle buttons -- */
+        const subscriptionState = {};
+        document.querySelectorAll('.toggle-track').forEach(toggle => {
+            const name = toggle.dataset.toggle;
+            subscriptionState[name] = true;
+            toggle.addEventListener('click', () => {
+                subscriptionState[name] = !subscriptionState[name];
+                if (subscriptionState[name]) {
+                    toggle.className = 'toggle-track on';
+                } else {
+                    toggle.className = 'toggle-track off';
+                }
+                updateTotal();
+            });
+        });
+
+        function updateTotal() {
+            let total = 0;
+            document.querySelectorAll('.sub-card[data-amount]').forEach(card => {
+                const name = card.dataset.sub;
+                const amount = parseFloat(card.dataset.amount);
+                if (subscriptionState[name]) total += amount;
+                card.style.opacity = subscriptionState[name] ? '1' : '0.4';
+            });
+            const totalEl = document.querySelector('#monthlyTotal [data-count-to]');
+            if (totalEl) {
+                totalEl.dataset.countTo = total.toFixed(2);
+                totalEl.textContent = '$' + total.toFixed(2);
+                /* Pulse effect */
+                totalEl.style.transition = 'transform 200ms ease, color 200ms ease';
+                totalEl.style.transform = 'scale(1.05)';
+                totalEl.style.color = '#00D4AA';
+                setTimeout(() => {
+                    totalEl.style.transform = 'scale(1)';
+                    totalEl.style.color = '';
+                }, 200);
+            }
+        }
+
+        /* -- Swipe to reveal cancel -- */
+        let touchStartX = 0;
+        let currentSwiped = null;
+
+        document.querySelectorAll('.sub-card').forEach(card => {
+            card.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            }, { passive: true });
+
+            card.addEventListener('touchmove', (e) => {
+                const diff = touchStartX - e.touches[0].clientX;
+                if (diff > 40) {
+                    if (currentSwiped && currentSwiped !== card) currentSwiped.classList.remove('swiped');
+                    card.classList.add('swiped');
+                    currentSwiped = card;
+                } else if (diff < -20) {
+                    card.classList.remove('swiped');
+                }
+            }, { passive: true });
+
+            /* Cancel action click */
+            const cancelBtn = card.querySelector('.cancel-action');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', () => {
+                    const name = card.dataset.sub;
+                    subscriptionState[name] = false;
+                    card.style.animation = 'cancelSlide 300ms ease forwards';
+                    setTimeout(() => { card.style.display = 'none'; updateTotal(); }, 300);
+                });
+            }
+        });
+
+        /* Desktop: click anywhere else to close swiped */
+        document.addEventListener('click', (e) => {
+            if (currentSwiped && !currentSwiped.contains(e.target)) {
+                currentSwiped.classList.remove('swiped');
+                currentSwiped = null;
+            }
+        });
+
+        /* Also allow desktop swipe hint on hover */
+        document.querySelectorAll('.sub-card').forEach(card => {
+            card.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                if (currentSwiped && currentSwiped !== card) currentSwiped.classList.remove('swiped');
+                card.classList.toggle('swiped');
+                currentSwiped = card.classList.contains('swiped') ? card : null;
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

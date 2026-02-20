@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Heart Rate Zones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#05070F", "cyan": "#00F0FF", "magenta": "#B24BF3", "rose": "#FF3CAC", "lime": "#84CC16", "zone1": "#3B82F6", "zone2": "#22C55E", "zone3": "#F59E0B", "zone4": "#F97316", "zone5": "#EF4444" }, fontFamily: { "display": ["Outfit", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #05070F
+        }
+
+        @keyframes pulse-hr {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.15)
+            }
+        }
+
+        .hr-pulse {
+            animation: pulse-hr 0.8s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider uppercase text-cyan/60">Heart Rate</h1>
+            <button class="text-xs text-cyan/30">History</button>
+        </div>
+
+        <!-- Live HR -->
+        <div class="mx-6 bg-white/3 border border-zone4/15 rounded-2xl p-6 text-center">
+            <p class="text-[10px] text-white/15 uppercase tracking-wider">Current Heart Rate</p>
+            <div class="flex items-center justify-center gap-2 mt-2"><span
+                    class="material-symbols-outlined !text-3xl text-zone4 hr-pulse"
+                    style="font-variation-settings:'FILL' 1">favorite</span>
+                <p class="text-5xl font-display font-bold text-zone4">142</p>
+            </div>
+            <p class="text-xs text-zone4 font-display font-bold mt-1">Zone 4 · Anaerobic</p>
+            <p class="text-[10px] text-white/10 mt-0.5">85% max HR</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3">
+            <!-- Zones -->
+            <div class="bg-white/3 border border-white/5 rounded-2xl p-4">
+                <p class="text-[10px] text-white/15 font-display uppercase tracking-wider mb-3">Training Zones</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-16 text-right"><span
+                                class="text-[10px] text-zone5 font-display font-bold">Z5</span>
+                            <p class="text-[8px] text-white/10">168-187</p>
+                        </div>
+                        <div class="flex-1 h-5 rounded bg-white/3 relative">
+                            <div class="h-full rounded bg-zone5/30" style="width:10%"></div><span
+                                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-zone5">VO₂ Max</span>
+                        </div><span class="text-[9px] text-white/10 w-8 text-right">2m</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-16 text-right"><span
+                                class="text-[10px] text-zone4 font-display font-bold">Z4</span>
+                            <p class="text-[8px] text-white/10">149-168</p>
+                        </div>
+                        <div class="flex-1 h-5 rounded bg-white/3 relative">
+                            <div class="h-full rounded bg-zone4/40" style="width:35%"></div><span
+                                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-zone4">Anaerobic
+                                ◄</span>
+                        </div><span class="text-[9px] text-white/10 w-8 text-right">12m</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-16 text-right"><span
+                                class="text-[10px] text-zone3 font-display font-bold">Z3</span>
+                            <p class="text-[8px] text-white/10">131-149</p>
+                        </div>
+                        <div class="flex-1 h-5 rounded bg-white/3 relative">
+                            <div class="h-full rounded bg-zone3/30" style="width:45%"></div><span
+                                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-zone3">Aerobic</span>
+                        </div><span class="text-[9px] text-white/10 w-8 text-right">18m</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-16 text-right"><span
+                                class="text-[10px] text-zone2 font-display font-bold">Z2</span>
+                            <p class="text-[8px] text-white/10">112-131</p>
+                        </div>
+                        <div class="flex-1 h-5 rounded bg-white/3 relative">
+                            <div class="h-full rounded bg-zone2/25" style="width:25%"></div><span
+                                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-zone2">Fat Burn</span>
+                        </div><span class="text-[9px] text-white/10 w-8 text-right">8m</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-16 text-right"><span
+                                class="text-[10px] text-zone1 font-display font-bold">Z1</span>
+                            <p class="text-[8px] text-white/10">93-112</p>
+                        </div>
+                        <div class="flex-1 h-5 rounded bg-white/3 relative">
+                            <div class="h-full rounded bg-zone1/20" style="width:15%"></div><span
+                                class="absolute left-2 top-1/2 -translate-y-1/2 text-[9px] text-zone1">Warm Up</span>
+                        </div><span class="text-[9px] text-white/10 w-8 text-right">5m</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session Summary -->
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-white/3 rounded-xl p-3 text-center">
+                    <p class="text-xs text-white/15">Avg HR</p>
+                    <p class="text-lg font-display font-bold">138</p>
+                </div>
+                <div class="bg-white/3 rounded-xl p-3 text-center">
+                    <p class="text-xs text-white/15">Max HR</p>
+                    <p class="text-lg font-display font-bold text-zone5">172</p>
+                </div>
+                <div class="bg-white/3 rounded-xl p-3 text-center">
+                    <p class="text-xs text-white/15">Calories</p>
+                    <p class="text-lg font-display font-bold text-zone4">487</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

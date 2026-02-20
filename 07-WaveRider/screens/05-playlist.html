@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Create Playlist</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "plasma": "#FF6B2B" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        .glass-neon {
+            background: rgba(255, 45, 120, 0.03);
+            border: 1px solid rgba(255, 45, 120, 0.08);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(255, 45, 120, 0.1), 0 0 40px rgba(139, 92, 246, 0.05)
+        }
+
+        .track-drag {
+            cursor: grab;
+            transition: transform 0.2s
+        }
+
+        .track-drag:active {
+            cursor: grabbing;
+            transform: scale(0.98);
+            opacity: 0.8
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/30">close</span></button>
+            <h1 class="font-display text-xs font-bold tracking-widest uppercase">Create Playlist</h1>
+            <button class="text-xs text-neon font-bold">Save</button>
+        </div>
+
+        <!-- Cover + Name -->
+        <div class="mx-6 glass-neon neon-glow p-5 flex items-center gap-4">
+            <div
+                class="w-20 h-20 rounded-xl bg-gradient-to-br from-neon/30 via-violet/20 to-void flex items-center justify-center">
+                <span class="material-symbols-outlined !text-3xl text-neon/40">add_photo_alternate</span>
+            </div>
+            <div class="flex-1">
+                <input type="text"
+                    class="w-full bg-transparent border-0 border-b border-white/5 text-lg font-display font-bold placeholder-white/10 focus:ring-0 focus:border-neon/30 pb-1"
+                    value="Late Night Vibes" />
+                <p class="text-[10px] text-white/20 mt-1">12 tracks · 48 min</p>
+            </div>
+        </div>
+
+        <!-- AI Suggest -->
+        <div class="mx-6 mt-3 flex items-center gap-2 px-4 py-3 bg-violet/5 border border-violet/10 rounded-xl">
+            <span class="material-symbols-outlined !text-lg text-violet">auto_awesome</span>
+            <p class="text-xs text-violet/70 flex-1">AI can suggest tracks based on your mood</p>
+            <button class="text-xs text-violet font-bold">Try</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-3 space-y-1">
+            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/3 track-drag">
+                <span class="text-[10px] text-white/15 font-display w-4">01</span>
+                <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-neon/20 to-violet/10 flex items-center justify-center text-sm">
+                    🎵</div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">Midnight City</p>
+                    <p class="text-[10px] text-white/30">M83 · 4:03</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-white/10">drag_indicator</span>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl bg-neon/5 border border-neon/10">
+                <span class="text-[10px] text-neon/30 font-display w-4">02</span>
+                <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-electric/20 to-violet/10 flex items-center justify-center text-sm">
+                    🎶</div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-neon">Blinding Lights</p>
+                    <p class="text-[10px] text-white/30">The Weeknd · 3:20</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-neon/30">equalizer</span>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/3 track-drag">
+                <span class="text-[10px] text-white/15 font-display w-4">03</span>
+                <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-violet/20 to-neon/10 flex items-center justify-center text-sm">
+                    🎹</div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">Retrograde</p>
+                    <p class="text-[10px] text-white/30">James Blake · 3:47</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-white/10">drag_indicator</span>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/3 track-drag">
+                <span class="text-[10px] text-white/15 font-display w-4">04</span>
+                <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-plasma/20 to-void flex items-center justify-center text-sm">
+                    🎸</div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">Nightcall</p>
+                    <p class="text-[10px] text-white/30">Kavinsky · 4:17</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-white/10">drag_indicator</span>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/3 track-drag">
+                <span class="text-[10px] text-white/15 font-display w-4">05</span>
+                <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-electric/20 to-electric/5 flex items-center justify-center text-sm">
+                    🎧</div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">Do I Wanna Know?</p>
+                    <p class="text-[10px] text-white/30">Arctic Monkeys · 4:32</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-white/10">drag_indicator</span>
+            </div>
+
+            <div class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/3 track-drag">
+                <span class="text-[10px] text-white/15 font-display w-4">06</span>
+                <div
+                    class="w-10 h-10 rounded-lg bg-gradient-to-br from-neon/10 to-violet/20 flex items-center justify-center text-sm">
+                    🌙</div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium">After Dark</p>
+                    <p class="text-[10px] text-white/30">Mr.Kitty · 4:32</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-white/10">drag_indicator</span>
+            </div>
+
+            <!-- Add More -->
+            <button
+                class="w-full py-3 mt-2 border border-dashed border-white/5 rounded-xl text-xs text-white/15 flex items-center justify-center gap-2 hover:border-neon/20 hover:text-neon/40 transition-colors">
+                <span class="material-symbols-outlined !text-lg">add</span> Add tracks
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

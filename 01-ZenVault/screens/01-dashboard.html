@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZenVault — Net Worth Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#00D4AA",
+        "primary-dim": "#00D4AA33",
+        "bg-void": "#0A0E1A",
+        "card": "#0F1424",
+        "card-hover": "#141930",
+        "profit": "#10B981",
+        "loss": "#EF4444",
+        "violet": "#7C3AED"
+      },
+      fontFamily: {
+        "display": ["Space Grotesk", "sans-serif"],
+        "mono": ["JetBrains Mono", "monospace"],
+        "sans": ["Inter", "sans-serif"]
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { min-height: max(884px, 100dvh); background: #0A0E1A; }
+  .aurora-glow {
+    background: radial-gradient(ellipse at 30% 20%, rgba(0,212,170,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(124,58,237,0.1) 0%, transparent 50%);
+  }
+  .glass { backdrop-filter: blur(16px); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+  .glass-bright { backdrop-filter: blur(20px); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+  .shimmer { background: linear-gradient(110deg, transparent 33%, rgba(255,255,255,0.03) 50%, transparent 67%); background-size: 200% 100%; animation: shimmer 3s infinite; }
+  .glow-text { text-shadow: 0 0 20px rgba(0,212,170,0.3); }
+
+  /* Animation Library */
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.5); } }
+  @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+  @keyframes countUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .chart-line { stroke-dasharray: 400; stroke-dashoffset: 400; animation: draw 2s ease forwards; }
+  .pulse-dot { animation: pulse 2s ease-in-out infinite; }
+  .breathe { animation: breathe 3s ease-in-out infinite; }
+
+  /* Staggered Entry */
+  [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+  [data-animate="scale"] { animation-name: scaleIn; }
+
+  /* Interactive States */
+  .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+  .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+  .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease; cursor: pointer; }
+  .card-interactive:hover { transform: translateY(-1px); }
+  .card-interactive:active { transform: scale(0.98); }
+  *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+
+  /* Tab chip styles */
+  .tab-chip { transition: all 200ms ease; cursor: pointer; }
+  .tab-chip[aria-selected="true"] { background: rgba(0,212,170,0.2); color: #00D4AA; }
+  .tab-chip[aria-selected="false"] { color: #64748b; }
+  .tab-chip:hover { background: rgba(0,212,170,0.1); }
+
+  /* Transaction row hover */
+  .tx-row { transition: background 150ms ease; cursor: pointer; }
+  .tx-row:hover { background: rgba(255,255,255,0.06); }
+  .tx-row:active { background: rgba(255,255,255,0.08); }
+
+  /* Layered shadows */
+  .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    [data-animate] { opacity: 1 !important; }
+    .chart-line { stroke-dashoffset: 0 !important; }
+  }
+</style>
+</head>
+<body class="font-sans antialiased text-slate-100 overflow-hidden">
+<div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden aurora-glow">
+
+  <!-- Status Bar -->
+  <div class="flex items-center justify-between px-6 pt-4 pb-2" aria-hidden="true">
+    <span class="text-sm font-medium text-slate-400">9:41</span>
+    <div class="flex items-center gap-1.5">
+      <div class="w-4 h-4 rounded-full border border-slate-600 flex items-center justify-center"><div class="w-2 h-2 rounded-full bg-primary"></div></div>
+      <div class="flex gap-0.5"><div class="w-1 h-2 bg-slate-400 rounded-sm"></div><div class="w-1 h-2.5 bg-slate-400 rounded-sm"></div><div class="w-1 h-3 bg-slate-400 rounded-sm"></div><div class="w-1 h-3.5 bg-slate-400 rounded-sm"></div></div>
+      <svg class="w-6 h-3" viewBox="0 0 25 12"><rect x="0" y="1" width="21" height="10" rx="2" stroke="white" stroke-opacity="0.35" fill="none"/><rect x="1.5" y="2.5" width="15" height="7" rx="1" fill="#00D4AA"/><rect x="22" y="4" width="2" height="4" rx="1" fill="white" fill-opacity="0.35"/></svg>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 pt-2 pb-4" data-animate style="animation-delay:0ms">
+    <div>
+      <p class="text-xs font-medium text-slate-500 tracking-widest uppercase">Net Worth</p>
+      <h1 class="font-display text-3xl font-bold glow-text mt-1">
+        <span data-count-to="284750" data-prefix="$" data-decimal=".32">$0.00</span>
+      </h1>
+      <div class="flex items-center gap-1.5 mt-1">
+        <span class="material-symbols-outlined !text-sm text-profit" aria-hidden="true">trending_up</span>
+        <span class="text-xs font-mono text-profit">+$4,230.18 (1.5%)</span>
+        <span class="text-xs text-slate-600">today</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="glass w-10 h-10 rounded-full flex items-center justify-center btn-press" aria-label="Notifications">
+        <span class="material-symbols-outlined !text-xl text-slate-400" aria-hidden="true">notifications</span>
+        <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-loss rounded-full border-2 border-bg-void breathe"></span>
+      </button>
+      <button class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-violet flex items-center justify-center text-sm font-display font-bold btn-press" aria-label="Profile">JD</button>
+    </div>
+  </header>
+
+  <!-- Scrollable Content -->
+  <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+
+    <!-- Portfolio Chart Card -->
+    <section class="glass-bright rounded-2xl p-5 relative overflow-hidden shimmer shadow-layered" aria-label="Portfolio performance chart" data-animate style="animation-delay:80ms">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-display font-semibold text-slate-300">Portfolio Performance</h2>
+        <div class="flex gap-1" role="tablist" aria-label="Time period">
+          <button class="tab-chip px-2.5 py-1 rounded-full text-[10px] font-medium" role="tab" aria-selected="true" data-period="1M">1M</button>
+          <button class="tab-chip px-2.5 py-1 rounded-full text-[10px] font-medium" role="tab" aria-selected="false" data-period="3M">3M</button>
+          <button class="tab-chip px-2.5 py-1 rounded-full text-[10px] font-medium" role="tab" aria-selected="false" data-period="1Y">1Y</button>
+          <button class="tab-chip px-2.5 py-1 rounded-full text-[10px] font-medium" role="tab" aria-selected="false" data-period="All">All</button>
+        </div>
+      </div>
+      <svg class="w-full h-32" viewBox="0 0 360 120" fill="none" aria-label="Portfolio value chart showing upward trend" role="img">
+        <defs>
+          <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00D4AA" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#00D4AA" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path id="chartFill" d="M0,80 C30,75 60,60 90,55 C120,50 150,65 180,45 C210,25 240,35 270,20 C300,15 330,25 360,10 L360,120 L0,120Z" fill="url(#chartGrad)" opacity="0.6"/>
+        <path id="chartPath" d="M0,80 C30,75 60,60 90,55 C120,50 150,65 180,45 C210,25 240,35 270,20 C300,15 330,25 360,10" stroke="#00D4AA" stroke-width="2" fill="none" class="chart-line"/>
+        <circle id="chartDot" cx="270" cy="20" r="4" fill="#00D4AA" class="pulse-dot"/>
+      </svg>
+    </section>
+
+    <!-- Asset Allocation Row -->
+    <section class="grid grid-cols-3 gap-3" aria-label="Asset allocation">
+      <div class="glass rounded-xl p-3 text-center card-interactive shadow-layered" data-animate style="animation-delay:160ms">
+        <div class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center mx-auto mb-2">
+          <span class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">account_balance</span>
+        </div>
+        <p class="text-xs text-slate-500">Stocks</p>
+        <p class="text-sm font-display font-bold mt-0.5" data-count-to="142" data-prefix="$" data-suffix="K">$0K</p>
+        <p class="text-[10px] font-mono text-profit">+2.1%</p>
+      </div>
+      <div class="glass rounded-xl p-3 text-center card-interactive shadow-layered" data-animate style="animation-delay:240ms">
+        <div class="w-8 h-8 rounded-lg bg-violet/20 flex items-center justify-center mx-auto mb-2">
+          <span class="material-symbols-outlined !text-lg text-violet" aria-hidden="true">currency_bitcoin</span>
+        </div>
+        <p class="text-xs text-slate-500">Crypto</p>
+        <p class="text-sm font-display font-bold mt-0.5" data-count-to="68" data-prefix="$" data-suffix="K">$0K</p>
+        <p class="text-[10px] font-mono text-profit">+5.3%</p>
+      </div>
+      <div class="glass rounded-xl p-3 text-center card-interactive shadow-layered" data-animate style="animation-delay:320ms">
+        <div class="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center mx-auto mb-2">
+          <span class="material-symbols-outlined !text-lg text-blue-400" aria-hidden="true">real_estate_agent</span>
+        </div>
+        <p class="text-xs text-slate-500">Property</p>
+        <p class="text-sm font-display font-bold mt-0.5" data-count-to="74" data-prefix="$" data-suffix="K">$0K</p>
+        <p class="text-[10px] font-mono text-slate-400">—</p>
+      </div>
+    </section>
+
+    <!-- AI Insights Card -->
+    <section class="glass-bright rounded-2xl p-5 border-l-2 border-primary card-interactive shadow-layered" aria-label="AI insight" data-animate style="animation-delay:400ms">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="material-symbols-outlined !text-lg text-primary breathe" aria-hidden="true">auto_awesome</span>
+        <h2 class="text-sm font-display font-semibold text-primary">AI Insight</h2>
+      </div>
+      <p class="text-sm text-slate-300 leading-relaxed">Your savings rate increased 12% this month. At this pace, you'll hit your emergency fund goal by <span class="text-primary font-medium">March 2026</span>.</p>
+    </section>
+
+    <!-- Recent Transactions -->
+    <section aria-label="Recent transactions" data-animate style="animation-delay:480ms">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-sm font-display font-semibold text-slate-300">Recent Activity</h2>
+        <button class="text-xs text-primary font-medium btn-press">See All</button>
+      </div>
+      <div class="space-y-2">
+        <div class="glass rounded-xl px-4 py-3 flex items-center gap-3 tx-row shadow-layered" data-animate style="animation-delay:560ms">
+          <div class="w-10 h-10 rounded-xl bg-[#1DB954]/20 flex items-center justify-center">
+            <span class="material-symbols-outlined !text-lg text-[#1DB954]" aria-hidden="true">music_note</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium truncate">Spotify</p>
+            <p class="text-xs text-slate-500">Subscription · Today</p>
+          </div>
+          <p class="text-sm font-mono font-medium text-loss shrink-0">-$9.99</p>
+        </div>
+        <div class="glass rounded-xl px-4 py-3 flex items-center gap-3 tx-row shadow-layered" data-animate style="animation-delay:640ms">
+          <div class="w-10 h-10 rounded-xl bg-profit/20 flex items-center justify-center">
+            <span class="material-symbols-outlined !text-lg text-profit" aria-hidden="true">payments</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium truncate">Salary Deposit</p>
+            <p class="text-xs text-slate-500">Income · Yesterday</p>
+          </div>
+          <p class="text-sm font-mono font-medium text-profit shrink-0">+$5,400</p>
+        </div>
+        <div class="glass rounded-xl px-4 py-3 flex items-center gap-3 tx-row shadow-layered" data-animate style="animation-delay:720ms">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center">
+            <span class="material-symbols-outlined !text-lg text-orange-400" aria-hidden="true">restaurant</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium truncate">Doordash</p>
+            <p class="text-xs text-slate-500">Food &amp; Drink · Yesterday</p>
+          </div>
+          <p class="text-sm font-mono font-medium text-loss shrink-0">-$32.50</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Tab Bar -->
+  <nav class="absolute bottom-0 left-0 right-0 glass-bright border-t border-white/5" role="navigation" aria-label="Main navigation">
+    <div class="flex items-center justify-around py-3 pb-6">
+      <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Home" aria-current="page">
+        <span class="material-symbols-outlined !text-xl text-primary" style="font-variation-settings: 'FILL' 1;" aria-hidden="true">home</span>
+        <span class="text-[10px] font-medium text-primary">Home</span>
+      </button>
+      <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Portfolio">
+        <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">pie_chart</span>
+        <span class="text-[10px] text-slate-500">Portfolio</span>
+      </button>
+      <button class="flex flex-col items-center gap-0.5 -mt-4 btn-press" aria-label="Add transaction">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-violet flex items-center justify-center shadow-lg shadow-primary/30 transition-transform hover:scale-105 active:scale-95">
+          <span class="material-symbols-outlined !text-2xl text-white" aria-hidden="true">add</span>
+        </div>
+      </button>
+      <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Budget">
+        <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">savings</span>
+        <span class="text-[10px] text-slate-500">Budget</span>
+      </button>
+      <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Analytics">
+        <span class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">analytics</span>
+        <span class="text-[10px] text-slate-500">Analytics</span>
+      </button>
+    </div>
+  </nav>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // --- Staggered Entry Animations via IntersectionObserver ---
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-animate]').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    animObserver.observe(el);
+  });
+
+  // --- Animated Count-Up ---
+  function animateCount(el) {
+    const target = parseInt(el.dataset.countTo, 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const decimal = el.dataset.decimal || '';
+    const duration = 1200;
+    const start = performance.now();
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      el.textContent = prefix + current.toLocaleString() + (progress >= 1 ? decimal : '') + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('[data-count-to]').forEach(el => countObserver.observe(el));
+
+  // --- Tab Switching (Chart Period Selector) ---
+  const chartPaths = {
+    '1M': { line: 'M0,80 C30,75 60,60 90,55 C120,50 150,65 180,45 C210,25 240,35 270,20 C300,15 330,25 360,10', dot: [270, 20] },
+    '3M': { line: 'M0,90 C30,85 60,70 90,75 C120,60 150,50 180,55 C210,40 240,30 270,25 C300,20 330,18 360,15', dot: [330, 18] },
+    '1Y': { line: 'M0,100 C30,95 60,85 90,80 C120,75 150,70 180,60 C210,55 240,45 270,35 C300,25 330,15 360,8', dot: [360, 8] },
+    'All': { line: 'M0,110 C30,105 60,100 90,90 C120,85 150,75 180,65 C210,50 240,40 270,30 C300,22 330,18 360,12', dot: [330, 18] }
+  };
+
+  document.querySelectorAll('[role="tab"]').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('[role="tab"]').forEach(t => t.setAttribute('aria-selected', 'false'));
+      tab.setAttribute('aria-selected', 'true');
+
+      const period = tab.dataset.period;
+      const data = chartPaths[period];
+      if (!data) return;
+
+      const line = document.getElementById('chartPath');
+      const fill = document.getElementById('chartFill');
+      const dot = document.getElementById('chartDot');
+
+      line.setAttribute('d', data.line);
+      fill.setAttribute('d', data.line + ' L360,120 L0,120Z');
+      dot.setAttribute('cx', data.dot[0]);
+      dot.setAttribute('cy', data.dot[1]);
+
+      // Re-trigger draw animation
+      line.style.animation = 'none';
+      line.offsetHeight; // force reflow
+      line.style.animation = 'draw 1s ease forwards';
+    });
+  });
+
+  // --- Keyboard support for tab list ---
+  const tabList = document.querySelector('[role="tablist"]');
+  if (tabList) {
+    tabList.addEventListener('keydown', (e) => {
+      const tabs = [...tabList.querySelectorAll('[role="tab"]')];
+      const idx = tabs.indexOf(document.activeElement);
+      if (e.key === 'ArrowRight' && idx < tabs.length - 1) { tabs[idx + 1].focus(); tabs[idx + 1].click(); }
+      if (e.key === 'ArrowLeft' && idx > 0) { tabs[idx - 1].focus(); tabs[idx - 1].click(); }
+    });
+  }
+});
+</script>
+</body>
+</html>

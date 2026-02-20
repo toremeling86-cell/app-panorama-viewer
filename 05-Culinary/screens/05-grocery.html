@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Smart Grocery</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "primary": "#16A249", "cream": "#FFFBF3", "accent": "#E8590C" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFFBF3;
+        }
+
+        .glass-warm {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 251, 243, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .checked {
+            text-decoration: line-through;
+            color: #9CA3AF;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-serif font-bold">Grocery List</h1>
+            <div class="flex gap-2">
+                <button
+                    class="text-xs font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full flex items-center gap-1"><span
+                        class="material-symbols-outlined !text-sm">auto_awesome</span> Auto Generate</button>
+            </div>
+        </div>
+
+        <!-- Meal Plan Banner -->
+        <div class="mx-6 mb-4 bg-gradient-to-r from-primary/10 to-emerald-100 rounded-2xl p-4 flex items-center gap-3">
+            <span class="material-symbols-outlined !text-2xl text-primary">event_note</span>
+            <div class="flex-1">
+                <p class="text-sm font-semibold">This Week's Meal Plan</p>
+                <p class="text-xs text-gray-500">7 meals · 23 ingredients needed</p>
+            </div>
+            <span class="material-symbols-outlined !text-xl text-primary">chevron_right</span>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Produce -->
+            <div>
+                <div class="flex items-center gap-2 mb-2"><span class="text-lg">🥬</span>
+                    <h3 class="text-sm font-semibold text-gray-600">Produce</h3><span
+                        class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">3/5</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div
+                            class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined !text-sm text-white">check</span></div>
+                        <span class="text-sm checked flex-1">Broccoli</span><span class="text-xs text-gray-300">2
+                            heads</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div
+                            class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined !text-sm text-white">check</span></div>
+                        <span class="text-sm checked flex-1">Garlic</span><span class="text-xs text-gray-300">1
+                            bulb</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div
+                            class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined !text-sm text-white">check</span></div>
+                        <span class="text-sm checked flex-1">Onions</span><span class="text-xs text-gray-300">3
+                            medium</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Mushrooms</span><span class="text-xs text-gray-500">200g</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Fresh Herbs</span><span class="text-xs text-gray-500">Parsley,
+                            thyme</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protein -->
+            <div>
+                <div class="flex items-center gap-2 mb-2"><span class="text-lg">🍗</span>
+                    <h3 class="text-sm font-semibold text-gray-600">Protein</h3><span
+                        class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">0/3</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Chicken Breast</span><span
+                            class="text-xs text-gray-500">600g</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Salmon Fillet</span><span class="text-xs text-gray-500">400g</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Eggs</span><span class="text-xs text-gray-500">12 pack</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dairy -->
+            <div>
+                <div class="flex items-center gap-2 mb-2"><span class="text-lg">🧀</span>
+                    <h3 class="text-sm font-semibold text-gray-600">Dairy</h3><span
+                        class="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">0/2</span>
+                </div>
+                <div class="space-y-2">
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Parmesan</span><span class="text-xs text-gray-500">150g
+                            block</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-3 card-shadow flex items-center gap-3">
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                        <span class="text-sm flex-1">Heavy Cream</span><span class="text-xs text-gray-500">250ml</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Item -->
+            <button
+                class="w-full py-3 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-400 flex items-center justify-center gap-2"><span
+                    class="material-symbols-outlined !text-lg">add</span> Add Item</button>
+        </div>
+
+        <!-- Bottom -->
+        <div class="absolute bottom-0 left-0 right-0 glass-warm border-t border-black/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">explore</span><span
+                        class="text-[10px] text-gray-400">Discover</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">search</span><span
+                        class="text-[10px] text-gray-400">Search</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">auto_awesome</span><span
+                        class="text-[10px] text-gray-400">AI Chef</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">menu_book</span><span
+                        class="text-[10px] text-gray-400">My Book</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">shopping_cart</span><span
+                        class="text-[10px] font-medium text-primary">Grocery</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

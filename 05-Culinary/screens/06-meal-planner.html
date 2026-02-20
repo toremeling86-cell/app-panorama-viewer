@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Meal Planner</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "panna": "#FDF8F0", "saffron": "#E8A838", "basil": "#3A7D44", "plum": "#6B3A6B", "espresso": "#3C2415", "cream": "#F5EBD9" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Lato", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FDF8F0
+        }
+
+        .food-shadow {
+            box-shadow: 0 4px 16px rgba(60, 36, 21, 0.06)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-espresso overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-panna">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <div>
+                <p class="text-[10px] text-saffron font-medium tracking-wider uppercase">This Week</p>
+                <h1 class="text-xl font-serif font-bold">Meal Planner</h1>
+            </div>
+            <button class="w-10 h-10 rounded-full bg-white food-shadow flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-saffron">auto_awesome</span></button>
+        </div>
+
+        <!-- Week Days -->
+        <div class="flex gap-1 px-6 pb-3">
+            <button
+                class="flex-1 py-2 rounded-xl text-center text-[10px] font-medium bg-white/50 text-espresso/30">M</button>
+            <button
+                class="flex-1 py-2 rounded-xl text-center text-[10px] font-medium bg-white/50 text-espresso/30">T</button>
+            <button class="flex-1 py-2 rounded-xl text-center text-[10px] font-bold bg-saffron text-white">W</button>
+            <button
+                class="flex-1 py-2 rounded-xl text-center text-[10px] font-medium bg-white/50 text-espresso/30">T</button>
+            <button
+                class="flex-1 py-2 rounded-xl text-center text-[10px] font-medium bg-white/50 text-espresso/30">F</button>
+            <button
+                class="flex-1 py-2 rounded-xl text-center text-[10px] font-medium bg-white/50 text-espresso/30">S</button>
+            <button
+                class="flex-1 py-2 rounded-xl text-center text-[10px] font-medium bg-white/50 text-espresso/30">S</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Breakfast -->
+            <div class="bg-white rounded-2xl food-shadow overflow-hidden">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-saffron/5 border-b border-cream"><span
+                        class="text-xs font-serif font-bold">🌅 Breakfast</span><span
+                        class="text-[10px] text-espresso/30">420 kcal</span></div>
+                <div class="p-4 flex items-center gap-3">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-saffron/20 to-cream flex items-center justify-center text-2xl">
+                        🥞</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-serif font-semibold">Banana Pancakes</p>
+                        <p class="text-[10px] text-espresso/40">Oat flour · Blueberries · Maple syrup</p>
+                        <div class="flex gap-2 mt-1"><span
+                                class="px-1.5 py-0.5 bg-basil/10 text-basil text-[8px] font-bold rounded">High
+                                Protein</span><span
+                                class="px-1.5 py-0.5 bg-saffron/10 text-saffron text-[8px] font-bold rounded">Fiber</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lunch -->
+            <div class="bg-white rounded-2xl food-shadow overflow-hidden">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-basil/5 border-b border-cream"><span
+                        class="text-xs font-serif font-bold">☀️ Lunch</span><span
+                        class="text-[10px] text-espresso/30">580 kcal</span></div>
+                <div class="p-4 flex items-center gap-3">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-basil/20 to-cream flex items-center justify-center text-2xl">
+                        🥗</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-serif font-semibold">Mediterranean Quinoa Bowl</p>
+                        <p class="text-[10px] text-espresso/40">Quinoa · Feta · Cucumber · Olives · Lemon dressing</p>
+                        <div class="flex gap-2 mt-1"><span
+                                class="px-1.5 py-0.5 bg-basil/10 text-basil text-[8px] font-bold rounded">Vegetarian</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snack -->
+            <div class="bg-white rounded-2xl food-shadow overflow-hidden">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-plum/5 border-b border-cream"><span
+                        class="text-xs font-serif font-bold">🍎 Snack</span><span
+                        class="text-[10px] text-espresso/30">180 kcal</span></div>
+                <div class="p-4 flex items-center gap-3">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-plum/20 to-cream flex items-center justify-center text-2xl">
+                        🥜</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-serif font-semibold">Trail Mix & Greek Yogurt</p>
+                        <p class="text-[10px] text-espresso/40">Almonds · Cashews · Dark chocolate · Honey drizzle</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dinner -->
+            <div class="bg-white rounded-2xl food-shadow overflow-hidden">
+                <div class="flex items-center justify-between px-4 py-2.5 bg-espresso/5 border-b border-cream"><span
+                        class="text-xs font-serif font-bold">🌙 Dinner</span><span
+                        class="text-[10px] text-espresso/30">650 kcal</span></div>
+                <div class="p-4 flex items-center gap-3">
+                    <div
+                        class="w-14 h-14 rounded-xl bg-gradient-to-br from-espresso/10 to-cream flex items-center justify-center text-2xl">
+                        🍝</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-serif font-semibold">Carbonara Classica</p>
+                        <p class="text-[10px] text-espresso/40">Guanciale · Pecorino · Fresh pasta · Black pepper</p>
+                        <div class="flex gap-2 mt-1"><span
+                                class="px-1.5 py-0.5 bg-saffron/10 text-saffron text-[8px] font-bold rounded">Fan
+                                Favorite</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Totals -->
+            <div class="bg-saffron/10 rounded-2xl p-4 flex items-center justify-around">
+                <div class="text-center">
+                    <p class="text-lg font-serif font-bold text-saffron">1,830</p>
+                    <p class="text-[9px] text-espresso/40">Calories</p>
+                </div>
+                <div class="w-px h-8 bg-espresso/5"></div>
+                <div class="text-center">
+                    <p class="text-lg font-serif font-bold text-basil">82g</p>
+                    <p class="text-[9px] text-espresso/40">Protein</p>
+                </div>
+                <div class="w-px h-8 bg-espresso/5"></div>
+                <div class="text-center">
+                    <p class="text-lg font-serif font-bold text-plum">210g</p>
+                    <p class="text-[9px] text-espresso/40">Carbs</p>
+                </div>
+                <div class="w-px h-8 bg-espresso/5"></div>
+                <div class="text-center">
+                    <p class="text-lg font-serif font-bold text-espresso">64g</p>
+                    <p class="text-[9px] text-espresso/40">Fat</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

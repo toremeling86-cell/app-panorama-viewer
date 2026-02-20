@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Care Calendar</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB;
+        }
+
+        .leaf-shadow {
+            box-shadow: 0 8px 30px rgba(45, 139, 86, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .day-active {
+            background: #2D8B56;
+            color: white;
+        }
+
+        .day-today {
+            ring: 2px solid #2D8B56;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-bark overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-serif font-bold text-soil">Care Calendar</h1>
+            <div class="flex gap-2">
+                <button class="px-3 py-1.5 bg-chloro/10 rounded-full text-xs font-medium text-chloro">Week</button>
+                <button
+                    class="px-3 py-1.5 bg-white rounded-full text-xs font-medium text-bark/40 leaf-shadow">Month</button>
+            </div>
+        </div>
+
+        <!-- Month/Year -->
+        <div class="flex items-center justify-between px-6 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-bark/30">chevron_left</span></button>
+            <h2 class="font-serif font-semibold text-soil">February 2026</h2>
+            <button><span class="material-symbols-outlined !text-xl text-bark/30">chevron_right</span></button>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="px-6 pb-4">
+            <div class="bg-white rounded-2xl p-4 leaf-shadow">
+                <!-- Day headers -->
+                <div class="grid grid-cols-7 gap-1 mb-2">
+                    <span class="text-[10px] text-bark/30 text-center font-medium">Mo</span>
+                    <span class="text-[10px] text-bark/30 text-center font-medium">Tu</span>
+                    <span class="text-[10px] text-bark/30 text-center font-medium">We</span>
+                    <span class="text-[10px] text-bark/30 text-center font-medium">Th</span>
+                    <span class="text-[10px] text-bark/30 text-center font-medium">Fr</span>
+                    <span class="text-[10px] text-bark/30 text-center font-medium">Sa</span>
+                    <span class="text-[10px] text-bark/30 text-center font-medium">Su</span>
+                </div>
+                <!-- Dates -->
+                <div class="grid grid-cols-7 gap-1">
+                    <div class="h-9"></div>
+                    <div class="h-9"></div>
+                    <div class="h-9"></div>
+                    <div class="h-9"></div>
+                    <div class="h-9"></div>
+                    <div class="h-9"></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">1</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">2</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-blue-50 relative">3<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-blue-400 rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">4</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">5</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-chloro/10 relative">6<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-chloro rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">7</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">8</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">9</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-blue-50 relative">10<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-blue-400 rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">11</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">12</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-amber/10 relative">13<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-amber rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">14</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">15</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">16</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-blue-50 relative">17<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-blue-400 rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">18</div>
+                    <div
+                        class="h-9 rounded-lg flex items-center justify-center text-xs bg-chloro text-white font-bold ring-2 ring-chloro ring-offset-2 ring-offset-white">
+                        19</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-terra/10 relative">20<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-terra rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">21</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">22</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">23</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-blue-50 relative">24<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-blue-400 rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">25</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">26</div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs bg-chloro/10 relative">27<span
+                            class="absolute bottom-0.5 w-1 h-1 bg-chloro rounded-full"></span></div>
+                    <div class="h-9 rounded-lg flex items-center justify-center text-xs">28</div>
+                </div>
+                <!-- Legend -->
+                <div class="flex items-center justify-center gap-4 mt-3 text-[10px] text-bark/40">
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-blue-400 rounded-full"></span> Water
+                    </div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-chloro rounded-full"></span> Fertilize
+                    </div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-amber rounded-full"></span> Rotate
+                    </div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 bg-terra rounded-full"></span> Repot</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <h3 class="font-serif font-semibold text-soil text-sm">Today — Feb 19</h3>
+            <div class="bg-white rounded-2xl p-4 leaf-shadow flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-blue-400">water_drop</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-soil">Water Monstera</p>
+                    <p class="text-[10px] text-terra">Overdue by 2 days</p>
+                </div>
+                <button class="px-3 py-1.5 bg-chloro text-white rounded-lg text-xs font-medium">Done</button>
+            </div>
+            <div class="bg-white rounded-2xl p-4 leaf-shadow flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-blue-400">water_drop</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-soil">Water Orchid</p>
+                    <p class="text-[10px] text-bark/40">Scheduled for today</p>
+                </div>
+                <button class="px-3 py-1.5 bg-chloro text-white rounded-lg text-xs font-medium">Done</button>
+            </div>
+            <div class="bg-white rounded-2xl p-4 leaf-shadow flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-amber">rotate_right</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-medium text-soil">Rotate Snake Plant</p>
+                    <p class="text-[10px] text-bark/40">Due tomorrow</p>
+                </div>
+                <button class="px-3 py-1.5 bg-bark/5 text-bark/40 rounded-lg text-xs font-medium">Skip</button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-cream/90 backdrop-blur border-t border-bark/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">yard</span><span
+                        class="text-[10px] text-bark/30">Garden</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-chloro"
+                        style="font-variation-settings: 'FILL' 1;">calendar_month</span><span
+                        class="text-[10px] font-medium text-chloro">Calendar</span></button>
+                <button class="flex flex-col items-center gap-0.5 relative">
+                    <div class="w-12 h-12 -mt-4 rounded-full bg-chloro flex items-center justify-center leaf-shadow">
+                        <span class="material-symbols-outlined !text-2xl text-white">add</span></div><span
+                        class="text-[10px] text-bark/30 mt-0.5">Add</span>
+                </button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">menu_book</span><span
+                        class="text-[10px] text-bark/30">Guide</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-bark/30">person</span><span
+                        class="text-[10px] text-bark/30">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

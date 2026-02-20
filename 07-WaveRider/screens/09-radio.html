@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Radio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "plasma": "#FF6B2B" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        @keyframes eq {
+
+            0%,
+            100% {
+                height: 4px
+            }
+
+            50% {
+                height: 16px
+            }
+        }
+
+        .eq-bar {
+            animation: eq 0.8s ease-in-out infinite;
+            background: #FF2D78;
+            width: 3px;
+            border-radius: 2px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-neon/50">Radio</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">favorite_border</span></button>
+        </div>
+
+        <!-- Now Tuned -->
+        <div
+            class="mx-6 bg-gradient-to-br from-neon/10 via-violet/5 to-void rounded-2xl p-6 border border-neon/10 text-center">
+            <div class="flex items-center justify-center gap-1 h-6 mb-3">
+                <div class="eq-bar" style="animation-delay:0s"></div>
+                <div class="eq-bar" style="animation-delay:0.2s"></div>
+                <div class="eq-bar" style="animation-delay:0.4s"></div>
+                <div class="eq-bar" style="animation-delay:0.1s"></div>
+                <div class="eq-bar" style="animation-delay:0.3s"></div>
+                <div class="eq-bar" style="animation-delay:0.5s"></div>
+                <div class="eq-bar" style="animation-delay:0.15s"></div>
+            </div>
+            <p class="text-xl font-display font-bold text-neon">Synthwave FM</p>
+            <p class="text-xs text-white/20 mt-1">🎵 Carpenter Brut — Turbo Killer</p>
+            <p class="text-[10px] text-white/10 mt-0.5">12.4K listening now</p>
+            <div class="flex items-center justify-center gap-6 mt-4">
+                <button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-white/30">thumb_down</span></button>
+                <button
+                    class="w-14 h-14 rounded-full bg-neon flex items-center justify-center shadow-lg shadow-neon/30"><span
+                        class="material-symbols-outlined !text-2xl text-void">pause</span></button>
+                <button class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-white/30">thumb_up</span></button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2 mt-4">
+            <p class="text-[10px] text-white/10 uppercase tracking-wider">Stations</p>
+
+            <div class="bg-white/3 rounded-2xl p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-violet/15 flex items-center justify-center text-lg">🌃</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Lo-Fi Beats</p>
+                    <p class="text-[10px] text-white/15">Chill study vibes · 8.2K</p>
+                </div><span class="material-symbols-outlined !text-sm text-white/10">play_arrow</span>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-electric/15 flex items-center justify-center text-lg">🎸</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Indie Rock</p>
+                    <p class="text-[10px] text-white/15">Alternative hits · 5.1K</p>
+                </div><span class="material-symbols-outlined !text-sm text-white/10">play_arrow</span>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-plasma/15 flex items-center justify-center text-lg">🎷</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Jazz Café</p>
+                    <p class="text-[10px] text-white/15">Smooth jazz · 3.7K</p>
+                </div><span class="material-symbols-outlined !text-sm text-white/10">play_arrow</span>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-neon/15 flex items-center justify-center text-lg">🎹</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Classical Focus</p>
+                    <p class="text-[10px] text-white/15">Orchestra · 2.9K</p>
+                </div><span class="material-symbols-outlined !text-sm text-white/10">play_arrow</span>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-violet/15 flex items-center justify-center text-lg">🎤</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Hip-Hop Classics</p>
+                    <p class="text-[10px] text-white/15">Old school · 6.3K</p>
+                </div><span class="material-symbols-outlined !text-sm text-white/10">play_arrow</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

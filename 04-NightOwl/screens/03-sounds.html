@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Sleep Sounds</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#6366F1", "lavender": "#C4B5FD", "night": "#0F0B2E" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0F0B2E;
+        }
+
+        .night-glow {
+            background: radial-gradient(ellipse at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 60%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-playing {
+            backdrop-filter: blur(20px);
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .wave {
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                height: 12px;
+            }
+
+            50% {
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden night-glow">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-bold">Sleep Sounds</h1>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">timer</span></button>
+        </div>
+
+        <!-- Now Playing -->
+        <div class="mx-6 mb-4 glass-playing rounded-2xl p-5">
+            <div class="flex items-center justify-center gap-1 mb-4">
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.1s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.2s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.3s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.4s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.5s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.6s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.3s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.1s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.5s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.2s"></div>
+                <div class="w-1 bg-primary rounded-full wave" style="animation-delay:0.4s"></div>
+            </div>
+            <div class="text-center">
+                <h3 class="text-lg font-semibold">Rainfall + Thunder</h3>
+                <p class="text-xs text-slate-500 mt-1">Playing · Timer: 45 min remaining</p>
+            </div>
+            <div class="flex items-center justify-center gap-6 mt-4">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-slate-400">skip_previous</span></button>
+                <button
+                    class="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30"><span
+                        class="material-symbols-outlined !text-2xl text-white">pause</span></button>
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-slate-400">skip_next</span></button>
+            </div>
+            <!-- Volume -->
+            <div class="flex items-center gap-3 mt-4">
+                <span class="material-symbols-outlined !text-lg text-slate-500">volume_down</span>
+                <div class="flex-1 h-1.5 rounded-full bg-white/10 relative">
+                    <div class="absolute h-full bg-primary rounded-full" style="width:35%"></div>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-slate-500">volume_up</span>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="px-6 pb-3">
+            <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                <button
+                    class="px-4 py-2 rounded-full text-xs font-medium bg-primary/20 text-primary whitespace-nowrap">All</button>
+                <button class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">🌧
+                    Rain</button>
+                <button class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">🌊
+                    Ocean</button>
+                <button class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">🌲
+                    Forest</button>
+                <button class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">🎵
+                    Music</button>
+                <button class="px-4 py-2 rounded-full text-xs font-medium text-slate-500 glass whitespace-nowrap">🧘
+                    ASMR</button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <div class="glass-bright rounded-xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-xl">🌊</div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Ocean Waves</h3>
+                    <p class="text-xs text-slate-500">Gentle shore waves</p>
+                </div>
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-slate-400">play_arrow</span></button>
+            </div>
+            <div class="glass-bright rounded-xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center text-xl">🌲</div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Forest Night</h3>
+                    <p class="text-xs text-slate-500">Crickets & wind</p>
+                </div>
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-slate-400">play_arrow</span></button>
+            </div>
+            <div class="glass-bright rounded-xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center text-xl">🔥</div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Fireplace</h3>
+                    <p class="text-xs text-slate-500">Crackling warmth</p>
+                </div>
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-slate-400">play_arrow</span></button>
+            </div>
+            <div class="glass-bright rounded-xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">🎵</div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Deep Sleep Music</h3>
+                    <p class="text-xs text-slate-500">Delta wave binaural</p>
+                </div>
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-slate-400">play_arrow</span></button>
+            </div>
+            <div class="glass-bright rounded-xl p-4 flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-xl">❄️</div>
+                <div class="flex-1">
+                    <h3 class="text-sm font-semibold">Arctic Wind</h3>
+                    <p class="text-xs text-slate-500">Soft howling breeze</p>
+                </div>
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-slate-400">play_arrow</span></button>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">bedtime</span><span
+                        class="text-[10px] text-slate-500">Sleep</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">insights</span><span
+                        class="text-[10px] text-slate-500">Trends</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">music_note</span><span
+                        class="text-[10px] font-medium text-primary">Sounds</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">alarm</span><span
+                        class="text-[10px] text-slate-500">Alarm</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">person</span><span
+                        class="text-[10px] text-slate-500">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

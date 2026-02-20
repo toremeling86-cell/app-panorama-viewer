@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Dream Journal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#A78BFA", "secondary": "#7C3AED", "luna": "#C4B5FD", "nebula": "#3B82F6", "deep": "#0F0A1F", "star": "#FDE68A" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0F0A1F;
+            margin: 0;
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-dream {
+            backdrop-filter: blur(20px);
+            background: rgba(167, 139, 250, 0.05);
+            border: 1px solid rgba(167, 139, 250, 0.1);
+        }
+
+        #starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .dream-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            margin: 2px;
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden">
+        <!-- GENERATIVE STARFIELD -->
+        <canvas id="starfield"></canvas>
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-4 relative z-10">
+            <div>
+                <p class="text-xs font-light text-luna/50 tracking-[0.3em] uppercase">Dream Archive</p>
+                <h1 class="text-2xl font-bold mt-0.5">Dream Journal 🌙</h1>
+            </div>
+            <div class="flex gap-2">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-luna/60">search</span></button>
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-luna/60">filter_list</span></button>
+            </div>
+        </div>
+
+        <!-- Dream Stats -->
+        <div class="flex items-center justify-center gap-4 px-6 pb-3 relative z-10">
+            <div class="glass rounded-full px-4 py-2 flex items-center gap-2"><span class="text-sm">📝</span><span
+                    class="text-xs font-mono text-luna">47 dreams</span></div>
+            <div class="glass rounded-full px-4 py-2 flex items-center gap-2"><span class="text-sm">🔮</span><span
+                    class="text-xs font-mono text-luna">12 lucid</span></div>
+            <div class="glass rounded-full px-4 py-2 flex items-center gap-2"><span class="text-sm">⭐</span><span
+                    class="text-xs font-mono text-star">8 recurring</span></div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 relative z-10">
+            <!-- Record Button -->
+            <button
+                class="w-full py-4 bg-gradient-to-r from-primary to-secondary rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined !text-lg">mic</span> Record This Morning's Dream
+            </button>
+
+            <!-- Dream Entry 1 -->
+            <div class="glass-dream rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-[10px] text-luna/40 font-mono">Feb 19, 2026 · 6:42 AM</p>
+                    <div class="flex items-center gap-1"><span class="text-xs">✨</span><span
+                            class="text-[10px] text-star font-medium">Lucid</span></div>
+                </div>
+                <h3 class="text-base font-semibold mb-1">Flying Over an Ocean of Light</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-3">I was soaring above an endless ocean that glowed
+                    with bioluminescence. Each wave created ripples of turquoise light. I realized I was dreaming and
+                    could control the flight...</p>
+                <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="dream-tag bg-nebula/20 text-nebula">🌊 Ocean</span>
+                    <span class="dream-tag bg-primary/20 text-primary">✈️ Flying</span>
+                    <span class="dream-tag bg-star/20 text-star">💡 Lucid</span>
+                </div>
+                <div class="flex items-center gap-4 text-[10px] text-slate-500">
+                    <span class="flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">sentiment_very_satisfied</span> Euphoric</span>
+                    <span class="flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">clarity</span> Very Clear</span>
+                    <span class="flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">palette</span> Vivid Colors</span>
+                </div>
+            </div>
+
+            <!-- Dream Entry 2 -->
+            <div class="glass rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-[10px] text-luna/40 font-mono">Feb 18, 2026 · 5:30 AM</p>
+                    <span class="text-[10px] text-slate-500">Normal</span>
+                </div>
+                <h3 class="text-base font-semibold mb-1">The Infinite Library</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-3">Walking through shelves that stretched to
+                    infinity. Books falling like rain, their pages turning into birds. An old man whispered my name...
+                </p>
+                <div class="flex flex-wrap gap-1 mb-2">
+                    <span class="dream-tag bg-primary/20 text-primary">📚 Library</span>
+                    <span class="dream-tag bg-emerald-500/20 text-emerald-400">🐦 Birds</span>
+                    <span class="dream-tag bg-amber-500/20 text-amber-400">🔄 Recurring</span>
+                </div>
+                <div class="flex items-center gap-4 text-[10px] text-slate-500">
+                    <span class="flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">sentiment_calm</span> Peaceful</span>
+                    <span class="flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-sm">clarity</span> Moderate</span>
+                </div>
+            </div>
+
+            <!-- Dream Entry 3 -->
+            <div class="glass rounded-2xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-[10px] text-luna/40 font-mono">Feb 17, 2026 · 7:15 AM</p>
+                    <span class="text-[10px] text-slate-500">Normal</span>
+                </div>
+                <h3 class="text-base font-semibold mb-1">Childhood Home Reimagined</h3>
+                <p class="text-xs text-slate-400 leading-relaxed mb-3">My childhood home but the rooms kept shifting.
+                    The backyard extended into a forest. Found a hidden door that led to space...</p>
+                <div class="flex flex-wrap gap-1">
+                    <span class="dream-tag bg-rose-500/20 text-rose-400">🏠 Home</span>
+                    <span class="dream-tag bg-emerald-500/20 text-emerald-400">🌲 Nature</span>
+                    <span class="dream-tag bg-nebula/20 text-nebula">🚀 Space</span>
+                </div>
+            </div>
+
+            <!-- AI Dream Analysis -->
+            <div class="glass rounded-2xl p-4 border-l-2 border-primary">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-lg text-primary">auto_awesome</span><span
+                        class="text-xs font-semibold text-primary">AI Dream Analysis</span></div>
+                <p class="text-xs text-slate-300 leading-relaxed">Your dreams this week show themes of <span
+                        class="text-luna font-medium">exploration</span> and <span
+                        class="text-luna font-medium">transformation</span>. The recurring library symbol often
+                    represents a search for knowledge. Your lucid dreaming rate increased to <span
+                        class="text-star font-medium">25%</span> — above average! <span
+                        class="text-primary font-medium">See full analysis →</span></p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5 z-10">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">bedtime</span><span
+                        class="text-[10px] text-slate-500">Sleep</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">insights</span><span
+                        class="text-[10px] text-slate-500">Trends</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">auto_stories</span><span
+                        class="text-[10px] font-medium text-primary">Dreams</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">alarm</span><span
+                        class="text-[10px] text-slate-500">Alarm</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">person</span><span
+                        class="text-[10px] text-slate-500">Profile</span></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === GENERATIVE STARFIELD with SHOOTING STARS ===
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            const c = canvas.parentElement;
+            canvas.width = c.offsetWidth * 2;
+            canvas.height = c.offsetHeight * 2;
+            canvas.style.width = c.offsetWidth + 'px';
+            canvas.style.height = c.offsetHeight + 'px';
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        // Stars
+        const stars = [];
+        for (let i = 0; i < 200; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5 + 0.3,
+                alpha: Math.random(),
+                speed: Math.random() * 0.01 + 0.003,
+                phase: Math.random() * Math.PI * 2
+            });
+        }
+
+        // Shooting stars
+        const shootingStars = [];
+        function addShootingStar() {
+            shootingStars.push({
+                x: Math.random() * canvas.width * 0.5,
+                y: Math.random() * canvas.height * 0.3,
+                length: Math.random() * 60 + 40,
+                speed: Math.random() * 8 + 6,
+                angle: Math.PI * 0.2 + Math.random() * 0.2,
+                alpha: 1,
+                life: 1
+            });
+        }
+
+        // Nebula clouds
+        function drawNebula(time) {
+            const grd1 = ctx.createRadialGradient(
+                canvas.width * 0.3 + Math.sin(time * 0.0003) * 20,
+                canvas.height * 0.2,
+                0,
+                canvas.width * 0.3,
+                canvas.height * 0.2,
+                canvas.width * 0.4
+            );
+            grd1.addColorStop(0, 'rgba(124,58,237,0.03)');
+            grd1.addColorStop(1, 'rgba(124,58,237,0)');
+            ctx.fillStyle = grd1;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const grd2 = ctx.createRadialGradient(
+                canvas.width * 0.7 + Math.cos(time * 0.0004) * 15,
+                canvas.height * 0.5,
+                0,
+                canvas.width * 0.7,
+                canvas.height * 0.5,
+                canvas.width * 0.3
+            );
+            grd2.addColorStop(0, 'rgba(59,130,246,0.02)');
+            grd2.addColorStop(1, 'rgba(59,130,246,0)');
+            ctx.fillStyle = grd2;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        let lastShot = 0;
+        function animate(time) {
+            ctx.fillStyle = 'rgba(15,10,31,0.15)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawNebula(time);
+
+            // Draw stars
+            stars.forEach(s => {
+                const twinkle = 0.4 + 0.6 * Math.sin(time * s.speed + s.phase);
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${s.alpha * twinkle})`;
+                ctx.fill();
+            });
+
+            // Shooting stars
+            if (time - lastShot > 3000 + Math.random() * 5000) {
+                addShootingStar();
+                lastShot = time;
+            }
+            for (let i = shootingStars.length - 1; i >= 0; i--) {
+                const ss = shootingStars[i];
+                ss.x += Math.cos(ss.angle) * ss.speed;
+                ss.y += Math.sin(ss.angle) * ss.speed;
+                ss.life -= 0.015;
+                if (ss.life <= 0) { shootingStars.splice(i, 1); continue; }
+
+                ctx.beginPath();
+                ctx.moveTo(ss.x, ss.y);
+                ctx.lineTo(ss.x - Math.cos(ss.angle) * ss.length, ss.y - Math.sin(ss.angle) * ss.length);
+                const grad = ctx.createLinearGradient(ss.x, ss.y, ss.x - Math.cos(ss.angle) * ss.length, ss.y - Math.sin(ss.angle) * ss.length);
+                grad.addColorStop(0, `rgba(253,230,138,${ss.life})`);
+                grad.addColorStop(1, `rgba(253,230,138,0)`);
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    </script>
+</body>
+
+</html>

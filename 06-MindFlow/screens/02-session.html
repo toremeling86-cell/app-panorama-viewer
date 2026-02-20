@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Active Session</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#F97316", "primary-soft": "#FDBA74", "bg-void": "#1A1210", "sage": "#6B8E6B", "mist": "#D4C5B4" }, fontFamily: { "display": ["DM Sans", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1210;
+        }
+
+        .zen-glow {
+            background: radial-gradient(ellipse at 50% 40%, rgba(249, 115, 22, 0.08) 0%, transparent 60%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .pulse-ring {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.95);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .counter {
+            animation: fade-count 1s ease-in-out;
+        }
+
+        @keyframes fade-count {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden zen-glow">
+        <!-- Top Bar -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2 relative z-10">
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-mist/60">close</span></button>
+            <div class="text-center">
+                <p class="text-[10px] text-primary tracking-[0.3em] uppercase">Morning Calm</p>
+            </div>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-mist/60">more_vert</span></button>
+        </div>
+
+        <!-- Center Visualizer -->
+        <div class="flex-1 flex items-center justify-center relative">
+            <!-- Concentric rings -->
+            <svg width="300" height="300" viewBox="0 0 300 300" class="absolute">
+                <circle cx="150" cy="150" r="140" fill="none" stroke="rgba(249,115,22,0.04)" stroke-width="0.5"
+                    class="pulse-ring" />
+                <circle cx="150" cy="150" r="110" fill="none" stroke="rgba(249,115,22,0.06)" stroke-width="0.5"
+                    class="pulse-ring" style="animation-delay:0.5s" />
+                <circle cx="150" cy="150" r="80" fill="none" stroke="rgba(249,115,22,0.1)" stroke-width="0.5"
+                    class="pulse-ring" style="animation-delay:1s" />
+                <circle cx="150" cy="150" r="50" fill="none" stroke="rgba(249,115,22,0.15)" stroke-width="1"
+                    class="pulse-ring" style="animation-delay:1.5s" />
+                <circle cx="150" cy="150" r="20" fill="rgba(249,115,22,0.2)" class="pulse-ring"
+                    style="animation-delay:2s" />
+            </svg>
+
+            <!-- Timer -->
+            <div class="text-center z-10">
+                <p class="text-6xl font-extralight font-mono text-primary-soft counter">08:42</p>
+                <p class="text-sm font-light text-mist/40 mt-2 tracking-[0.15em] uppercase">remaining</p>
+            </div>
+        </div>
+
+        <!-- Guidance Text -->
+        <div class="text-center px-10 pb-6">
+            <p class="text-lg font-light text-mist/40 leading-relaxed italic">"Notice the rhythm of your breath… inhale
+                gently… exhale slowly…"</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="px-6 pb-12">
+            <!-- Progress Bar -->
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-[10px] text-mist/30 font-mono">06:18</span>
+                <div class="flex-1 h-1 rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-gradient-to-r from-primary to-primary-soft" style="width:42%">
+                    </div>
+                </div>
+                <span class="text-[10px] text-mist/30 font-mono">15:00</span>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="flex items-center justify-center gap-8">
+                <button class="glass w-12 h-12 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-mist/40">skip_previous</span></button>
+                <button
+                    class="w-16 h-16 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/30 active:scale-95 transition-transform"><span
+                        class="material-symbols-outlined !text-3xl text-white">pause</span></button>
+                <button class="glass w-12 h-12 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-mist/40">skip_next</span></button>
+            </div>
+
+            <!-- Ambient Controls -->
+            <div class="flex items-center justify-center gap-6 mt-6">
+                <button class="flex items-center gap-1.5 text-mist/30 text-xs"><span
+                        class="material-symbols-outlined !text-sm">volume_up</span> Sound</button>
+                <button class="flex items-center gap-1.5 text-primary text-xs"><span
+                        class="material-symbols-outlined !text-sm">mic</span> Guide On</button>
+                <button class="flex items-center gap-1.5 text-mist/30 text-xs"><span
+                        class="material-symbols-outlined !text-sm">timer</span> Timer</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

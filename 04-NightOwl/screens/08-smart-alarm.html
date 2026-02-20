@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Smart Alarm</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "midnight": "#0B0D1A", "indigo": "#4F46E5", "lavender": "#A78BFA", "luna": "#C4B5FD", "dawn": "#F472B6", "amber": "#FBBF24" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0D1A
+        }
+
+        .sleep-window {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(167, 139, 250, 0.04));
+            border: 1px solid rgba(167, 139, 250, 0.1);
+            border-radius: 20px
+        }
+
+        .dawn-glow {
+            background: linear-gradient(to right, rgba(79, 70, 229, 0.2), rgba(244, 114, 182, 0.15), rgba(251, 191, 36, 0.1));
+            border-radius: 12px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-midnight">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider uppercase text-lavender/60">Smart Alarm</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">settings</span></button>
+        </div>
+
+        <!-- Main Alarm Display -->
+        <div class="flex flex-col items-center py-6">
+            <div class="relative">
+                <p class="text-7xl font-extralight text-white/90 tracking-tight">6<span
+                        class="text-lavender animate-pulse">:</span>45</p>
+                <p class="text-center text-sm text-lavender/40 mt-1">Tomorrow, Wed</p>
+            </div>
+            <div class="mt-3 flex items-center gap-2 px-4 py-2 bg-indigo/10 border border-indigo/15 rounded-full">
+                <span class="material-symbols-outlined !text-sm text-indigo">auto_awesome</span>
+                <p class="text-xs text-indigo/80">Smart Wake: will ring between 6:30–6:45</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Sleep Window -->
+            <div class="sleep-window p-4">
+                <h3 class="text-xs font-bold text-lavender/40 uppercase tracking-wider mb-3">Optimal Sleep Window</h3>
+                <div class="flex items-center justify-between">
+                    <div class="text-center"><span
+                            class="material-symbols-outlined !text-xl text-indigo/60">bedtime</span>
+                        <p class="text-lg font-bold mt-1">10:45 PM</p>
+                        <p class="text-[9px] text-white/20">Bedtime</p>
+                    </div>
+                    <div class="flex-1 mx-4">
+                        <div class="dawn-glow h-3 relative">
+                            <div class="absolute left-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-indigo"></div>
+                            <div class="absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-amber"></div>
+                        </div>
+                        <p class="text-center text-[9px] text-white/15 mt-1">8h sleep cycles</p>
+                    </div>
+                    <div class="text-center"><span
+                            class="material-symbols-outlined !text-xl text-amber/60">wb_twilight</span>
+                        <p class="text-lg font-bold mt-1">6:45 AM</p>
+                        <p class="text-[9px] text-white/20">Wake</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wake Sound -->
+            <div class="sleep-window p-4 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-dawn/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-dawn">music_note</span></div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Sunrise Melody</p>
+                    <p class="text-[10px] text-white/20">Gradual volume over 2 min</p>
+                </div>
+                <span class="material-symbols-outlined !text-lg text-white/10">chevron_right</span>
+            </div>
+
+            <!-- Smart Features -->
+            <div class="sleep-window p-4 space-y-3">
+                <h3 class="text-xs font-bold text-lavender/40 uppercase tracking-wider">Smart Features</h3>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-sm text-indigo/60">body_system</span><span
+                            class="text-sm">Light Sleep Detection</span></div>
+                    <div class="w-10 h-5 bg-indigo rounded-full relative">
+                        <div class="absolute top-0.5 right-0.5 w-4 h-4 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-sm text-dawn/60">wb_sunny</span><span
+                            class="text-sm">Sunrise Simulation</span></div>
+                    <div class="w-10 h-5 bg-indigo rounded-full relative">
+                        <div class="absolute top-0.5 right-0.5 w-4 h-4 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-sm text-amber/60">snooze</span><span
+                            class="text-sm">Smart Snooze (5 min)</span></div>
+                    <div class="w-10 h-5 bg-white/10 rounded-full relative">
+                        <div class="absolute top-0.5 left-0.5 w-4 h-4 bg-white/30 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat Days -->
+            <div class="sleep-window p-4">
+                <h3 class="text-xs font-bold text-lavender/40 uppercase tracking-wider mb-3">Repeat</h3>
+                <div class="flex gap-2">
+                    <button class="w-9 h-9 rounded-full bg-indigo text-xs font-bold">M</button>
+                    <button class="w-9 h-9 rounded-full bg-indigo text-xs font-bold">T</button>
+                    <button class="w-9 h-9 rounded-full bg-indigo text-xs font-bold">W</button>
+                    <button class="w-9 h-9 rounded-full bg-indigo text-xs font-bold">T</button>
+                    <button class="w-9 h-9 rounded-full bg-indigo text-xs font-bold">F</button>
+                    <button class="w-9 h-9 rounded-full bg-white/5 text-xs text-white/20">S</button>
+                    <button class="w-9 h-9 rounded-full bg-white/5 text-xs text-white/20">S</button>
+                </div>
+            </div>
+
+            <!-- Label -->
+            <div class="sleep-window p-4 flex items-center justify-between">
+                <span class="text-sm text-white/40">Label</span>
+                <span class="text-sm font-medium">Work Morning ✏️</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

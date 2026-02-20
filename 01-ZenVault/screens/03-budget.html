@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Monthly Budget</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00D4AA", "bg-void": "#0A0E1A", "profit": "#10B981", "loss": "#EF4444", "violet": "#7C3AED", "amber": "#F59E0B" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"], "mono": ["JetBrains Mono", "monospace"], "sans": ["Inter", "sans-serif"] } } } }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0E1A;
+        }
+
+        .aurora-glow {
+            background: radial-gradient(ellipse at 20% 30%, rgba(0, 212, 170, 0.1) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .budget-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .budget-fill {
+            height: 100%;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Animation Library */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+        .tx-row { transition: background 150ms ease; cursor: pointer; }
+        .tx-row:hover { background: rgba(255,255,255,0.06); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden aurora-glow">
+        <!-- Status Bar -->
+        <div aria-hidden="true"></div>
+
+        <!-- Header -->
+        <header class="flex items-center justify-between px-6 pt-14 pb-2" data-animate style="animation-delay:0ms">
+            <div class="flex items-center gap-3">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center btn-press" aria-label="Go back"><span
+                        class="material-symbols-outlined !text-xl text-slate-400" aria-hidden="true">arrow_back</span></button>
+                <h1 class="font-display text-xl font-bold">Budget</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <button
+                    class="glass px-3 py-1.5 rounded-full text-xs font-display font-medium flex items-center gap-1 btn-press" aria-label="Select month"><span
+                        class="material-symbols-outlined !text-sm" aria-hidden="true">calendar_month</span> Feb 2026</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Budget Overview Card -->
+            <section aria-label="Budget overview" class="mx-6 mt-4 glass-bright rounded-2xl p-5 card-interactive shadow-layered" data-animate="scale" style="animation-delay:80ms">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <p class="text-xs text-slate-500">Monthly Budget</p>
+                        <p class="font-display text-2xl font-bold">$4,200</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs text-slate-500">Remaining</p>
+                        <p class="font-display text-2xl font-bold text-primary">$1,847</p>
+                    </div>
+                </div>
+                <div class="budget-bar">
+                    <div class="budget-fill bg-gradient-to-r from-primary to-violet" data-width="56%"></div>
+                </div>
+                <div class="flex items-center justify-between mt-2">
+                    <span class="text-[10px] text-slate-500">56% spent</span>
+                    <span class="text-[10px] text-slate-500">18 days left</span>
+                </div>
+            </section>
+
+            <!-- Scrollable Categories -->
+            <div class="flex-1 overflow-y-auto px-6 pt-4 pb-24 space-y-3">
+                <h3 class="text-sm font-display font-semibold text-slate-400 mb-2" data-animate style="animation-delay:160ms">Categories</h3>
+
+                <!-- Housing -->
+                <section aria-label="Housing budget">
+                    <div class="glass rounded-xl px-4 py-3 card-interactive shadow-layered" data-animate style="animation-delay:240ms">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-violet/20 flex items-center justify-center"><span
+                                        class="material-symbols-outlined !text-lg text-violet" aria-hidden="true">home</span></div>
+                                <div>
+                                    <p class="text-sm font-medium">Housing</p>
+                                    <p class="text-[10px] font-mono text-slate-500">$1,400 / $1,400</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-amber">100%</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div class="budget-fill bg-amber" data-width="100%"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Food -->
+                <section aria-label="Food and dining budget">
+                    <div class="glass rounded-xl px-4 py-3 card-interactive shadow-layered" data-animate style="animation-delay:320ms">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center"><span
+                                        class="material-symbols-outlined !text-lg text-orange-400" aria-hidden="true">restaurant</span></div>
+                                <div>
+                                    <p class="text-sm font-medium">Food & Dining</p>
+                                    <p class="text-[10px] font-mono text-slate-500">$380 / $600</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-profit">63%</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div class="budget-fill bg-primary" data-width="63%"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transport -->
+                <section aria-label="Transportation budget">
+                    <div class="glass rounded-xl px-4 py-3 card-interactive shadow-layered" data-animate style="animation-delay:400ms">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center"><span
+                                        class="material-symbols-outlined !text-lg text-blue-400" aria-hidden="true">directions_car</span></div>
+                                <div>
+                                    <p class="text-sm font-medium">Transportation</p>
+                                    <p class="text-[10px] font-mono text-slate-500">$210 / $400</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-profit">53%</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div class="budget-fill bg-blue-500" data-width="53%"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Entertainment -->
+                <section aria-label="Entertainment budget">
+                    <div class="glass rounded-xl px-4 py-3 card-interactive shadow-layered" data-animate style="animation-delay:480ms">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-pink-500/20 flex items-center justify-center"><span
+                                        class="material-symbols-outlined !text-lg text-pink-400" aria-hidden="true">movie</span></div>
+                                <div>
+                                    <p class="text-sm font-medium">Entertainment</p>
+                                    <p class="text-[10px] font-mono text-slate-500">$245 / $300</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-amber">82%</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div class="budget-fill bg-gradient-to-r from-amber to-loss" data-width="82%"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Shopping -->
+                <section aria-label="Shopping budget">
+                    <div class="glass rounded-xl px-4 py-3 card-interactive shadow-layered" data-animate style="animation-delay:560ms">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center"><span
+                                        class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">shopping_bag</span></div>
+                                <div>
+                                    <p class="text-sm font-medium">Shopping</p>
+                                    <p class="text-[10px] font-mono text-slate-500">$118 / $350</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-profit">34%</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div class="budget-fill bg-primary" data-width="34%"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Subscriptions -->
+                <section aria-label="Subscriptions budget">
+                    <div class="glass rounded-xl px-4 py-3 card-interactive shadow-layered" data-animate style="animation-delay:640ms">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center"><span
+                                        class="material-symbols-outlined !text-lg text-red-400" aria-hidden="true">subscriptions</span></div>
+                                <div>
+                                    <p class="text-sm font-medium">Subscriptions</p>
+                                    <p class="text-[10px] font-mono text-slate-500">$89 / $150</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono text-profit">59%</span>
+                        </div>
+                        <div class="budget-bar">
+                            <div class="budget-fill bg-red-400" data-width="59%"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Bottom Tab Bar -->
+        <nav role="navigation" aria-label="Main navigation" class="absolute bottom-0 left-0 right-0 glass-bright border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Home"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">home</span><span
+                        class="text-[10px] text-slate-500">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Portfolio"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">pie_chart</span><span
+                        class="text-[10px] text-slate-500">Portfolio</span></button>
+                <button class="flex flex-col items-center gap-0.5 -mt-4 btn-press" aria-label="Add new transaction">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-violet flex items-center justify-center shadow-lg shadow-primary/30">
+                        <span class="material-symbols-outlined !text-2xl text-white" aria-hidden="true">add</span></div>
+                </button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Budget"><span
+                        class="material-symbols-outlined !text-xl text-primary" aria-hidden="true"
+                        style="font-variation-settings: 'FILL' 1;">savings</span><span
+                        class="text-[10px] font-medium text-primary">Budget</span></button>
+                <button class="flex flex-col items-center gap-0.5 btn-press" aria-label="Analytics"><span
+                        class="material-symbols-outlined !text-xl text-slate-500" aria-hidden="true">analytics</span><span
+                        class="text-[10px] text-slate-500">Analytics</span></button>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // IntersectionObserver for staggered entry
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+        // Budget bar fill animation: bars start at 0 width, animate to target on scroll
+        const barObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const fill = e.target.querySelector('.budget-fill[data-width]');
+                    if (fill) {
+                        // Small delay for visual effect after card animates in
+                        setTimeout(() => {
+                            fill.style.width = fill.getAttribute('data-width');
+                        }, 300);
+                    }
+                    barObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.budget-bar').forEach(bar => {
+            const fill = bar.querySelector('.budget-fill[data-width]');
+            if (fill) {
+                fill.style.width = '0%';
+                barObs.observe(bar);
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

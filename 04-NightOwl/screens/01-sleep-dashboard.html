@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Sleep Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#6366F1", "primary-light": "#818CF8", "deep": "#3730A3", "lavender": "#C4B5FD", "moon": "#FDE68A", "night": "#0F0B2E" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0F0B2E;
+        }
+
+        .night-glow {
+            background: radial-gradient(ellipse at 60% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-indigo {
+            backdrop-filter: blur(20px);
+            background: rgba(99, 102, 241, 0.06);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .moon-glow {
+            filter: drop-shadow(0 0 20px rgba(253, 230, 138, 0.3));
+            animation: moonPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes moonPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 15px rgba(253, 230, 138, 0.3));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 30px rgba(253, 230, 138, 0.5));
+            }
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden night-glow">
+        <!-- Stars -->
+        <div class="star" style="top:5%;left:15%;animation-delay:0s"></div>
+        <div class="star" style="top:8%;left:70%;animation-delay:0.5s"></div>
+        <div class="star" style="top:12%;left:40%;animation-delay:1s"></div>
+        <div class="star" style="top:3%;left:85%;animation-delay:1.5s"></div>
+        <div class="star" style="top:15%;left:55%;animation-delay:2s"></div>
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-light text-slate-500 tracking-widest uppercase">Good evening</p>
+                <h1 class="text-2xl font-bold mt-0.5">Sleep Report 🌙</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-slate-400">settings</span></button>
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-lavender flex items-center justify-center text-sm font-bold">
+                    J</div>
+            </div>
+        </div>
+
+        <!-- Moon + Score -->
+        <div class="flex justify-center py-6 relative">
+            <svg width="160" height="160" viewBox="0 0 160 160" class="moon-glow">
+                <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="6" />
+                <circle cx="80" cy="80" r="70" fill="none" stroke="#6366F1" stroke-width="6" stroke-linecap="round"
+                    stroke-dasharray="330" stroke-dashoffset="66" transform="rotate(-90 80 80)" />
+            </svg>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <p class="text-4xl font-bold text-primary-light">92</p>
+                <p class="text-xs text-slate-500">Sleep Score</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Sleep Time -->
+            <div class="glass-indigo rounded-2xl p-5 text-center">
+                <div class="flex items-center justify-center gap-6">
+                    <div>
+                        <p class="text-xs text-slate-500">Bedtime</p>
+                        <p class="text-lg font-semibold font-mono">23:15</p>
+                    </div>
+                    <div class="flex items-center gap-1"><span
+                            class="material-symbols-outlined !text-xl text-primary">arrow_forward</span></div>
+                    <div>
+                        <p class="text-xs text-slate-500">Wake Up</p>
+                        <p class="text-lg font-semibold font-mono">07:02</p>
+                    </div>
+                </div>
+                <div class="mt-3 pt-3 border-t border-white/5">
+                    <p class="text-2xl font-bold text-lavender">7h 47m</p>
+                    <p class="text-xs text-slate-500">Total Sleep Time</p>
+                </div>
+            </div>
+
+            <!-- Sleep Stages -->
+            <div class="glass-bright rounded-2xl p-5">
+                <h3 class="text-sm font-semibold text-slate-300 mb-3">Sleep Stages</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-primary"></div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1"><span class="text-xs">Deep Sleep</span><span
+                                    class="text-xs font-mono text-primary">1h 52m</span></div>
+                            <div class="w-full h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-primary" style="width:35%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-lavender"></div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1"><span class="text-xs">Light Sleep</span><span
+                                    class="text-xs font-mono text-lavender">3h 15m</span></div>
+                            <div class="w-full h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-lavender" style="width:55%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-violet-400"></div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1"><span class="text-xs">REM</span><span
+                                    class="text-xs font-mono text-violet-400">2h 10m</span></div>
+                            <div class="w-full h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-violet-400" style="width:40%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-rose-400"></div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1"><span class="text-xs">Awake</span><span
+                                    class="text-xs font-mono text-rose-400">30m</span></div>
+                            <div class="w-full h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-rose-400" style="width:10%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="glass rounded-xl p-3 text-center"><span
+                        class="material-symbols-outlined !text-xl text-moon">favorite</span>
+                    <p class="text-lg font-bold mt-1">58</p>
+                    <p class="text-[9px] text-slate-500">Avg HR</p>
+                </div>
+                <div class="glass rounded-xl p-3 text-center"><span
+                        class="material-symbols-outlined !text-xl text-primary">air</span>
+                    <p class="text-lg font-bold mt-1">96%</p>
+                    <p class="text-[9px] text-slate-500">SpO₂</p>
+                </div>
+                <div class="glass rounded-xl p-3 text-center"><span
+                        class="material-symbols-outlined !text-xl text-lavender">thermostat</span>
+                    <p class="text-lg font-bold mt-1">19°</p>
+                    <p class="text-[9px] text-slate-500">Room</p>
+                </div>
+            </div>
+
+            <!-- AI Insight -->
+            <div class="glass rounded-2xl p-4 border-l-2 border-primary">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-lg text-primary">psychology</span><span
+                        class="text-xs font-display font-semibold text-primary">Sleep AI Insight</span></div>
+                <p class="text-xs text-slate-300 leading-relaxed">Your deep sleep increased by 12% this week. Keep your
+                    11pm bedtime consistent for optimal recovery. <span class="text-primary font-medium">See trends
+                        →</span></p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">bedtime</span><span
+                        class="text-[10px] font-medium text-primary">Sleep</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">insights</span><span
+                        class="text-[10px] text-slate-500">Trends</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">music_note</span><span
+                        class="text-[10px] text-slate-500">Sounds</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">alarm</span><span
+                        class="text-[10px] text-slate-500">Alarm</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-slate-500">person</span><span
+                        class="text-[10px] text-slate-500">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

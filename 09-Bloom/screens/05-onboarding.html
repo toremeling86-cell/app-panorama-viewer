@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Onboarding</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+
+        .leaf-float {
+            animation: leafFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes leafFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+        }
+
+        .grow-in {
+            animation: growIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        }
+
+        @keyframes growIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .dot-active {
+            background: #2D8B56;
+            width: 24px;
+        }
+
+        .dot-inactive {
+            background: rgba(93, 64, 51, 0.15);
+            width: 8px;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-bark overflow-hidden">
+    <div
+        class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream items-center justify-center px-8">
+        <!-- Skip -->
+        <button class="absolute top-14 right-6 text-xs text-bark/30 font-medium">Skip</button>
+
+        <!-- Illustration -->
+        <div class="leaf-float grow-in mb-8">
+            <svg width="160" height="160" viewBox="0 0 160 160">
+                <circle cx="80" cy="80" r="60" fill="#2D8B56" opacity="0.06" />
+                <circle cx="80" cy="80" r="40" fill="#2D8B56" opacity="0.08" />
+                <!-- Pot -->
+                <rect x="60" y="100" width="40" height="30" rx="4" fill="#C67B5C" />
+                <rect x="55" y="95" width="50" height="10" rx="3" fill="#C67B5C" opacity="0.8" />
+                <!-- Plant -->
+                <path d="M80 95 Q70 70 55 60 Q70 65 80 70 Q90 65 105 60 Q90 70 80 95Z" fill="#2D8B56" />
+                <path d="M80 80 Q65 55 45 50 Q60 55 80 65 Q100 55 115 50 Q95 55 80 80Z" fill="#2D8B56" opacity="0.7" />
+                <line x1="80" y1="95" x2="80" y2="65" stroke="#2D8B56" stroke-width="2" />
+                <!-- Sparkles -->
+                <circle cx="50" cy="45" r="2" fill="#D4A03C" opacity="0.6" />
+                <circle cx="110" cy="50" r="1.5" fill="#D4A03C" opacity="0.4" />
+                <circle cx="45" cy="75" r="1" fill="#D4A03C" opacity="0.5" />
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-serif font-bold text-soil text-center leading-tight grow-in"
+            style="animation-delay:0.2s">Welcome to<br />Bloom 🌱</h1>
+        <p class="text-sm text-bark/50 text-center mt-3 leading-relaxed grow-in" style="animation-delay:0.4s">Your
+            personal plant care companion. Track watering, monitor health, and watch your garden thrive.</p>
+
+        <!-- Feature highlights -->
+        <div class="mt-8 space-y-4 w-full grow-in" style="animation-delay:0.6s">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-chloro/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-chloro">water_drop</span></div>
+                <div>
+                    <p class="text-sm font-serif font-semibold text-soil">Smart Reminders</p>
+                    <p class="text-[10px] text-bark/40">Never forget to water again</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-amber">photo_camera</span></div>
+                <div>
+                    <p class="text-sm font-serif font-semibold text-soil">Plant Identification</p>
+                    <p class="text-[10px] text-bark/40">Snap a photo, get instant info</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-terra/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-terra">calendar_month</span></div>
+                <div>
+                    <p class="text-sm font-serif font-semibold text-soil">Care Calendar</p>
+                    <p class="text-[10px] text-bark/40">Seasonal care plans for every plant</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination dots -->
+        <div class="flex items-center gap-2 mt-8 grow-in" style="animation-delay:0.8s">
+            <div class="h-2 rounded-full dot-active transition-all"></div>
+            <div class="h-2 rounded-full dot-inactive transition-all"></div>
+            <div class="h-2 rounded-full dot-inactive transition-all"></div>
+        </div>
+
+        <button
+            class="mt-6 w-full py-4 bg-chloro text-white font-serif font-bold rounded-2xl text-sm active:scale-95 transition-transform grow-in"
+            style="animation-delay:1s">Get Started</button>
+        <p class="text-[10px] text-bark/30 mt-3">Already have an account? <span class="text-chloro font-medium">Sign
+                in</span></p>
+    </div>
+</body>
+
+</html>

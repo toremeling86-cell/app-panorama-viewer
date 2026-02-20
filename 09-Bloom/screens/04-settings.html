@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+
+        .leaf-shadow {
+            box-shadow: 0 8px 30px rgba(45, 139, 86, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-bark overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="px-6 pt-14 pb-4">
+            <h1 class="text-xl font-serif font-bold text-soil">Settings</h1>
+        </div>
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Profile -->
+            <div class="bg-white rounded-2xl p-4 leaf-shadow flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-chloro/10 flex items-center justify-center text-2xl">🌱</div>
+                <div class="flex-1">
+                    <p class="text-base font-serif font-semibold text-soil">Emily Chen</p>
+                    <p class="text-xs text-bark/40">Plant parent since 2024</p>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-bark/30">chevron_right</span>
+            </div>
+            <!-- Notifications -->
+            <div class="bg-white rounded-2xl leaf-shadow divide-y divide-cream">
+                <div class="p-4">
+                    <h3 class="text-xs font-medium text-bark/40 uppercase tracking-wider">Notifications</h3>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-blue-400">water_drop</span><span
+                            class="text-sm text-soil">Watering Reminders</span></div>
+                    <div class="w-11 h-6 bg-chloro rounded-full relative">
+                        <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5 shadow"></div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-amber">light_mode</span><span
+                            class="text-sm text-soil">Light Alerts</span></div>
+                    <div class="w-11 h-6 bg-chloro rounded-full relative">
+                        <div class="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5 shadow"></div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-chloro">compost</span><span
+                            class="text-sm text-soil">Fertilizing Schedule</span></div>
+                    <div class="w-11 h-6 bg-bark/10 rounded-full relative">
+                        <div class="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5 shadow"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Preferences -->
+            <div class="bg-white rounded-2xl leaf-shadow divide-y divide-cream">
+                <div class="p-4">
+                    <h3 class="text-xs font-medium text-bark/40 uppercase tracking-wider">Preferences</h3>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">thermostat</span><span
+                            class="text-sm text-soil">Temperature Unit</span></div><span
+                        class="text-sm text-bark/40">°C</span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">language</span><span
+                            class="text-sm text-soil">Language</span></div><span
+                        class="text-sm text-bark/40">English</span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">dark_mode</span><span
+                            class="text-sm text-soil">Dark Mode</span></div>
+                    <div class="w-11 h-6 bg-bark/10 rounded-full relative">
+                        <div class="w-5 h-5 bg-white rounded-full absolute left-0.5 top-0.5 shadow"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Data -->
+            <div class="bg-white rounded-2xl leaf-shadow divide-y divide-cream">
+                <div class="p-4">
+                    <h3 class="text-xs font-medium text-bark/40 uppercase tracking-wider">Data & Storage</h3>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">cloud_upload</span><span
+                            class="text-sm text-soil">Backup Garden</span></div><span
+                        class="material-symbols-outlined !text-lg text-bark/30">chevron_right</span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">download</span><span
+                            class="text-sm text-soil">Export Data</span></div><span
+                        class="material-symbols-outlined !text-lg text-bark/30">chevron_right</span>
+                </div>
+            </div>
+            <!-- About -->
+            <div class="bg-white rounded-2xl leaf-shadow divide-y divide-cream">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">info</span><span
+                            class="text-sm text-soil">About Bloom</span></div><span
+                        class="text-xs text-bark/30">v2.1.0</span>
+                </div>
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center gap-3"><span
+                            class="material-symbols-outlined !text-lg text-bark/40">rate_review</span><span
+                            class="text-sm text-soil">Rate App</span></div><span
+                        class="material-symbols-outlined !text-lg text-bark/30">chevron_right</span>
+                </div>
+            </div>
+            <button class="w-full py-3 text-terra text-sm font-medium">Log Out</button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Grooming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "pawbg": "#FFF8F0", "bark": "#8B5E3C", "ocean": "#4A90D9", "leaf": "#5CB85C", "rose": "#FF7E7E", "sunny": "#FFD93D" }, fontFamily: { "display": ["Quicksand", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0
+        }
+
+        .paw-card {
+            box-shadow: 0 2px 12px rgba(139, 94, 60, 0.08);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-pawbg">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2"><button><span
+                    class="material-symbols-outlined !text-xl text-bark/20">arrow_back</span></button>
+            <h1 class="text-xl font-display font-bold">Grooming 🛁</h1><button><span
+                    class="material-symbols-outlined !text-xl text-bark/20">calendar_month</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Next Appointment -->
+            <div class="paw-card p-4 border-2 border-ocean/15">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-2 h-2 rounded-full bg-ocean animate-pulse"></div><span
+                        class="text-[10px] text-ocean font-display font-bold uppercase">Next Grooming</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-ocean/10 flex items-center justify-center text-2xl">✂️</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold">Full Groom — Buddy</p>
+                        <p class="text-[10px] text-bark/25">PawSpa Grooming · Feb 25</p>
+                        <p class="text-xs text-ocean font-bold mt-0.5">10:30 AM</p>
+                    </div>
+                </div>
+                <div class="flex gap-2 mt-3"><button
+                        class="flex-1 py-2 bg-ocean text-white font-display font-bold rounded-xl text-xs">Confirm</button><button
+                        class="flex-1 py-2 bg-bark/5 text-bark/30 font-medium rounded-xl text-xs">Reschedule</button>
+                </div>
+            </div>
+
+            <!-- Grooming Tasks -->
+            <p class="text-[10px] text-bark/25 font-display uppercase tracking-wider">At-Home Schedule</p>
+            <div class="paw-card p-3 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-sunny/15 flex items-center justify-center text-lg">🪮</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Brushing</p>
+                    <p class="text-[10px] text-bark/20">Every 2 days</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-leaf font-bold">Today</p><span class="text-[9px] text-bark/15">Due</span>
+                </div>
+            </div>
+            <div class="paw-card p-3 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-ocean/15 flex items-center justify-center text-lg">🫧</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Bath</p>
+                    <p class="text-[10px] text-bark/20">Every 2 weeks</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-bark/20">5 days</p><span class="text-[9px] text-bark/15">Left</span>
+                </div>
+            </div>
+            <div class="paw-card p-3 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-rose/15 flex items-center justify-center text-lg">💅</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Nail Trim</p>
+                    <p class="text-[10px] text-bark/20">Every 3 weeks</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-bark/20">12 days</p><span class="text-[9px] text-bark/15">Left</span>
+                </div>
+            </div>
+            <div class="paw-card p-3 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-leaf/15 flex items-center justify-center text-lg">👂</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Ear Cleaning</p>
+                    <p class="text-[10px] text-bark/20">Weekly</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-rose font-bold">Overdue</p><span class="text-[9px] text-rose">1 day</span>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <p class="text-[10px] text-bark/25 font-display uppercase tracking-wider">Recommended Products</p>
+            <div class="flex gap-2 overflow-x-auto no-scrollbar">
+                <div class="min-w-[130px] paw-card p-3 text-center"><span class="text-2xl">🧴</span>
+                    <p class="text-xs font-display font-bold mt-1">Oat Shampoo</p>
+                    <p class="text-[9px] text-leaf font-bold">$12.99</p>
+                </div>
+                <div class="min-w-[130px] paw-card p-3 text-center"><span class="text-2xl">🪥</span>
+                    <p class="text-xs font-display font-bold mt-1">Slicker Brush</p>
+                    <p class="text-[9px] text-leaf font-bold">$8.49</p>
+                </div>
+                <div class="min-w-[130px] paw-card p-3 text-center"><span class="text-2xl">✂️</span>
+                    <p class="text-xs font-display font-bold mt-1">Nail Clipper</p>
+                    <p class="text-[9px] text-leaf font-bold">$6.99</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

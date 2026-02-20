@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Radar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "sky-dark": "#0A1628", "radar-green": "#22C55E", "radar-yellow": "#F59E0B", "radar-red": "#EF4444", "radar-blue": "#3B82F6" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A1628
+        }
+
+        @keyframes sweep {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .sweep-line {
+            animation: sweep 4s linear infinite;
+            transform-origin: center
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-sky-dark">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-radar-green/50">Weather Radar</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">layers</span></button>
+        </div>
+
+        <!-- Radar Map -->
+        <div class="mx-6 rounded-2xl overflow-hidden relative" style="height:300px">
+            <canvas id="radar" class="w-full h-full"></canvas>
+            <!-- Sweep overlay -->
+            <svg class="absolute inset-0 w-full h-full" viewBox="0 0 300 300">
+                <line x1="150" y1="150" x2="150" y2="10" stroke="rgba(34,197,94,0.3)" stroke-width="2"
+                    class="sweep-line" />
+            </svg>
+            <div class="absolute bottom-3 left-3 bg-black/50 backdrop-blur rounded-lg px-2 py-1 flex gap-2">
+                <span class="flex items-center gap-1 text-[8px]"><span
+                        class="w-2 h-2 rounded-full bg-radar-green"></span>Light</span>
+                <span class="flex items-center gap-1 text-[8px]"><span
+                        class="w-2 h-2 rounded-full bg-radar-yellow"></span>Moderate</span>
+                <span class="flex items-center gap-1 text-[8px]"><span
+                        class="w-2 h-2 rounded-full bg-radar-red"></span>Heavy</span>
+            </div>
+            <div class="absolute top-3 right-3 bg-black/50 backdrop-blur rounded-lg px-2 py-1 text-[9px] text-white/40">
+                Live · 2 min ago</div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="px-6 mt-3">
+            <div class="flex items-center gap-1"><span
+                    class="material-symbols-outlined !text-sm text-radar-green/40">play_arrow</span>
+                <div class="flex-1 h-1 rounded-full bg-white/5 relative">
+                    <div class="absolute left-0 top-0 h-full rounded-full bg-radar-green/40" style="width:30%"></div>
+                    <div class="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-radar-green border-2 border-sky-dark"
+                        style="left:30%"></div>
+                </div><span class="text-[9px] text-white/20">+3h</span>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3">
+            <!-- Precipitation -->
+            <div class="bg-white/3 border border-white/5 rounded-2xl p-4">
+                <p class="text-[10px] text-radar-green/30 font-display uppercase tracking-wider mb-2">Precipitation
+                    Forecast</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2"><span class="text-xs text-white/20 w-10">Now</span>
+                        <div class="flex-1 h-4 rounded bg-white/3">
+                            <div class="h-full rounded bg-radar-green/40" style="width:25%"></div>
+                        </div><span class="text-[10px] text-white/15">Light</span>
+                    </div>
+                    <div class="flex items-center gap-2"><span class="text-xs text-white/20 w-10">+1h</span>
+                        <div class="flex-1 h-4 rounded bg-white/3">
+                            <div class="h-full rounded bg-radar-yellow/40" style="width:55%"></div>
+                        </div><span class="text-[10px] text-white/15">Moderate</span>
+                    </div>
+                    <div class="flex items-center gap-2"><span class="text-xs text-white/20 w-10">+2h</span>
+                        <div class="flex-1 h-4 rounded bg-white/3">
+                            <div class="h-full rounded bg-radar-red/50" style="width:80%"></div>
+                        </div><span class="text-[10px] text-white/15">Heavy</span>
+                    </div>
+                    <div class="flex items-center gap-2"><span class="text-xs text-white/20 w-10">+3h</span>
+                        <div class="flex-1 h-4 rounded bg-white/3">
+                            <div class="h-full rounded bg-radar-yellow/40" style="width:40%"></div>
+                        </div><span class="text-[10px] text-white/15">Moderate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert -->
+            <div class="bg-radar-yellow/5 border border-radar-yellow/10 rounded-2xl p-3 flex items-center gap-3"><span
+                    class="material-symbols-outlined !text-lg text-radar-yellow">warning</span>
+                <div>
+                    <p class="text-xs font-display font-bold text-radar-yellow">Flash Flood Watch</p>
+                    <p class="text-[10px] text-white/20">Until 8:00 PM · Low-lying areas</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const c = document.getElementById('radar'); c.width = c.offsetWidth * 2; c.height = 300 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2); const W = c.offsetWidth, H = 300, cx = W / 2, cy = H / 2;
+        // Dark map bg
+        x.fillStyle = '#0D1B2A'; x.fillRect(0, 0, W, H);
+        // Grid circles
+        [40, 80, 120].forEach(r => { x.beginPath(); x.arc(cx, cy, r, 0, Math.PI * 2); x.strokeStyle = 'rgba(34,197,94,0.06)'; x.lineWidth = 1; x.stroke() });
+        // Crosshair
+        x.strokeStyle = 'rgba(34,197,94,0.08)'; x.beginPath(); x.moveTo(cx, 0); x.lineTo(cx, H); x.stroke(); x.beginPath(); x.moveTo(0, cy); x.lineTo(W, cy); x.stroke();
+        // Rain cells
+        const cells = [[cx - 40, cy - 30, 35, 25, 'rgba(34,197,94,0.25)'], [cx + 20, cy + 10, 50, 35, 'rgba(245,158,11,0.3)'], [cx + 50, cy - 50, 25, 20, 'rgba(34,197,94,0.2)'], [cx - 60, cy + 40, 40, 30, 'rgba(239,68,68,0.25)'], [cx - 10, cy + 60, 30, 20, 'rgba(245,158,11,0.2)']];
+        cells.forEach(([px, py, w, h, color]) => { x.fillStyle = color; x.beginPath(); x.ellipse(px, py, w, h, 0.3, 0, Math.PI * 2); x.fill() });
+        // Center dot (user location)
+        x.beginPath(); x.arc(cx, cy, 3, 0, Math.PI * 2); x.fillStyle = 'rgba(59,130,246,0.8)'; x.fill(); x.beginPath(); x.arc(cx, cy, 8, 0, Math.PI * 2); x.strokeStyle = 'rgba(59,130,246,0.3)'; x.lineWidth = 1.5; x.stroke();
+    </script>
+</body>
+
+</html>

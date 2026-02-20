@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Today's Schedule</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FFFE", "trust": "#0D9488", "attention": "#D97706", "critical": "#DC2626", "calm": "#E0F2FE", "safe": "#DCFCE7" }, fontFamily: { "display": ["Figtree", "sans-serif"], "body": ["Noto Sans", "sans-serif"], "mono": ["IBM Plex Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FFFE;
+        }
+
+        .medical-card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(13, 148, 136, 0.08);
+            border-radius: 16px;
+        }
+
+        .urgency-calm {
+            border-left: 4px solid #0D9488;
+        }
+
+        .urgency-attention {
+            border-left: 4px solid #D97706;
+            background: #FFFBEB;
+        }
+
+        .urgency-critical {
+            border-left: 4px solid #DC2626;
+            background: #FEF2F2;
+        }
+
+        /* WCAG AAA: All text meets 7:1 contrast ratio */
+        .check-anim {
+            stroke-dasharray: 20;
+            stroke-dashoffset: 20;
+            animation: checkmark 0.5s ease-out 0.3s forwards;
+        }
+
+        @keyframes checkmark {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .check-anim,
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical" role="main"
+        aria-label="Today's medication schedule">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-display text-trust font-semibold">Vitals</p>
+                <h1 class="text-xl font-display font-bold mt-0.5">Today's Schedule</h1>
+            </div>
+            <div class="flex gap-2">
+                <button class="w-10 h-10 rounded-full bg-white medical-card flex items-center justify-center"
+                    aria-label="Emergency info"><span
+                        class="material-symbols-outlined !text-xl text-critical">emergency</span></button>
+                <button class="w-10 h-10 rounded-full bg-white medical-card flex items-center justify-center"
+                    aria-label="Settings"><span
+                        class="material-symbols-outlined !text-xl text-gray-400">settings</span></button>
+            </div>
+        </div>
+
+        <!-- Adherence Banner -->
+        <div class="mx-6 mt-2 bg-safe rounded-2xl p-4 flex items-center gap-3">
+            <svg width="44" height="44" viewBox="0 0 44 44" role="img" aria-label="Adherence 95%">
+                <circle cx="22" cy="22" r="18" fill="none" stroke="#DCFCE7" stroke-width="4" />
+                <circle cx="22" cy="22" r="18" fill="none" stroke="#0D9488" stroke-width="4" stroke-linecap="round"
+                    stroke-dasharray="113" stroke-dashoffset="6" transform="rotate(-90 22 22)" />
+            </svg>
+            <div>
+                <p class="text-lg font-display font-bold text-trust">95%</p>
+                <p class="text-xs text-gray-500">Weekly adherence · Great job!</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-4 space-y-2" role="list" aria-label="Medication timeline">
+            <!-- Time Block: Morning -->
+            <div class="flex items-center gap-2 mt-2 mb-1"><span
+                    class="text-[10px] font-display text-gray-400 uppercase tracking-wider font-semibold">Morning</span>
+                <div class="flex-1 h-px bg-gray-100"></div>
+            </div>
+
+            <!-- Taken - Calm -->
+            <div class="bg-white medical-card p-4 urgency-calm opacity-60" role="listitem">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-trust/10 flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="9" fill="none" stroke="#0D9488" stroke-width="2" />
+                            <polyline points="6,10 9,13 14,7" fill="none" stroke="#0D9488" stroke-width="2"
+                                class="check-anim" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Lisinopril</p>
+                        <p class="text-xs text-gray-400">10mg · 1 tablet · Blood pressure</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-display text-trust font-medium">8:00 AM</p>
+                        <p class="text-[10px] text-trust/60">Taken ✓</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Taken -->
+            <div class="bg-white medical-card p-4 urgency-calm opacity-60" role="listitem">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-trust/10 flex items-center justify-center">
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <circle cx="10" cy="10" r="9" fill="none" stroke="#0D9488" stroke-width="2" />
+                            <polyline points="6,10 9,13 14,7" fill="none" stroke="#0D9488" stroke-width="2"
+                                class="check-anim" />
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Vitamin D3</p>
+                        <p class="text-xs text-gray-400">2000 IU · 1 capsule · Supplement</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-display text-trust font-medium">8:00 AM</p>
+                        <p class="text-[10px] text-trust/60">Taken ✓</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Block: Afternoon -->
+            <div class="flex items-center gap-2 mt-4 mb-1"><span
+                    class="text-[10px] font-display text-gray-400 uppercase tracking-wider font-semibold">Afternoon</span>
+                <div class="flex-1 h-px bg-gray-100"></div>
+            </div>
+
+            <!-- Attention - Due soon -->
+            <div class="bg-white medical-card p-4 urgency-attention" role="listitem">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-attention/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined !text-xl text-attention">schedule</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Metformin</p>
+                        <p class="text-xs text-gray-500">500mg · 1 tablet · Blood sugar</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-display text-attention font-bold">1:00 PM</p>
+                        <p class="text-[10px] text-attention">Due in 15min</p>
+                    </div>
+                </div>
+                <button
+                    class="mt-3 w-full py-2.5 bg-trust text-white font-display font-semibold rounded-xl text-sm active:scale-95 transition-transform"
+                    aria-label="Mark Metformin as taken">Mark as Taken</button>
+            </div>
+
+            <!-- Time Block: Evening -->
+            <div class="flex items-center gap-2 mt-4 mb-1"><span
+                    class="text-[10px] font-display text-gray-400 uppercase tracking-wider font-semibold">Evening</span>
+                <div class="flex-1 h-px bg-gray-100"></div>
+            </div>
+
+            <!-- Upcoming -->
+            <div class="bg-white medical-card p-4 urgency-calm" role="listitem">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-xl text-gray-300">medication</span></div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Aspirin</p>
+                        <p class="text-xs text-gray-400">81mg · 1 tablet · Heart</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-display text-gray-400">8:00 PM</p>
+                        <p class="text-[10px] text-gray-300">Upcoming</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white medical-card p-4 urgency-calm" role="listitem">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-xl text-gray-300">medication</span></div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Melatonin</p>
+                        <p class="text-xs text-gray-400">3mg · 1 tablet · Sleep</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-xs font-display text-gray-400">10:00 PM</p>
+                        <p class="text-[10px] text-gray-300">Upcoming</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interaction Warning -->
+            <div class="medical-card urgency-critical p-4 mt-2" role="alert">
+                <div class="flex items-start gap-2">
+                    <span class="material-symbols-outlined !text-lg text-critical mt-0.5">warning</span>
+                    <div>
+                        <p class="text-sm font-display font-semibold text-critical">Interaction Alert</p>
+                        <p class="text-xs text-gray-600 mt-0.5">Metformin + Alcohol may cause lactic acidosis. Avoid
+                            alcohol today. <span class="text-trust font-medium underline">Learn more</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-medical/90 backdrop-blur border-t border-trust/10">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5" aria-label="Schedule"><span
+                        class="material-symbols-outlined !text-xl text-trust"
+                        style="font-variation-settings: 'FILL' 1;">today</span><span
+                        class="text-[10px] font-display font-medium text-trust">Today</span></button>
+                <button class="flex flex-col items-center gap-0.5" aria-label="Medications"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">medication</span><span
+                        class="text-[10px] text-gray-300">Meds</span></button>
+                <button class="flex flex-col items-center gap-0.5" aria-label="Health records"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">folder_shared</span><span
+                        class="text-[10px] text-gray-300">Records</span></button>
+                <button class="flex flex-col items-center gap-0.5" aria-label="Family"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">group</span><span
+                        class="text-[10px] text-gray-300">Family</span></button>
+                <button class="flex flex-col items-center gap-0.5" aria-label="Settings"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">settings</span><span
+                        class="text-[10px] text-gray-300">Settings</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

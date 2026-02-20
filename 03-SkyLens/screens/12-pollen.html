@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Pollen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "sky-dark": "#0A1628", "low": "#22C55E", "med": "#F59E0B", "high": "#EF4444", "tree": "#84CC16", "grass": "#22D3EE", "weed": "#F97316" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A1628
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-sky-dark">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-med/50">Pollen & Allergy</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">notifications_none</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Overall -->
+            <div class="bg-med/5 border border-med/10 rounded-2xl p-5 text-center">
+                <p class="text-[10px] text-white/15 uppercase tracking-wider">Pollen Index</p>
+                <p class="text-4xl font-display font-bold text-med mt-1">6.8</p>
+                <p class="text-xs text-med">Moderate</p>
+                <div class="h-2 rounded-full bg-white/5 mt-3 mx-4 relative">
+                    <div class="h-full rounded-full bg-gradient-to-r from-low via-med to-high" style="width:68%"></div>
+                </div>
+                <div class="flex justify-between text-[8px] text-white/15 mt-1 mx-4"><span>Low</span><span>High</span>
+                </div>
+            </div>
+
+            <!-- Types -->
+            <div class="bg-white/3 border border-white/5 rounded-2xl p-4">
+                <p class="text-[10px] text-white/15 font-display uppercase tracking-wider mb-3">By Type</p>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-tree/10 flex items-center justify-center text-lg">🌳</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Tree Pollen</p>
+                            <div class="h-1.5 rounded-full bg-white/5 mt-1">
+                                <div class="h-full rounded-full bg-high" style="width:82%"></div>
+                            </div>
+                        </div><span class="text-xs text-high font-display font-bold">High</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-grass/10 flex items-center justify-center text-lg">🌿</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Grass Pollen</p>
+                            <div class="h-1.5 rounded-full bg-white/5 mt-1">
+                                <div class="h-full rounded-full bg-med" style="width:45%"></div>
+                            </div>
+                        </div><span class="text-xs text-med font-display font-bold">Med</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-weed/10 flex items-center justify-center text-lg">🌾</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Weed Pollen</p>
+                            <div class="h-1.5 rounded-full bg-white/5 mt-1">
+                                <div class="h-full rounded-full bg-low" style="width:18%"></div>
+                            </div>
+                        </div><span class="text-xs text-low font-display font-bold">Low</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-lg">🍄</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Mold</p>
+                            <div class="h-1.5 rounded-full bg-white/5 mt-1">
+                                <div class="h-full rounded-full bg-med" style="width:55%"></div>
+                            </div>
+                        </div><span class="text-xs text-med font-display font-bold">Med</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5-Day -->
+            <div class="bg-white/3 border border-white/5 rounded-2xl p-4">
+                <p class="text-[10px] text-white/15 font-display uppercase tracking-wider mb-2">5-Day Forecast</p>
+                <div class="flex justify-between">
+                    <div class="text-center">
+                        <p class="text-[9px] text-white/15">Today</p>
+                        <div
+                            class="w-8 h-8 rounded-lg bg-med/20 flex items-center justify-center mt-1 text-med text-xs font-display font-bold">
+                            6.8</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[9px] text-white/15">Thu</p>
+                        <div
+                            class="w-8 h-8 rounded-lg bg-high/20 flex items-center justify-center mt-1 text-high text-xs font-display font-bold">
+                            8.2</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[9px] text-white/15">Fri</p>
+                        <div
+                            class="w-8 h-8 rounded-lg bg-high/20 flex items-center justify-center mt-1 text-high text-xs font-display font-bold">
+                            7.9</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[9px] text-white/15">Sat</p>
+                        <div
+                            class="w-8 h-8 rounded-lg bg-med/20 flex items-center justify-center mt-1 text-med text-xs font-display font-bold">
+                            5.4</div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[9px] text-white/15">Sun</p>
+                        <div
+                            class="w-8 h-8 rounded-lg bg-low/20 flex items-center justify-center mt-1 text-low text-xs font-display font-bold">
+                            3.1</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advice -->
+            <div class="bg-med/5 border border-med/10 rounded-2xl p-3 flex items-center gap-3"><span
+                    class="material-symbols-outlined !text-lg text-med">masks</span>
+                <div>
+                    <p class="text-xs font-display font-bold text-med">Allergy Advice</p>
+                    <p class="text-[10px] text-white/20">Tree pollen is high. Consider antihistamines and keeping
+                        windows closed. Best outdoor hours: early morning.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

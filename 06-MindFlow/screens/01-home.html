@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Meditation Home</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#F97316", "primary-soft": "#FDBA74", "bg-void": "#1A1210", "warm-brown": "#44291C", "sage": "#6B8E6B", "mist": "#D4C5B4" }, fontFamily: { "display": ["DM Sans", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1210;
+        }
+
+        .zen-glow {
+            background: radial-gradient(ellipse at 50% 30%, rgba(249, 115, 22, 0.1) 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, rgba(107, 142, 107, 0.06) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-warm {
+            backdrop-filter: blur(20px);
+            background: rgba(249, 115, 22, 0.05);
+            border: 1px solid rgba(249, 115, 22, 0.15);
+        }
+
+        .breath-ring {
+            animation: breatheRing 8s ease-in-out infinite;
+        }
+
+        @keyframes breatheRing {
+            0% {
+                transform: scale(0.85);
+                opacity: 0.5;
+            }
+
+            25% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(0.85);
+                opacity: 0.5;
+            }
+
+            75% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(0.85);
+                opacity: 0.5;
+            }
+        }
+
+        .ember {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #F97316;
+            border-radius: 50%;
+            animation: emFloat 5s infinite ease-in-out;
+            opacity: 0.2;
+        }
+
+        @keyframes emFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.1;
+            }
+
+            50% {
+                transform: translateY(-30px);
+                opacity: 0.4;
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden zen-glow">
+        <!-- Embers -->
+        <div class="ember" style="top:20%;left:25%;animation-delay:0s"></div>
+        <div class="ember" style="top:40%;left:70%;animation-delay:1.5s"></div>
+        <div class="ember" style="top:60%;left:15%;animation-delay:3s"></div>
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs font-light text-mist/50 tracking-[0.3em] uppercase">Namaste</p>
+                <h1 class="text-2xl font-bold mt-0.5">Welcome back 🧘</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="glass w-10 h-10 rounded-full flex items-center justify-center relative"><span
+                        class="material-symbols-outlined !text-xl text-mist/60">notifications</span></button>
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-primary-soft flex items-center justify-center text-sm font-bold">
+                    J</div>
+            </div>
+        </div>
+
+        <!-- Breathing Circle -->
+        <div class="flex justify-center py-8 relative">
+            <div class="breath-ring">
+                <svg width="180" height="180" viewBox="0 0 180 180">
+                    <circle cx="90" cy="90" r="80" fill="none" stroke="rgba(249,115,22,0.08)" stroke-width="1" />
+                    <circle cx="90" cy="90" r="60" fill="none" stroke="rgba(249,115,22,0.12)" stroke-width="1" />
+                    <circle cx="90" cy="90" r="40" fill="none" stroke="rgba(249,115,22,0.18)" stroke-width="1" />
+                    <circle cx="90" cy="90" r="20" fill="rgba(249,115,22,0.15)" />
+                </svg>
+            </div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <p class="text-sm font-light tracking-[0.2em] text-primary-soft uppercase">Breathe</p>
+            </div>
+        </div>
+
+        <!-- Streak & Stats -->
+        <div class="flex items-center justify-center gap-6 px-6 pb-4">
+            <div class="flex items-center gap-1.5"><span class="text-primary">🔥</span><span
+                    class="text-sm font-medium">21 days</span><span class="text-xs text-mist/40">streak</span></div>
+            <div class="w-px h-4 bg-white/10"></div>
+            <div class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined !text-sm text-sage">timer</span><span
+                    class="text-sm font-medium">4.2h</span><span class="text-xs text-mist/40">this week</span></div>
+            <div class="w-px h-4 bg-white/10"></div>
+            <div class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined !text-sm text-primary-soft">spa</span><span
+                    class="text-sm font-medium">142</span><span class="text-xs text-mist/40">sessions</span></div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Today's Session -->
+            <div class="glass-warm rounded-2xl p-5">
+                <p class="text-[10px] text-primary tracking-[0.3em] uppercase font-medium">Recommended For You</p>
+                <h3 class="text-lg font-semibold mt-2">Morning Calm</h3>
+                <p class="text-sm text-mist/50 mt-1">Start your day with clarity and intention</p>
+                <div class="flex items-center gap-4 mt-3">
+                    <span class="text-xs flex items-center gap-1 text-mist/40"><span
+                            class="material-symbols-outlined !text-sm">timer</span> 15 min</span>
+                    <span class="text-xs flex items-center gap-1 text-mist/40"><span
+                            class="material-symbols-outlined !text-sm">trending_up</span> Focus</span>
+                    <span class="text-xs flex items-center gap-1 text-primary"><span
+                            class="material-symbols-outlined !text-sm">star</span> Popular</span>
+                </div>
+                <button
+                    class="mt-4 w-full py-3 bg-primary text-bg-void font-semibold rounded-xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                    <span class="material-symbols-outlined !text-lg">play_arrow</span> Begin Session
+                </button>
+            </div>
+
+            <!-- Quick Practices -->
+            <h3 class="text-sm font-medium text-mist/40 tracking-wider uppercase">Quick Practices</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass rounded-xl p-4 text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-2"><span
+                            class="material-symbols-outlined !text-2xl text-primary">air</span></div>
+                    <p class="text-sm font-medium">Breathwork</p>
+                    <p class="text-xs text-mist/40 mt-0.5">5 min</p>
+                </div>
+                <div class="glass rounded-xl p-4 text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-sage/10 flex items-center justify-center mx-auto mb-2"><span
+                            class="material-symbols-outlined !text-2xl text-sage">self_improvement</span></div>
+                    <p class="text-sm font-medium">Body Scan</p>
+                    <p class="text-xs text-mist/40 mt-0.5">10 min</p>
+                </div>
+                <div class="glass rounded-xl p-4 text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto mb-2">
+                        <span class="material-symbols-outlined !text-2xl text-purple-400">bedtime</span></div>
+                    <p class="text-sm font-medium">Sleep Story</p>
+                    <p class="text-xs text-mist/40 mt-0.5">20 min</p>
+                </div>
+                <div class="glass rounded-xl p-4 text-center">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mx-auto mb-2">
+                        <span class="material-symbols-outlined !text-2xl text-blue-400">psychology</span></div>
+                    <p class="text-sm font-medium">Focus</p>
+                    <p class="text-xs text-mist/40 mt-0.5">15 min</p>
+                </div>
+            </div>
+
+            <!-- Daily Quote -->
+            <div class="glass rounded-2xl p-5 border-l-2 border-primary/30">
+                <p class="text-sm italic text-mist/60 leading-relaxed">"The present moment is the only moment available
+                    to us, and it is the door to all moments."</p>
+                <p class="text-xs text-primary/70 mt-2">— Thich Nhat Hanh</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">spa</span><span
+                        class="text-[10px] font-medium text-primary">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-mist/30">explore</span><span
+                        class="text-[10px] text-mist/30">Explore</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-mist/30">insights</span><span
+                        class="text-[10px] text-mist/30">Progress</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-mist/30">person</span><span
+                        class="text-[10px] text-mist/30">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

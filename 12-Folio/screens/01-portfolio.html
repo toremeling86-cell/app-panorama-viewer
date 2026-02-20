@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "gallery": "#FAFAFA", "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF", "mist": "#F3F4F6" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"], "mono": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA;
+        }
+
+        .tension-grid {
+            display: grid;
+            grid-template-columns: 61.8% 38.2%;
+            gap: 4px;
+        }
+
+        .tension-grid-alt {
+            display: grid;
+            grid-template-columns: 38.2% 61.8%;
+            gap: 4px;
+        }
+
+        .editorial-line {
+            border-top: 1px solid #0A0A0A;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.6);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 16px;
+        }
+
+        .drop-cap::first-letter {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3.5em;
+            float: left;
+            line-height: 1;
+            margin-right: 8px;
+            font-weight: 900;
+            color: #E8553D;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-gallery">
+        <!-- Masthead -->
+        <div class="px-6 pt-14 pb-3 editorial-line">
+            <div class="flex items-center justify-between">
+                <h1 class="font-serif text-3xl font-bold tracking-tight">Folio<span class="text-coral">.</span></h1>
+                <button><span class="material-symbols-outlined !text-xl text-ink">menu</span></button>
+            </div>
+        </div>
+
+        <!-- Subhead -->
+        <div class="px-6 py-3 border-b border-ink/5">
+            <p class="text-xs font-sans font-light text-silver tracking-[0.3em] uppercase">Selected Work</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto pb-20">
+            <!-- Asymmetric Grid Projects -->
+            <div class="tension-grid p-1 mt-1">
+                <div class="project-card bg-ink aspect-[3/4] flex items-end p-4 relative">
+                    <div class="project-card overlay"></div>
+                    <div>
+                        <p class="text-[10px] text-white/40 font-mono uppercase tracking-widest">Branding</p>
+                        <h3 class="font-serif text-lg font-bold text-white leading-tight mt-1">Meridian<br />Labs</h3>
+                        <p class="text-[10px] text-coral font-medium mt-1">2026</p>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <div class="project-card bg-mist aspect-square flex items-end p-3">
+                        <div>
+                            <p class="text-[9px] text-silver font-mono uppercase tracking-widest">UI/UX</p>
+                            <h3 class="font-serif text-sm font-bold leading-tight mt-0.5">Aero<br />Cloud</h3>
+                        </div>
+                    </div>
+                    <div class="project-card bg-coral aspect-[4/3] flex items-end p-3">
+                        <div>
+                            <p class="text-[9px] text-white/60 font-mono uppercase tracking-widest">Identity</p>
+                            <h3 class="font-serif text-sm font-bold text-white leading-tight mt-0.5">Nomad<br />Coffee
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tension-grid-alt p-1 mt-1">
+                <div class="flex flex-col gap-1">
+                    <div class="project-card bg-ink/90 aspect-square flex items-end p-3">
+                        <div>
+                            <p class="text-[9px] text-white/40 font-mono uppercase tracking-widest">Product</p>
+                            <h3 class="font-serif text-sm font-bold text-white leading-tight mt-0.5">Silent<br />Audio
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="project-card bg-mist aspect-[4/3] flex items-end p-3">
+                        <div>
+                            <p class="text-[9px] text-silver font-mono uppercase tracking-widest">Web</p>
+                            <h3 class="font-serif text-sm font-bold leading-tight mt-0.5">Nordic<br />Studio</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card bg-gradient-to-b from-ink to-ink/80 aspect-[3/4] flex items-end p-4">
+                    <div>
+                        <p class="text-[10px] text-white/40 font-mono uppercase tracking-widest">Motion</p>
+                        <h3 class="font-serif text-lg font-bold text-white leading-tight mt-1">Pulse<br />Festival</h3>
+                        <p class="text-[10px] text-coral font-medium mt-1">2025 · Gold Award</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="px-6 py-8">
+                <div class="editorial-line pt-6">
+                    <h2 class="font-serif text-2xl font-bold tracking-tight">About</h2>
+                    <p class="text-xs text-silver leading-relaxed mt-3 drop-cap">Designer and creative director based in
+                        Oslo, Norway. I specialize in brand identity, product design, and creative direction for
+                        forward-thinking companies. Previously at Pentagram, now independent.</p>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="px-6 pb-6 grid grid-cols-3 gap-4">
+                <div class="text-center editorial-line pt-3">
+                    <p class="font-serif text-3xl font-bold text-coral">47</p>
+                    <p class="text-[10px] text-silver uppercase tracking-wider mt-1">Projects</p>
+                </div>
+                <div class="text-center editorial-line pt-3">
+                    <p class="font-serif text-3xl font-bold">12</p>
+                    <p class="text-[10px] text-silver uppercase tracking-wider mt-1">Awards</p>
+                </div>
+                <div class="text-center editorial-line pt-3">
+                    <p class="font-serif text-3xl font-bold">8yr</p>
+                    <p class="text-[10px] text-silver uppercase tracking-wider mt-1">Experience</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-gallery/90 backdrop-blur editorial-line">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-ink">grid_view</span><span
+                        class="text-[10px] font-mono text-ink">Work</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-silver">article</span><span
+                        class="text-[10px] font-mono text-silver">Case</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-silver">person</span><span
+                        class="text-[10px] font-mono text-silver">About</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-silver">mail</span><span
+                        class="text-[10px] font-mono text-silver">Contact</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

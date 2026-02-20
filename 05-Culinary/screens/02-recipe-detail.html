@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Recipe Detail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "primary": "#16A249", "cream": "#FFFBF3", "accent": "#E8590C" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFFBF3;
+        }
+
+        .glass-warm {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 251, 243, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bg-cream">
+        <!-- Hero Image Area -->
+        <div
+            class="relative h-56 bg-gradient-to-br from-amber-200 via-orange-200 to-yellow-100 flex items-center justify-center">
+            <span class="text-7xl">🍝</span>
+            <div class="absolute top-0 left-0 right-0 flex items-center justify-between px-6 pt-14">
+                <button
+                    class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center card-shadow"><span
+                        class="material-symbols-outlined !text-xl">arrow_back</span></button>
+                <div class="flex gap-2">
+                    <button
+                        class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center card-shadow"><span
+                            class="material-symbols-outlined !text-xl">bookmark_border</span></button>
+                    <button
+                        class="w-10 h-10 rounded-full bg-white/80 backdrop-blur flex items-center justify-center card-shadow"><span
+                            class="material-symbols-outlined !text-xl">share</span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex-1 overflow-y-auto pb-28 -mt-6 relative z-10">
+            <div class="bg-cream rounded-t-3xl px-6 pt-6">
+                <!-- Title -->
+                <div class="flex items-center gap-2 mb-1"><span
+                        class="text-[10px] font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full">Italian</span><span
+                        class="text-[10px] font-medium bg-accent/10 text-accent px-2 py-0.5 rounded-full">Comfort
+                        Food</span></div>
+                <h1 class="font-serif text-2xl font-bold mt-2">Truffle Mushroom Risotto</h1>
+                <p class="text-sm text-gray-500 mt-1">Creamy Arborio rice with porcini mushrooms and truffle oil finish
+                </p>
+
+                <!-- Stats -->
+                <div class="flex items-center gap-4 mt-4 py-3 border-y border-black/5">
+                    <div class="flex items-center gap-1.5"><span
+                            class="material-symbols-outlined !text-lg text-primary">timer</span><span
+                            class="text-sm font-medium">35 min</span></div>
+                    <div class="flex items-center gap-1.5"><span
+                            class="material-symbols-outlined !text-lg text-accent">local_fire_department</span><span
+                            class="text-sm font-medium">420 kcal</span></div>
+                    <div class="flex items-center gap-1.5"><span
+                            class="material-symbols-outlined !text-lg text-amber-500">group</span><span
+                            class="text-sm font-medium">4 servings</span></div>
+                    <div class="flex items-center gap-1.5"><span class="text-amber-400 text-sm">★</span><span
+                            class="text-sm font-medium">4.9</span></div>
+                </div>
+
+                <!-- Tab Selector -->
+                <div class="flex gap-4 mt-4 border-b border-black/5">
+                    <button
+                        class="pb-3 text-sm font-semibold text-primary border-b-2 border-primary">Ingredients</button>
+                    <button class="pb-3 text-sm font-medium text-gray-400">Steps</button>
+                    <button class="pb-3 text-sm font-medium text-gray-400">Nutrition</button>
+                </div>
+
+                <!-- Servings -->
+                <div class="flex items-center justify-between mt-4 mb-3">
+                    <span class="text-sm text-gray-500">Servings</span>
+                    <div class="flex items-center gap-3">
+                        <button class="w-8 h-8 rounded-full bg-white card-shadow flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm">remove</span></button>
+                        <span class="text-lg font-semibold font-mono">4</span>
+                        <button
+                            class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm">add</span></button>
+                    </div>
+                </div>
+
+                <!-- Ingredients List -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3 bg-white rounded-xl p-3 card-shadow">
+                        <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-lg">🍚</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Arborio Rice</p>
+                            <p class="text-xs text-gray-400">320g</p>
+                        </div>
+                        <div
+                            class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined !text-sm text-white">check</span></div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-xl p-3 card-shadow">
+                        <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-lg">🍄</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Porcini Mushrooms</p>
+                            <p class="text-xs text-gray-400">200g, sliced</p>
+                        </div>
+                        <div
+                            class="w-5 h-5 rounded border-2 border-primary bg-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined !text-sm text-white">check</span></div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-xl p-3 card-shadow">
+                        <div class="w-10 h-10 rounded-lg bg-yellow-50 flex items-center justify-center text-lg">🧈</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Butter</p>
+                            <p class="text-xs text-gray-400">50g</p>
+                        </div>
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-xl p-3 card-shadow">
+                        <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center text-lg">🧀</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Parmesan</p>
+                            <p class="text-xs text-gray-400">80g, grated</p>
+                        </div>
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                    </div>
+                    <div class="flex items-center gap-3 bg-white rounded-xl p-3 card-shadow">
+                        <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-lg">🫒</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Truffle Oil</p>
+                            <p class="text-xs text-gray-400">2 tbsp</p>
+                        </div>
+                        <div class="w-5 h-5 rounded border-2 border-gray-200"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="absolute bottom-0 left-0 right-0 glass-warm px-6 pt-3 pb-8">
+            <div class="flex gap-3">
+                <button
+                    class="flex-1 py-3.5 bg-primary text-white font-semibold rounded-2xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform"><span
+                        class="material-symbols-outlined !text-lg">play_arrow</span> Start Cooking</button>
+                <button class="py-3.5 px-4 bg-white card-shadow rounded-2xl flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-primary">shopping_cart</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Sleep Hygiene</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "midnight": "#0B0D1A", "indigo": "#4F46E5", "lavender": "#A78BFA", "luna": "#C4B5FD", "dawn": "#F472B6", "safe": "#22C55E", "amber": "#F59E0B" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0D1A
+        }
+
+        .glass-m {
+            background: rgba(79, 70, 229, 0.04);
+            border: 1px solid rgba(167, 139, 250, 0.08);
+            border-radius: 20px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-midnight">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider text-luna/50">Sleep Hygiene</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">help_outline</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Score -->
+            <div class="glass-m p-5 text-center">
+                <p class="text-[10px] text-luna/20 uppercase tracking-wider">Hygiene Score</p>
+                <p class="text-4xl font-bold text-safe mt-1">78<span class="text-lg text-white/20">/100</span></p>
+                <p class="text-xs text-safe">Good · 3 areas to improve</p>
+            </div>
+
+            <!-- Checklist -->
+            <div class="glass-m p-4">
+                <p class="text-[10px] text-luna/20 uppercase tracking-wider mb-3">Tonight's Checklist</p>
+                <div class="space-y-2.5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-safe/15 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-safe">check</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-white/40">No caffeine after 2 PM</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-safe/15 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-safe">check</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-white/40">30 min screen-free before bed</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-safe/15 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-safe">check</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-white/40">Room temperature 65–68°F</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-amber/15 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-amber">close</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">No heavy meals 3h before</p>
+                            <p class="text-[9px] text-amber">Last meal was 1.5h ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-amber/15 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-amber">close</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold">Exercise completed 4h+ prior</p>
+                            <p class="text-[9px] text-amber">Workout ended 2h ago</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-sm text-white/15">remove</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-white/20">Consistent bedtime (±30 min)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="glass-m p-4">
+                <p class="text-[10px] text-luna/20 uppercase tracking-wider mb-2">Personalized Tips</p>
+                <div class="space-y-2">
+                    <div class="flex gap-2"><span class="text-sm">🌙</span>
+                        <p class="text-xs text-white/20">Try a 10-min meditation to wind down after your late workout.
+                        </p>
+                    </div>
+                    <div class="flex gap-2"><span class="text-sm">🍵</span>
+                        <p class="text-xs text-white/20">Swap your evening snack for chamomile tea to improve sleep
+                            onset.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly -->
+            <div class="glass-m p-4">
+                <p class="text-[10px] text-luna/20 uppercase tracking-wider mb-2">Weekly Trend</p>
+                <div class="flex justify-between items-end h-12">
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-safe/30" style="height:35px"></div><span
+                            class="text-[8px] text-white/10 mt-1">M</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-safe/30" style="height:40px"></div><span
+                            class="text-[8px] text-white/10 mt-1">T</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-amber/30" style="height:25px"></div><span
+                            class="text-[8px] text-white/10 mt-1">W</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-safe/30" style="height:38px"></div><span
+                            class="text-[8px] text-white/10 mt-1">T</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-safe/30" style="height:42px"></div><span
+                            class="text-[8px] text-white/10 mt-1">F</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-amber/30" style="height:30px"></div><span
+                            class="text-[8px] text-white/10 mt-1">S</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-6 rounded-t bg-amber/40 border border-luna/20" style="height:32px"></div><span
+                            class="text-[8px] text-luna/30 mt-1">S</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

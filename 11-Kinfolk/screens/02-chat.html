@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Family Chat</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED;
+        }
+
+        .clay-sm {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05), -2px -2px 8px rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+        }
+
+        .msg-dad {
+            background: #EBF2FF;
+            border-radius: 18px 18px 18px 4px;
+        }
+
+        .msg-mom {
+            background: #FDE8F0;
+            border-radius: 18px 18px 18px 4px;
+        }
+
+        .msg-kid {
+            background: #E6FAF1;
+            border-radius: 18px 18px 18px 4px;
+        }
+
+        .msg-me {
+            background: #EDE9FE;
+            border-radius: 18px 18px 4px 18px;
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <!-- Header -->
+        <div class="flex items-center gap-3 px-4 pt-14 pb-3 border-b border-gray-100/50">
+            <button><span class="material-symbols-outlined !text-xl text-gray-400">arrow_back</span></button>
+            <div class="flex -space-x-2">
+                <div class="w-8 h-8 rounded-full bg-papa/20 flex items-center justify-center text-sm ring-2 ring-white">
+                    👨</div>
+                <div class="w-8 h-8 rounded-full bg-mama/20 flex items-center justify-center text-sm ring-2 ring-white">
+                    👩</div>
+                <div class="w-8 h-8 rounded-full bg-kid/20 flex items-center justify-center text-sm ring-2 ring-white">
+                    👧</div>
+                <div class="w-8 h-8 rounded-full bg-warm/20 flex items-center justify-center text-sm ring-2 ring-white">
+                    👦</div>
+            </div>
+            <div class="flex-1">
+                <p class="text-sm font-display font-semibold">Family Chat</p>
+                <p class="text-[10px] text-gray-400">4 members · all online</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-gray-400">videocam</span></button>
+        </div>
+
+        <!-- Messages -->
+        <div class="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+            <div class="flex gap-2 max-w-[85%]">
+                <div class="w-7 h-7 rounded-full bg-mama/20 flex items-center justify-center text-xs mt-auto">👩</div>
+                <div>
+                    <div class="msg-mom px-4 py-2.5">
+                        <p class="text-sm">Hey everyone! What should we have for dinner tonight? 🍕🍝</p>
+                    </div>
+                    <p class="text-[9px] text-gray-300 mt-1 ml-2">Mom · 5:15 PM</p>
+                </div>
+            </div>
+
+            <div class="flex gap-2 max-w-[85%]">
+                <div class="w-7 h-7 rounded-full bg-kid/20 flex items-center justify-center text-xs mt-auto">👧</div>
+                <div>
+                    <div class="msg-kid px-4 py-2.5">
+                        <p class="text-sm">PIZZA PIZZA PIZZA!!! 🍕🍕🍕</p>
+                    </div>
+                    <p class="text-[9px] text-gray-300 mt-1 ml-2">Emma · 5:16 PM</p>
+                </div>
+            </div>
+
+            <div class="max-w-[85%] ml-auto">
+                <div class="msg-me px-4 py-2.5">
+                    <p class="text-sm">I vote for pasta! Can we make carbonara? 🍝</p>
+                </div>
+                <p class="text-[9px] text-gray-300 mt-1 mr-2 text-right">Liam · 5:17 PM</p>
+            </div>
+
+            <div class="flex gap-2 max-w-[85%]">
+                <div class="w-7 h-7 rounded-full bg-papa/20 flex items-center justify-center text-xs mt-auto">👨</div>
+                <div>
+                    <div class="msg-dad px-4 py-2.5">
+                        <p class="text-sm">Both sound great! How about I pick up ingredients for carbonara on my way
+                            home? 🛒</p>
+                    </div>
+                    <p class="text-[9px] text-gray-300 mt-1 ml-2">Dad · 5:20 PM</p>
+                </div>
+            </div>
+
+            <div class="flex gap-2 max-w-[85%]">
+                <div class="w-7 h-7 rounded-full bg-mama/20 flex items-center justify-center text-xs mt-auto">👩</div>
+                <div>
+                    <div class="msg-mom px-4 py-2.5">
+                        <p class="text-sm">Perfect! I'll add the ingredients to our shopping list ✅</p>
+                    </div>
+                    <p class="text-[9px] text-gray-300 mt-1 ml-2">Mom · 5:21 PM</p>
+                </div>
+            </div>
+
+            <!-- Shared List Bubble -->
+            <div class="flex gap-2 max-w-[85%]">
+                <div class="w-7 h-7 rounded-full bg-mama/20 flex items-center justify-center text-xs mt-auto">👩</div>
+                <div class="bg-white clay-sm p-3 w-full">
+                    <p class="text-[10px] text-gray-400 mb-1">📋 Shared Shopping List</p>
+                    <p class="text-xs">🥓 Guanciale · 🧀 Pecorino · 🥚 Eggs · 🍝 Spaghetti</p>
+                    <button class="mt-2 text-[10px] text-together font-semibold">View Full List →</button>
+                </div>
+            </div>
+
+            <div class="flex gap-2 max-w-[85%]">
+                <div class="w-7 h-7 rounded-full bg-kid/20 flex items-center justify-center text-xs mt-auto">👧</div>
+                <div>
+                    <div class="msg-kid px-4 py-2.5">
+                        <p class="text-sm">Fine… but next time PIZZA 😤🍕</p>
+                    </div>
+                    <p class="text-[9px] text-gray-300 mt-1 ml-2">Emma · 5:22 PM</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <div class="flex items-center gap-2 px-3 py-1 bg-together/5 rounded-full">
+                    <span class="text-[10px] text-together">👨 Dad reacted ❤️ to "Fine… but next time PIZZA"</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="px-4 py-3 pb-8 bg-white/50 backdrop-blur border-t border-gray-100/50">
+            <div class="flex items-center gap-2">
+                <button class="w-9 h-9 rounded-full bg-warm/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-warm">add</span></button>
+                <div class="flex-1 clay-sm bg-white px-4 py-2.5 flex items-center">
+                    <input type="text" placeholder="Message family..."
+                        class="w-full text-sm bg-transparent outline-none placeholder-gray-300" />
+                    <button><span
+                            class="material-symbols-outlined !text-lg text-gray-300">emoji_emotions</span></button>
+                </div>
+                <button class="w-9 h-9 rounded-full bg-together flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-white">send</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

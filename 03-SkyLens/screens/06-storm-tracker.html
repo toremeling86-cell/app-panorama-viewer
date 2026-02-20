@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Storm Tracker</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Nunito:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "storm": "#0C1220", "lightning": "#FFD700", "rain": "#4A9FFF", "danger": "#FF4444", "wind": "#7FDBDA" }, fontFamily: { "sans": ["Inter", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0C1220
+        }
+
+        .storm-glow {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.05), 0 0 60px rgba(74, 159, 255, 0.05)
+        }
+
+        .radar-ring {
+            animation: radarSweep 3s linear infinite;
+            transform-origin: center
+        }
+
+        @keyframes radarSweep {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .rain-drop {
+            animation: rainFall 1s linear infinite
+        }
+
+        @keyframes rainFall {
+            0% {
+                transform: translateY(-10px);
+                opacity: 0
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translateY(10px);
+                opacity: 0
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-storm">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/30">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider uppercase">Storm Tracker</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/30">notifications</span></button>
+        </div>
+
+        <!-- Canvas Radar -->
+        <div class="mx-6 rounded-2xl bg-storm storm-glow overflow-hidden border border-white/5 relative"
+            style="height:220px">
+            <canvas id="radar" class="w-full h-full"></canvas>
+            <div class="absolute top-3 left-3 flex items-center gap-2"><span
+                    class="w-2 h-2 bg-danger rounded-full animate-pulse"></span><span
+                    class="text-[10px] text-danger font-bold">LIVE RADAR</span></div>
+            <div class="absolute bottom-3 right-3 text-[9px] text-white/30 font-mono">Updated 2min ago</div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-3 space-y-3">
+            <!-- Active Storm Alert -->
+            <div class="bg-danger/10 rounded-2xl p-4 border border-danger/30">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-lg text-danger animate-pulse">warning</span><span
+                        class="text-sm font-bold text-danger">Severe Weather Alert</span></div>
+                <p class="text-xs text-white/60">Thunderstorms expected between 4:00 PM — 8:00 PM. Heavy rain, gusty
+                    winds up to 50 mph, and possible hail.</p>
+                <div class="flex gap-2 mt-3">
+                    <div class="flex-1 bg-storm rounded-lg p-2 text-center"><span class="text-lg">⚡</span>
+                        <p class="text-[9px] text-white/40 mt-0.5">Lightning</p>
+                    </div>
+                    <div class="flex-1 bg-storm rounded-lg p-2 text-center"><span class="text-lg">💨</span>
+                        <p class="text-[9px] text-white/40 mt-0.5">50 mph</p>
+                    </div>
+                    <div class="flex-1 bg-storm rounded-lg p-2 text-center"><span class="text-lg">🌧️</span>
+                        <p class="text-[9px] text-white/40 mt-0.5">Heavy</p>
+                    </div>
+                    <div class="flex-1 bg-storm rounded-lg p-2 text-center"><span class="text-lg">🧊</span>
+                        <p class="text-[9px] text-white/40 mt-0.5">Hail Risk</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storm Timeline -->
+            <div class="bg-white/5 rounded-2xl p-4">
+                <h3 class="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Storm Path Timeline</h3>
+                <div class="relative">
+                    <div
+                        class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-lightning via-danger to-rain">
+                    </div>
+                    <div class="space-y-4 pl-10">
+                        <div class="relative">
+                            <div class="absolute -left-[26px] w-3 h-3 rounded-full bg-lightning border-2 border-storm">
+                            </div>
+                            <p class="text-xs font-medium text-lightning">3:30 PM — Front approaches</p>
+                            <p class="text-[10px] text-white/30">15 miles NW, moving SE at 25mph</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[26px] w-3 h-3 rounded-full bg-danger border-2 border-storm">
+                            </div>
+                            <p class="text-xs font-medium text-danger">4:00 PM — Impact begins</p>
+                            <p class="text-[10px] text-white/30">Heavy rain and lightning expected</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[26px] w-3 h-3 rounded-full bg-danger/60 border-2 border-storm">
+                            </div>
+                            <p class="text-xs font-medium text-white/50">6:00 PM — Peak intensity</p>
+                            <p class="text-[10px] text-white/30">Highest wind gusts, possible hail</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[26px] w-3 h-3 rounded-full bg-rain border-2 border-storm"></div>
+                            <p class="text-xs font-medium text-rain">8:00 PM — Storm passes</p>
+                            <p class="text-[10px] text-white/30">Clearing skies, temp drop to 42°F</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wind Direction -->
+            <div class="bg-white/5 rounded-2xl p-4">
+                <h3 class="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Wind</h3>
+                <div class="flex items-center gap-4">
+                    <svg width="60" height="60" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="28" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                        <text x="30" y="10" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="8">N</text>
+                        <text x="55" y="33" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="8">E</text>
+                        <text x="30" y="57" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="8">S</text>
+                        <text x="5" y="33" text-anchor="middle" fill="rgba(255,255,255,0.2)" font-size="8">W</text>
+                        <polygon points="30,8 34,28 30,24 26,28" fill="#7FDBDA" transform="rotate(225 30 30)" />
+                    </svg>
+                    <div>
+                        <p class="text-2xl font-bold">32 <span class="text-sm text-white/30 font-normal">mph</span></p>
+                        <p class="text-xs text-white/30">SW · Gusting to 50 mph</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('radar');
+        c.width = c.offsetWidth * 2; c.height = 220 * 2;
+        const ctx = c.getContext('2d');
+        ctx.scale(2, 2);
+        const W = c.offsetWidth, H = 220;
+        const cx = W / 2, cy = H / 2;
+        let angle = 0;
+
+        // Rain cells
+        const cells = [];
+        for (let i = 0; i < 30; i++) {
+            cells.push({ x: Math.random() * W, y: Math.random() * H, r: 5 + Math.random() * 25, intensity: 0.1 + Math.random() * 0.6 });
+        }
+
+        function drawRadar() {
+            ctx.clearRect(0, 0, W, H);
+            // Grid rings
+            for (let r = 1; r <= 4; r++) {
+                ctx.beginPath(); ctx.arc(cx, cy, r * 25, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(255,255,255,0.03)'; ctx.lineWidth = 0.5; ctx.stroke();
+            }
+            // Cross
+            ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.moveTo(0, cy); ctx.lineTo(W, cy);
+            ctx.strokeStyle = 'rgba(255,255,255,0.02)'; ctx.stroke();
+
+            // Rain cells
+            cells.forEach(cell => {
+                const grad = ctx.createRadialGradient(cell.x, cell.y, 0, cell.x, cell.y, cell.r);
+                const hue = cell.intensity > 0.4 ? 0 : 210;
+                const sat = cell.intensity > 0.4 ? 80 : 70;
+                grad.addColorStop(0, `hsla(${hue},${sat}%,50%,${cell.intensity * 0.6})`);
+                grad.addColorStop(1, `hsla(${hue},${sat}%,50%,0)`);
+                ctx.fillStyle = grad;
+                ctx.fillRect(cell.x - cell.r, cell.y - cell.r, cell.r * 2, cell.r * 2);
+                // Drift
+                cell.x += (Math.random() - 0.3) * 0.3;
+                cell.y += (Math.random() - 0.3) * 0.3;
+            });
+
+            // Sweep line
+            angle += 0.02;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(cx + Math.cos(angle) * 100, cy + Math.sin(angle) * 100);
+            ctx.strokeStyle = 'rgba(74,159,255,0.4)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            // Sweep fade trail
+            const trailGrad = ctx.createConicGradient(angle - 0.5, cx, cy);
+            trailGrad.addColorStop(0, 'rgba(74,159,255,0)');
+            trailGrad.addColorStop(0.08, 'rgba(74,159,255,0.05)');
+            trailGrad.addColorStop(0.1, 'rgba(74,159,255,0)');
+            ctx.fillStyle = trailGrad;
+            ctx.beginPath(); ctx.arc(cx, cy, 100, 0, Math.PI * 2); ctx.fill();
+
+            // Center dot
+            ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI * 2); ctx.fillStyle = 'rgba(74,159,255,0.8)'; ctx.fill();
+
+            requestAnimationFrame(drawRadar);
+        }
+        drawRadar();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Growth Timeline</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723", "water": "#5B9BD5" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+
+        .paper-card {
+            box-shadow: 0 1px 4px rgba(60, 40, 20, 0.06);
+            border: 1px solid rgba(92, 64, 51, 0.06);
+            border-radius: 16px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-soil overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-bark/30">arrow_back</span></button>
+            <h1 class="font-serif text-base font-bold">Growth Timeline</h1>
+            <button><span class="material-symbols-outlined !text-xl text-bark/30">add_a_photo</span></button>
+        </div>
+
+        <!-- Plant Header -->
+        <div class="px-6 py-3 flex items-center gap-3">
+            <div class="w-14 h-14 rounded-2xl bg-chloro/10 flex items-center justify-center text-3xl">🌱</div>
+            <div>
+                <p class="text-lg font-serif font-bold">Fiddle Leaf Fig</p>
+                <p class="text-xs text-bark/30">Added 6 months ago · 14 updates</p>
+            </div>
+        </div>
+
+        <!-- Growth Chart -->
+        <div class="mx-6 paper-card p-4 mb-3">
+            <h3 class="text-[10px] text-bark/30 uppercase tracking-wider mb-2 font-medium">Height Over Time</h3>
+            <canvas id="growthChart" class="w-full" style="height:80px"></canvas>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-0">
+            <!-- Timeline -->
+            <div class="relative pl-6">
+                <div class="absolute left-[11px] top-0 bottom-0 w-0.5 bg-chloro/10"></div>
+
+                <div class="relative pb-4">
+                    <div class="absolute left-[-17px] w-6 h-6 rounded-full bg-chloro flex items-center justify-center">
+                        <span class="text-[10px] text-white">📸</span></div>
+                    <div class="paper-card p-3 ml-3">
+                        <div class="flex justify-between items-center mb-1"><span
+                                class="text-xs font-serif font-bold text-chloro">Today</span><span
+                                class="text-[9px] text-bark/20">42" tall</span></div>
+                        <div class="h-24 bg-chloro/5 rounded-lg flex items-center justify-center text-3xl mb-2">🌿</div>
+                        <p class="text-xs text-bark/40">New leaf unfurling! Third one this month. Moving to brighter
+                            spot really helped.</p>
+                        <div class="flex gap-1 mt-2"><span
+                                class="px-1.5 py-0.5 bg-water/10 rounded text-[8px] text-water">💧 Watered</span><span
+                                class="px-1.5 py-0.5 bg-chloro/10 rounded text-[8px] text-chloro">🌿 New leaf</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-chloro/40 flex items-center justify-center">
+                        <span class="text-[10px] text-white">💧</span></div>
+                    <div class="paper-card p-3 ml-3">
+                        <div class="flex justify-between items-center mb-1"><span
+                                class="text-xs font-serif font-semibold text-bark/50">Feb 12</span><span
+                                class="text-[9px] text-bark/15">40" tall</span></div>
+                        <p class="text-xs text-bark/40">Regular watering day. Soil was dry 2 inches down. Added
+                            half-strength fertilizer.</p>
+                        <div class="flex gap-1 mt-2"><span
+                                class="px-1.5 py-0.5 bg-water/10 rounded text-[8px] text-water">💧 Watered</span><span
+                                class="px-1.5 py-0.5 bg-amber/10 rounded text-[8px] text-amber">🧪 Fertilized</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-chloro/30 flex items-center justify-center">
+                        <span class="text-[10px]">📸</span></div>
+                    <div class="paper-card p-3 ml-3 opacity-70">
+                        <div class="flex justify-between items-center mb-1"><span
+                                class="text-xs font-serif font-semibold text-bark/40">Feb 5</span><span
+                                class="text-[9px] text-bark/15">39" tall</span></div>
+                        <div class="h-16 bg-chloro/5 rounded-lg flex items-center justify-center text-2xl mb-2">🪴</div>
+                        <p class="text-xs text-bark/30">Repotted into larger container. Roots were circling the bottom.
+                        </p>
+                        <div class="flex gap-1 mt-2"><span
+                                class="px-1.5 py-0.5 bg-terra/10 rounded text-[8px] text-terra">🏺 Repotted</span></div>
+                    </div>
+                </div>
+
+                <div class="relative pb-4">
+                    <div
+                        class="absolute left-[-17px] w-6 h-6 rounded-full bg-chloro/20 flex items-center justify-center">
+                        <span class="text-[10px]">⚠️</span></div>
+                    <div class="paper-card p-3 ml-3 opacity-50">
+                        <div class="flex justify-between items-center mb-1"><span
+                                class="text-xs font-serif font-semibold text-bark/30">Jan 22</span></div>
+                        <p class="text-xs text-bark/25">Brown spots on lower leaves. Moved away from cold window draft.
+                        </p>
+                        <div class="flex gap-1 mt-2"><span
+                                class="px-1.5 py-0.5 bg-terra/10 rounded text-[8px] text-terra/60">⚠️ Issue</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Update FAB -->
+        <button
+            class="fixed bottom-24 right-8 w-14 h-14 bg-chloro rounded-full flex items-center justify-center shadow-xl shadow-chloro/20 active:scale-90 transition-transform"><span
+                class="material-symbols-outlined !text-2xl text-white">add_a_photo</span></button>
+    </div>
+
+    <script>
+        const c = document.getElementById('growthChart'); c.width = c.offsetWidth * 2; c.height = 80 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2);
+        const W = c.offsetWidth, H = 80;
+        const d = [24, 26, 28, 31, 33, 35, 36, 38, 39, 40, 42];
+        const mn = Math.min(...d) - 2, mx = Math.max(...d) + 2;
+        x.beginPath(); x.strokeStyle = '#2D8B56'; x.lineWidth = 2; x.lineJoin = 'round';
+        d.forEach((v, i) => { const px = (i / (d.length - 1)) * W; const py = H - ((v - mn) / (mx - mn)) * (H - 16) - 8; i === 0 ? x.moveTo(px, py) : x.lineTo(px, py); });
+        x.stroke();
+        d.forEach((v, i) => { const px = (i / (d.length - 1)) * W; const py = H - ((v - mn) / (mx - mn)) * (H - 16) - 8; x.beginPath(); x.arc(px, py, 3, 0, Math.PI * 2); x.fillStyle = '#2D8B56'; x.fill(); });
+        const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(45,139,86,0.1)'); g.addColorStop(1, 'rgba(45,139,86,0)');
+        x.lineTo(W, H); x.lineTo(0, H); x.closePath(); x.fillStyle = g; x.fill();
+        x.fillStyle = 'rgba(92,64,51,0.15)'; x.font = '8px Raleway';
+        ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'].forEach((m, i) => { x.fillText(m, (i / 5) * W, H - 1); });
+    </script>
+</body>
+
+</html>

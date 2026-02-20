@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Packing List</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "parchment": "#F5EDE0", "leather": "#6B4C3B", "compass": "#C4953A", "ocean": "#3D5A73", "ink": "#2C1810" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"], "mono": ["Fira Code", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F5EDE0
+        }
+
+        .map-shadow {
+            box-shadow: 0 4px 20px rgba(107, 76, 59, 0.1)
+        }
+
+        .checked-line {
+            text-decoration: line-through;
+            color: rgba(107, 76, 59, 0.3)
+        }
+
+        .check-draw {
+            animation: checkDraw 0.4s ease-out both
+        }
+
+        @keyframes checkDraw {
+            0% {
+                stroke-dashoffset: 20
+            }
+
+            100% {
+                stroke-dashoffset: 0
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <div><button class="flex items-center gap-2 text-leather/50"><span
+                        class="material-symbols-outlined !text-xl">arrow_back</span></button></div>
+            <h1 class="font-display text-sm font-bold uppercase tracking-widest text-ink">Packing List</h1>
+            <button class="text-xs text-compass font-medium">+ Add</button>
+        </div>
+        <div class="mx-6 bg-compass/10 rounded-xl p-3 flex items-center gap-3 map-shadow">
+            <span class="text-xl">🇯🇵</span>
+            <div>
+                <p class="text-xs font-display font-bold text-ink">Tokyo Trip</p>
+                <p class="text-[10px] text-leather/40">7 days · Feb 14-21</p>
+            </div>
+            <div class="ml-auto text-right">
+                <p class="text-lg font-display font-bold text-compass">68%</p>
+                <p class="text-[9px] text-leather/40">packed</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-4 space-y-4">
+            <!-- Essentials -->
+            <div class="bg-white/50 rounded-2xl map-shadow border border-leather/10 overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-leather/5">
+                    <h3 class="font-display text-xs font-bold uppercase tracking-wider text-ink">✈️ Essentials</h3><span
+                        class="text-[10px] text-compass font-mono">4/4</span>
+                </div>
+                <div class="divide-y divide-parchment/50">
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Passport</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Flight tickets</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Hotel booking</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Travel insurance</span></label>
+                </div>
+            </div>
+            <!-- Clothing -->
+            <div class="bg-white/50 rounded-2xl map-shadow border border-leather/10 overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-leather/5">
+                    <h3 class="font-display text-xs font-bold uppercase tracking-wider text-ink">👔 Clothing</h3><span
+                        class="text-[10px] text-ocean font-mono">3/6</span>
+                </div>
+                <div class="divide-y divide-parchment/50">
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Winter jacket</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Comfortable shoes</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Scarf & gloves</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox"
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span class="text-sm">T-shirts
+                            (×4)</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox"
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span class="text-sm">Pants
+                            (×2)</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox"
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span class="text-sm">Formal
+                            outfit</span></label>
+                </div>
+            </div>
+            <!-- Tech -->
+            <div class="bg-white/50 rounded-2xl map-shadow border border-leather/10 overflow-hidden">
+                <div class="flex items-center justify-between p-4 border-b border-leather/5">
+                    <h3 class="font-display text-xs font-bold uppercase tracking-wider text-ink">📱 Tech</h3><span
+                        class="text-[10px] text-ocean font-mono">1/4</span>
+                </div>
+                <div class="divide-y divide-parchment/50">
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox" checked
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span
+                            class="text-sm checked-line">Camera + charger</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox"
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span class="text-sm">Power adapter
+                            (Type A)</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox"
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span class="text-sm">Portable
+                            WiFi</span></label>
+                    <label class="flex items-center gap-3 px-4 py-3 cursor-pointer"><input type="checkbox"
+                            class="w-4 h-4 rounded border-leather/20 text-compass" /><span class="text-sm">Power
+                            bank</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

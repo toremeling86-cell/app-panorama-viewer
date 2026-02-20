@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Case Study</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "gallery": "#FAFAFA", "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"], "mono": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA
+        }
+
+        .editorial-line {
+            border-top: 1px solid #0A0A0A
+        }
+
+        .reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: #E8553D;
+            z-index: 50;
+            transition: width 0.1s linear
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="reading-progress" style="width:0%" id="progressBar"></div>
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-gallery">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-ink">arrow_back</span></button>
+            <span class="font-serif text-sm font-bold">Folio<span class="text-coral">.</span></span>
+            <button><span class="material-symbols-outlined !text-xl text-ink">share</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto pb-20" id="scrollContainer">
+            <!-- Hero -->
+            <div class="bg-ink px-6 py-10">
+                <p class="text-[10px] text-white/40 font-mono uppercase tracking-[0.4em]">Case Study · Branding</p>
+                <h1 class="font-serif text-4xl font-bold text-white mt-3 leading-[1.1]">Meridian<br />Labs</h1>
+                <p class="text-sm text-white/50 mt-3 font-light leading-relaxed">Complete brand identity for a biotech
+                    startup revolutionizing personalized medicine.</p>
+                <div class="flex items-center gap-4 mt-6">
+                    <div>
+                        <p class="text-[9px] text-white/30 uppercase tracking-wider">Year</p>
+                        <p class="text-xs text-white font-mono">2026</p>
+                    </div>
+                    <div class="w-px h-6 bg-white/10"></div>
+                    <div>
+                        <p class="text-[9px] text-white/30 uppercase tracking-wider">Role</p>
+                        <p class="text-xs text-white font-mono">Creative Dir.</p>
+                    </div>
+                    <div class="w-px h-6 bg-white/10"></div>
+                    <div>
+                        <p class="text-[9px] text-white/30 uppercase tracking-wider">Duration</p>
+                        <p class="text-xs text-white font-mono">3 months</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process -->
+            <div class="px-6 py-8">
+                <div class="editorial-line pt-4">
+                    <p class="text-[10px] text-silver font-mono uppercase tracking-[0.3em]">01 — Challenge</p>
+                    <h2 class="font-serif text-xl font-bold mt-2">The Brief</h2>
+                    <p class="text-sm text-silver leading-relaxed mt-3">Meridian Labs needed a brand identity that
+                        conveyed cutting-edge science with human warmth. The challenge was to differentiate them in a
+                        sea of clinical, cold biotech identities.</p>
+                </div>
+            </div>
+
+            <!-- Visual Showcase -->
+            <div class="px-3">
+                <div class="grid grid-cols-2 gap-1">
+                    <div class="bg-ink aspect-square rounded-sm flex items-center justify-center"><span
+                            class="font-serif text-2xl text-white font-bold">M</span></div>
+                    <div class="bg-coral aspect-square rounded-sm flex items-center justify-center"><span
+                            class="font-serif text-2xl text-white font-bold italic">L</span></div>
+                </div>
+                <div class="bg-ink/5 aspect-[2/1] mt-1 rounded-sm flex items-center justify-center">
+                    <span class="font-serif text-3xl font-bold tracking-widest">MERIDIAN<span
+                            class="text-coral">.</span></span>
+                </div>
+            </div>
+
+            <div class="px-6 py-8">
+                <div class="editorial-line pt-4">
+                    <p class="text-[10px] text-silver font-mono uppercase tracking-[0.3em]">02 — Approach</p>
+                    <h2 class="font-serif text-xl font-bold mt-2">Design Direction</h2>
+                    <p class="text-sm text-silver leading-relaxed mt-3">We drew from molecular structures and human cell
+                        patterns, creating a visual language that feels both scientific and organic. The logotype uses a
+                        custom-cut serif that suggests precision.</p>
+                </div>
+            </div>
+
+            <!-- Color System -->
+            <div class="px-6 pb-8">
+                <div class="editorial-line pt-4">
+                    <p class="text-[10px] text-silver font-mono uppercase tracking-[0.3em]">03 — System</p>
+                    <h2 class="font-serif text-xl font-bold mt-2">Color Palette</h2>
+                    <div class="flex gap-2 mt-4">
+                        <div class="flex-1">
+                            <div class="aspect-square rounded-lg bg-ink"></div>
+                            <p class="text-[9px] font-mono text-silver mt-1">#0A0A0A</p>
+                        </div>
+                        <div class="flex-1">
+                            <div class="aspect-square rounded-lg bg-coral"></div>
+                            <p class="text-[9px] font-mono text-silver mt-1">#E8553D</p>
+                        </div>
+                        <div class="flex-1">
+                            <div class="aspect-square rounded-lg bg-gallery border border-ink/10"></div>
+                            <p class="text-[9px] font-mono text-silver mt-1">#FAFAFA</p>
+                        </div>
+                        <div class="flex-1">
+                            <div class="aspect-square rounded-lg" style="background:#1a472a"></div>
+                            <p class="text-[9px] font-mono text-silver mt-1">#1A472A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="px-6 pb-8">
+                <div class="editorial-line pt-4">
+                    <p class="text-[10px] text-silver font-mono uppercase tracking-[0.3em]">04 — Impact</p>
+                    <h2 class="font-serif text-xl font-bold mt-2">Results</h2>
+                    <div class="grid grid-cols-3 gap-4 mt-4">
+                        <div class="text-center">
+                            <p class="font-serif text-2xl font-bold text-coral">340%</p>
+                            <p class="text-[9px] text-silver">Brand Recall</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-serif text-2xl font-bold">$12M</p>
+                            <p class="text-[9px] text-silver">Series A</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="font-serif text-2xl font-bold">🏆</p>
+                            <p class="text-[9px] text-silver">AIGA Award</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const bar = document.getElementById('progressBar');
+        container.addEventListener('scroll', () => {
+            const pct = (container.scrollTop / (container.scrollHeight - container.clientHeight)) * 100;
+            bar.style.width = pct + '%';
+        });
+    </script>
+</body>
+
+</html>

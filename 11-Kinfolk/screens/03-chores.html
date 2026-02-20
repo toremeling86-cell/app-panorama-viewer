@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Chore Board</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "warm": "#F97316" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED;
+        }
+
+        .clay {
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.06), -4px -4px 12px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+        }
+
+        .clay-sm {
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05), -2px -2px 8px rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+        }
+
+        .clay-press:active {
+            box-shadow: inset 4px 4px 10px rgba(0, 0, 0, 0.05);
+            transform: scale(0.97);
+        }
+
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <div>
+                <p class="text-xs font-display text-together/60">Family Tasks</p>
+                <h1 class="text-xl font-display font-bold">Chore Board ✨</h1>
+            </div>
+            <div class="flex gap-2">
+                <button class="px-3 py-1.5 clay-sm bg-white text-xs font-display font-medium text-together">This
+                    week</button>
+            </div>
+        </div>
+
+        <!-- Score Board -->
+        <div class="mx-6 bg-white clay p-4 flex items-center gap-3">
+            <div class="flex-1 text-center">
+                <div class="text-xl">👧</div>
+                <p class="text-xs font-display font-semibold text-kid">Emma</p>
+                <p class="text-lg font-display font-bold text-kid">⭐ 12</p>
+            </div>
+            <div class="w-px h-12 bg-gray-100"></div>
+            <div class="flex-1 text-center">
+                <div class="text-xl">👦</div>
+                <p class="text-xs font-display font-semibold text-warm">Liam</p>
+                <p class="text-lg font-display font-bold text-warm">⭐ 9</p>
+            </div>
+            <div class="w-px h-12 bg-gray-100"></div>
+            <div class="flex-1 text-center">
+                <div class="text-xl">👨</div>
+                <p class="text-xs font-display font-semibold text-papa">Dad</p>
+                <p class="text-lg font-display font-bold text-papa">⭐ 7</p>
+            </div>
+            <div class="w-px h-12 bg-gray-100"></div>
+            <div class="flex-1 text-center">
+                <div class="text-xl">👩</div>
+                <p class="text-xs font-display font-semibold text-mama">Mom</p>
+                <p class="text-lg font-display font-bold text-mama">⭐ 11</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-4 space-y-3">
+            <!-- Completed -->
+            <p class="text-xs font-display font-semibold text-gray-300 uppercase tracking-wider">Completed ✅</p>
+            <div class="bg-white clay-sm p-4 clay-press transition-all cursor-pointer opacity-50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-kid/10 flex items-center justify-center text-xl">🧹</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold line-through text-gray-300">Clean Room</p>
+                        <p class="text-[10px] text-kid">Emma · Completed 2h ago</p>
+                    </div>
+                    <span class="text-lg">⭐</span>
+                </div>
+            </div>
+
+            <div class="bg-white clay-sm p-4 clay-press transition-all cursor-pointer opacity-50">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-mama/10 flex items-center justify-center text-xl">🍽️</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold line-through text-gray-300">Load Dishwasher</p>
+                        <p class="text-[10px] text-mama">Mom · Completed 4h ago</p>
+                    </div>
+                    <span class="text-lg">⭐</span>
+                </div>
+            </div>
+
+            <!-- In Progress -->
+            <p class="text-xs font-display font-semibold text-together uppercase tracking-wider mt-4">In Progress 🔄</p>
+            <div class="bg-white clay p-4 clay-press transition-all cursor-pointer border-l-4 border-warm">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-warm/10 flex items-center justify-center text-xl">🐕</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Walk the Dog</p>
+                        <p class="text-[10px] text-warm">Liam · Started 10min ago</p>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-warm/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-lg text-warm">timer</span></div>
+                </div>
+                <div class="mt-2 h-2 rounded-full bg-family">
+                    <div class="h-full rounded-full bg-warm transition-all" style="width:40%"></div>
+                </div>
+            </div>
+
+            <!-- Pending -->
+            <p class="text-xs font-display font-semibold text-gray-300 uppercase tracking-wider mt-4">Up Next 📋</p>
+            <div class="bg-white clay-sm p-4 clay-press transition-all cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-papa/10 flex items-center justify-center text-xl">🧺</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Fold Laundry</p>
+                        <p class="text-[10px] text-papa">Dad · Due by 5 PM</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 rounded-xl bg-papa text-white text-xs font-display font-medium">Start</button>
+                </div>
+            </div>
+            <div class="bg-white clay-sm p-4 clay-press transition-all cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-kid/10 flex items-center justify-center text-xl">📚</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Homework Time</p>
+                        <p class="text-[10px] text-kid">Emma · Due by 6 PM</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 rounded-xl bg-kid text-white text-xs font-display font-medium">Start</button>
+                </div>
+            </div>
+            <div class="bg-white clay-sm p-4 clay-press transition-all cursor-pointer">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-mama/10 flex items-center justify-center text-xl">🍳</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Cook Dinner</p>
+                        <p class="text-[10px] text-mama">Mom · 6:00 PM</p>
+                    </div>
+                    <button
+                        class="px-3 py-1.5 rounded-xl bg-mama text-white text-xs font-display font-medium">Start</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-family/90 backdrop-blur border-t border-gray-100">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">home</span><span
+                        class="text-[10px] text-gray-300">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">calendar_month</span><span
+                        class="text-[10px] text-gray-300">Calendar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-together"
+                        style="font-variation-settings: 'FILL' 1;">task_alt</span><span
+                        class="text-[10px] font-display font-medium text-together">Chores</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">chat</span><span
+                        class="text-[10px] text-gray-300">Chat</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-gray-300">settings</span><span
+                        class="text-[10px] text-gray-300">Settings</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

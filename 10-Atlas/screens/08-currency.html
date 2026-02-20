@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Currency</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "parchment": "#1A1510", "vintage": "#D4A574", "terra": "#C67B5C", "linen": "#F5E6D3", "forest": "#4A7C59" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1510
+        }
+
+        .glass-vintage {
+            background: rgba(212, 165, 116, 0.04);
+            border: 1px solid rgba(212, 165, 116, 0.08);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-linen overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-linen/30">arrow_back</span></button>
+            <h1 class="font-display text-sm font-bold tracking-wider">Currency Converter</h1>
+            <button><span class="material-symbols-outlined !text-xl text-linen/30">swap_vert</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Converter -->
+            <div class="glass-vintage p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="flex items-center gap-2 px-3 py-2 bg-vintage/10 rounded-xl"><span
+                            class="text-lg">🇺🇸</span><span class="text-sm font-display font-bold">USD</span></div>
+                    <div class="flex-1 text-right">
+                        <p class="text-3xl font-display font-bold">100.00</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 my-2">
+                    <div class="flex-1 h-px bg-vintage/10"></div><button
+                        class="w-8 h-8 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-vintage">swap_vert</span></button>
+                    <div class="flex-1 h-px bg-vintage/10"></div>
+                </div>
+                <div class="flex items-center gap-3 mt-4">
+                    <div class="flex items-center gap-2 px-3 py-2 bg-vintage/10 rounded-xl"><span
+                            class="text-lg">🇲🇦</span><span class="text-sm font-display font-bold">MAD</span></div>
+                    <div class="flex-1 text-right">
+                        <p class="text-3xl font-display font-bold text-vintage">1,002.50</p>
+                    </div>
+                </div>
+                <p class="text-[9px] text-vintage/20 text-right mt-2">1 USD = 10.025 MAD · Updated 5m ago</p>
+            </div>
+
+            <!-- Quick Amounts -->
+            <div class="flex gap-2">
+                <button class="flex-1 py-2 glass-vintage text-center text-xs font-display">$20</button>
+                <button class="flex-1 py-2 glass-vintage text-center text-xs font-display">$50</button>
+                <button
+                    class="flex-1 py-2 glass-vintage text-center text-xs font-display text-vintage border-vintage/20">$100</button>
+                <button class="flex-1 py-2 glass-vintage text-center text-xs font-display">$500</button>
+            </div>
+
+            <!-- Popular Currencies -->
+            <div class="glass-vintage p-4">
+                <p class="text-[10px] text-vintage/30 font-display uppercase tracking-wider mb-3">Trip Currencies</p>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between py-2 border-b border-vintage/5">
+                        <div class="flex items-center gap-2"><span>🇪🇺</span><span class="text-sm">EUR</span><span
+                                class="text-[10px] text-vintage/20">Euro</span></div><span
+                            class="text-sm font-display font-bold">€92.15</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2 border-b border-vintage/5">
+                        <div class="flex items-center gap-2"><span>🇬🇧</span><span class="text-sm">GBP</span><span
+                                class="text-[10px] text-vintage/20">Pound</span></div><span
+                            class="text-sm font-display font-bold">£78.90</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2 border-b border-vintage/5">
+                        <div class="flex items-center gap-2"><span>🇯🇵</span><span class="text-sm">JPY</span><span
+                                class="text-[10px] text-vintage/20">Yen</span></div><span
+                            class="text-sm font-display font-bold">¥15,240</span>
+                    </div>
+                    <div class="flex items-center justify-between py-2">
+                        <div class="flex items-center gap-2"><span>🇹🇭</span><span class="text-sm">THB</span><span
+                                class="text-[10px] text-vintage/20">Baht</span></div><span
+                            class="text-sm font-display font-bold">฿3,520</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tip Calculator -->
+            <div class="glass-vintage p-4">
+                <p class="text-[10px] text-vintage/30 font-display uppercase tracking-wider mb-2">Tip Calculator</p>
+                <div class="flex items-center justify-between"><span class="text-xs text-linen/40">Bill: 200 MAD</span>
+                    <div class="flex gap-2"><button
+                            class="px-3 py-1 bg-vintage/10 rounded text-[10px]">10%</button><button
+                            class="px-3 py-1 bg-vintage/20 rounded text-[10px] text-vintage font-bold">15%</button><button
+                            class="px-3 py-1 bg-vintage/10 rounded text-[10px]">20%</button></div>
+                </div>
+                <p class="text-right text-sm font-display font-bold text-vintage mt-2">Tip: 30 MAD (~$3.00)</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

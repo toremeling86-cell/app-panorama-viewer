@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Safety</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "parchment": "#1A1510", "vintage": "#D4A574", "linen": "#F5E6D3", "forest": "#4A7C59", "danger": "#EF4444", "warning": "#F59E0B", "safe": "#22C55E" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1510
+        }
+
+        .glass-v {
+            background: rgba(212, 165, 116, 0.04);
+            border: 1px solid rgba(212, 165, 116, 0.08);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-linen overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-linen/20">arrow_back</span></button>
+            <div class="text-center">
+                <h1 class="font-display text-sm font-bold tracking-wider">Travel Safety</h1>
+                <p class="text-[9px] text-vintage/30">🇯🇵 Japan</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-linen/20">share</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Safety Score -->
+            <div class="glass-v p-5 text-center">
+                <p class="text-[10px] text-vintage/25 uppercase tracking-wider">Safety Rating</p>
+                <p class="text-4xl font-display font-bold text-safe mt-1">9.2<span
+                        class="text-lg text-vintage/20">/10</span></p>
+                <p class="text-xs text-safe mt-0.5">Very Safe</p>
+            </div>
+
+            <!-- Key Info -->
+            <div class="glass-v p-4">
+                <p class="text-[10px] text-vintage/25 font-display uppercase tracking-wider mb-2">Emergency Numbers</p>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between"><span
+                            class="text-xs text-linen/30">Police</span><span
+                            class="text-sm font-display font-bold text-vintage">110</span></div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-linen/30">Ambulance /
+                            Fire</span><span class="text-sm font-display font-bold text-vintage">119</span></div>
+                    <div class="flex items-center justify-between"><span class="text-xs text-linen/30">Embassy
+                            (US)</span><span class="text-sm font-display font-bold text-vintage">03-3224-5000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advisories -->
+            <div class="glass-v p-4">
+                <p class="text-[10px] text-vintage/25 font-display uppercase tracking-wider mb-2">Current Advisories</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 p-2 bg-safe/5 rounded-xl">
+                        <div class="w-2 h-2 rounded-full bg-safe"></div>
+                        <div>
+                            <p class="text-xs font-semibold">Low Crime Risk</p>
+                            <p class="text-[10px] text-linen/20">One of the safest countries globally</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 p-2 bg-warning/5 rounded-xl">
+                        <div class="w-2 h-2 rounded-full bg-warning"></div>
+                        <div>
+                            <p class="text-xs font-semibold">Earthquake Zone</p>
+                            <p class="text-[10px] text-linen/20">Know building evacuation routes</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 p-2 bg-safe/5 rounded-xl">
+                        <div class="w-2 h-2 rounded-full bg-safe"></div>
+                        <div>
+                            <p class="text-xs font-semibold">Healthcare</p>
+                            <p class="text-[10px] text-linen/20">World-class medical facilities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="glass-v p-4">
+                <p class="text-[10px] text-vintage/25 font-display uppercase tracking-wider mb-2">Local Tips</p>
+                <div class="space-y-1.5 text-xs text-linen/25">
+                    <p>• Carry cash — many places don't accept cards</p>
+                    <p>• Tipping is not customary and can be offensive</p>
+                    <p>• Remove shoes before entering homes/temples</p>
+                    <p>• Trains are extremely punctual — arrive early</p>
+                </div>
+            </div>
+
+            <!-- SOS -->
+            <button
+                class="w-full py-3 bg-danger text-white font-display font-bold rounded-xl text-sm flex items-center justify-center gap-2">🚨
+                Emergency SOS</button>
+        </div>
+    </div>
+</body>
+
+</html>

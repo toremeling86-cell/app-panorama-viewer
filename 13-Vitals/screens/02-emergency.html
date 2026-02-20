@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Emergency Card</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FFFE", "trust": "#0D9488", "attention": "#D97706", "critical": "#DC2626" }, fontFamily: { "display": ["Figtree", "sans-serif"], "body": ["Noto Sans", "sans-serif"], "mono": ["IBM Plex Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FFFE
+        }
+
+        .medical-card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(13, 148, 136, 0.08);
+            border-radius: 16px
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical" role="main"
+        aria-label="Emergency medical card">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button aria-label="Go back"><span
+                    class="material-symbols-outlined !text-xl text-gray-400">arrow_back</span></button>
+            <h1 class="font-display text-base font-bold">Emergency Card</h1>
+            <button class="text-xs text-trust font-semibold">Edit</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Emergency Header -->
+            <div class="bg-critical rounded-2xl p-5 text-white text-center">
+                <span class="material-symbols-outlined !text-3xl">emergency</span>
+                <h2 class="font-display text-xl font-bold mt-2">Medical Emergency Card</h2>
+                <p class="text-xs text-white/80 mt-1">Show this to first responders</p>
+            </div>
+
+            <!-- Personal -->
+            <div class="bg-white medical-card p-5">
+                <h3 class="text-xs font-display text-gray-400 uppercase tracking-wider font-semibold mb-3">Personal Info
+                </h3>
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-trust/10 flex items-center justify-center text-3xl">👤</div>
+                    <div>
+                        <p class="text-lg font-display font-bold">Robert Chen</p>
+                        <p class="text-sm text-gray-500">DOB: March 15, 1968</p>
+                        <p class="text-sm text-gray-500">Blood Type: <span class="font-bold text-critical">A+</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Critical Conditions -->
+            <div class="bg-white medical-card p-5 border-l-4 border-critical">
+                <h3 class="text-xs font-display text-critical uppercase tracking-wider font-semibold mb-3">⚠️ Medical
+                    Conditions</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 bg-critical rounded-full"></span>
+                        <p class="text-sm font-medium">Type 2 Diabetes</p>
+                    </div>
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 bg-attention rounded-full"></span>
+                        <p class="text-sm font-medium">Hypertension (controlled)</p>
+                    </div>
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 bg-attention rounded-full"></span>
+                        <p class="text-sm font-medium">High Cholesterol</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Allergies -->
+            <div class="bg-white medical-card p-5 border-l-4 border-attention" role="alert">
+                <h3 class="text-xs font-display text-attention uppercase tracking-wider font-semibold mb-3">🚫 Allergies
+                </h3>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="px-3 py-1.5 bg-critical/10 text-critical text-sm font-medium rounded-lg">Penicillin</span>
+                    <span class="px-3 py-1.5 bg-attention/10 text-attention text-sm font-medium rounded-lg">Sulfa
+                        drugs</span>
+                    <span class="px-3 py-1.5 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg">Shellfish</span>
+                </div>
+            </div>
+
+            <!-- Current Medications -->
+            <div class="bg-white medical-card p-5">
+                <h3 class="text-xs font-display text-gray-400 uppercase tracking-wider font-semibold mb-3">💊 Current
+                    Medications</h3>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between"><span>Lisinopril</span><span class="text-gray-400">10mg
+                            daily</span></div>
+                    <div class="flex justify-between"><span>Metformin</span><span class="text-gray-400">500mg 2x
+                            daily</span></div>
+                    <div class="flex justify-between"><span>Aspirin</span><span class="text-gray-400">81mg daily</span>
+                    </div>
+                    <div class="flex justify-between"><span>Atorvastatin</span><span class="text-gray-400">20mg
+                            nightly</span></div>
+                </div>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="bg-white medical-card p-5">
+                <h3 class="text-xs font-display text-gray-400 uppercase tracking-wider font-semibold mb-3">📞 Emergency
+                    Contacts</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-trust/10 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-lg text-trust">person</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Sarah Chen (Wife)</p>
+                            <p class="text-xs text-gray-400">+1 (555) 123-4567</p>
+                        </div>
+                        <button class="w-9 h-9 rounded-full bg-trust flex items-center justify-center"
+                            aria-label="Call Sarah"><span
+                                class="material-symbols-outlined !text-lg text-white">call</span></button>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-trust/10 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-lg text-trust">local_hospital</span></div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Dr. James Liu (PCP)</p>
+                            <p class="text-xs text-gray-400">+1 (555) 987-6543</p>
+                        </div>
+                        <button class="w-9 h-9 rounded-full bg-trust flex items-center justify-center"
+                            aria-label="Call Dr. Liu"><span
+                                class="material-symbols-outlined !text-lg text-white">call</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insurance -->
+            <div class="bg-white medical-card p-5">
+                <h3 class="text-xs font-display text-gray-400 uppercase tracking-wider font-semibold mb-3">🏥 Insurance
+                </h3>
+                <div class="text-sm space-y-1">
+                    <div class="flex justify-between"><span class="text-gray-500">Provider</span><span
+                            class="font-medium">Blue Cross</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Policy #</span><span
+                            class="font-mono">XBC-4829371</span></div>
+                    <div class="flex justify-between"><span class="text-gray-500">Group #</span><span
+                            class="font-mono">GRP-88421</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

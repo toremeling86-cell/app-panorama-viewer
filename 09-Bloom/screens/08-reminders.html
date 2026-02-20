@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Reminders</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "amber": "#D4A03C", "bark": "#5C4033", "soil": "#3E2723", "water": "#5B9BD5", "urgent": "#E85D4A" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+
+        .paper {
+            box-shadow: 0 1px 4px rgba(60, 40, 20, 0.06);
+            border: 1px solid rgba(92, 64, 51, 0.06);
+            border-radius: 16px;
+            background: white
+        }
+
+        .overdue {
+            border-left: 3px solid #E85D4A
+        }
+
+        .due-today {
+            border-left: 3px solid #D4A03C
+        }
+
+        .upcoming {
+            border-left: 3px solid #2D8B56
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-soil overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-bark/30">arrow_back</span></button>
+            <h1 class="font-serif text-base font-bold">Care Reminders 🔔</h1>
+            <button><span class="material-symbols-outlined !text-xl text-bark/30">tune</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <!-- Overdue -->
+            <p class="text-[10px] font-sans font-bold text-urgent uppercase tracking-wider mb-1">⚠️ Overdue</p>
+
+            <div class="paper p-3 overdue flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-urgent/10 flex items-center justify-center text-xl">💧</div>
+                <div class="flex-1">
+                    <p class="text-sm font-serif font-bold">Fiddle Leaf Fig</p>
+                    <p class="text-[10px] text-urgent">Water — 2 days overdue</p>
+                </div>
+                <button class="px-3 py-1.5 bg-urgent/10 text-urgent text-xs font-bold rounded-full">Water</button>
+            </div>
+
+            <!-- Due Today -->
+            <p class="text-[10px] font-sans font-bold text-amber uppercase tracking-wider mt-3 mb-1">🌤️ Due Today</p>
+
+            <div class="paper p-3 due-today flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center text-xl">🌿</div>
+                <div class="flex-1">
+                    <p class="text-sm font-serif font-bold">Monstera</p>
+                    <p class="text-[10px] text-amber">Mist leaves · Rotate pot</p>
+                </div>
+                <button class="px-3 py-1.5 bg-amber/10 text-amber text-xs font-bold rounded-full">Done</button>
+            </div>
+
+            <div class="paper p-3 due-today flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber/10 flex items-center justify-center text-xl">🌸</div>
+                <div class="flex-1">
+                    <p class="text-sm font-serif font-bold">Orchid</p>
+                    <p class="text-[10px] text-amber">Ice cube watering day</p>
+                </div>
+                <button class="px-3 py-1.5 bg-amber/10 text-amber text-xs font-bold rounded-full">Done</button>
+            </div>
+
+            <!-- Upcoming -->
+            <p class="text-[10px] font-sans font-bold text-chloro/60 uppercase tracking-wider mt-3 mb-1">🌱 Upcoming</p>
+
+            <div class="paper p-3 upcoming flex items-center gap-3 opacity-70">
+                <div class="w-10 h-10 rounded-xl bg-chloro/10 flex items-center justify-center text-xl">🪴</div>
+                <div class="flex-1">
+                    <p class="text-sm font-serif font-bold text-soil/70">Snake Plant</p>
+                    <p class="text-[10px] text-chloro/60">Water in 3 days</p>
+                </div>
+                <span class="text-[10px] text-bark/20">Feb 22</span>
+            </div>
+
+            <div class="paper p-3 upcoming flex items-center gap-3 opacity-70">
+                <div class="w-10 h-10 rounded-xl bg-chloro/10 flex items-center justify-center text-xl">🌿</div>
+                <div class="flex-1">
+                    <p class="text-sm font-serif font-bold text-soil/70">Fiddle Leaf Fig</p>
+                    <p class="text-[10px] text-chloro/60">Fertilize in 5 days</p>
+                </div>
+                <span class="text-[10px] text-bark/20">Feb 24</span>
+            </div>
+
+            <div class="paper p-3 upcoming flex items-center gap-3 opacity-50">
+                <div class="w-10 h-10 rounded-xl bg-chloro/10 flex items-center justify-center text-xl">🌵</div>
+                <div class="flex-1">
+                    <p class="text-sm font-serif font-bold text-soil/50">Cactus</p>
+                    <p class="text-[10px] text-chloro/40">Water in 12 days</p>
+                </div>
+                <span class="text-[10px] text-bark/15">Mar 3</span>
+            </div>
+
+            <!-- Weekly Overview -->
+            <div class="paper p-4 mt-3">
+                <h3 class="text-[10px] font-sans font-bold text-bark/30 uppercase tracking-wider mb-2">This Week — 8
+                    Plants</h3>
+                <div class="grid grid-cols-7 gap-1">
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">M</p>
+                        <div class="w-6 h-6 rounded bg-urgent/20 mx-auto flex items-center justify-center text-[8px]">💧
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">T</p>
+                        <div class="w-6 h-6 rounded bg-amber/20 mx-auto flex items-center justify-center text-[8px]">2
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">W</p>
+                        <div class="w-6 h-6 rounded bg-chloro/10 mx-auto flex items-center justify-center text-[8px]">-
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">T</p>
+                        <div class="w-6 h-6 rounded bg-chloro/20 mx-auto flex items-center justify-center text-[8px]">1
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">F</p>
+                        <div class="w-6 h-6 rounded bg-chloro/10 mx-auto flex items-center justify-center text-[8px]">-
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">S</p>
+                        <div class="w-6 h-6 rounded bg-chloro/20 mx-auto flex items-center justify-center text-[8px]">1
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[8px] text-bark/20">S</p>
+                        <div class="w-6 h-6 rounded bg-chloro/10 mx-auto flex items-center justify-center text-[8px]">-
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

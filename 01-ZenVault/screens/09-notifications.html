@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Notifications</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#0A0B0F", "primary": "#00D4AA", "secondary": "#7B61FF", "accent": "#FF6B9D", "danger": "#FF4757", "surface": "#12131A" }, fontFamily: { "display": ["Outfit", "sans-serif"], "sans": ["DM Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0B0F
+        }
+
+        .glass {
+            background: rgba(18, 19, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        .notif-new {
+            border-left: 3px solid #00D4AA
+        }
+
+        .notif-alert {
+            border-left: 3px solid #FF4757
+        }
+
+        .notif-info {
+            border-left: 3px solid #7B61FF
+        }
+
+        .notif-read {
+            border-left: 3px solid transparent
+        }
+
+        .swipe-hint {
+            animation: swipeHint 3s ease-in-out infinite
+        }
+
+        @keyframes swipeHint {
+            0%, 100% { transform: translateX(0) }
+            50% { transform: translateX(-5px) }
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes unreadPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.7; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+        [data-animate="slide"] { animation-name: slideInRight; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease, opacity 300ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .unread-dot { animation: unreadPulse 2s ease-in-out infinite; }
+        .notif-item { transition: transform 200ms ease, opacity 200ms ease; }
+        .notif-item:active { transform: scale(0.97); }
+        .chip-active { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2); color: #00D4AA; }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+          [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <!-- Status Bar -->
+        <div class="h-12 w-full" aria-hidden="true"></div>
+
+        <!-- Header -->
+        <header class="flex items-center justify-between px-6 pb-3" data-animate style="animation-delay:0ms">
+            <h1 class="text-xl font-display font-bold">Notifications</h1>
+            <div class="flex gap-2">
+                <button class="text-xs text-primary font-medium btn-press" id="markAllRead" aria-label="Mark all notifications as read">Mark all read</button>
+            </div>
+        </header>
+
+        <!-- Filter Chips -->
+        <section aria-label="Notification filters" class="flex gap-2 px-6 pb-3" data-animate style="animation-delay:80ms">
+            <button class="px-3 py-1.5 chip-active rounded-full text-xs font-medium btn-press" data-filter="all" aria-pressed="true">All</button>
+            <button class="px-3 py-1.5 bg-white/3 rounded-full text-xs text-white/30 btn-press" data-filter="alerts" aria-pressed="false">Alerts</button>
+            <button class="px-3 py-1.5 bg-white/3 rounded-full text-xs text-white/30 btn-press" data-filter="trades" aria-pressed="false">Trades</button>
+            <button class="px-3 py-1.5 bg-white/3 rounded-full text-xs text-white/30 btn-press" data-filter="news" aria-pressed="false">News</button>
+        </section>
+
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <p class="text-[10px] text-white/15 font-display uppercase tracking-widest mb-1" data-animate style="animation-delay:160ms">Today</p>
+
+            <!-- Notification: Alert -->
+            <div class="glass card-interactive shadow-layered p-4 notif-alert notif-item swipe-hint" data-animate style="animation-delay:240ms" data-notif="unread" data-type="alerts" role="article" aria-label="Price alert notification">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-danger/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-danger" aria-hidden="true">trending_down</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium">Price Alert: SOL dropped below $145</p>
+                        <p class="text-[10px] text-white/30 mt-0.5">Solana is down 4.2% in the last hour</p>
+                        <p class="text-[10px] text-white/15 mt-1">2 min ago</p>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-danger mt-1.5 flex-shrink-0 unread-dot" aria-label="Unread"></span>
+                </div>
+            </div>
+
+            <!-- Notification: New/Trade -->
+            <div class="glass card-interactive shadow-layered p-4 notif-new notif-item" data-animate style="animation-delay:320ms" data-notif="unread" data-type="trades" role="article" aria-label="Dividend notification">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">check_circle</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium">Dividend received: $34.20</p>
+                        <p class="text-[10px] text-white/30 mt-0.5">AAPL quarterly dividend deposited</p>
+                        <p class="text-[10px] text-white/15 mt-1">1 hour ago</p>
+                    </div>
+                    <span class="w-2 h-2 rounded-full bg-primary mt-1.5 flex-shrink-0 unread-dot" aria-label="Unread"></span>
+                </div>
+            </div>
+
+            <!-- Notification: AI Insight -->
+            <div class="glass card-interactive shadow-layered p-4 notif-info notif-item" data-animate style="animation-delay:400ms" data-notif="unread" data-type="news" role="article" aria-label="AI insight notification">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-secondary" aria-hidden="true">auto_awesome</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium">AI Insight: Rebalance opportunity</p>
+                        <p class="text-[10px] text-white/30 mt-0.5">Your tech allocation is 8% above target. Consider rebalancing.</p>
+                        <div class="flex gap-2 mt-2">
+                            <button class="px-3 py-1 bg-secondary/10 text-secondary text-[10px] font-medium rounded-full btn-press">Review</button>
+                            <button class="px-3 py-1 bg-white/3 text-white/30 text-[10px] rounded-full btn-press">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification: Read -->
+            <div class="glass card-interactive p-4 notif-item" data-animate style="animation-delay:480ms" data-notif="read" data-type="news" role="article" aria-label="BTC price milestone">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-primary" aria-hidden="true">trending_up</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-white/50">BTC reached $58,200 — new monthly high</p>
+                        <p class="text-[10px] text-white/15 mt-1">3 hours ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-[10px] text-white/15 font-display uppercase tracking-widest mt-3 mb-1" data-animate style="animation-delay:560ms">Yesterday</p>
+
+            <div class="glass card-interactive p-4 opacity-60 notif-item" data-animate style="animation-delay:640ms" data-notif="read" data-type="news" role="article" aria-label="Goal progress notification">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-accent" aria-hidden="true">savings</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-white/50">Goal reached! Emergency Fund at 75%</p>
+                        <p class="text-[10px] text-white/15 mt-1">Yesterday, 4:30 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass card-interactive p-4 opacity-60 notif-item" data-animate style="animation-delay:720ms" data-notif="read" data-type="trades" role="article" aria-label="Monthly statement ready">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-white/20" aria-hidden="true">receipt_long</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-white/50">Monthly statement ready</p>
+                        <p class="text-[10px] text-white/15 mt-1">Yesterday, 9:00 AM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass card-interactive p-4 opacity-40 notif-item" data-animate style="animation-delay:800ms" data-notif="read" data-type="alerts" role="article" aria-label="Security login notification">
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined !text-lg text-white/15" aria-hidden="true">security</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-medium text-white/40">Security: New device login detected</p>
+                        <p class="text-[10px] text-white/10 mt-1">2 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Intersection Observer for animations
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+        // Mark-as-read toggle on notification tap
+        document.querySelectorAll('.notif-item').forEach(item => {
+            item.addEventListener('click', () => {
+                if (item.dataset.notif === 'unread') {
+                    item.dataset.notif = 'read';
+                    // Remove unread dot
+                    const dot = item.querySelector('.unread-dot');
+                    if (dot) {
+                        dot.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        dot.style.opacity = '0';
+                        dot.style.transform = 'scale(0)';
+                        setTimeout(() => dot.remove(), 300);
+                    }
+                    // Remove colored border
+                    item.classList.remove('notif-alert', 'notif-new', 'notif-info');
+                    item.classList.add('notif-read');
+                    // Dim the title
+                    const title = item.querySelector('.text-sm.font-medium');
+                    if (title) title.classList.add('text-white/50');
+                    // Update unread count
+                    updateUnreadCount();
+                }
+            });
+        });
+
+        // Mark all read button
+        document.getElementById('markAllRead').addEventListener('click', () => {
+            document.querySelectorAll('[data-notif="unread"]').forEach(item => {
+                item.click();
+            });
+        });
+
+        function updateUnreadCount() {
+            const unread = document.querySelectorAll('[data-notif="unread"]').length;
+            const badge = document.getElementById('unreadBadge');
+            if (badge) {
+                badge.textContent = unread;
+                badge.style.display = unread > 0 ? 'inline' : 'none';
+            }
+        }
+
+        // Filter chips
+        const chips = document.querySelectorAll('[data-filter]');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Update active state
+                chips.forEach(c => {
+                    c.classList.remove('chip-active');
+                    c.classList.add('bg-white/3', 'text-white/30');
+                    c.setAttribute('aria-pressed', 'false');
+                });
+                chip.classList.add('chip-active');
+                chip.classList.remove('bg-white/3', 'text-white/30');
+                chip.setAttribute('aria-pressed', 'true');
+
+                const filter = chip.dataset.filter;
+                const items = document.querySelectorAll('.notif-item');
+                items.forEach(item => {
+                    if (filter === 'all' || item.dataset.type === filter) {
+                        item.style.display = '';
+                        item.style.opacity = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Swipe hint: remove after first interaction
+        let swipeHintRemoved = false;
+        document.addEventListener('touchstart', () => {
+            if (!swipeHintRemoved) {
+                document.querySelectorAll('.swipe-hint').forEach(el => el.classList.remove('swipe-hint'));
+                swipeHintRemoved = true;
+            }
+        }, { once: true });
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Shared Lists</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay-card {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.06), -3px -3px 10px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <h1 class="text-xl font-display font-bold">Shopping Lists 🛒</h1>
+            <button class="px-3 py-1.5 bg-together/10 rounded-full text-xs text-together font-display font-semibold">+
+                New List</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Groceries List -->
+            <div class="clay-card p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-sm font-display font-bold">🥬 Groceries</p>
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-5 h-5 rounded-full bg-papa/20 border-2 border-white text-[7px] flex items-center justify-center">
+                            👨</div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-mama/20 border-2 border-white text-[7px] flex items-center justify-center">
+                            👩</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-green-100 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-green-500">check</span></div><span
+                            class="text-xs line-through text-gray-300">Milk (2%)</span><span
+                            class="text-[8px] text-mama/40">👩 added</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-green-100 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-green-500">check</span></div><span
+                            class="text-xs line-through text-gray-300">Bread (whole wheat)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Eggs
+                            (dozen)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Bananas</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Chicken
+                            breast</span><span class="text-[8px] text-papa/40">👨 added</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Broccoli</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-50"><span
+                        class="text-[10px] text-gray-300">2/6 done</span><button
+                        class="text-[10px] text-together font-display font-semibold">+ Add item</button></div>
+            </div>
+
+            <!-- School Supplies -->
+            <div class="clay-card p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-sm font-display font-bold">📚 School Supplies</p>
+                    <div class="w-5 h-5 rounded-full bg-kid/20 text-[7px] flex items-center justify-center">👦</div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Notebook
+                            (lined)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Colored
+                            pencils</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Glue sticks
+                            (x3)</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-50"><span
+                        class="text-[10px] text-gray-300">0/3 done</span><button
+                        class="text-[10px] text-together font-display font-semibold">+ Add item</button></div>
+            </div>
+
+            <!-- Weekend Plans -->
+            <div class="clay-card p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-sm font-display font-bold">🎉 Birthday Party Prep</p>
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-5 h-5 rounded-full bg-together/20 border-2 border-white text-[7px] flex items-center justify-center">
+                            👨</div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-mama/20 border-2 border-white text-[7px] flex items-center justify-center">
+                            👩</div>
+                        <div
+                            class="w-5 h-5 rounded-full bg-kid/20 border-2 border-white text-[7px] flex items-center justify-center">
+                            👦</div>
+                    </div>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded bg-green-100 flex items-center justify-center"><span
+                                class="material-symbols-outlined !text-xs text-green-500">check</span></div><span
+                            class="text-xs line-through text-gray-300">Order cake</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Buy
+                            balloons</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Send
+                            invitations</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-5 h-5 rounded border border-gray-200"></div><span class="text-xs">Pick up
+                            decorations</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mt-3 pt-2 border-t border-gray-50"><span
+                        class="text-[10px] text-gray-300">1/4 done</span><button
+                        class="text-[10px] text-together font-display font-semibold">+ Add item</button></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Artist</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "plasma": "#FF6B2B" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+
+        .glass-neon {
+            background: rgba(255, 45, 120, 0.03);
+            border: 1px solid rgba(255, 45, 120, 0.08);
+            border-radius: 16px
+        }
+
+        .hero-blur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 280px;
+            background: linear-gradient(180deg, rgba(255, 45, 120, 0.15) 0%, rgba(139, 92, 246, 0.08) 40%, rgba(10, 10, 15, 1) 100%)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="hero-blur"></div>
+
+        <div class="relative z-10 flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-white/30">arrow_back</span></button>
+            <button><span class="material-symbols-outlined !text-xl text-white/30">more_horiz</span></button>
+        </div>
+
+        <!-- Artist Profile -->
+        <div class="relative z-10 flex flex-col items-center pb-4">
+            <div
+                class="w-28 h-28 rounded-full bg-gradient-to-br from-neon/30 via-violet/20 to-void border-2 border-neon/20 flex items-center justify-center text-5xl">
+                🎤</div>
+            <h1 class="text-2xl font-display font-bold mt-3 tracking-wider">AURORA</h1>
+            <p class="text-xs text-white/30 mt-1">2.4M monthly listeners</p>
+            <div class="flex gap-3 mt-3">
+                <button
+                    class="px-6 py-2 bg-neon text-void font-display text-xs font-bold rounded-full active:scale-95 transition-transform">Follow</button>
+                <button class="px-4 py-2 bg-white/5 border border-white/10 text-xs rounded-full"><span
+                        class="material-symbols-outlined !text-sm align-middle">shuffle</span> Shuffle</button>
+            </div>
+        </div>
+
+        <div class="relative z-10 flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Popular -->
+            <div>
+                <p class="text-[10px] text-neon/40 font-display uppercase tracking-[0.3em] mb-2">Popular</p>
+                <div class="space-y-1">
+                    <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/3"><span
+                            class="text-[10px] text-white/15 font-display w-4">1</span>
+                        <div class="w-9 h-9 rounded-lg bg-neon/10 flex items-center justify-center text-sm">🎵</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Runaway</p>
+                            <p class="text-[10px] text-white/20">148M plays</p>
+                        </div><span class="text-[10px] text-white/10">3:45</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/3"><span
+                            class="text-[10px] text-white/15 font-display w-4">2</span>
+                        <div class="w-9 h-9 rounded-lg bg-violet/10 flex items-center justify-center text-sm">🎶</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Running with the Wolves</p>
+                            <p class="text-[10px] text-white/20">98M plays</p>
+                        </div><span class="text-[10px] text-white/10">5:01</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/3"><span
+                            class="text-[10px] text-white/15 font-display w-4">3</span>
+                        <div class="w-9 h-9 rounded-lg bg-electric/10 flex items-center justify-center text-sm">🎹</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">Cure for Me</p>
+                            <p class="text-[10px] text-white/20">76M plays</p>
+                        </div><span class="text-[10px] text-white/10">3:23</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 rounded-xl hover:bg-white/3"><span
+                            class="text-[10px] text-white/15 font-display w-4">4</span>
+                        <div class="w-9 h-9 rounded-lg bg-plasma/10 flex items-center justify-center text-sm">🌙</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-medium">The Seed</p>
+                            <p class="text-[10px] text-white/20">52M plays</p>
+                        </div><span class="text-[10px] text-white/10">4:15</span>
+                    </div>
+                    <button class="text-xs text-neon/40 mt-1 font-medium">Show all →</button>
+                </div>
+            </div>
+
+            <!-- Albums -->
+            <div>
+                <p class="text-[10px] text-neon/40 font-display uppercase tracking-[0.3em] mb-2">Albums</p>
+                <div class="flex gap-3 overflow-x-auto pb-2 -mx-2 px-2 no-scrollbar">
+                    <div class="min-w-[120px]">
+                        <div
+                            class="aspect-square rounded-xl bg-gradient-to-br from-neon/20 via-violet/10 to-void flex items-center justify-center text-3xl mb-2">
+                            💿</div>
+                        <p class="text-xs font-medium truncate">The Gods We Can Touch</p>
+                        <p class="text-[9px] text-white/20">2022</p>
+                    </div>
+                    <div class="min-w-[120px]">
+                        <div
+                            class="aspect-square rounded-xl bg-gradient-to-br from-violet/20 via-electric/10 to-void flex items-center justify-center text-3xl mb-2">
+                            📀</div>
+                        <p class="text-xs font-medium truncate">A Different Kind of Human</p>
+                        <p class="text-[9px] text-white/20">2019</p>
+                    </div>
+                    <div class="min-w-[120px]">
+                        <div
+                            class="aspect-square rounded-xl bg-gradient-to-br from-electric/20 via-neon/10 to-void flex items-center justify-center text-3xl mb-2">
+                            🎧</div>
+                        <p class="text-xs font-medium truncate">Infections of a Different Kind</p>
+                        <p class="text-[9px] text-white/20">2018</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similar Artists -->
+            <div>
+                <p class="text-[10px] text-neon/40 font-display uppercase tracking-[0.3em] mb-2">Similar Artists</p>
+                <div class="flex gap-4 overflow-x-auto pb-2 no-scrollbar">
+                    <div class="min-w-[60px] text-center">
+                        <div
+                            class="w-14 h-14 rounded-full bg-violet/10 flex items-center justify-center text-2xl mx-auto">
+                            🎤</div>
+                        <p class="text-[10px] text-white/40 mt-1">Björk</p>
+                    </div>
+                    <div class="min-w-[60px] text-center">
+                        <div
+                            class="w-14 h-14 rounded-full bg-neon/10 flex items-center justify-center text-2xl mx-auto">
+                            🎤</div>
+                        <p class="text-[10px] text-white/40 mt-1">Grimes</p>
+                    </div>
+                    <div class="min-w-[60px] text-center">
+                        <div
+                            class="w-14 h-14 rounded-full bg-electric/10 flex items-center justify-center text-2xl mx-auto">
+                            🎤</div>
+                        <p class="text-[10px] text-white/40 mt-1">FKA twigs</p>
+                    </div>
+                    <div class="min-w-[60px] text-center">
+                        <div
+                            class="w-14 h-14 rounded-full bg-plasma/10 flex items-center justify-center text-2xl mx-auto">
+                            🎤</div>
+                        <p class="text-[10px] text-white/40 mt-1">Sigur Rós</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

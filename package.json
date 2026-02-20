@@ -1,0 +1,10 @@
+{
+    "name": "app-panorama-viewer",
+    "version": "1.0.0",
+    "private": true,
+    "description": "App Screen Panorama Viewer with Element Inspector",
+    "scripts": {
+        "dev": "npx -y serve . -p 3456 --cors",
+        "start": "npx -y serve . -p 3456 --cors"
+    }
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Photo Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "parchment": "#1A1510", "vintage": "#D4A574", "linen": "#F5E6D3" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1510
+        }
+
+        .glass-v {
+            background: rgba(212, 165, 116, 0.04);
+            border: 1px solid rgba(212, 165, 116, 0.08);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-linen overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-linen/20">arrow_back</span></button>
+            <div class="text-center">
+                <h1 class="font-display text-sm font-bold tracking-wider">Photo Journal</h1>
+                <p class="text-[9px] text-vintage/30">🇯🇵 Tokyo · 5 days</p>
+            </div>
+            <button class="w-9 h-9 rounded-full bg-vintage/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-vintage">add_a_photo</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Day Header -->
+            <div class="flex items-center gap-3">
+                <div class="h-px flex-1 bg-vintage/10"></div><span class="text-[10px] text-vintage/25 font-display">Day
+                    3 · Feb 17</span>
+                <div class="h-px flex-1 bg-vintage/10"></div>
+            </div>
+
+            <!-- Photo Post -->
+            <div class="glass-v overflow-hidden">
+                <div
+                    class="h-44 bg-gradient-to-br from-vintage/15 via-parchment to-vintage/5 flex items-center justify-center text-5xl">
+                    🏯</div>
+                <div class="p-4">
+                    <p class="text-sm font-display font-semibold">Senso-ji Temple</p>
+                    <p class="text-xs text-linen/20 mt-1 leading-relaxed">The oldest temple in Tokyo. The Thunder Gate
+                        (Kaminarimon) was breathtaking at sunset. Incense smoke curled through the twilight air.</p>
+                    <div class="flex items-center gap-2 mt-2"><span
+                            class="material-symbols-outlined !text-xs text-vintage/20">location_on</span><span
+                            class="text-[9px] text-vintage/20">Asakusa, Tokyo</span><span
+                            class="text-[9px] text-linen/10">· 5:42 PM</span></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+                <div class="glass-v overflow-hidden">
+                    <div class="h-28 bg-vintage/8 flex items-center justify-center text-3xl">🍣</div>
+                    <div class="p-2">
+                        <p class="text-xs font-display font-semibold">Tsukiji Market</p>
+                        <p class="text-[9px] text-linen/15">Fresh sushi · 12:30 PM</p>
+                    </div>
+                </div>
+                <div class="glass-v overflow-hidden">
+                    <div class="h-28 bg-vintage/8 flex items-center justify-center text-3xl">🌸</div>
+                    <div class="p-2">
+                        <p class="text-xs font-display font-semibold">Ueno Park</p>
+                        <p class="text-[9px] text-linen/15">Cherry blossoms · 3:15 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="flex items-center gap-3">
+                <div class="h-px flex-1 bg-vintage/10"></div><span class="text-[10px] text-vintage/20 font-display">Day
+                    2 · Feb 16</span>
+                <div class="h-px flex-1 bg-vintage/10"></div>
+            </div>
+
+            <div class="glass-v overflow-hidden opacity-70">
+                <div class="h-36 bg-vintage/5 flex items-center justify-center text-4xl">🗼</div>
+                <div class="p-3">
+                    <p class="text-sm font-display font-semibold">Tokyo Skytree</p>
+                    <p class="text-xs text-linen/15 mt-0.5">360° view of the city at night. Absolutely unreal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — AI Chef</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "panna": "#FDF8F0", "saffron": "#E8A838", "basil": "#3A7D44", "espresso": "#3C2415" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Lato", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FDF8F0
+        }
+
+        @keyframes typing {
+            0% {
+                opacity: 0.3
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            100% {
+                opacity: 0.3
+            }
+        }
+
+        .dot {
+            animation: typing 1.5s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-espresso overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-panna">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2"><button><span
+                    class="material-symbols-outlined !text-xl text-espresso/20">arrow_back</span></button>
+            <h1 class="font-serif text-lg font-bold">AI Chef 🤖</h1><button><span
+                    class="material-symbols-outlined !text-xl text-espresso/20">history</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-32 space-y-3 mt-1">
+            <!-- AI Message -->
+            <div class="flex gap-2">
+                <div
+                    class="w-8 h-8 rounded-full bg-saffron/15 flex items-center justify-center text-sm flex-shrink-0 mt-1">
+                    👨‍🍳</div>
+                <div class="bg-white rounded-2xl rounded-tl-sm shadow-sm p-3 max-w-[80%]">
+                    <p class="text-xs text-espresso/50 leading-relaxed">Hello! I'm your AI Chef. I can help you with:
+                    </p>
+                    <div class="space-y-1 mt-2">
+                        <div class="flex items-center gap-2 text-xs text-espresso/40"><span
+                                class="text-sm">🍲</span>Recipe suggestions from ingredients</div>
+                        <div class="flex items-center gap-2 text-xs text-espresso/40"><span
+                                class="text-sm">🔄</span>Ingredient substitutions</div>
+                        <div class="flex items-center gap-2 text-xs text-espresso/40"><span
+                                class="text-sm">📏</span>Scaling recipes up or down</div>
+                        <div class="flex items-center gap-2 text-xs text-espresso/40"><span
+                                class="text-sm">🌿</span>Dietary adaptations</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Message -->
+            <div class="flex justify-end">
+                <div class="bg-saffron/15 rounded-2xl rounded-tr-sm p-3 max-w-[75%]">
+                    <p class="text-xs text-espresso/60">I have chicken, garlic, lemon, and pasta. What can I make?</p>
+                </div>
+            </div>
+
+            <!-- AI Response -->
+            <div class="flex gap-2">
+                <div
+                    class="w-8 h-8 rounded-full bg-saffron/15 flex items-center justify-center text-sm flex-shrink-0 mt-1">
+                    👨‍🍳</div>
+                <div class="bg-white rounded-2xl rounded-tl-sm shadow-sm p-3 max-w-[80%]">
+                    <p class="text-xs text-espresso/50 leading-relaxed">Great ingredients! Here are 3 recipes:</p>
+                    <div class="space-y-2 mt-2">
+                        <div class="bg-panna rounded-xl p-2">
+                            <p class="text-xs font-serif font-bold">🍝 Lemon Garlic Chicken Pasta</p>
+                            <p class="text-[10px] text-espresso/25">30 min · Easy · ⭐ Best match</p>
+                        </div>
+                        <div class="bg-panna rounded-xl p-2">
+                            <p class="text-xs font-serif font-bold">🍗 Garlic Butter Chicken</p>
+                            <p class="text-[10px] text-espresso/25">25 min · Easy</p>
+                        </div>
+                        <div class="bg-panna rounded-xl p-2">
+                            <p class="text-xs font-serif font-bold">🥗 Lemon Chicken Orzo</p>
+                            <p class="text-[10px] text-espresso/25">35 min · Medium</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-saffron mt-2 font-semibold">Tap any recipe for full instructions →</p>
+                </div>
+            </div>
+
+            <!-- Typing -->
+            <div class="flex gap-2">
+                <div class="w-8 h-8 rounded-full bg-saffron/15 flex items-center justify-center text-sm flex-shrink-0">
+                    👨‍🍳</div>
+                <div class="bg-white rounded-2xl rounded-tl-sm shadow-sm px-4 py-3 flex gap-1"><span
+                        class="w-2 h-2 rounded-full bg-espresso/15 dot"></span><span
+                        class="w-2 h-2 rounded-full bg-espresso/15 dot" style="animation-delay:0.3s"></span><span
+                        class="w-2 h-2 rounded-full bg-espresso/15 dot" style="animation-delay:0.6s"></span></div>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div
+            class="absolute bottom-0 left-0 right-0 bg-panna/95 backdrop-blur border-t border-espresso/5 px-6 py-4 pb-8">
+            <div class="flex items-center gap-2">
+                <div class="flex-1 flex items-center gap-2 bg-white rounded-xl px-3 py-2.5 shadow-sm"><span
+                        class="material-symbols-outlined !text-lg text-espresso/15">photo_camera</span><input
+                        class="flex-1 bg-transparent text-sm outline-none placeholder-espresso/15"
+                        placeholder="Ask the AI Chef..." /></div><button
+                    class="w-10 h-10 rounded-xl bg-saffron flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-white">send</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

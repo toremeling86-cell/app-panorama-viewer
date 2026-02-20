@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NightOwl Insights &amp; Trends</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1418eb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#020208", // True Void Black
+                        "teal-accent": "#14B8A6",
+                        "amber-accent": "#F59E0B",
+                        "rose-accent": "#FB7185",
+                        "indigo-accent": "#6366F1",
+                        "lavender-accent": "#A78BFA",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(20, 24, 235, 0.05);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(99, 102, 241, 0.15);
+        }
+        .heatmap-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-4 bg-background-dark/80 backdrop-blur-xl">
+<h1 class="text-[20px] font-medium tracking-tight">Insights</h1>
+<div class="glass-card px-4 py-1.5 rounded-full flex items-center gap-2">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Range</span>
+<span class="text-sm font-bold text-indigo-accent">30 Days</span>
+<span class="material-symbols-outlined text-sm text-slate-500">expand_more</span>
+</div>
+</header>
+<main class="px-4 space-y-6 max-w-md mx-auto">
+<!-- Heatmap Section -->
+<section class="mt-2">
+<div class="flex items-end justify-between mb-4 px-2">
+<div>
+<h2 class="text-lg font-bold">February 2026</h2>
+<p class="text-xs text-slate-500">Sleep Score Distribution</p>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-2xl font-bold text-teal-accent">84</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-slate-500">Avg Score</span>
+</div>
+</div>
+<div class="heatmap-grid px-2">
+<!-- Row 1 (Partial) -->
+<div class="aspect-square rounded bg-transparent"></div>
+<div class="aspect-square rounded bg-teal-accent/20"></div>
+<div class="aspect-square rounded bg-teal-accent/40"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/60"></div>
+<div class="aspect-square rounded bg-amber-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/40"></div>
+<!-- Row 2 -->
+<div class="aspect-square rounded bg-rose-accent"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/80"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/40"></div>
+<div class="aspect-square rounded bg-teal-accent/80"></div>
+<div class="aspect-square rounded bg-amber-accent/80"></div>
+<!-- Row 3 -->
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/80"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/60"></div>
+<div class="aspect-square rounded bg-teal-accent/40"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<!-- Row 4 (Highlight Today) -->
+<div class="aspect-square rounded bg-teal-accent/80"></div>
+<div class="aspect-square rounded bg-teal-accent"></div>
+<div class="aspect-square rounded bg-teal-accent/60 border-2 border-white ring-2 ring-white/20"></div>
+<div class="aspect-square rounded bg-slate-800/30"></div>
+<div class="aspect-square rounded bg-slate-800/30"></div>
+<div class="aspect-square rounded bg-slate-800/30"></div>
+<div class="aspect-square rounded bg-slate-800/30"></div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[10px] text-slate-500 font-bold uppercase tracking-widest">
+<span>Low (&lt;70)</span>
+<div class="flex gap-1.5">
+<div class="size-2 rounded bg-rose-accent"></div>
+<div class="size-2 rounded bg-amber-accent"></div>
+<div class="size-2 rounded bg-teal-accent/40"></div>
+<div class="size-2 rounded bg-teal-accent"></div>
+</div>
+<span>Peak (90+)</span>
+</div>
+</section>
+<!-- Sleep Duration Chart -->
+<section class="glass-card rounded-xl p-5 overflow-hidden">
+<h3 class="text-sm font-bold mb-6 flex items-center justify-between">
+                Duration Trends
+                <span class="text-[10px] text-indigo-accent font-mono uppercase">7.8h Average</span>
+</h3>
+<div class="relative h-32 flex items-end justify-between gap-1">
+<!-- Dashed Target Line 8h -->
+<div class="absolute top-4 left-0 w-full border-t border-dashed border-slate-700/50 z-0">
+<span class="absolute -top-3 right-0 text-[8px] text-slate-600 font-bold">TARGET 8H</span>
+</div>
+<!-- Average Line 7.8h -->
+<div class="absolute top-6 left-0 w-full border-t border-slate-500/30 z-0"></div>
+<!-- Chart Bars -->
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-3/4 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-2/3 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-5/6 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-rose-accent h-1/2 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-4/5 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-3/4 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-full rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-4/5 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-5/6 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-amber-accent h-3/5 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-3/4 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-2/3 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-4/5 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-teal-accent h-5/6 rounded-full"></div>
+<div class="w-2 bg-gradient-to-t from-primary/20 to-indigo-accent h-3/4 rounded-full"></div>
+</div>
+</section>
+<!-- Sleep Debt Card -->
+<section class="glass-card rounded-xl p-5 border-l-4 border-l-rose-accent">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1">Sleep Debt</h3>
+<p class="text-3xl font-mono font-bold text-rose-accent tracking-tighter">-2.4 hours</p>
+</div>
+<div class="material-symbols-outlined text-rose-accent/40 text-3xl">warning</div>
+</div>
+<p class="mt-3 text-xs text-slate-400 leading-relaxed">
+                You need <span class="text-slate-100 font-bold">24 more minutes</span> per night this week to recover.
+            </p>
+<div class="mt-4">
+<div class="flex justify-between text-[10px] font-bold text-slate-500 mb-1.5 uppercase">
+<span>Recovery Progress</span>
+<span>45%</span>
+</div>
+<div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-rose-accent rounded-full" style="width: 45%;"></div>
+</div>
+</div>
+</section>
+<!-- Stage Breakdown -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-sm font-bold">Stage Breakdown</h3>
+<div class="flex items-center gap-1.5 bg-teal-accent/10 border border-teal-accent/20 px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-teal-accent text-sm">emoji_events</span>
+<span class="text-[10px] font-bold text-teal-accent uppercase">Above average Deep sleep</span>
+</div>
+</div>
+<div class="glass-card rounded-xl p-5">
+<div class="w-full h-6 flex rounded-full overflow-hidden mb-4">
+<div class="h-full bg-indigo-accent" style="width: 22%;"></div>
+<div class="h-full bg-lavender-accent" style="width: 24%;"></div>
+<div class="h-full bg-indigo-accent/40" style="width: 46%;"></div>
+<div class="h-full bg-slate-700" style="width: 8%;"></div>
+</div>
+<div class="grid grid-cols-2 gap-y-3 gap-x-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-indigo-accent"></div>
+<span class="text-xs text-slate-400">Deep</span>
+</div>
+<span class="text-xs font-bold">22%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-lavender-accent"></div>
+<span class="text-xs text-slate-400">REM</span>
+</div>
+<span class="text-xs font-bold">24%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-indigo-accent/40"></div>
+<span class="text-xs text-slate-400">Light</span>
+</div>
+<span class="text-xs font-bold">46%</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-slate-700"></div>
+<span class="text-xs text-slate-400">Awake</span>
+</div>
+<span class="text-xs font-bold">8%</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Top Insights Grid -->
+<section class="grid grid-cols-3 gap-3">
+<div class="glass-card p-3 rounded-xl text-center flex flex-col items-center justify-center gap-1">
+<span class="text-[9px] font-bold uppercase tracking-widest text-slate-500">Best Night</span>
+<span class="text-teal-accent font-bold">Feb 14</span>
+<span class="text-[10px] text-slate-400">96 Score</span>
+</div>
+<div class="glass-card p-3 rounded-xl text-center flex flex-col items-center justify-center gap-1">
+<span class="text-[9px] font-bold uppercase tracking-widest text-slate-500">Worst Night</span>
+<span class="text-rose-accent font-bold">Feb 08</span>
+<span class="text-[10px] text-slate-400">62 Score</span>
+</div>
+<div class="glass-card p-3 rounded-xl text-center flex flex-col items-center justify-center gap-1 border border-teal-accent/30 bg-teal-accent/5">
+<span class="text-[9px] font-bold uppercase tracking-widest text-slate-500">Trend</span>
+<span class="text-white font-bold">+4%</span>
+<span class="text-[10px] text-teal-accent">Improving</span>
+</div>
+</section>
+</main>
+<!-- Navigation Bar -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-sm glass-card rounded-full px-6 py-3 flex items-center justify-between z-50">
+<a class="flex flex-col items-center gap-0.5 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl font-light">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-indigo-accent" href="#">
+<span class="material-symbols-outlined text-2xl font-fill">psychology</span>
+<span class="text-[10px] font-bold">Insights</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl font-light">calendar_today</span>
+<span class="text-[10px] font-medium">Journal</span>
+</a>
+<a class="flex flex-col items-center gap-0.5 text-slate-500" href="#">
+<span class="material-symbols-outlined text-2xl font-light">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

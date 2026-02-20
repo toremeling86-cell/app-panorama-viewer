@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Budget</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6", "danger": "#EF4444" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay-card {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.06), -3px -3px 10px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <h1 class="text-xl font-display font-bold">Family Budget 💰</h1><button
+                class="text-xs text-together font-display font-semibold">February</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Overview -->
+            <div class="clay-card p-5">
+                <div class="text-center mb-3">
+                    <p class="text-[10px] text-gray-300">Monthly Budget</p>
+                    <p class="text-3xl font-display font-bold">$4,200</p>
+                </div>
+                <div class="h-3 rounded-full bg-gray-100 overflow-hidden flex">
+                    <div class="bg-papa" style="width:35%"></div>
+                    <div class="bg-mama" style="width:25%"></div>
+                    <div class="bg-kid" style="width:12%"></div>
+                    <div class="bg-together" style="width:10%"></div>
+                </div>
+                <div class="flex justify-between mt-2 text-[9px] text-gray-300"><span>$3,444 spent</span><span>$756
+                        remaining</span></div>
+            </div>
+
+            <!-- Categories -->
+            <p class="text-[10px] text-gray-300 font-display uppercase tracking-wider">Categories</p>
+
+            <div class="clay-card p-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-papa/10 flex items-center justify-center text-lg">🏠</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <p class="text-sm font-display font-bold">Housing</p>
+                            <p class="text-sm font-display font-bold">$1,500</p>
+                        </div>
+                        <div class="h-1.5 rounded-full bg-gray-100 mt-1">
+                            <div class="h-full rounded-full bg-papa" style="width:100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clay-card p-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-mama/10 flex items-center justify-center text-lg">🛒</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <p class="text-sm font-display font-bold">Groceries</p>
+                            <p class="text-sm font-display font-bold text-mama">$620 <span
+                                    class="text-[10px] text-gray-300 font-normal">/ $700</span></p>
+                        </div>
+                        <div class="h-1.5 rounded-full bg-gray-100 mt-1">
+                            <div class="h-full rounded-full bg-mama" style="width:89%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clay-card p-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-kid/10 flex items-center justify-center text-lg">👶</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <p class="text-sm font-display font-bold">Kids Activities</p>
+                            <p class="text-sm font-display font-bold text-kid">$380 <span
+                                    class="text-[10px] text-gray-300 font-normal">/ $500</span></p>
+                        </div>
+                        <div class="h-1.5 rounded-full bg-gray-100 mt-1">
+                            <div class="h-full rounded-full bg-kid" style="width:76%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clay-card p-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-together/10 flex items-center justify-center text-lg">🎬</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <p class="text-sm font-display font-bold">Entertainment</p>
+                            <p class="text-sm font-display font-bold text-danger">$310 <span
+                                    class="text-[10px] text-danger font-normal">/ $300 ⚠️</span></p>
+                        </div>
+                        <div class="h-1.5 rounded-full bg-gray-100 mt-1">
+                            <div class="h-full rounded-full bg-danger" style="width:103%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clay-card p-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-lg">🚗</div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <p class="text-sm font-display font-bold">Transport</p>
+                            <p class="text-sm font-display font-bold">$280 <span
+                                    class="text-[10px] text-gray-300 font-normal">/ $400</span></p>
+                        </div>
+                        <div class="h-1.5 rounded-full bg-gray-100 mt-1">
+                            <div class="h-full rounded-full bg-gray-300" style="width:70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savings Goal -->
+            <div class="clay-card p-4 border border-kid/20">
+                <div class="flex items-center gap-2 mb-2"><span class="text-lg">🎯</span>
+                    <p class="text-xs font-display font-bold text-kid">Family Vacation Fund</p>
+                </div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-gray-300">$2,400 of $5,000</span><span
+                        class="font-bold text-kid">48%</span></div>
+                <div class="h-2 rounded-full bg-gray-100">
+                    <div class="h-full rounded-full bg-kid" style="width:48%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

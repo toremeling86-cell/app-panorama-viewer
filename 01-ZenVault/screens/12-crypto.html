@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Crypto Wallet</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "vault": "#0C0F1A", "primary": "#00D4AA", "secondary": "#7B61FF", "rose": "#FF6B8A", "gold": "#FFD700", "btc": "#F7931A", "eth": "#627EEA", "sol": "#9945FF", "panel": "#141829" }, fontFamily: { "display": ["Inter", "sans-serif"], "body": ["DM Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0C0F1A
+        }
+
+        .glass-b {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 8px rgba(0, 212, 170, 0.1) }
+            50% { box-shadow: 0 0 20px rgba(0, 212, 170, 0.2) }
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @keyframes sparkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .action-tab-active { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2); color: #00D4AA; font-weight: 700; }
+
+        .sparkline { overflow: visible; }
+        .sparkline path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawLine 1.5s ease forwards;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-vault">
+        <!-- Status Bar -->
+        <div aria-hidden="true" class="flex items-center justify-between px-6 pt-3 pb-0">
+            <span class="text-xs text-white/20 font-medium">9:41</span>
+            <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">signal_cellular_alt</span>
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">wifi</span>
+                <span class="material-symbols-outlined !text-sm text-white/20" aria-hidden="true">battery_full</span>
+            </div>
+        </div>
+
+        <header class="flex items-center justify-between px-6 pt-4 pb-3" data-animate style="animation-delay:0ms">
+            <button class="btn-press" aria-label="Go back"><span class="material-symbols-outlined !text-xl text-white/20" aria-hidden="true">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-white/60">Crypto Wallet</h1>
+            <button class="btn-press" aria-label="Scan QR code"><span class="material-symbols-outlined !text-xl text-white/20" aria-hidden="true">qr_code_scanner</span></button>
+        </header>
+
+        <main class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Total Balance -->
+            <section aria-label="Portfolio balance" class="glass-b card-interactive shadow-layered p-5 text-center" data-animate style="animation-delay:80ms;animation:pulse-glow 3s ease-in-out infinite, fadeInUp 0.5s ease both">
+                <p class="text-[10px] text-white/20 uppercase tracking-wider">Crypto Portfolio</p>
+                <p class="text-3xl font-display font-bold mt-1" data-count-to="12847.32" data-prefix="$" data-decimals="2">$0.00</p>
+                <div class="flex items-center justify-center gap-1 mt-1"><span
+                        class="material-symbols-outlined !text-sm text-primary" aria-hidden="true">trending_up</span><span
+                        class="text-xs text-primary">+$892.14 (7.5%) today</span></div>
+            </section>
+
+            <!-- Quick Actions -->
+            <div class="flex gap-2" data-animate style="animation-delay:160ms" id="actionTabs">
+                <button class="flex-1 py-2.5 rounded-xl text-xs font-display text-center btn-press action-tab-active" data-action="buy">Buy</button>
+                <button class="flex-1 py-2.5 glass-b text-xs text-white/30 text-center btn-press rounded-xl" data-action="sell">Sell</button>
+                <button class="flex-1 py-2.5 glass-b text-xs text-white/30 text-center btn-press rounded-xl" data-action="send">Send</button>
+                <button class="flex-1 py-2.5 glass-b text-xs text-white/30 text-center btn-press rounded-xl" data-action="receive">Receive</button>
+            </div>
+
+            <!-- Holdings -->
+            <p class="text-[10px] text-white/15 font-display uppercase tracking-wider" data-animate style="animation-delay:240ms">Holdings</p>
+
+            <section aria-label="Bitcoin holding" class="glass-b card-interactive shadow-layered p-4 flex items-center gap-3" data-animate style="animation-delay:320ms">
+                <div class="w-10 h-10 rounded-full bg-btc/15 flex items-center justify-center text-lg font-display font-bold text-btc" aria-hidden="true">₿</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Bitcoin</p>
+                    <p class="text-[10px] text-white/15">0.0842 BTC</p>
+                </div>
+                <div class="mr-2">
+                    <svg class="sparkline" width="48" height="24" viewBox="0 0 48 24">
+                        <path d="M0,18 L6,15 L12,16 L18,10 L24,12 L30,8 L36,6 L42,9 L48,4" fill="none" stroke="#F7931A" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-display font-bold" data-count-to="8124.50" data-prefix="$" data-decimals="2">$0.00</p>
+                    <p class="text-[10px] text-primary">+5.2%</p>
+                </div>
+            </section>
+
+            <section aria-label="Ethereum holding" class="glass-b card-interactive shadow-layered p-4 flex items-center gap-3" data-animate style="animation-delay:400ms">
+                <div class="w-10 h-10 rounded-full bg-eth/15 flex items-center justify-center text-lg font-display font-bold text-eth" aria-hidden="true">Ξ</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Ethereum</p>
+                    <p class="text-[10px] text-white/15">1.24 ETH</p>
+                </div>
+                <div class="mr-2">
+                    <svg class="sparkline" width="48" height="24" viewBox="0 0 48 24">
+                        <path d="M0,20 L6,17 L12,14 L18,16 L24,10 L30,7 L36,5 L42,3 L48,2" fill="none" stroke="#627EEA" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.3s"/>
+                    </svg>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-display font-bold" data-count-to="3472.80" data-prefix="$" data-decimals="2">$0.00</p>
+                    <p class="text-[10px] text-primary">+12.1%</p>
+                </div>
+            </section>
+
+            <section aria-label="Solana holding" class="glass-b card-interactive shadow-layered p-4 flex items-center gap-3" data-animate style="animation-delay:480ms">
+                <div class="w-10 h-10 rounded-full bg-sol/15 flex items-center justify-center text-lg font-display font-bold text-sol" aria-hidden="true">◎</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-semibold">Solana</p>
+                    <p class="text-[10px] text-white/15">8.5 SOL</p>
+                </div>
+                <div class="mr-2">
+                    <svg class="sparkline" width="48" height="24" viewBox="0 0 48 24">
+                        <path d="M0,6 L6,8 L12,5 L18,10 L24,12 L30,14 L36,11 L42,16 L48,18" fill="none" stroke="#9945FF" stroke-width="1.5" stroke-linecap="round" style="animation-delay:0.6s"/>
+                    </svg>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm font-display font-bold" data-count-to="1250.02" data-prefix="$" data-decimals="2">$0.00</p>
+                    <p class="text-[10px] text-rose">-2.4%</p>
+                </div>
+            </section>
+
+            <!-- Chart -->
+            <section aria-label="Portfolio chart" class="glass-b card-interactive shadow-layered p-4" data-animate style="animation-delay:560ms">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="text-[10px] text-white/15 font-display uppercase tracking-wider">Portfolio (7D)</p>
+                    <div class="flex gap-1" id="chartRange">
+                        <button class="px-2 py-0.5 text-[9px] text-white/20 btn-press" data-range="1D">1D</button>
+                        <button class="px-2 py-0.5 text-[9px] bg-primary/10 text-primary rounded btn-press font-bold" data-range="7D">7D</button>
+                        <button class="px-2 py-0.5 text-[9px] text-white/20 btn-press" data-range="1M">1M</button>
+                        <button class="px-2 py-0.5 text-[9px] text-white/20 btn-press" data-range="1Y">1Y</button>
+                    </div>
+                </div>
+                <canvas id="cryptoChart" class="w-full" style="height:80px"></canvas>
+            </section>
+
+            <!-- Recent -->
+            <p class="text-[10px] text-white/15 font-display uppercase tracking-wider mt-1" data-animate style="animation-delay:640ms">Recent Activity</p>
+            <section aria-label="Recent crypto activity" class="glass-b card-interactive shadow-layered p-3 flex items-center gap-3" data-animate style="animation-delay:720ms">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-sm text-primary" aria-hidden="true">arrow_downward</span></div>
+                <div class="flex-1">
+                    <p class="text-xs font-medium">Bought BTC</p>
+                    <p class="text-[9px] text-white/15">Today · 2:14 PM</p>
+                </div><span class="text-xs text-primary font-display font-bold">+0.005 BTC</span>
+            </section>
+            <section aria-label="Recent crypto activity" class="glass-b card-interactive shadow-layered p-3 flex items-center gap-3" data-animate style="animation-delay:800ms">
+                <div class="w-8 h-8 rounded-lg bg-rose/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-sm text-rose" aria-hidden="true">arrow_upward</span></div>
+                <div class="flex-1">
+                    <p class="text-xs font-medium">Sent ETH</p>
+                    <p class="text-[9px] text-white/15">Yesterday · 5:30 PM</p>
+                </div><span class="text-xs text-rose font-display font-bold">-0.15 ETH</span>
+            </section>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        /* -- Intersection Observer for animations -- */
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+        /* -- Animated counters -- */
+        function animateCount(el) {
+            const target = parseFloat(el.dataset.countTo);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+            const duration = 1200;
+            const start = performance.now();
+            function tick(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = prefix + (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }
+        const countObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('[data-count-to]').forEach(el => countObs.observe(el));
+
+        /* -- Action tab selectors -- */
+        document.getElementById('actionTabs').addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-action]');
+            if (!btn) return;
+            document.querySelectorAll('#actionTabs button').forEach(b => {
+                b.className = 'flex-1 py-2.5 glass-b text-xs text-white/30 text-center btn-press rounded-xl';
+            });
+            btn.className = 'flex-1 py-2.5 rounded-xl text-xs font-display text-center btn-press action-tab-active';
+        });
+
+        /* -- Chart range selectors -- */
+        document.getElementById('chartRange').addEventListener('click', (e) => {
+            const btn = e.target.closest('button[data-range]');
+            if (!btn) return;
+            document.querySelectorAll('#chartRange button').forEach(b => {
+                b.className = 'px-2 py-0.5 text-[9px] text-white/20 btn-press';
+            });
+            btn.className = 'px-2 py-0.5 text-[9px] bg-primary/10 text-primary rounded btn-press font-bold';
+            drawChart();
+        });
+
+        /* -- Canvas chart with draw animation -- */
+        function drawChart() {
+            const c = document.getElementById('cryptoChart');
+            c.width = c.offsetWidth * 2; c.height = 80 * 2;
+            const x = c.getContext('2d'); x.scale(2, 2);
+            const W = c.offsetWidth, H = 80;
+            const pts = [40, 35, 38, 30, 32, 25, 22, 28, 20, 15, 18, 12, 14, 10];
+            const step = W / (pts.length - 1);
+
+            /* Gradient fill */
+            const grad = x.createLinearGradient(0, 0, 0, H);
+            grad.addColorStop(0, 'rgba(0,212,170,0.15)');
+            grad.addColorStop(1, 'rgba(0,212,170,0)');
+
+            let progress = 0;
+            function draw() {
+                progress = Math.min(progress + 0.03, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const visiblePts = Math.floor(pts.length * eased);
+
+                x.clearRect(0, 0, W, H);
+
+                if (visiblePts < 2) { requestAnimationFrame(draw); return; }
+
+                /* Fill */
+                x.beginPath();
+                x.moveTo(0, pts[0]);
+                for (let i = 1; i < visiblePts; i++) {
+                    const cx1 = (i - 0.5) * step, cy1 = pts[i - 1];
+                    const cx2 = (i - 0.5) * step, cy2 = pts[i];
+                    x.bezierCurveTo(cx1, cy1, cx2, cy2, i * step, pts[i]);
+                }
+                x.lineTo((visiblePts - 1) * step, H);
+                x.lineTo(0, H);
+                x.closePath();
+                x.fillStyle = grad;
+                x.fill();
+
+                /* Line */
+                x.beginPath();
+                x.moveTo(0, pts[0]);
+                for (let i = 1; i < visiblePts; i++) {
+                    const cx1 = (i - 0.5) * step, cy1 = pts[i - 1];
+                    const cx2 = (i - 0.5) * step, cy2 = pts[i];
+                    x.bezierCurveTo(cx1, cy1, cx2, cy2, i * step, pts[i]);
+                }
+                x.strokeStyle = '#00D4AA';
+                x.lineWidth = 1.5;
+                x.stroke();
+
+                /* Glow dot at end */
+                if (visiblePts > 0) {
+                    const lastX = (visiblePts - 1) * step;
+                    const lastY = pts[visiblePts - 1];
+                    x.beginPath();
+                    x.arc(lastX, lastY, 3, 0, Math.PI * 2);
+                    x.fillStyle = '#00D4AA';
+                    x.fill();
+                    x.beginPath();
+                    x.arc(lastX, lastY, 6, 0, Math.PI * 2);
+                    x.fillStyle = 'rgba(0,212,170,0.2)';
+                    x.fill();
+                }
+
+                if (progress < 1) requestAnimationFrame(draw);
+            }
+            requestAnimationFrame(draw);
+        }
+
+        /* Draw chart after a short delay */
+        setTimeout(drawChart, 600);
+    });
+    </script>
+</body>
+
+</html>

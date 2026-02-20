@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Cooking Mode</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "panna": "#FDF8F0", "saffron": "#E8A838", "basil": "#3A7D44", "plum": "#6B3A6B", "espresso": "#3C2415", "cream": "#F5EBD9" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Lato", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #3C2415
+        }
+
+        .step-active {
+            background: rgba(232, 168, 56, 0.1);
+            border: 2px solid rgba(232, 168, 56, 0.3)
+        }
+
+        .timer-ring {
+            animation: timerPulse 2s ease-in-out infinite
+        }
+
+        @keyframes timerPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(232, 168, 56, 0.2)
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(232, 168, 56, 0)
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-espresso">
+        <!-- Cooking Mode Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button class="text-xs text-saffron/60">Exit</button>
+            <div class="text-center">
+                <p class="text-[10px] text-saffron/40 uppercase tracking-widest">Cooking Mode</p>
+                <p class="text-sm font-serif font-bold text-panna">Carbonara Classica</p>
+            </div>
+            <button><span class="material-symbols-outlined !text-xl text-panna/30">volume_up</span></button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="px-6 py-2">
+            <div class="flex items-center gap-2 mb-1"><span class="text-[10px] text-saffron/50">Step 3 of 6</span><span
+                    class="text-[10px] text-panna/20 ml-auto">~12 min left</span></div>
+            <div class="h-1.5 rounded-full bg-white/5">
+                <div class="h-full rounded-full bg-gradient-to-r from-saffron to-saffron/60" style="width:50%"></div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24">
+            <!-- Active Timer -->
+            <div class="flex justify-center py-6">
+                <div
+                    class="w-32 h-32 rounded-full border-4 border-saffron/30 flex flex-col items-center justify-center timer-ring">
+                    <p class="text-3xl font-serif font-bold text-saffron" id="timer">4:32</p>
+                    <p class="text-[10px] text-panna/30">Boil pasta</p>
+                    <button class="mt-1 text-[10px] text-saffron/60 font-medium">Pause</button>
+                </div>
+            </div>
+
+            <!-- Current Step -->
+            <div class="step-active rounded-2xl p-5 mb-3">
+                <div class="flex items-start gap-3">
+                    <div
+                        class="w-8 h-8 rounded-full bg-saffron flex items-center justify-center text-sm font-bold text-espresso flex-shrink-0">
+                        3</div>
+                    <div>
+                        <p class="text-base font-serif font-bold text-panna leading-snug">While pasta cooks, prepare the
+                            sauce</p>
+                        <p class="text-sm text-panna/50 mt-2 leading-relaxed">In a bowl, whisk together <span
+                                class="text-saffron font-medium">3 egg yolks</span>, <span
+                                class="text-saffron font-medium">1 whole egg</span>, and <span
+                                class="text-saffron font-medium">80g Pecorino Romano</span>. Season with freshly cracked
+                            black pepper.</p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="px-2 py-1 bg-saffron/10 rounded-full text-[9px] text-saffron">⏱ 3 min</span>
+                            <span class="px-2 py-1 bg-basil/10 rounded-full text-[9px] text-basil/80">🥣 Mixing
+                                bowl</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Step Preview -->
+            <div class="bg-white/3 rounded-2xl p-4 mb-2 opacity-50">
+                <div class="flex items-start gap-3">
+                    <div
+                        class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-xs text-panna/30 flex-shrink-0">
+                        4</div>
+                    <div>
+                        <p class="text-sm text-panna/30">Crisp the guanciale in a cold pan on medium heat until
+                            golden...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-4 opacity-30">
+                <div class="flex items-start gap-3">
+                    <div
+                        class="w-7 h-7 rounded-full bg-white/5 flex items-center justify-center text-xs text-panna/20 flex-shrink-0">
+                        5</div>
+                    <div>
+                        <p class="text-sm text-panna/20">Combine pasta with guanciale, then add egg mixture off heat...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div
+            class="absolute bottom-0 left-0 right-0 bg-espresso/95 backdrop-blur border-t border-saffron/5 px-6 py-4 pb-8">
+            <div class="flex items-center justify-between">
+                <button class="flex items-center gap-1 text-panna/30"><span
+                        class="material-symbols-outlined !text-xl">arrow_back</span><span
+                        class="text-xs">Prev</span></button>
+                <button
+                    class="px-8 py-3 bg-saffron text-espresso font-serif font-bold rounded-2xl text-sm active:scale-95 transition-transform flex items-center gap-2"><span
+                        class="material-symbols-outlined !text-lg">check</span> Done — Next Step</button>
+                <button class="flex items-center gap-1 text-saffron/60"><span class="text-xs">Skip</span><span
+                        class="material-symbols-outlined !text-xl">arrow_forward</span></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let s = 272; const el = document.getElementById('timer');
+        setInterval(() => { if (s > 0) { s--; const m = Math.floor(s / 60), sec = s % 60; el.textContent = `${m}:${sec.toString().padStart(2, '0')}`; } }, 1000);
+    </script>
+</body>
+
+</html>

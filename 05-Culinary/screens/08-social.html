@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Feed</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "panna": "#FDF8F0", "saffron": "#E8A838", "basil": "#3A7D44", "plum": "#6B3A6B", "espresso": "#3C2415", "cream": "#F5EBD9" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Lato", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FDF8F0
+        }
+
+        .feed-card {
+            box-shadow: 0 2px 8px rgba(60, 36, 21, 0.06);
+            border-radius: 20px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-espresso overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-panna">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <h1 class="text-xl font-serif font-bold">Community 👨‍🍳</h1>
+            <button class="w-10 h-10 rounded-full bg-saffron/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-saffron">edit_square</span></button>
+        </div>
+
+        <!-- Story-style chef circles -->
+        <div class="flex gap-3 px-6 pb-3 overflow-x-auto no-scrollbar">
+            <div class="flex flex-col items-center min-w-[56px]">
+                <div class="w-14 h-14 rounded-full bg-gradient-to-br from-saffron to-basil p-0.5">
+                    <div class="w-full h-full rounded-full bg-panna flex items-center justify-center text-2xl">📸</div>
+                </div>
+                <p class="text-[9px] text-espresso/40 mt-1">You</p>
+            </div>
+            <div class="flex flex-col items-center min-w-[56px]">
+                <div class="w-14 h-14 rounded-full border-2 border-saffron p-0.5">
+                    <div class="w-full h-full rounded-full bg-cream flex items-center justify-center text-2xl">👨‍🍳
+                    </div>
+                </div>
+                <p class="text-[9px] text-espresso/40 mt-1">Marco</p>
+            </div>
+            <div class="flex flex-col items-center min-w-[56px]">
+                <div class="w-14 h-14 rounded-full border-2 border-saffron p-0.5">
+                    <div class="w-full h-full rounded-full bg-cream flex items-center justify-center text-2xl">👩‍🍳
+                    </div>
+                </div>
+                <p class="text-[9px] text-espresso/40 mt-1">Yuki</p>
+            </div>
+            <div class="flex flex-col items-center min-w-[56px]">
+                <div class="w-14 h-14 rounded-full border-2 border-cream p-0.5">
+                    <div class="w-full h-full rounded-full bg-cream flex items-center justify-center text-2xl">🧑‍🍳
+                    </div>
+                </div>
+                <p class="text-[9px] text-espresso/30 mt-1">Pierre</p>
+            </div>
+            <div class="flex flex-col items-center min-w-[56px]">
+                <div class="w-14 h-14 rounded-full border-2 border-cream p-0.5">
+                    <div class="w-full h-full rounded-full bg-cream flex items-center justify-center text-2xl">👩‍🍳
+                    </div>
+                </div>
+                <p class="text-[9px] text-espresso/30 mt-1">Elena</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Post 1 -->
+            <div class="feed-card overflow-hidden">
+                <div class="flex items-center gap-3 p-4 pb-2">
+                    <div class="w-9 h-9 rounded-full bg-saffron/20 flex items-center justify-center text-lg">👨‍🍳</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-serif font-bold">Marco Rossi</p>
+                        <p class="text-[10px] text-espresso/30">2 hours ago</p>
+                    </div><span class="material-symbols-outlined !text-lg text-espresso/15">more_horiz</span>
+                </div>
+                <div
+                    class="h-48 bg-gradient-to-br from-saffron/20 via-cream to-basil/10 flex items-center justify-center text-6xl">
+                    🍝</div>
+                <div class="p-4 pt-3">
+                    <div class="flex items-center gap-4 mb-2">
+                        <button class="flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-xl text-saffron"
+                                style="font-variation-settings:'FILL' 1">favorite</span><span
+                                class="text-xs text-espresso/40">234</span></button>
+                        <button class="flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-xl text-espresso/20">chat_bubble_outline</span><span
+                                class="text-xs text-espresso/40">18</span></button>
+                        <button class="flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-xl text-espresso/20">bookmark_border</span></button>
+                    </div>
+                    <p class="text-sm"><span class="font-serif font-bold">Marco Rossi</span> <span
+                            class="text-espresso/60">Finally perfected my nonna's cacio e pepe. The secret? Toast the
+                            pepper in the pasta water before—</span> <span
+                            class="text-saffron font-medium text-xs">more</span></p>
+                    <div class="flex gap-1 mt-2"><span
+                            class="px-2 py-0.5 bg-saffron/10 rounded-full text-[9px] text-saffron">Italian</span><span
+                            class="px-2 py-0.5 bg-basil/10 rounded-full text-[9px] text-basil">Pasta</span></div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="feed-card overflow-hidden">
+                <div class="flex items-center gap-3 p-4 pb-2">
+                    <div class="w-9 h-9 rounded-full bg-plum/20 flex items-center justify-center text-lg">👩‍🍳</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-serif font-bold">Yuki Tanaka</p>
+                        <p class="text-[10px] text-espresso/30">5 hours ago</p>
+                    </div>
+                </div>
+                <div
+                    class="h-36 bg-gradient-to-br from-plum/10 via-cream to-saffron/10 flex items-center justify-center text-5xl">
+                    🍣</div>
+                <div class="p-4 pt-3">
+                    <div class="flex items-center gap-4 mb-2">
+                        <button class="flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-xl text-espresso/20">favorite_border</span><span
+                                class="text-xs text-espresso/40">189</span></button>
+                        <button class="flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-xl text-espresso/20">chat_bubble_outline</span><span
+                                class="text-xs text-espresso/40">12</span></button>
+                        <button class="flex items-center gap-1"><span
+                                class="material-symbols-outlined !text-xl text-espresso/20">bookmark_border</span></button>
+                    </div>
+                    <p class="text-sm"><span class="font-serif font-bold">Yuki Tanaka</span> <span
+                            class="text-espresso/60">Home-made nigiri! The rice seasoning ratio is 10:1:1
+                            (rice:vinegar:sugar).</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

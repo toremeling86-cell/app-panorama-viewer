@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Onboarding</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FFFE", "trust": "#0D9488", "attention": "#D97706", "safe": "#16A34A" }, fontFamily: { "display": ["Figtree", "sans-serif"], "body": ["Noto Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FFFE
+        }
+
+        .medical-card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(13, 148, 136, 0.08);
+            border-radius: 16px
+        }
+
+        .grow-in {
+            animation: growIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both
+        }
+
+        @keyframes growIn {
+            0% {
+                transform: scale(0);
+                opacity: 0
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1
+            }
+        }
+
+        .slide-up {
+            animation: slideUp 0.6s ease-out both
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical items-center justify-center px-8"
+        role="main">
+        <button class="absolute top-14 right-6 text-xs text-gray-400" aria-label="Skip onboarding">Skip</button>
+
+        <!-- Medical cross illustration -->
+        <div class="grow-in mb-6">
+            <svg width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="Medical cross icon">
+                <circle cx="60" cy="60" r="55" fill="rgba(13,148,136,0.06)" />
+                <circle cx="60" cy="60" r="38" fill="rgba(13,148,136,0.08)" />
+                <rect x="48" y="30" width="24" height="60" rx="6" fill="#0D9488" />
+                <rect x="30" y="48" width="60" height="24" rx="6" fill="#0D9488" />
+                <circle cx="92" cy="32" r="4" fill="#16A34A" opacity="0.4" />
+                <circle cx="28" cy="85" r="3" fill="#D97706" opacity="0.3" />
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-display font-bold text-center grow-in" style="animation-delay:0.2s" role="heading"
+            aria-level="1">Your Health,<br />Simplified</h1>
+        <p class="text-sm text-gray-400 text-center mt-3 leading-relaxed slide-up" style="animation-delay:0.4s">Track
+            medications, manage records, and stay on top of your health — all in one secure, accessible app.</p>
+
+        <!-- Features -->
+        <div class="mt-8 space-y-4 w-full" role="list">
+            <div class="flex items-center gap-3 slide-up" style="animation-delay:0.5s" role="listitem">
+                <div class="w-10 h-10 rounded-xl bg-trust/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-trust" aria-hidden="true">medication</span></div>
+                <div>
+                    <p class="text-sm font-display font-semibold">Medication Tracking</p>
+                    <p class="text-[10px] text-gray-400">Smart reminders you can rely on</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 slide-up" style="animation-delay:0.6s" role="listitem">
+                <div class="w-10 h-10 rounded-xl bg-safe/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-safe" aria-hidden="true">clinical_notes</span>
+                </div>
+                <div>
+                    <p class="text-sm font-display font-semibold">Medical Records</p>
+                    <p class="text-[10px] text-gray-400">All your records, always accessible</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 slide-up" style="animation-delay:0.7s" role="listitem">
+                <div class="w-10 h-10 rounded-xl bg-attention/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-attention" aria-hidden="true">emergency</span>
+                </div>
+                <div>
+                    <p class="text-sm font-display font-semibold">Emergency Card</p>
+                    <p class="text-[10px] text-gray-400">Critical info when seconds matter</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accessibility note -->
+        <div class="mt-6 flex items-center gap-2 px-4 py-2 bg-trust/5 rounded-xl slide-up" style="animation-delay:0.8s"
+            role="note">
+            <span class="material-symbols-outlined !text-sm text-trust" aria-hidden="true">accessibility_new</span>
+            <p class="text-[10px] text-trust/70">Designed with WCAG AAA accessibility standards</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center gap-2 mt-6 slide-up" style="animation-delay:0.9s" aria-label="Page 1 of 3">
+            <div class="h-2 w-6 rounded-full bg-trust"></div>
+            <div class="h-2 w-2 rounded-full bg-gray-200"></div>
+            <div class="h-2 w-2 rounded-full bg-gray-200"></div>
+        </div>
+
+        <button
+            class="mt-5 w-full py-4 bg-trust text-white font-display font-bold rounded-2xl text-sm slide-up active:scale-95 transition-transform"
+            style="animation-delay:1s" aria-label="Get started with Vitals">Get Started</button>
+        <p class="text-[10px] text-gray-300 mt-3">Already have an account? <span class="text-trust font-medium">Sign
+                in</span></p>
+    </div>
+</body>
+
+</html>

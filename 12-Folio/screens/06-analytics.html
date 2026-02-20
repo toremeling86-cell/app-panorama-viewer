@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Analytics</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "gallery": "#FAFAFA", "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF", "ocean": "#3B82F6", "forest": "#22C55E" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FAFAFA
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-gallery">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-silver">arrow_back</span></button>
+            <h1 class="font-serif text-sm font-bold tracking-wider uppercase">Analytics</h1>
+            <button class="text-xs text-coral">This Month</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Big Numbers -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <p class="text-3xl font-serif font-bold">2,847</p>
+                    <p class="text-[10px] text-silver mt-0.5">Page Views</p>
+                    <p class="text-[10px] text-forest mt-1">↑ 23% vs last month</p>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm">
+                    <p class="text-3xl font-serif font-bold">184</p>
+                    <p class="text-[10px] text-silver mt-0.5">Unique Visitors</p>
+                    <p class="text-[10px] text-forest mt-1">↑ 12% vs last month</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                    <p class="text-lg font-serif font-bold">3:42</p>
+                    <p class="text-[9px] text-silver">Avg Time</p>
+                </div>
+                <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                    <p class="text-lg font-serif font-bold">67%</p>
+                    <p class="text-[9px] text-silver">Bounce</p>
+                </div>
+                <div class="bg-white rounded-xl p-3 shadow-sm text-center">
+                    <p class="text-lg font-serif font-bold">14</p>
+                    <p class="text-[9px] text-silver">Inquiries</p>
+                </div>
+            </div>
+
+            <!-- Traffic Chart -->
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <h3 class="text-[10px] text-silver uppercase tracking-wider font-medium mb-2">Traffic Overview</h3>
+                <canvas id="trafficChart" class="w-full" style="height:80px"></canvas>
+            </div>
+
+            <!-- Top Projects -->
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <h3 class="text-[10px] text-silver uppercase tracking-wider font-medium mb-3">Top Projects</h3>
+                <div class="space-y-2">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span>Brand Identity — Luxe</span><span
+                                class="text-coral font-medium">842 views</span></div>
+                        <div class="h-1.5 rounded-full bg-gray-100">
+                            <div class="h-full rounded-full bg-coral" style="width:100%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span>Web Redesign — Atlas</span><span
+                                class="text-ocean font-medium">621 views</span></div>
+                        <div class="h-1.5 rounded-full bg-gray-100">
+                            <div class="h-full rounded-full bg-ocean" style="width:74%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span>Mobile App — Flow</span><span
+                                class="text-ink/40 font-medium">489 views</span></div>
+                        <div class="h-1.5 rounded-full bg-gray-100">
+                            <div class="h-full rounded-full bg-ink/30" style="width:58%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Traffic Sources -->
+            <div class="bg-white rounded-xl p-4 shadow-sm">
+                <h3 class="text-[10px] text-silver uppercase tracking-wider font-medium mb-3">Sources</h3>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><span class="text-sm">🔍</span><span class="text-xs">Google
+                                Search</span></div><span class="text-xs font-serif font-bold">38%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><span class="text-sm">🎨</span><span
+                                class="text-xs">Dribbble</span></div><span
+                            class="text-xs font-serif font-bold">24%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><span class="text-sm">📱</span><span class="text-xs">Social
+                                Media</span></div><span class="text-xs font-serif font-bold">18%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><span class="text-sm">🔗</span><span
+                                class="text-xs">Direct</span></div><span class="text-xs font-serif font-bold">14%</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2"><span class="text-sm">📧</span><span
+                                class="text-xs">Email</span></div><span class="text-xs font-serif font-bold">6%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('trafficChart'); c.width = c.offsetWidth * 2; c.height = 80 * 2;
+        const x = c.getContext('2d'); x.scale(2, 2); const W = c.offsetWidth, H = 80;
+        const d = [45, 62, 78, 55, 92, 88, 120, 105, 95, 140, 130, 115, 148, 162, 180, 172];
+        const mn = Math.min(...d) - 10, mx = Math.max(...d) + 10;
+        const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, 'rgba(232,85,61,0.12)'); g.addColorStop(1, 'rgba(232,85,61,0)');
+        x.beginPath(); d.forEach((v, i) => { const px = (i / (d.length - 1)) * W; const py = H - ((v - mn) / (mx - mn)) * (H - 16) - 8; i === 0 ? x.moveTo(px, py) : x.lineTo(px, py); });
+        x.strokeStyle = '#E8553D'; x.lineWidth = 2; x.stroke();
+        x.lineTo(W, H); x.lineTo(0, H); x.closePath(); x.fillStyle = g; x.fill();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SkyLens — Sky Now</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#7C3AED", "primary-light": "#A78BFA", "sky-blue": "#38BDF8", "warm": "#F59E0B", "cold": "#06B6D4" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        .sky-gradient {
+            background: linear-gradient(180deg, #1E1B4B 0%, #312E81 20%, #4338CA 40%, #6366F1 60%, #818CF8 80%, #A78BFA 100%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: drift 20s infinite ease-in-out;
+        }
+
+        @keyframes drift {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(30px);
+            }
+        }
+
+        .temp-glow {
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden sky-gradient">
+        <!-- Clouds -->
+        <div class="cloud" style="width:200px;height:60px;top:15%;left:-20px;animation-delay:0s"></div>
+        <div class="cloud" style="width:150px;height:40px;top:25%;right:-30px;animation-delay:5s"></div>
+
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined !text-xl">location_on</span>
+                <h1 class="text-lg font-semibold">Oslo, Norway</h1>
+                <span class="material-symbols-outlined !text-sm text-white/50">expand_more</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg">notifications</span></button>
+                <button class="glass w-9 h-9 rounded-full flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg">add</span></button>
+            </div>
+        </div>
+
+        <!-- Main Temperature -->
+        <div class="text-center py-8 relative z-10">
+            <div class="flex items-start justify-center">
+                <span class="text-8xl font-extralight temp-glow">-3</span>
+                <span class="text-3xl font-light mt-4">°</span>
+            </div>
+            <p class="text-lg font-light text-white/70 mt-1">Partly Cloudy</p>
+            <div class="flex items-center justify-center gap-4 mt-2">
+                <span class="text-sm text-white/50">H: 1° <span class="text-white/30">|</span> L: -7°</span>
+                <span class="text-sm text-white/50">Feels like -6°</span>
+            </div>
+        </div>
+
+        <!-- Hourly Forecast -->
+        <div class="px-6 pb-4">
+            <div class="glass-bright rounded-2xl p-4">
+                <div class="flex gap-5 overflow-x-auto pb-1 no-scrollbar">
+                    <div class="flex flex-col items-center gap-2 min-w-[40px]">
+                        <span class="text-[10px] text-white/60">Now</span>
+                        <span class="material-symbols-outlined !text-xl">partly_cloudy_day</span>
+                        <span class="text-sm font-medium">-3°</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[40px]">
+                        <span class="text-[10px] text-white/60">14</span>
+                        <span class="material-symbols-outlined !text-xl">cloud</span>
+                        <span class="text-sm font-medium">-2°</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[40px]">
+                        <span class="text-[10px] text-white/60">15</span>
+                        <span class="material-symbols-outlined !text-xl">ac_unit</span>
+                        <span class="text-sm font-medium">-4°</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[40px]">
+                        <span class="text-[10px] text-white/60">16</span>
+                        <span class="material-symbols-outlined !text-xl">ac_unit</span>
+                        <span class="text-sm font-medium">-5°</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[40px]">
+                        <span class="text-[10px] text-white/60">17</span>
+                        <span class="material-symbols-outlined !text-xl">nights_stay</span>
+                        <span class="text-sm font-medium">-6°</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 min-w-[40px]">
+                        <span class="text-[10px] text-white/60">18</span>
+                        <span class="material-symbols-outlined !text-xl">nights_stay</span>
+                        <span class="text-sm font-medium">-7°</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollable Details -->
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Weather Grid -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass rounded-xl p-4">
+                    <div class="flex items-center gap-2 mb-2"><span
+                            class="material-symbols-outlined !text-lg text-sky-blue">air</span><span
+                            class="text-xs text-white/60">Wind</span></div>
+                    <p class="text-xl font-semibold">12 <span class="text-sm text-white/50">km/h</span></p>
+                    <p class="text-[10px] text-white/40">NW · Gusts 22 km/h</p>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <div class="flex items-center gap-2 mb-2"><span
+                            class="material-symbols-outlined !text-lg text-sky-blue">water_drop</span><span
+                            class="text-xs text-white/60">Humidity</span></div>
+                    <p class="text-xl font-semibold">72<span class="text-sm text-white/50">%</span></p>
+                    <p class="text-[10px] text-white/40">Dew point: -7°</p>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <div class="flex items-center gap-2 mb-2"><span
+                            class="material-symbols-outlined !text-lg text-warm">visibility</span><span
+                            class="text-xs text-white/60">Visibility</span></div>
+                    <p class="text-xl font-semibold">8 <span class="text-sm text-white/50">km</span></p>
+                    <p class="text-[10px] text-white/40">Good</p>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <div class="flex items-center gap-2 mb-2"><span
+                            class="material-symbols-outlined !text-lg text-warm">compress</span><span
+                            class="text-xs text-white/60">Pressure</span></div>
+                    <p class="text-xl font-semibold">1018 <span class="text-sm text-white/50">hPa</span></p>
+                    <p class="text-[10px] text-white/40">Rising ↑</p>
+                </div>
+            </div>
+
+            <!-- UV Index -->
+            <div class="glass rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined !text-lg text-warm">wb_sunny</span><span
+                            class="text-xs text-white/60">UV Index</span></div>
+                    <span class="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">Low</span>
+                </div>
+                <div
+                    class="w-full h-2 rounded-full bg-gradient-to-r from-green-500 via-yellow-400 via-orange-500 via-red-500 to-purple-600 mt-2">
+                    <div class="w-3 h-3 rounded-full bg-white shadow-lg -mt-0.5 border-2 border-green-500"
+                        style="margin-left:8%"></div>
+                </div>
+                <div class="flex justify-between mt-1"><span class="text-[9px] text-white/30">0</span><span
+                        class="text-[9px] text-white/50 font-medium">1</span><span
+                        class="text-[9px] text-white/30">11+</span></div>
+            </div>
+
+            <!-- Sunrise/Sunset -->
+            <div class="glass rounded-xl p-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined !text-2xl text-warm">wb_twilight</span>
+                        <div>
+                            <p class="text-xs text-white/60">Sunrise</p>
+                            <p class="text-sm font-medium">08:42</p>
+                        </div>
+                    </div>
+                    <div class="w-px h-8 bg-white/10"></div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right">
+                            <p class="text-xs text-white/60">Sunset</p>
+                            <p class="text-sm font-medium">16:18</p>
+                        </div>
+                        <span class="material-symbols-outlined !text-2xl text-orange-400">wb_twilight</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Tab Bar -->
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white"
+                        style="font-variation-settings: 'FILL' 1;">cloud</span><span
+                        class="text-[10px] font-medium text-white">Sky Now</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">calendar_month</span><span
+                        class="text-[10px] text-white/40">Forecast</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">air</span><span
+                        class="text-[10px] text-white/40">Air</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">radar</span><span
+                        class="text-[10px] text-white/40">Radar</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-white/40">bookmark</span><span
+                        class="text-[10px] text-white/40">Places</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

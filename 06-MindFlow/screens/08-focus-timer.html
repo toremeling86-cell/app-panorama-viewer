@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Focus Timer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0", "deep": "#2D1810", "coral": "#FF6B6B", "sky": "#60A5FA" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 0.6
+            }
+        }
+
+        .timer-ring {
+            animation: breathe 4s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">close</span></button>
+            <h1 class="font-serif text-base font-semibold text-dawn/70">Focus Timer</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">settings</span></button>
+        </div>
+
+        <!-- Timer Ring -->
+        <div class="flex justify-center py-8">
+            <div class="relative">
+                <svg width="220" height="220" viewBox="0 0 220 220" class="timer-ring">
+                    <circle cx="110" cy="110" r="100" fill="none" stroke="rgba(255,140,66,0.06)" stroke-width="6" />
+                    <circle cx="110" cy="110" r="100" fill="none" stroke="#FF8C42" stroke-width="6"
+                        stroke-linecap="round" stroke-dasharray="628" stroke-dashoffset="157"
+                        transform="rotate(-90 110 110)" opacity="0.7" />
+                </svg>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                    <p class="text-5xl font-serif font-bold tracking-tight" id="timer">18:42</p>
+                    <p class="text-[10px] text-glow/30 mt-1">of 25:00 · Focus</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Type -->
+        <div class="flex gap-2 mx-6 mb-4">
+            <button
+                class="flex-1 py-2.5 bg-glow/10 border border-glow/20 rounded-xl text-xs font-serif font-bold text-glow text-center">Focus
+                25m</button>
+            <button class="flex-1 py-2.5 bg-white/3 rounded-xl text-xs text-dawn/20 text-center">Short Break 5m</button>
+            <button class="flex-1 py-2.5 bg-white/3 rounded-xl text-xs text-dawn/20 text-center">Long Break 15m</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Controls -->
+            <div class="flex items-center justify-center gap-6 mb-4">
+                <button class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-dawn/30">skip_previous</span></button>
+                <button
+                    class="w-16 h-16 rounded-full bg-glow flex items-center justify-center shadow-lg shadow-glow/20"><span
+                        class="material-symbols-outlined !text-3xl text-ember">pause</span></button>
+                <button class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-xl text-dawn/30">skip_next</span></button>
+            </div>
+
+            <!-- Today's Sessions -->
+            <div class="bg-white/3 border border-glow/5 rounded-2xl p-4">
+                <p class="text-[10px] text-dawn/20 font-serif uppercase tracking-wider mb-2">Today's Sessions</p>
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-glow/20 flex items-center justify-center text-[10px] text-glow font-bold">
+                        ✓</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-glow/20 flex items-center justify-center text-[10px] text-glow font-bold">
+                        ✓</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-glow/20 flex items-center justify-center text-[10px] text-glow font-bold">
+                        ✓</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-glow border-2 border-glow flex items-center justify-center text-[10px] text-ember font-bold">
+                        4</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-white/3 flex items-center justify-center text-[10px] text-dawn/10">
+                        5</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-white/3 flex items-center justify-center text-[10px] text-dawn/10">
+                        6</div>
+                </div>
+                <p class="text-[10px] text-dawn/15 mt-2">3 of 6 sessions complete · 75 min focused</p>
+            </div>
+
+            <!-- Task -->
+            <div class="bg-white/3 rounded-2xl p-4 flex items-center gap-3">
+                <span class="text-lg">📝</span>
+                <div class="flex-1">
+                    <p class="text-xs font-serif font-semibold text-dawn/50">Current Task</p>
+                    <p class="text-sm">Design review — mobile screens</p>
+                </div>
+                <button><span class="material-symbols-outlined !text-sm text-dawn/15">edit</span></button>
+            </div>
+
+            <!-- Ambient -->
+            <div class="bg-white/3 rounded-2xl p-4 flex items-center gap-3">
+                <span class="text-lg">🌧️</span>
+                <div class="flex-1">
+                    <p class="text-xs text-dawn/30">Ambient Sound</p>
+                    <p class="text-[10px] text-dawn/15">Rain on Leaves</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <div class="w-16 h-1 rounded-full bg-white/5">
+                        <div class="h-full rounded-full bg-glow/40" style="width:60%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

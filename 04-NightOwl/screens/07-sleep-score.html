@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Sleep Score</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "night": "#0D0B1A", "luna": "#C4B5FD", "deep": "#4C1D95", "dream": "#7C3AED", "mist": "#1E1B30" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0D0B1A
+        }
+
+        .moon-glow {
+            box-shadow: 0 0 40px rgba(196, 181, 253, 0.1), 0 0 80px rgba(124, 58, 237, 0.05)
+        }
+
+        .score-ring {
+            animation: scoreReveal 1.5s ease-out both
+        }
+
+        @keyframes scoreReveal {
+            0% {
+                stroke-dashoffset: 251
+            }
+
+            100% {
+                stroke-dashoffset: var(--final-offset)
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-night">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/30">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider uppercase text-luna/80">Sleep Score</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/30">share</span></button>
+        </div>
+
+        <!-- Score Ring -->
+        <div class="flex justify-center py-6 relative">
+            <svg width="200" height="200" viewBox="0 0 200 200" class="moon-glow">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(196,181,253,0.05)" stroke-width="12" />
+                <circle cx="100" cy="100" r="80" fill="none" stroke="url(#scoreGrad)" stroke-width="12"
+                    stroke-linecap="round" stroke-dasharray="502" stroke-dashoffset="75" class="score-ring"
+                    style="--final-offset:75" transform="rotate(-90 100 100)" />
+                <defs>
+                    <linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#C4B5FD" />
+                        <stop offset="100%" stop-color="#7C3AED" />
+                    </linearGradient>
+                </defs>
+            </svg>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <p class="text-5xl font-bold text-luna">85</p>
+                <p class="text-xs text-luna/40 mt-1">out of 100</p>
+                <p class="text-[10px] text-dream mt-1">Great Sleep! 🌙</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Sleep Stages Canvas -->
+            <div class="bg-mist rounded-2xl p-4">
+                <h3 class="text-xs font-bold text-white/40 uppercase tracking-wider mb-2">Sleep Stages</h3>
+                <canvas id="stagesCanvas" class="w-full" style="height:80px"></canvas>
+                <div class="flex justify-between mt-2">
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-dream"></span><span
+                            class="text-[9px] text-white/30">Deep</span></div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-luna"></span><span
+                            class="text-[9px] text-white/30">REM</span></div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-luna/40"></span><span
+                            class="text-[9px] text-white/30">Light</span></div>
+                    <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-white/10"></span><span
+                            class="text-[9px] text-white/30">Awake</span></div>
+                </div>
+            </div>
+
+            <!-- Score Breakdown -->
+            <div class="bg-mist rounded-2xl p-4">
+                <h3 class="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Score Breakdown</h3>
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="text-sm">Duration</span><span
+                                class="text-sm font-bold text-luna">92/100</span></div>
+                        <div class="h-2 rounded-full bg-night">
+                            <div class="h-full rounded-full bg-gradient-to-r from-dream to-luna" style="width:92%">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="text-sm">Efficiency</span><span
+                                class="text-sm font-bold text-luna">88/100</span></div>
+                        <div class="h-2 rounded-full bg-night">
+                            <div class="h-full rounded-full bg-gradient-to-r from-dream to-luna" style="width:88%">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="text-sm">Deep Sleep</span><span
+                                class="text-sm font-bold text-luna">78/100</span></div>
+                        <div class="h-2 rounded-full bg-night">
+                            <div class="h-full rounded-full bg-gradient-to-r from-dream to-luna" style="width:78%">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="text-sm">REM Sleep</span><span
+                                class="text-sm font-bold text-luna">82/100</span></div>
+                        <div class="h-2 rounded-full bg-night">
+                            <div class="h-full rounded-full bg-gradient-to-r from-dream to-luna" style="width:82%">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span class="text-sm">Consistency</span><span
+                                class="text-sm font-bold text-luna/60">71/100</span></div>
+                        <div class="h-2 rounded-full bg-night">
+                            <div class="h-full rounded-full bg-gradient-to-r from-dream/60 to-luna/60"
+                                style="width:71%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights -->
+            <div class="bg-dream/10 rounded-2xl p-4 border border-dream/20">
+                <div class="flex items-start gap-2"><span
+                        class="material-symbols-outlined !text-lg text-dream mt-0.5">auto_awesome</span>
+                    <div>
+                        <p class="text-sm font-semibold text-luna">AI Sleep Insight</p>
+                        <p class="text-xs text-white/40 mt-1 leading-relaxed">Your deep sleep increased 15% this week.
+                            Going to bed 30 min earlier seems to be working! Keep your 10:30 PM bedtime for consistent
+                            results.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-3 gap-3">
+                <div class="bg-mist rounded-xl p-3 text-center">
+                    <p class="text-lg font-bold text-luna">7h42m</p>
+                    <p class="text-[9px] text-white/20">Duration</p>
+                </div>
+                <div class="bg-mist rounded-xl p-3 text-center">
+                    <p class="text-lg font-bold text-luna">10:32p</p>
+                    <p class="text-[9px] text-white/20">Bedtime</p>
+                </div>
+                <div class="bg-mist rounded-xl p-3 text-center">
+                    <p class="text-lg font-bold text-luna">6:14a</p>
+                    <p class="text-[9px] text-white/20">Wake up</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('stagesCanvas');
+        c.width = c.offsetWidth * 2; c.height = 80 * 2;
+        const ctx = c.getContext('2d');
+        ctx.scale(2, 2);
+        const W = c.offsetWidth, H = 80;
+
+        // Sleep stages: 0=awake, 1=light, 2=REM, 3=deep
+        const stages = [0, 1, 1, 2, 3, 3, 3, 2, 1, 1, 2, 2, 3, 3, 2, 1, 1, 2, 2, 1, 1, 0, 1, 1, 2, 3, 3, 2, 1, 1, 0];
+        const colors = { 0: 'rgba(255,255,255,0.1)', 1: 'rgba(196,181,253,0.3)', 2: 'rgba(196,181,253,0.7)', 3: 'rgba(124,58,237,0.8)' };
+        const segW = W / stages.length;
+        const labels = ['Awake', 'Light', 'REM', 'Deep'];
+
+        stages.forEach((s, i) => {
+            const y = [5, 25, 45, 65][s];
+            const h = 15;
+            ctx.fillStyle = colors[s];
+            ctx.fillRect(i * segW, y, segW - 1, h);
+            ctx.beginPath();
+            ctx.roundRect(i * segW, y, segW - 1, h, 2);
+            ctx.fill();
+        });
+
+        // Time labels
+        ctx.fillStyle = 'rgba(255,255,255,0.15)';
+        ctx.font = '8px Plus Jakarta Sans';
+        ctx.fillText('10:30p', 0, H - 2);
+        ctx.fillText('1:00a', W * 0.3, H - 2);
+        ctx.fillText('3:30a', W * 0.6, H - 2);
+        ctx.fillText('6:14a', W - 25, H - 2);
+    </script>
+</body>
+
+</html>

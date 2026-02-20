@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Progress</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#F97316", "primary-soft": "#FDBA74", "bg-void": "#1A1210", "sage": "#6B8E6B", "mist": "#D4C5B4" }, fontFamily: { "display": ["DM Sans", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A1210;
+        }
+
+        .zen-glow {
+            background: radial-gradient(ellipse at 50% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 50%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-bright {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden zen-glow">
+        <div class="flex items-center justify-between px-6 pt-14 pb-4">
+            <h1 class="text-xl font-bold">Your Journey</h1>
+            <div class="flex gap-2">
+                <button class="glass px-3 py-1.5 rounded-full text-xs font-medium text-primary">Week</button>
+                <button class="glass px-3 py-1.5 rounded-full text-xs font-medium text-mist/30">Month</button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-4">
+            <!-- Mindfulness Score -->
+            <div class="glass-bright rounded-2xl p-5 text-center">
+                <p class="text-[10px] text-primary tracking-[0.2em] uppercase mb-2">Mindfulness Score</p>
+                <svg width="130" height="130" viewBox="0 0 130 130" class="mx-auto">
+                    <circle cx="65" cy="65" r="55" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="8" />
+                    <circle cx="65" cy="65" r="55" fill="none" stroke="url(#grad)" stroke-width="8"
+                        stroke-linecap="round" stroke-dasharray="346" stroke-dashoffset="52"
+                        transform="rotate(-90 65 65)" />
+                    <defs>
+                        <linearGradient id="grad">
+                            <stop offset="0%" stop-color="#F97316" />
+                            <stop offset="100%" stop-color="#FDBA74" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div style="margin-top:-90px; margin-bottom: 50px;">
+                    <p class="text-3xl font-bold text-primary-soft">85</p>
+                    <p class="text-[10px] text-mist/40">out of 100</p>
+                </div>
+            </div>
+
+            <!-- Weekly Activity -->
+            <div class="glass-bright rounded-2xl p-5">
+                <h3 class="text-sm font-semibold text-mist/60 mb-3">This Week</h3>
+                <div class="flex items-end justify-between h-24 gap-2">
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/80" style="height:50px"></div>
+                        <span class="text-[9px] text-mist/30">M</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/80" style="height:70px"></div>
+                        <span class="text-[9px] text-mist/30">T</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/80" style="height:40px"></div>
+                        <span class="text-[9px] text-mist/30">W</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/80" style="height:85px"></div>
+                        <span class="text-[9px] text-mist/30">T</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/80" style="height:60px"></div>
+                        <span class="text-[9px] text-mist/30">F</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/50" style="height:30px"></div>
+                        <span class="text-[9px] text-mist/30">S</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <div class="w-full rounded-full bg-primary/30" style="height:20px"></div>
+                        <span class="text-[9px] text-primary font-medium">S</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass rounded-xl p-4">
+                    <span class="material-symbols-outlined !text-xl text-primary">timer</span>
+                    <p class="text-xl font-bold mt-2 text-primary-soft">4h 12m</p>
+                    <p class="text-xs text-mist/30">Total time</p>
+                    <p class="text-[10px] font-mono text-sage mt-1">↑ 18% vs last week</p>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <span class="material-symbols-outlined !text-xl text-sage">event_available</span>
+                    <p class="text-xl font-bold mt-2 text-sage">5/7</p>
+                    <p class="text-xs text-mist/30">Days active</p>
+                    <p class="text-[10px] font-mono text-sage mt-1">↑ Great consistency</p>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <span class="material-symbols-outlined !text-xl text-primary-soft">local_fire_department</span>
+                    <p class="text-xl font-bold mt-2 text-primary-soft">🔥 21</p>
+                    <p class="text-xs text-mist/30">Day streak</p>
+                    <p class="text-[10px] text-mist/30 mt-1">Personal best!</p>
+                </div>
+                <div class="glass rounded-xl p-4">
+                    <span class="material-symbols-outlined !text-xl text-blue-400">mood</span>
+                    <p class="text-xl font-bold mt-2 text-blue-400">+23%</p>
+                    <p class="text-xs text-mist/30">Mood lift</p>
+                    <p class="text-[10px] text-mist/30 mt-1">After sessions</p>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="glass rounded-2xl p-4">
+                <h3 class="text-sm font-semibold text-mist/60 mb-3">Recent Achievements</h3>
+                <div class="flex gap-4 overflow-x-auto pb-1">
+                    <div class="text-center min-w-[60px]">
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl mx-auto">
+                            🧘</div>
+                        <p class="text-[9px] text-mist/40 mt-1">21 days</p>
+                    </div>
+                    <div class="text-center min-w-[60px]">
+                        <div class="w-12 h-12 rounded-full bg-sage/20 flex items-center justify-center text-xl mx-auto">
+                            🌅</div>
+                        <p class="text-[9px] text-mist/40 mt-1">Morning</p>
+                    </div>
+                    <div class="text-center min-w-[60px]">
+                        <div
+                            class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center text-xl mx-auto">
+                            ⭐</div>
+                        <p class="text-[9px] text-mist/40 mt-1">100 sessions</p>
+                    </div>
+                    <div class="text-center min-w-[60px]">
+                        <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-xl mx-auto">
+                            🔒</div>
+                        <p class="text-[9px] text-mist/20 mt-1">10h total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 glass border-t border-white/5">
+            <div class="flex items-center justify-around py-3 pb-6">
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-mist/30">spa</span><span
+                        class="text-[10px] text-mist/30">Home</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-mist/30">explore</span><span
+                        class="text-[10px] text-mist/30">Explore</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-primary"
+                        style="font-variation-settings: 'FILL' 1;">insights</span><span
+                        class="text-[10px] font-medium text-primary">Progress</span></button>
+                <button class="flex flex-col items-center gap-0.5"><span
+                        class="material-symbols-outlined !text-xl text-mist/30">person</span><span
+                        class="text-[10px] text-mist/30">Profile</span></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

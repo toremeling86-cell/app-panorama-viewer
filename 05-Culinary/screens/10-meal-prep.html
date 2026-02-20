@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Culinary — Meal Prep</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "panna": "#FDF8F0", "saffron": "#E8A838", "basil": "#3A7D44", "plum": "#6B3A6B", "espresso": "#3C2415", "cream": "#F5EBD9" }, fontFamily: { "serif": ["Playfair Display", "serif"], "sans": ["Lato", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FDF8F0
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-espresso overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-panna">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button><span class="material-symbols-outlined !text-xl text-espresso/30">arrow_back</span></button>
+            <h1 class="text-sm font-serif font-bold">Meal Prep Sunday 🫙</h1>
+            <button><span class="material-symbols-outlined !text-xl text-espresso/30">shopping_cart</span></button>
+        </div>
+
+        <!-- Prep Timeline -->
+        <div class="flex gap-2 px-6 py-2 overflow-x-auto no-scrollbar">
+            <button
+                class="px-3 py-1.5 bg-saffron text-white text-[10px] font-serif font-bold rounded-full whitespace-nowrap">This
+                Week</button>
+            <button
+                class="px-3 py-1.5 bg-white text-espresso/30 text-[10px] rounded-full shadow-sm whitespace-nowrap">Next
+                Week</button>
+            <button
+                class="px-3 py-1.5 bg-white text-espresso/30 text-[10px] rounded-full shadow-sm whitespace-nowrap">Custom</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-1">
+            <!-- Summary -->
+            <div class="bg-white rounded-2xl shadow-sm p-4">
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div>
+                        <p class="text-xl font-serif font-bold text-saffron">12</p>
+                        <p class="text-[9px] text-espresso/25">Meals</p>
+                    </div>
+                    <div>
+                        <p class="text-xl font-serif font-bold text-basil">~3h</p>
+                        <p class="text-[9px] text-espresso/25">Prep Time</p>
+                    </div>
+                    <div>
+                        <p class="text-xl font-serif font-bold text-plum">$82</p>
+                        <p class="text-[9px] text-espresso/25">Est. Cost</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prep Batch 1 -->
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div class="px-4 py-2.5 bg-saffron/10 flex items-center justify-between">
+                    <p class="text-xs font-serif font-bold text-saffron">Batch 1 — Proteins</p><span
+                        class="text-[10px] text-espresso/20">~45 min</span>
+                </div>
+                <div class="p-4 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-saffron/10 flex items-center justify-center text-lg">🍗
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Grilled Chicken</p>
+                            <p class="text-[10px] text-espresso/30">4 servings · 180 cal each</p>
+                        </div><span class="text-[10px] text-espresso/15">25 min</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-basil/10 flex items-center justify-center text-lg">🐟</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Baked Salmon</p>
+                            <p class="text-[10px] text-espresso/30">4 servings · 220 cal each</p>
+                        </div><span class="text-[10px] text-espresso/15">20 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prep Batch 2 -->
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div class="px-4 py-2.5 bg-basil/10 flex items-center justify-between">
+                    <p class="text-xs font-serif font-bold text-basil">Batch 2 — Grains & Veg</p><span
+                        class="text-[10px] text-espresso/20">~35 min</span>
+                </div>
+                <div class="p-4 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-cream flex items-center justify-center text-lg">🍚</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Brown Rice</p>
+                            <p class="text-[10px] text-espresso/30">6 cups · Base for all meals</p>
+                        </div><span class="text-[10px] text-espresso/15">30 min</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-basil/10 flex items-center justify-center text-lg">🥦</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Roasted Veggies</p>
+                            <p class="text-[10px] text-espresso/30">Broccoli, peppers, zucchini</p>
+                        </div><span class="text-[10px] text-espresso/15">25 min</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch 3 -->
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div class="px-4 py-2.5 bg-plum/10 flex items-center justify-between">
+                    <p class="text-xs font-serif font-bold text-plum">Batch 3 — Sauces & Snacks</p><span
+                        class="text-[10px] text-espresso/20">~30 min</span>
+                </div>
+                <div class="p-4 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-plum/10 flex items-center justify-center text-lg">🫙</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Teriyaki Sauce</p>
+                            <p class="text-[10px] text-espresso/30">Homemade · 1 jar</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-saffron/10 flex items-center justify-center text-lg">🥜
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-serif font-semibold">Trail Mix Portions</p>
+                            <p class="text-[10px] text-espresso/30">8 snack bags</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping List -->
+            <button
+                class="w-full py-3 bg-saffron text-white font-serif font-bold rounded-xl text-sm flex items-center justify-center gap-2 active:scale-95 transition-transform"><span
+                    class="material-symbols-outlined !text-lg">shopping_cart</span> Generate Shopping List</button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Body Composition</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Exo+2:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#050508", "primary": "#00F0FF", "secondary": "#8B5CF6", "magenta": "#FF2D78", "bio": "#0A0F12" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"], "sans": ["Exo 2", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #050508
+        }
+
+        .glass-cyan {
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        .bio-scan {
+            position: relative;
+            overflow: hidden
+        }
+
+        .bio-scan::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00F0FF, transparent);
+            animation: scan 3s linear infinite
+        }
+
+        @keyframes scan {
+            to {
+                top: 200%
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/30">arrow_back</span></button>
+            <h1 class="font-display text-sm font-bold tracking-wider uppercase text-primary/80">Body Composition</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/30">history</span></button>
+        </div>
+
+        <!-- Body Map Canvas -->
+        <div class="mx-6 glass-cyan bio-scan flex items-center justify-center relative" style="height:260px">
+            <canvas id="bodyMap" width="200" height="240"></canvas>
+            <!-- Measurement Callouts -->
+            <div class="absolute top-6 right-4 text-right">
+                <p class="text-[9px] text-primary/50">Shoulders</p>
+                <p class="text-xs font-display font-bold text-primary">44"</p>
+            </div>
+            <div class="absolute top-[45%] left-4">
+                <p class="text-[9px] text-magenta/50">Waist</p>
+                <p class="text-xs font-display font-bold text-magenta">32"</p>
+            </div>
+            <div class="absolute bottom-[30%] right-4 text-right">
+                <p class="text-[9px] text-secondary/50">Hips</p>
+                <p class="text-xs font-display font-bold text-secondary">38"</p>
+            </div>
+            <div class="absolute bottom-6 left-4">
+                <p class="text-[9px] text-primary/50">Thigh</p>
+                <p class="text-xs font-display font-bold text-primary">22"</p>
+            </div>
+            <div class="absolute top-3 left-4">
+                <p class="text-[10px] text-white/20 font-mono">Last scan: Today</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 mt-3 space-y-3">
+            <!-- Metrics Grid -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="glass-cyan p-4">
+                    <p class="text-[10px] text-primary/40 uppercase tracking-wider font-display">Body Fat</p>
+                    <p class="text-2xl font-display font-bold mt-1">14.8<span class="text-sm text-white/20">%</span></p>
+                    <div class="mt-2 h-2 rounded-full bg-white/5">
+                        <div class="h-full rounded-full bg-gradient-to-r from-primary to-primary/60"
+                            style="width:14.8%"></div>
+                    </div>
+                    <p class="text-[9px] text-primary/50 mt-1">Athletic range</p>
+                </div>
+                <div class="glass-cyan p-4">
+                    <p class="text-[10px] text-magenta/40 uppercase tracking-wider font-display">Muscle Mass</p>
+                    <p class="text-2xl font-display font-bold mt-1">72.4<span class="text-sm text-white/20">kg</span>
+                    </p>
+                    <div class="flex items-center gap-1 mt-2"><span class="text-[10px] text-primary">↑ 0.8kg</span><span
+                            class="text-[9px] text-white/15">this month</span></div>
+                </div>
+                <div class="glass-cyan p-4">
+                    <p class="text-[10px] text-secondary/40 uppercase tracking-wider font-display">BMI</p>
+                    <p class="text-2xl font-display font-bold mt-1">23.1</p>
+                    <p class="text-[9px] text-primary/50 mt-1">Normal weight</p>
+                </div>
+                <div class="glass-cyan p-4">
+                    <p class="text-[10px] text-primary/40 uppercase tracking-wider font-display">Water</p>
+                    <p class="text-2xl font-display font-bold mt-1">62.3<span class="text-sm text-white/20">%</span></p>
+                    <p class="text-[9px] text-primary/50 mt-1">Well hydrated</p>
+                </div>
+            </div>
+
+            <!-- Progress Canvas -->
+            <div class="glass-cyan p-4">
+                <h3 class="text-[10px] text-white/20 font-display uppercase tracking-wider mb-2">Body Fat — 6 Month
+                    Trend</h3>
+                <canvas id="bfTrend" class="w-full" style="height:60px"></canvas>
+            </div>
+
+            <!-- Body Comp Bars -->
+            <div class="glass-cyan p-4">
+                <h3 class="text-[10px] text-white/20 font-display uppercase tracking-wider mb-3">Composition Breakdown
+                </h3>
+                <div class="flex gap-1 h-5 rounded-full overflow-hidden">
+                    <div class="bg-primary" style="width:44.5%" title="Muscle"></div>
+                    <div class="bg-secondary" style="width:25.2%" title="Bone"></div>
+                    <div class="bg-magenta" style="width:14.8%" title="Fat"></div>
+                    <div class="bg-primary/30" style="width:15.5%" title="Water/Other"></div>
+                </div>
+                <div class="flex justify-between mt-2">
+                    <span class="text-[9px] text-primary">Muscle 44.5%</span>
+                    <span class="text-[9px] text-secondary">Bone 25.2%</span>
+                    <span class="text-[9px] text-magenta">Fat 14.8%</span>
+                    <span class="text-[9px] text-primary/40">Other 15.5%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Body silhouette
+        const bc = document.getElementById('bodyMap');
+        const bx = bc.getContext('2d');
+        bx.strokeStyle = 'rgba(0,240,255,0.15)';
+        bx.lineWidth = 1;
+        bx.fillStyle = 'rgba(0,240,255,0.03)';
+        // Simplified body outline
+        bx.beginPath();
+        bx.moveTo(100, 10); bx.quadraticCurveTo(115, 10, 115, 30); bx.quadraticCurveTo(115, 45, 100, 48); bx.quadraticCurveTo(85, 45, 85, 30); bx.quadraticCurveTo(85, 10, 100, 10);
+        bx.fill(); bx.stroke();
+        // Torso
+        bx.beginPath();
+        bx.moveTo(85, 48); bx.lineTo(75, 55); bx.lineTo(55, 70); bx.lineTo(55, 72); bx.lineTo(75, 58); bx.lineTo(80, 80); bx.lineTo(78, 120); bx.lineTo(80, 125);
+        bx.lineTo(85, 125); bx.lineTo(90, 140); bx.lineTo(88, 180); bx.lineTo(85, 210); bx.lineTo(80, 230); bx.lineTo(90, 232); bx.lineTo(95, 215); bx.lineTo(98, 180);
+        bx.lineTo(100, 140);
+        bx.lineTo(102, 180); bx.lineTo(105, 215); bx.lineTo(110, 232); bx.lineTo(120, 230); bx.lineTo(115, 210); bx.lineTo(112, 180); bx.lineTo(110, 140);
+        bx.lineTo(115, 125); bx.lineTo(120, 125); bx.lineTo(122, 120); bx.lineTo(120, 80); bx.lineTo(125, 58); bx.lineTo(145, 72); bx.lineTo(145, 70); bx.lineTo(125, 55); bx.lineTo(115, 48);
+        bx.closePath();
+        bx.fill(); bx.stroke();
+
+        // Muscle highlight zones
+        const zones = [{ x: 92, y: 65, w: 16, h: 20, c: 'rgba(0,240,255,0.08)' }, { x: 88, y: 90, w: 24, h: 25, c: 'rgba(255,45,120,0.06)' }, { x: 88, y: 145, w: 10, h: 40, c: 'rgba(139,92,246,0.06)' }, { x: 102, y: 145, w: 10, h: 40, c: 'rgba(139,92,246,0.06)' }];
+        zones.forEach(z => { bx.fillStyle = z.c; bx.fillRect(z.x, z.y, z.w, z.h); });
+
+        // Body fat trend
+        const tc = document.getElementById('bfTrend');
+        tc.width = tc.offsetWidth * 2; tc.height = 60 * 2;
+        const tx = tc.getContext('2d'); tx.scale(2, 2);
+        const W = tc.offsetWidth, H = 60;
+        const bf = [18.2, 17.5, 16.8, 16.1, 15.5, 14.8];
+        const bfMin = Math.min(...bf) - 1, bfMax = Math.max(...bf) + 1;
+        tx.beginPath(); tx.strokeStyle = '#FF2D78'; tx.lineWidth = 2; tx.lineJoin = 'round';
+        bf.forEach((v, i) => { const x = (i / (bf.length - 1)) * W; const y = H - ((v - bfMin) / (bfMax - bfMin)) * (H - 10) - 5; i === 0 ? tx.moveTo(x, y) : tx.lineTo(x, y); });
+        tx.stroke();
+        bf.forEach((v, i) => { const x = (i / (bf.length - 1)) * W; const y = H - ((v - bfMin) / (bfMax - bfMin)) * (H - 10) - 5; tx.beginPath(); tx.arc(x, y, 3, 0, Math.PI * 2); tx.fillStyle = '#FF2D78'; tx.fill(); });
+        tx.fillStyle = 'rgba(255,255,255,0.1)'; tx.font = '8px Exo 2';
+        ['Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb'].forEach((m, i) => { tx.fillText(m, (i / (5)) * W, H - 1); });
+    </script>
+</body>
+
+</html>

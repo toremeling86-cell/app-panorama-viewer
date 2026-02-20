@@ -1,0 +1,305 @@
+{
+    "portfolio": "Premium Mobile App UI Collection 2026",
+    "totalApps": 8,
+    "totalScreens": 35,
+    "createdAt": "2026-02-19T03:30:00+01:00",
+    "techStack": [
+        "TailwindCSS",
+        "Google Fonts",
+        "Material Symbols",
+        "SVG",
+        "CSS Animations",
+        "Canvas 2D"
+    ],
+    "apps": [
+        {
+            "id": "01-ZenVault",
+            "name": "ZenVault",
+            "category": "Finance",
+            "tagline": "Personal Finance & Wealth Management",
+            "designSystem": "Dark aurora glassmorphism, emerald/teal accents",
+            "fonts": [
+                "Outfit",
+                "JetBrains Mono"
+            ],
+            "stitchProjectId": "6834420023245534759",
+            "stitchUrl": "https://stitch.withgoogle.com/projects/6834420023245534759",
+            "screens": [
+                {
+                    "file": "01-dashboard.html",
+                    "name": "Dashboard",
+                    "description": "Net worth overview with chart and transaction feed"
+                },
+                {
+                    "file": "02-portfolio.html",
+                    "name": "Portfolio",
+                    "description": "Investment portfolio allocation with donut chart"
+                },
+                {
+                    "file": "03-budget.html",
+                    "name": "Budget",
+                    "description": "Monthly budget tracker with category breakdowns"
+                },
+                {
+                    "file": "04-goals.html",
+                    "name": "Goals",
+                    "description": "Financial goals with SVG progress rings"
+                },
+                {
+                    "file": "05-analytics.html",
+                    "name": "Analytics",
+                    "description": "Income vs expenses bar chart and spending analysis"
+                },
+                {
+                    "file": "06-onboarding.html",
+                    "name": "Onboarding",
+                    "description": "Welcome flow with account setup"
+                }
+            ]
+        },
+        {
+            "id": "02-AuraFit",
+            "name": "AuraFit",
+            "category": "Fitness",
+            "tagline": "AI-Powered Fitness & Performance",
+            "designSystem": "Void-black with cyan bioluminescence, activity rings",
+            "fonts": [
+                "Outfit",
+                "JetBrains Mono"
+            ],
+            "stitchProjectId": "8075010404149597399",
+            "stitchUrl": "https://stitch.withgoogle.com/projects/8075010404149597399",
+            "screens": [
+                {
+                    "file": "01-dashboard.html",
+                    "name": "Dashboard",
+                    "description": "Triple activity rings with daily overview"
+                },
+                {
+                    "file": "02-workout.html",
+                    "name": "Active Workout",
+                    "description": "Live workout timer with exercise tracking"
+                },
+                {
+                    "file": "03-progress.html",
+                    "name": "Progress",
+                    "description": "Body stats and strength milestones"
+                },
+                {
+                    "file": "04-exercises.html",
+                    "name": "Exercise Library",
+                    "description": "Searchable exercise database"
+                },
+                {
+                    "file": "05-profile.html",
+                    "name": "Profile",
+                    "description": "User profile with stats and settings"
+                }
+            ]
+        },
+        {
+            "id": "03-SkyLens",
+            "name": "SkyLens",
+            "category": "Weather",
+            "tagline": "Atmospheric Intelligence & Forecasting",
+            "designSystem": "Dynamic sky gradients, atmospheric layers",
+            "fonts": [
+                "Outfit",
+                "JetBrains Mono"
+            ],
+            "stitchProjectId": "2226802953232336873",
+            "stitchUrl": "https://stitch.withgoogle.com/projects/2226802953232336873",
+            "screens": [
+                {
+                    "file": "01-sky-now.html",
+                    "name": "Sky Now",
+                    "description": "Current conditions with temperature display"
+                },
+                {
+                    "file": "02-forecast.html",
+                    "name": "10-Day Forecast",
+                    "description": "Extended forecast with daily ranges"
+                },
+                {
+                    "file": "03-air-quality.html",
+                    "name": "Air Quality",
+                    "description": "AQI ring with pollutant breakdown"
+                },
+                {
+                    "file": "04-radar.html",
+                    "name": "Weather Radar",
+                    "description": "Animated radar sweep with timeline"
+                },
+                {
+                    "file": "05-locations.html",
+                    "name": "Saved Locations",
+                    "description": "Multi-city weather comparison"
+                }
+            ]
+        },
+        {
+            "id": "04-NightOwl",
+            "name": "NightOwl",
+            "category": "Health",
+            "tagline": "Sleep Science & Smart Alarm",
+            "designSystem": "Deep indigo night palette, moon-glow animations",
+            "fonts": [
+                "Outfit",
+                "JetBrains Mono"
+            ],
+            "stitchProjectId": "2263342564490330114",
+            "stitchUrl": "https://stitch.withgoogle.com/projects/2263342564490330114",
+            "screens": [
+                {
+                    "file": "01-sleep-dashboard.html",
+                    "name": "Sleep Dashboard",
+                    "description": "Sleep score ring with stage breakdown"
+                },
+                {
+                    "file": "02-trends.html",
+                    "name": "Trends",
+                    "description": "Weekly stacked bar chart of sleep stages"
+                },
+                {
+                    "file": "03-sounds.html",
+                    "name": "Sounds",
+                    "description": "Sleep sound player with wave visualizer"
+                },
+                {
+                    "file": "04-alarm.html",
+                    "name": "Smart Alarm",
+                    "description": "Smart wake technology with day picker"
+                },
+                {
+                    "file": "05-profile.html",
+                    "name": "Profile",
+                    "description": "Chronotype badge and lifetime stats"
+                }
+            ]
+        },
+        {
+            "id": "05-Culinary",
+            "name": "Culinary",
+            "category": "Food",
+            "tagline": "AI Recipe Intelligence & Meal Planning",
+            "designSystem": "Warm cream light-mode, serif/sans duo typography",
+            "fonts": [
+                "Playfair Display",
+                "Inter"
+            ],
+            "stitchProjectId": "12873609639738482029",
+            "stitchUrl": "https://stitch.withgoogle.com/projects/12873609639738482029",
+            "screens": [
+                {
+                    "file": "01-discover.html",
+                    "name": "Discover",
+                    "description": "Featured recipe hero card with recipe grid"
+                },
+                {
+                    "file": "02-recipe-detail.html",
+                    "name": "Recipe Detail",
+                    "description": "Ingredient checklist with cooking CTA"
+                },
+                {
+                    "file": "03-ai-chef.html",
+                    "name": "AI Chef",
+                    "description": "Chat interface with recipe suggestions"
+                },
+                {
+                    "file": "04-my-book.html",
+                    "name": "My Recipe Book",
+                    "description": "Collection cards and saved recipes"
+                },
+                {
+                    "file": "05-grocery.html",
+                    "name": "Smart Grocery",
+                    "description": "Categorized shopping list with check-off"
+                }
+            ]
+        },
+        {
+            "id": "06-MindFlow",
+            "name": "MindFlow",
+            "category": "Wellness",
+            "tagline": "Meditation & Mindfulness",
+            "designSystem": "Warm ember dark palette, breathing ring animations",
+            "fonts": [
+                "DM Sans",
+                "JetBrains Mono"
+            ],
+            "screens": [
+                {
+                    "file": "01-home.html",
+                    "name": "Home",
+                    "description": "Breathing circle with ember particles"
+                },
+                {
+                    "file": "02-session.html",
+                    "name": "Active Session",
+                    "description": "Pulsing concentric rings with timer"
+                },
+                {
+                    "file": "03-progress.html",
+                    "name": "Progress",
+                    "description": "Mindfulness score ring and weekly chart"
+                }
+            ]
+        },
+        {
+            "id": "07-WaveRider",
+            "name": "WaveRider",
+            "category": "Music",
+            "tagline": "Spatial Music Discovery & Playback",
+            "designSystem": "Neon pink/violet sonic palette, spinning vinyl",
+            "fonts": [
+                "Space Grotesk",
+                "JetBrains Mono"
+            ],
+            "screens": [
+                {
+                    "file": "01-now-playing.html",
+                    "name": "Now Playing",
+                    "description": "Vinyl spin with audio visualizer bars"
+                },
+                {
+                    "file": "02-discover.html",
+                    "name": "Discover",
+                    "description": "AI mood engine with spatial playlists"
+                },
+                {
+                    "file": "03-library.html",
+                    "name": "Library",
+                    "description": "Playlist collection with AI smart playlist"
+                }
+            ]
+        },
+        {
+            "id": "08-PawPal",
+            "name": "PawPal",
+            "category": "Pets",
+            "tagline": "AI Pet Wellness & Care",
+            "designSystem": "Warm light-mode, playful rounded system",
+            "fonts": [
+                "Nunito",
+                "JetBrains Mono"
+            ],
+            "screens": [
+                {
+                    "file": "01-dashboard.html",
+                    "name": "Pet Dashboard",
+                    "description": "Pet selector with health score and schedule"
+                },
+                {
+                    "file": "02-ai-vet.html",
+                    "name": "AI Vet Chat",
+                    "description": "Veterinary diagnosis chat with action cards"
+                },
+                {
+                    "file": "03-walk-tracker.html",
+                    "name": "Walk Tracker",
+                    "description": "Live route map with walk stats and pace chart"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Nutrition</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Exo+2:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#050508", "primary": "#00F0FF", "secondary": "#8B5CF6", "magenta": "#FF2D78", "carb": "#FFB800", "protein": "#00F0FF", "fat": "#FF2D78" }, fontFamily: { "display": ["Space Grotesk", "sans-serif"], "sans": ["Exo 2", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #050508
+        }
+
+        .glass-cyan {
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <div>
+                <p class="text-xs text-primary/50 font-display">Today</p>
+                <h1 class="text-xl font-display font-bold">Nutrition</h1>
+            </div>
+            <button class="w-10 h-10 rounded-full glass-cyan flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-primary/40">qr_code_scanner</span></button>
+        </div>
+
+        <!-- Calorie Ring -->
+        <div class="flex justify-center py-4">
+            <div class="relative">
+                <svg width="160" height="160" viewBox="0 0 160 160">
+                    <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="10" />
+                    <circle cx="80" cy="80" r="68" fill="none" stroke="url(#calGrad)" stroke-width="10"
+                        stroke-linecap="round" stroke-dasharray="427" stroke-dashoffset="128"
+                        transform="rotate(-90 80 80)" />
+                    <defs>
+                        <linearGradient id="calGrad">
+                            <stop offset="0%" stop-color="#00F0FF" />
+                            <stop offset="100%" stop-color="#8B5CF6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <p class="text-3xl font-display font-bold">1,640</p>
+                    <p class="text-[10px] text-white/20">of 2,200 kcal</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Macro Bars -->
+        <div class="flex gap-3 px-6 mb-3">
+            <div class="flex-1 glass-cyan p-3 text-center">
+                <div class="w-full h-2 rounded-full bg-white/5 mb-2">
+                    <div class="h-full rounded-full bg-protein" style="width:72%"></div>
+                </div>
+                <p class="text-sm font-display font-bold text-protein">108g</p>
+                <p class="text-[9px] text-white/20">Protein</p>
+            </div>
+            <div class="flex-1 glass-cyan p-3 text-center">
+                <div class="w-full h-2 rounded-full bg-white/5 mb-2">
+                    <div class="h-full rounded-full bg-carb" style="width:65%"></div>
+                </div>
+                <p class="text-sm font-display font-bold text-carb">195g</p>
+                <p class="text-[9px] text-white/20">Carbs</p>
+            </div>
+            <div class="flex-1 glass-cyan p-3 text-center">
+                <div class="w-full h-2 rounded-full bg-white/5 mb-2">
+                    <div class="h-full rounded-full bg-fat" style="width:58%"></div>
+                </div>
+                <p class="text-sm font-display font-bold text-fat">52g</p>
+                <p class="text-[9px] text-white/20">Fat</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-2">
+            <p class="text-[10px] text-white/15 font-display uppercase tracking-widest mb-1">Meals Logged</p>
+
+            <div class="glass-cyan p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-br from-carb/20 to-carb/5 flex items-center justify-center text-xl">
+                        🥣</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Breakfast</p>
+                        <p class="text-[10px] text-white/25">Oatmeal, banana, protein shake</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-display font-bold text-primary">520</p>
+                        <p class="text-[9px] text-white/15">kcal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-cyan p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-br from-protein/20 to-protein/5 flex items-center justify-center text-xl">
+                        🥩</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Lunch</p>
+                        <p class="text-[10px] text-white/25">Grilled chicken, rice, broccoli</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-display font-bold text-primary">680</p>
+                        <p class="text-[9px] text-white/15">kcal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-cyan p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-11 h-11 rounded-xl bg-gradient-to-br from-fat/20 to-fat/5 flex items-center justify-center text-xl">
+                        🥜</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-semibold">Snack</p>
+                        <p class="text-[10px] text-white/25">Greek yogurt, almonds, honey</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm font-display font-bold text-primary">280</p>
+                        <p class="text-[9px] text-white/15">kcal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-cyan p-4 border-dashed border-primary/10">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-white/3 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-xl text-primary/30">add</span></div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display text-white/20">Dinner</p>
+                        <p class="text-[10px] text-white/10">Tap to log</p>
+                    </div>
+                    <p class="text-sm text-white/10">— kcal</p>
+                </div>
+            </div>
+
+            <!-- Water -->
+            <div class="glass-cyan p-4 mt-2">
+                <div class="flex items-center justify-between mb-2"><span
+                        class="text-xs font-display font-semibold text-white/40">💧 Hydration</span><span
+                        class="text-xs font-display font-bold text-primary">6/8 glasses</span></div>
+                <div class="flex gap-1.5">
+                    <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center text-[10px]">💧</div>
+                    <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center text-[10px]">💧</div>
+                    <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center text-[10px]">💧</div>
+                    <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center text-[10px]">💧</div>
+                    <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center text-[10px]">💧</div>
+                    <div class="w-7 h-7 rounded-lg bg-primary/20 flex items-center justify-center text-[10px]">💧</div>
+                    <div
+                        class="w-7 h-7 rounded-lg bg-white/3 flex items-center justify-center text-[10px] text-white/10">
+                        💧</div>
+                    <div
+                        class="w-7 h-7 rounded-lg bg-white/3 flex items-center justify-center text-[10px] text-white/10">
+                        💧</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAB -->
+        <button
+            class="fixed bottom-24 right-8 w-14 h-14 bg-primary rounded-full flex items-center justify-center shadow-xl shadow-primary/30 active:scale-90 transition-transform"><span
+                class="material-symbols-outlined !text-2xl text-bg-void">photo_camera</span></button>
+    </div>
+</body>
+
+</html>

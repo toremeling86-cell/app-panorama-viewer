@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZenVault — Crypto</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#0A0B0F", "primary": "#00D4AA", "secondary": "#7B61FF", "accent": "#FF6B9D", "danger": "#FF4757", "surface": "#12131A", "bitcoin": "#F7931A", "ethereum": "#627EEA" }, fontFamily: { "display": ["Outfit", "sans-serif"], "sans": ["DM Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0B0F
+        }
+
+        .glass {
+            background: rgba(18, 19, 26, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(12px)
+        }
+
+        .aurora {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: radial-gradient(ellipse at 30% 0%, rgba(0, 212, 170, 0.06), transparent 60%), radial-gradient(ellipse at 70% 0%, rgba(123, 97, 255, 0.06), transparent 50%)
+        }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+        @keyframes breathe { 0%, 100% { opacity: 0.7; } 50% { opacity: 1; } }
+        @keyframes priceFlash { 0% { background: rgba(0,212,170,0.15); } 100% { background: transparent; } }
+        @keyframes barGrow { from { width: 0; } }
+
+        [data-animate] { opacity: 0; animation: fadeInUp 0.5s ease both; }
+        [data-animate="scale"] { animation-name: scaleIn; }
+
+        .btn-press { transition: transform 150ms ease, opacity 150ms ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.95); opacity: 0.9; }
+        .card-interactive { transition: transform 200ms ease, box-shadow 200ms ease; cursor: pointer; }
+        .card-interactive:hover { transform: translateY(-1px); }
+        .card-interactive:active { transform: scale(0.98); }
+        *:focus-visible { outline: 2px solid #00D4AA; outline-offset: 2px; border-radius: 4px; }
+        .shadow-layered { box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 4px 8px rgba(0,0,0,0.2), 0 8px 16px rgba(0,0,0,0.1); }
+
+        .price-flash { animation: priceFlash 0.6s ease; border-radius: 4px; }
+        .tab-active { background: rgba(0,212,170,0.1); border: 1px solid rgba(0,212,170,0.2); color: #00D4AA; }
+        .alloc-bar { animation: barGrow 1s ease both; }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+          [data-animate] { opacity: 1 !important; }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="aurora" aria-hidden="true"></div>
+
+        <!-- Status Bar -->
+        <div class="h-12 w-full" aria-hidden="true"></div>
+
+        <!-- Header -->
+        <header class="relative z-10 flex items-center justify-between px-6 pb-2" data-animate style="animation-delay:0ms">
+            <div>
+                <p class="text-xs text-primary font-display font-semibold">ZenVault</p>
+                <h1 class="text-xl font-display font-bold">Crypto Portfolio</h1>
+            </div>
+            <button class="w-10 h-10 rounded-full glass btn-press flex items-center justify-center" aria-label="Swap view">
+                <span class="material-symbols-outlined !text-lg text-white/40" aria-hidden="true">swap_horiz</span>
+            </button>
+        </header>
+
+        <!-- Portfolio Value -->
+        <section aria-label="Portfolio overview" class="relative z-10 px-6 py-4" data-animate style="animation-delay:80ms">
+            <p class="text-3xl font-display font-bold"><span data-count-to="24832" data-prefix="$" data-decimals="2">$0.00</span></p>
+            <div class="flex items-center gap-2 mt-1">
+                <span class="text-sm text-primary">↑ +$1,246.30</span>
+                <span class="text-xs text-primary/60 px-2 py-0.5 bg-primary/10 rounded-full">+5.28%</span>
+            </div>
+            <canvas id="portfolioChart" class="w-full mt-3" style="height:100px" aria-label="Portfolio price chart over 1 month"></canvas>
+            <div class="flex justify-between mt-1" role="tablist" aria-label="Chart time range" id="chartTabs">
+                <button class="text-[9px] text-white/15 px-2 py-1 rounded-full btn-press" role="tab" data-range="24h">24h</button>
+                <button class="text-[9px] text-white/15 px-2 py-1 rounded-full btn-press" role="tab" data-range="7d">7d</button>
+                <button class="text-[9px] text-primary/60 font-medium px-2 py-1 rounded-full tab-active btn-press" role="tab" aria-selected="true" data-range="1M">1M</button>
+                <button class="text-[9px] text-white/15 px-2 py-1 rounded-full btn-press" role="tab" data-range="3M">3M</button>
+                <button class="text-[9px] text-white/15 px-2 py-1 rounded-full btn-press" role="tab" data-range="1Y">1Y</button>
+                <button class="text-[9px] text-white/15 px-2 py-1 rounded-full btn-press" role="tab" data-range="All">All</button>
+            </div>
+        </section>
+
+        <main class="relative z-10 flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Holdings -->
+            <section aria-label="Cryptocurrency holdings">
+                <p class="text-[10px] text-white/20 font-display uppercase tracking-widest" data-animate style="animation-delay:160ms">Holdings</p>
+
+                <div class="glass card-interactive shadow-layered p-4 mt-2" data-animate style="animation-delay:240ms" id="holding-btc">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-bitcoin/20 flex items-center justify-center text-lg font-bold text-bitcoin" aria-hidden="true">₿</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-display font-semibold">Bitcoin</p>
+                            <p class="text-[10px] text-white/30">0.245 BTC</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-display font-bold" data-count-to="14280" data-prefix="$" data-decimals="0">$0</p>
+                            <p class="text-[10px] text-primary">+3.2%</p>
+                        </div>
+                        <canvas id="btcSpark" width="60" height="24" class="ml-2" aria-hidden="true"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass card-interactive shadow-layered p-4 mt-2" data-animate style="animation-delay:320ms" id="holding-eth">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-ethereum/20 flex items-center justify-center text-lg font-bold text-ethereum" aria-hidden="true">Ξ</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-display font-semibold">Ethereum</p>
+                            <p class="text-[10px] text-white/30">3.12 ETH</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-display font-bold" data-count-to="8424" data-prefix="$" data-decimals="0">$0</p>
+                            <p class="text-[10px] text-primary">+7.8%</p>
+                        </div>
+                        <canvas id="ethSpark" width="60" height="24" class="ml-2" aria-hidden="true"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass card-interactive shadow-layered p-4 mt-2" data-animate style="animation-delay:400ms" id="holding-sol">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-lg font-bold text-secondary" aria-hidden="true">S</div>
+                        <div class="flex-1">
+                            <p class="text-sm font-display font-semibold">Solana</p>
+                            <p class="text-[10px] text-white/30">14.5 SOL</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-display font-bold" data-count-to="2128" data-prefix="$" data-decimals="0">$0</p>
+                            <p class="text-[10px] text-danger">-1.4%</p>
+                        </div>
+                        <canvas id="solSpark" width="60" height="24" class="ml-2" aria-hidden="true"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Allocation -->
+            <section aria-label="Portfolio allocation" data-animate style="animation-delay:480ms">
+                <div class="glass card-interactive shadow-layered p-4">
+                    <h3 class="text-xs font-display font-bold text-white/30 uppercase tracking-wider mb-3">Allocation</h3>
+                    <div class="flex gap-1 h-3 rounded-full overflow-hidden">
+                        <div class="bg-bitcoin alloc-bar" style="width:57.5%"></div>
+                        <div class="bg-ethereum alloc-bar" style="width:33.9%; animation-delay:200ms"></div>
+                        <div class="bg-secondary alloc-bar" style="width:8.6%; animation-delay:400ms"></div>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <span class="text-[9px] text-bitcoin">BTC 57.5%</span>
+                        <span class="text-[9px] text-ethereum">ETH 33.9%</span>
+                        <span class="text-[9px] text-secondary">SOL 8.6%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section aria-label="Quick trade actions" data-animate style="animation-delay:560ms">
+                <div class="grid grid-cols-3 gap-2">
+                    <button class="glass btn-press card-interactive py-3 text-center" aria-label="Buy crypto">
+                        <span class="material-symbols-outlined !text-lg text-primary block mb-1" aria-hidden="true">arrow_upward</span>
+                        <span class="text-[10px]">Buy</span>
+                    </button>
+                    <button class="glass btn-press card-interactive py-3 text-center" aria-label="Sell crypto">
+                        <span class="material-symbols-outlined !text-lg text-accent block mb-1" aria-hidden="true">arrow_downward</span>
+                        <span class="text-[10px]">Sell</span>
+                    </button>
+                    <button class="glass btn-press card-interactive py-3 text-center" aria-label="Swap crypto">
+                        <span class="material-symbols-outlined !text-lg text-secondary block mb-1" aria-hidden="true">swap_vert</span>
+                        <span class="text-[10px]">Swap</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function drawSparkline(id, data, color, up) {
+            const c = document.getElementById(id);
+            const ctx = c.getContext('2d');
+            const w = 60, h = 24;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.5;
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            const min = Math.min(...data), max = Math.max(...data);
+            data.forEach((v, i) => {
+                const x = (i / (data.length - 1)) * w;
+                const y = h - ((v - min) / (max - min)) * (h - 4) - 2;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, color.replace(')', ',0.15)').replace('rgb', 'rgba'));
+            grad.addColorStop(1, color.replace(')', ',0)').replace('rgb', 'rgba'));
+            ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath();
+            ctx.fillStyle = up ? 'rgba(0,212,170,0.1)' : 'rgba(255,71,87,0.1)';
+            ctx.fill();
+        }
+        drawSparkline('btcSpark', [42, 44, 43, 46, 48, 47, 50, 52, 51, 54, 53, 55], '#00D4AA', true);
+        drawSparkline('ethSpark', [22, 24, 23, 26, 28, 30, 29, 32, 34, 33, 36, 38], '#00D4AA', true);
+        drawSparkline('solSpark', [18, 17, 19, 16, 18, 15, 17, 16, 14, 15, 14, 15], '#FF4757', false);
+
+        // Portfolio Chart
+        const pc = document.getElementById('portfolioChart');
+        pc.width = pc.offsetWidth * 2; pc.height = 100 * 2;
+        const px = pc.getContext('2d');
+        px.scale(2, 2);
+        const W = pc.offsetWidth, H = 100;
+        const pd = [20100, 20800, 21200, 20900, 21500, 22100, 21800, 22400, 23000, 22700, 23200, 23800, 24100, 23900, 24500, 24832];
+        const pMin = Math.min(...pd), pMax = Math.max(...pd);
+
+        // Animated chart draw
+        let drawProgress = 0;
+        function drawChart() {
+            px.clearRect(0, 0, W, H);
+            const count = Math.floor(drawProgress * pd.length);
+            if (count < 2) { drawProgress += 0.04; if (drawProgress < 1) requestAnimationFrame(drawChart); return; }
+            const slice = pd.slice(0, count);
+            px.beginPath();
+            px.strokeStyle = '#00D4AA';
+            px.lineWidth = 2;
+            px.lineJoin = 'round';
+            slice.forEach((v, i) => {
+                const xp = (i / (pd.length - 1)) * W;
+                const yp = H - ((v - pMin) / (pMax - pMin)) * (H - 20) - 10;
+                i === 0 ? px.moveTo(xp, yp) : px.lineTo(xp, yp);
+            });
+            px.stroke();
+            const g = px.createLinearGradient(0, 0, 0, H);
+            g.addColorStop(0, 'rgba(0,212,170,0.15)'); g.addColorStop(1, 'rgba(0,212,170,0)');
+            const lastPx = ((count - 1) / (pd.length - 1)) * W;
+            const lastPy = H - ((slice[slice.length - 1] - pMin) / (pMax - pMin)) * (H - 20) - 10;
+            px.lineTo(lastPx, H); px.lineTo(0, H); px.closePath(); px.fillStyle = g; px.fill();
+            // Dot at end
+            if (drawProgress >= 1) {
+                px.beginPath(); px.arc(lastPx, lastPy, 4, 0, Math.PI * 2); px.fillStyle = '#00D4AA'; px.fill();
+                px.beginPath(); px.arc(lastPx, lastPy, 8, 0, Math.PI * 2); px.fillStyle = 'rgba(0,212,170,0.2)'; px.fill();
+            }
+            drawProgress += 0.04;
+            if (drawProgress < 1.01) requestAnimationFrame(drawChart);
+        }
+        requestAnimationFrame(drawChart);
+
+        // === DOM READY ===
+        document.addEventListener('DOMContentLoaded', () => {
+            // Intersection Observer for animations
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.style.animationPlayState = 'running'; obs.unobserve(e.target); } });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('[data-animate]').forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+
+            // Animated counters
+            function animateCount(el) {
+                const target = parseFloat(el.dataset.countTo);
+                const prefix = el.dataset.prefix || '';
+                const suffix = el.dataset.suffix || '';
+                const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : 0;
+                const duration = 1200;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = prefix + (target * eased).toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+            const countObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); countObs.unobserve(e.target); } });
+            }, { threshold: 0.3 });
+            document.querySelectorAll('[data-count-to]').forEach(el => countObs.observe(el));
+
+            // Working tab selectors
+            const tabs = document.querySelectorAll('#chartTabs [role="tab"]');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('tab-active', 'text-primary/60', 'font-medium');
+                        t.classList.add('text-white/15');
+                        t.removeAttribute('aria-selected');
+                    });
+                    tab.classList.add('tab-active', 'text-primary/60', 'font-medium');
+                    tab.classList.remove('text-white/15');
+                    tab.setAttribute('aria-selected', 'true');
+                    // Flash effect on chart
+                    pc.style.opacity = '0.5';
+                    setTimeout(() => { pc.style.opacity = '1'; pc.style.transition = 'opacity 0.3s ease'; }, 100);
+                });
+            });
+
+            // Simulated price updates
+            function simulatePriceUpdate() {
+                const holdings = document.querySelectorAll('[id^="holding-"]');
+                holdings.forEach(card => {
+                    const priceEl = card.querySelector('[data-count-to]');
+                    if (priceEl && Math.random() > 0.6) {
+                        priceEl.classList.add('price-flash');
+                        setTimeout(() => priceEl.classList.remove('price-flash'), 600);
+                    }
+                });
+            }
+            setInterval(simulatePriceUpdate, 4000);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Atlas — Empty State</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "parchment": "#F5EDE0", "leather": "#6B4C3B", "compass": "#C4953A", "ocean": "#3D5A73", "ink": "#2C1810" }, fontFamily: { "display": ["Cinzel", "serif"], "sans": ["Josefin Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F5EDE0;
+        }
+
+        .map-shadow {
+            box-shadow: 0 4px 20px rgba(107, 76, 59, 0.1);
+        }
+
+        .compass-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            25% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+
+            75% {
+                transform: translateY(5px) rotate(-3deg);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-ink overflow-hidden">
+    <div
+        class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-parchment items-center justify-center px-8">
+        <div class="compass-float mb-6">
+            <svg width="80" height="80" viewBox="0 0 80 80" opacity="0.3">
+                <circle cx="40" cy="40" r="35" fill="none" stroke="#6B4C3B" stroke-width="1" stroke-dasharray="4 4" />
+                <polygon points="40,8 46,36 40,32 34,36" fill="#C4953A" />
+                <polygon points="40,72 46,44 40,48 34,44" fill="#6B4C3B" />
+                <circle cx="40" cy="40" r="4" fill="#C4953A" />
+            </svg>
+        </div>
+        <h2 class="font-display text-xl font-bold text-center">No Journeys Yet</h2>
+        <p class="text-sm text-leather/50 text-center mt-2 leading-relaxed">Every great explorer starts somewhere. Plan
+            your first trip and let the adventure begin.</p>
+        <button
+            class="mt-6 px-8 py-3 bg-compass text-white font-display font-bold rounded-2xl text-sm flex items-center gap-2 active:scale-95 transition-transform map-shadow uppercase tracking-wider">
+            <span class="material-symbols-outlined !text-lg">add</span> Plan First Trip
+        </button>
+        <p class="text-[10px] text-leather/30 mt-8 text-center font-display italic">"Not all those who wander are
+            lost."<br />— J.R.R. Tolkien</p>
+    </div>
+</body>
+
+</html>

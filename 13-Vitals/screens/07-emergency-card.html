@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Emergency Card</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FFFE", "trust": "#0D9488", "danger": "#DC2626", "safe": "#16A34A", "amber": "#D97706" }, fontFamily: { "display": ["Figtree", "sans-serif"], "body": ["Noto Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FFFE
+        }
+
+        .med-card {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(13, 148, 136, 0.06);
+            border-radius: 16px;
+            background: white
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important
+            }
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-900 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical" role="main">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button aria-label="Go back"><span
+                    class="material-symbols-outlined !text-xl text-gray-300">arrow_back</span></button>
+            <h1 class="font-display text-base font-bold text-danger">🚨 Emergency Card</h1>
+            <button aria-label="Edit"><span class="material-symbols-outlined !text-xl text-trust">edit</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- ID Card -->
+            <div class="bg-danger/5 border-2 border-danger/20 rounded-2xl p-5" role="region"
+                aria-label="Emergency identification">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 rounded-xl bg-danger/10 flex items-center justify-center text-3xl"
+                        aria-hidden="true">🆘</div>
+                    <div>
+                        <p class="text-xl font-display font-bold">Sarah Mitchell</p>
+                        <p class="text-xs text-gray-400">DOB: March 12, 1985 · F</p>
+                        <p class="text-xs text-gray-400">Blood Type: <span class="font-bold text-danger">O+</span></p>
+                    </div>
+                </div>
+                <div class="text-center py-2 bg-danger/10 rounded-xl">
+                    <p class="text-xs text-danger font-bold">⚠️ SHOW TO MEDICAL PERSONNEL ⚠️</p>
+                </div>
+            </div>
+
+            <!-- Medical Conditions -->
+            <div class="med-card p-4" role="region" aria-label="Medical conditions">
+                <p class="text-xs font-display font-bold text-danger/60 mb-2">⚕️ Medical Conditions</p>
+                <div class="space-y-1.5">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-danger"></div><span class="text-sm">Type 2 Diabetes</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-danger"></div><span class="text-sm">Hypertension</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full bg-amber"></div><span class="text-sm">Asthma (mild)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Allergies -->
+            <div class="bg-amber/5 border border-amber/20 rounded-2xl p-4" role="region" aria-label="Allergies">
+                <p class="text-xs font-display font-bold text-amber mb-2">⚠️ Allergies</p>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="px-3 py-1 bg-danger/10 border border-danger/20 rounded-full text-xs text-danger font-bold">Penicillin
+                        💊</span>
+                    <span
+                        class="px-3 py-1 bg-danger/10 border border-danger/20 rounded-full text-xs text-danger font-bold">Shellfish
+                        🦐</span>
+                    <span
+                        class="px-3 py-1 bg-amber/10 border border-amber/20 rounded-full text-xs text-amber font-bold">Latex
+                        ⚠️</span>
+                </div>
+            </div>
+
+            <!-- Current Medications -->
+            <div class="med-card p-4" role="region" aria-label="Current medications">
+                <p class="text-xs font-display font-bold text-trust mb-2">💊 Current Medications</p>
+                <div class="space-y-1.5">
+                    <div class="flex justify-between text-sm"><span>Metformin 500mg</span><span
+                            class="text-gray-400 text-xs">2x daily</span></div>
+                    <div class="flex justify-between text-sm"><span>Lisinopril 10mg</span><span
+                            class="text-gray-400 text-xs">1x daily</span></div>
+                    <div class="flex justify-between text-sm"><span>Albuterol Inhaler</span><span
+                            class="text-gray-400 text-xs">As needed</span></div>
+                </div>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="med-card p-4" role="region" aria-label="Emergency contacts">
+                <p class="text-xs font-display font-bold text-trust mb-3">📞 Emergency Contacts</p>
+                <div class="space-y-2">
+                    <div class="flex items-center gap-3 p-2 bg-trust/5 rounded-xl">
+                        <div class="w-10 h-10 rounded-full bg-trust/10 flex items-center justify-center text-lg">👨
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-bold">David Mitchell</p>
+                            <p class="text-[10px] text-gray-400">Husband · (555) 234-5678</p>
+                        </div>
+                        <button class="w-9 h-9 rounded-full bg-trust flex items-center justify-center"
+                            aria-label="Call David"><span
+                                class="material-symbols-outlined !text-sm text-white">call</span></button>
+                    </div>
+                    <div class="flex items-center gap-3 p-2 bg-trust/5 rounded-xl">
+                        <div class="w-10 h-10 rounded-full bg-trust/10 flex items-center justify-center text-lg">👩
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm font-bold">Dr. Lisa Chen</p>
+                            <p class="text-[10px] text-gray-400">Primary Care · (555) 876-5432</p>
+                        </div>
+                        <button class="w-9 h-9 rounded-full bg-trust flex items-center justify-center"
+                            aria-label="Call Dr. Chen"><span
+                                class="material-symbols-outlined !text-sm text-white">call</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Organ Donor -->
+            <div class="med-card p-4 flex items-center gap-3">
+                <span class="text-2xl">❤️</span>
+                <div>
+                    <p class="text-sm font-bold">Organ Donor</p>
+                    <p class="text-[10px] text-gray-400">Registered since 2018</p>
+                </div>
+                <span class="ml-auto px-2 py-0.5 bg-safe/10 text-safe text-[9px] font-bold rounded">Active</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

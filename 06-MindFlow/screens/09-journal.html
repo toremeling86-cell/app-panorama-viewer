@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+
+        .glass-e {
+            background: rgba(255, 140, 66, 0.03);
+            border: 1px solid rgba(255, 140, 66, 0.06);
+            border-radius: 16px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-dawn/20">arrow_back</span></button>
+            <h1 class="font-serif text-base font-semibold text-dawn/70">Mindful Journal</h1>
+            <button><span class="material-symbols-outlined !text-xl text-dawn/20">calendar_month</span></button>
+        </div>
+
+        <!-- Prompt -->
+        <div class="mx-6 glass-e p-4 border-glow/10">
+            <p class="text-[10px] text-glow/40 font-serif uppercase tracking-wider mb-1">Today's Prompt</p>
+            <p class="text-sm font-serif italic text-dawn/50">"What are you grateful for right now, in this very
+                moment?"</p>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3">
+            <!-- Mood Check -->
+            <div class="glass-e p-4">
+                <p class="text-[10px] text-dawn/20 font-serif uppercase tracking-wider mb-2">How are you feeling?</p>
+                <div class="flex justify-between"><button class="flex flex-col items-center gap-1 opacity-30"><span
+                            class="text-2xl">😔</span><span class="text-[8px] text-dawn/20">Low</span></button><button
+                        class="flex flex-col items-center gap-1 opacity-30"><span class="text-2xl">😐</span><span
+                            class="text-[8px] text-dawn/20">Meh</span></button><button
+                        class="flex flex-col items-center gap-1"><span class="text-2xl">🙂</span><span
+                            class="text-[8px] text-glow">Good</span></button><button
+                        class="flex flex-col items-center gap-1 opacity-30"><span class="text-2xl">😊</span><span
+                            class="text-[8px] text-dawn/20">Great</span></button><button
+                        class="flex flex-col items-center gap-1 opacity-30"><span class="text-2xl">🤩</span><span
+                            class="text-[8px] text-dawn/20">Amazing</span></button></div>
+            </div>
+
+            <!-- Past Entries -->
+            <p class="text-[10px] text-dawn/15 font-serif uppercase tracking-wider">Recent Entries</p>
+
+            <div class="glass-e p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">😊</span><span
+                            class="text-[10px] text-dawn/20">Today · 8:32 AM</span></div><span
+                        class="text-[9px] text-glow/20">After meditation</span>
+                </div>
+                <p class="text-xs text-dawn/30 leading-relaxed">Feeling centered today. The morning sit was particularly
+                    deep — I noticed how much calmer I've been since starting the consistency streak. Grateful for the
+                    quiet before the day begins.</p>
+            </div>
+
+            <div class="glass-e p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">🙂</span><span
+                            class="text-[10px] text-dawn/20">Yesterday · 7:45 AM</span></div><span
+                        class="text-[9px] text-glow/20">Morning</span>
+                </div>
+                <p class="text-xs text-dawn/25 leading-relaxed">Slept well. Had an insight during meditation about
+                    letting go of expectations. Want to carry that awareness through the week.</p>
+            </div>
+
+            <div class="glass-e p-4 opacity-60">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">😐</span><span
+                            class="text-[10px] text-dawn/15">Feb 16 · 9:10 AM</span></div>
+                </div>
+                <p class="text-xs text-dawn/20 leading-relaxed">Distracted today. Mind kept wandering. Still showed up
+                    though — that counts for something.</p>
+            </div>
+
+            <div class="glass-e p-4 opacity-40">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">😊</span><span
+                            class="text-[10px] text-dawn/10">Feb 15 · 7:30 AM</span></div>
+                </div>
+                <p class="text-xs text-dawn/15 leading-relaxed">Beautiful morning. The breathing exercise before
+                    journaling really helped ground me…</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 bg-ember/95 backdrop-blur border-t border-glow/5 px-6 py-4 pb-8">
+            <button class="w-full py-3.5 bg-glow text-ember font-serif font-bold rounded-xl text-sm">✍️ Write
+                Entry</button>
+        </div>
+    </div>
+</body>
+
+</html>

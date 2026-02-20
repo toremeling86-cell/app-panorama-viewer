@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Folio — Showcase</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "gallery": "#FAFAFA", "ink": "#0A0A0A", "coral": "#E8553D", "silver": "#9CA3AF" }, fontFamily: { "serif": ["Bodoni Moda", "serif"], "sans": ["Jost", "sans-serif"], "mono": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0A;
+            color: #FAFAFA
+        }
+
+        .editorial-line {
+            border-top: 1px solid rgba(250, 250, 250, 0.06)
+        }
+
+        .tension-grid {
+            display: grid;
+            grid-template-columns: 61.8fr 38.2fr;
+            gap: 3px
+        }
+
+        .number {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 120px;
+            font-weight: 900;
+            line-height: 0.85;
+            color: rgba(250, 250, 250, 0.03)
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ink">
+        <!-- Full-bleed header -->
+        <div class="relative h-48 bg-gradient-to-br from-coral/20 via-ink to-ink flex items-end px-6 pb-4">
+            <button class="absolute top-14 left-6"><span
+                    class="material-symbols-outlined !text-xl text-white/40">arrow_back</span></button>
+            <button class="absolute top-14 right-6"><span
+                    class="material-symbols-outlined !text-xl text-white/40">open_in_new</span></button>
+            <div>
+                <p class="text-[10px] font-mono text-coral uppercase tracking-[0.3em]">Featured Project</p>
+                <h1 class="text-3xl font-serif font-black leading-none mt-1">NOVA<span class="text-coral">.</span></h1>
+                <p class="text-xs text-silver/50 mt-1">Brand Identity · 2025</p>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-20">
+            <!-- Challenge -->
+            <div class="editorial-line py-5">
+                <p class="text-[10px] font-mono text-silver/30 uppercase tracking-[0.3em] mb-2">01 — Challenge</p>
+                <p class="text-sm text-gallery/60 leading-relaxed"><span
+                        class="font-serif text-2xl font-bold text-gallery float-left mr-2 leading-none">N</span>ova
+                    needed a brand identity that communicated both cutting-edge technology and human warmth. The
+                    challenge was bridging the gap between cold tech aesthetics and approachable design.</p>
+            </div>
+
+            <!-- Gallery -->
+            <div class="editorial-line py-5">
+                <p class="text-[10px] font-mono text-silver/30 uppercase tracking-[0.3em] mb-3">02 — Visual System</p>
+                <div class="tension-grid">
+                    <div
+                        class="aspect-[4/5] bg-gradient-to-br from-coral/30 to-coral/5 rounded-sm flex items-center justify-center">
+                        <span class="text-4xl">🎨</span></div>
+                    <div class="space-y-[3px]">
+                        <div
+                            class="aspect-square bg-gradient-to-b from-gallery/5 to-gallery/2 rounded-sm flex items-center justify-center">
+                            <span class="text-2xl">✦</span></div>
+                        <div
+                            class="aspect-square bg-gradient-to-br from-coral/10 to-ink rounded-sm flex items-center justify-center">
+                            <span class="text-xl font-serif font-black text-coral">N</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography Specimen -->
+            <div class="editorial-line py-5">
+                <p class="text-[10px] font-mono text-silver/30 uppercase tracking-[0.3em] mb-3">03 — Typography</p>
+                <div class="bg-gallery/3 rounded-sm p-4">
+                    <p class="font-serif text-4xl font-black text-gallery">Aa</p>
+                    <p class="text-xs text-silver/30 mt-1 font-mono">General Grotesque · 4 weights</p>
+                    <div class="mt-3 flex gap-4">
+                        <div>
+                            <p class="text-2xl font-extralight text-gallery/40">Aa</p>
+                            <p class="text-[8px] text-silver/20 mt-0.5">Light</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-normal text-gallery/60">Aa</p>
+                            <p class="text-[8px] text-silver/20 mt-0.5">Regular</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-semibold text-gallery/80">Aa</p>
+                            <p class="text-[8px] text-silver/20 mt-0.5">Semi</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-black text-gallery">Aa</p>
+                            <p class="text-[8px] text-silver/20 mt-0.5">Black</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Palette -->
+            <div class="editorial-line py-5">
+                <p class="text-[10px] font-mono text-silver/30 uppercase tracking-[0.3em] mb-3">04 — Color</p>
+                <div class="flex gap-2">
+                    <div class="flex-1">
+                        <div class="aspect-square rounded-sm bg-coral"></div>
+                        <p class="text-[8px] font-mono text-silver/20 mt-1">#E8553D</p>
+                    </div>
+                    <div class="flex-1">
+                        <div class="aspect-square rounded-sm bg-ink border border-gallery/10"></div>
+                        <p class="text-[8px] font-mono text-silver/20 mt-1">#0A0A0A</p>
+                    </div>
+                    <div class="flex-1">
+                        <div class="aspect-square rounded-sm bg-gallery"></div>
+                        <p class="text-[8px] font-mono text-silver/20 mt-1">#FAFAFA</p>
+                    </div>
+                    <div class="flex-1">
+                        <div class="aspect-square rounded-sm bg-silver/40"></div>
+                        <p class="text-[8px] font-mono text-silver/20 mt-1">#9CA3AF</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div class="editorial-line py-5">
+                <p class="text-[10px] font-mono text-silver/30 uppercase tracking-[0.3em] mb-3">05 — Impact</p>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="text-center">
+                        <p class="text-2xl font-serif font-black text-coral">280<span class="text-sm">%</span></p>
+                        <p class="text-[9px] text-silver/30">Brand recall</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-serif font-black text-gallery">45<span class="text-sm">K</span></p>
+                        <p class="text-[9px] text-silver/30">Followers</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-2xl font-serif font-black text-coral">3</p>
+                        <p class="text-[9px] text-silver/30">Awards</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Project -->
+            <button class="editorial-line py-4 w-full flex items-center justify-between">
+                <span class="text-xs text-silver/30 font-mono">Next project</span>
+                <span class="font-serif text-lg font-black">ORBIT<span class="text-coral">.</span> →</span>
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>

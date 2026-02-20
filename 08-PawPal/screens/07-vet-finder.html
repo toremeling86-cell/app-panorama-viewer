@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>PawPal — Find Vet</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "pawbg": "#FFF8F0", "bark": "#8B5E3C", "ocean": "#4A90D9", "leaf": "#5CB85C", "sunny": "#FFD93D", "rose": "#FF7E7E", "star": "#FFA726" }, fontFamily: { "display": ["Quicksand", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF8F0
+        }
+
+        .vet-card {
+            box-shadow: 0 2px 12px rgba(139, 94, 60, 0.08);
+            border-radius: 18px;
+            background: white
+        }
+
+        .rating-star {
+            color: #FFA726
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-pawbg">
+        <div class="px-6 pt-14 pb-2">
+            <h1 class="font-display text-lg font-bold">Find a Vet 🏥</h1>
+            <div class="flex gap-2 mt-3">
+                <div class="flex-1 flex items-center gap-2 bg-white rounded-xl px-3 py-2.5 shadow-sm"><span
+                        class="material-symbols-outlined !text-lg text-bark/20">search</span><span
+                        class="text-xs text-bark/25">Search by name or specialty</span></div>
+                <button class="w-10 h-10 rounded-xl bg-ocean/10 flex items-center justify-center"><span
+                        class="material-symbols-outlined !text-lg text-ocean">tune</span></button>
+            </div>
+            <div class="flex gap-2 mt-2 overflow-x-auto no-scrollbar">
+                <button
+                    class="px-3 py-1.5 bg-ocean text-white text-[10px] font-display font-bold rounded-full">All</button>
+                <button
+                    class="px-3 py-1.5 bg-white text-bark/30 text-[10px] font-display font-medium rounded-full shadow-sm">Emergency
+                    🚨</button>
+                <button
+                    class="px-3 py-1.5 bg-white text-bark/30 text-[10px] font-display font-medium rounded-full shadow-sm">Dental
+                    🦷</button>
+                <button
+                    class="px-3 py-1.5 bg-white text-bark/30 text-[10px] font-display font-medium rounded-full shadow-sm">Surgery</button>
+            </div>
+        </div>
+
+        <!-- Map Preview -->
+        <div
+            class="mx-6 mt-2 h-36 bg-gradient-to-b from-ocean/10 via-leaf/5 to-pawbg rounded-2xl flex items-center justify-center relative">
+            <div class="absolute top-3 left-3 bg-white/90 rounded-lg px-2 py-1 shadow text-[9px] text-bark/40">📍 3 vets
+                within 2 miles</div>
+            <div class="absolute" style="top:40%;left:30%">
+                <div class="w-6 h-6 rounded-full bg-ocean flex items-center justify-center text-[10px] shadow-lg">🏥
+                </div>
+            </div>
+            <div class="absolute" style="top:55%;left:60%">
+                <div class="w-6 h-6 rounded-full bg-ocean/60 flex items-center justify-center text-[10px]">🏥</div>
+            </div>
+            <div class="absolute" style="top:30%;left:70%">
+                <div class="w-6 h-6 rounded-full bg-ocean/40 flex items-center justify-center text-[10px]">🏥</div>
+            </div>
+            <div class="absolute" style="top:50%;left:45%">
+                <div
+                    class="w-5 h-5 rounded-full bg-rose border-2 border-white flex items-center justify-center text-[8px]">
+                    📍</div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-3">
+            <div class="vet-card p-4">
+                <div class="flex gap-3">
+                    <div class="w-14 h-14 rounded-xl bg-ocean/10 flex items-center justify-center text-2xl">👩‍⚕️</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-display font-bold">PetCare Animal Hospital</p><span
+                                class="px-2 py-0.5 bg-leaf/10 text-leaf text-[8px] font-bold rounded">Open</span>
+                        </div>
+                        <div class="flex items-center gap-1 mt-0.5"><span
+                                class="text-[10px] rating-star">★★★★★</span><span class="text-[10px] text-bark/25">4.9
+                                (128)</span></div>
+                        <p class="text-[10px] text-bark/30 mt-0.5">📍 0.8 mi · General, Emergency, Dental</p>
+                        <div class="flex gap-2 mt-2">
+                            <button
+                                class="flex-1 py-1.5 bg-ocean text-white text-[10px] font-display font-bold rounded-lg">📞
+                                Call</button>
+                            <button
+                                class="flex-1 py-1.5 bg-ocean/10 text-ocean text-[10px] font-display font-bold rounded-lg">📅
+                                Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vet-card p-4">
+                <div class="flex gap-3">
+                    <div class="w-14 h-14 rounded-xl bg-leaf/10 flex items-center justify-center text-2xl">🧑‍⚕️</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-display font-bold">Sunshine Veterinary</p><span
+                                class="px-2 py-0.5 bg-leaf/10 text-leaf text-[8px] font-bold rounded">Open</span>
+                        </div>
+                        <div class="flex items-center gap-1 mt-0.5"><span
+                                class="text-[10px] rating-star">★★★★☆</span><span class="text-[10px] text-bark/25">4.7
+                                (89)</span></div>
+                        <p class="text-[10px] text-bark/30 mt-0.5">📍 1.2 mi · General, Surgery</p>
+                        <div class="flex gap-2 mt-2">
+                            <button
+                                class="flex-1 py-1.5 bg-ocean text-white text-[10px] font-display font-bold rounded-lg">📞
+                                Call</button>
+                            <button
+                                class="flex-1 py-1.5 bg-ocean/10 text-ocean text-[10px] font-display font-bold rounded-lg">📅
+                                Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vet-card p-4 opacity-70">
+                <div class="flex gap-3">
+                    <div class="w-14 h-14 rounded-xl bg-bark/5 flex items-center justify-center text-2xl">👨‍⚕️</div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-display font-bold text-bark/50">City Pet Clinic</p><span
+                                class="px-2 py-0.5 bg-bark/5 text-bark/25 text-[8px] font-bold rounded">Closed</span>
+                        </div>
+                        <div class="flex items-center gap-1 mt-0.5"><span
+                                class="text-[10px] rating-star">★★★★☆</span><span class="text-[10px] text-bark/20">4.5
+                                (64)</span></div>
+                        <p class="text-[10px] text-bark/20 mt-0.5">📍 1.8 mi · Opens 8 AM tomorrow</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

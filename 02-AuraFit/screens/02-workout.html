@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Active Workout</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00F0FF", "bg-void": "#050B14", "violet": "#A855F7", "pink": "#EC4899", "profit": "#10B981", "red": "#EF4444" }, fontFamily: { "display": ["Outfit", "sans-serif"], "mono": ["JetBrains Mono", "monospace"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #050B14;
+        }
+
+        .bio-glow {
+            background: radial-gradient(ellipse at 50% 30%, rgba(0, 240, 255, 0.12) 0%, transparent 60%);
+        }
+
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glass-cyan {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 240, 255, 0.04);
+            border: 1px solid rgba(0, 240, 255, 0.12);
+        }
+
+        .timer-glow {
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5), 0 0 60px rgba(0, 240, 255, 0.2);
+        }
+
+        .heartbeat {
+            animation: heartbeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            14% {
+                transform: scale(1.1);
+            }
+
+            28% {
+                transform: scale(1);
+            }
+
+            42% {
+                transform: scale(1.1);
+            }
+
+            70% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-display antialiased text-slate-100 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto overflow-hidden bio-glow">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 pt-14 pb-2">
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">close</span></button>
+            <div class="text-center">
+                <p class="text-xs text-primary tracking-widest uppercase font-light">Workout Active</p>
+                <h1 class="text-lg font-bold">Upper Body Power</h1>
+            </div>
+            <button class="glass w-10 h-10 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-xl text-slate-400">more_horiz</span></button>
+        </div>
+
+        <!-- Timer -->
+        <div class="text-center py-8">
+            <p class="font-mono text-6xl font-bold timer-glow text-primary">24:37</p>
+            <p class="text-sm text-slate-500 mt-2">Set 3 of 4 · Rest in <span class="text-primary font-mono">0:42</span>
+            </p>
+        </div>
+
+        <!-- Current Exercise -->
+        <div class="mx-6 glass-cyan rounded-2xl p-6">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full font-medium">Exercise
+                    7/12</span>
+                <span class="text-xs text-slate-500">Chest</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-1">Incline Dumbbell Press</h2>
+            <p class="text-sm text-slate-400">4 sets × 10 reps · 30kg</p>
+
+            <!-- Set Progress -->
+            <div class="flex items-center gap-3 mt-5">
+                <div class="flex-1 flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-xs font-bold text-bg-void">
+                        1</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-xs font-bold text-bg-void">
+                        2</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-primary/30 border-2 border-primary flex items-center justify-center text-xs font-bold text-primary animate-pulse">
+                        3</div>
+                    <div
+                        class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-xs font-bold text-slate-600">
+                        4</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Metrics -->
+        <div class="grid grid-cols-3 gap-3 px-6 mt-4">
+            <div class="glass rounded-xl p-3 text-center">
+                <span class="material-symbols-outlined !text-xl text-red heartbeat">favorite</span>
+                <p class="text-xl font-bold font-mono mt-1 text-red">142</p>
+                <p class="text-[9px] text-slate-500">BPM</p>
+            </div>
+            <div class="glass rounded-xl p-3 text-center">
+                <span class="material-symbols-outlined !text-xl text-primary">local_fire_department</span>
+                <p class="text-xl font-bold font-mono mt-1">312</p>
+                <p class="text-[9px] text-slate-500">KCAL</p>
+            </div>
+            <div class="glass rounded-xl p-3 text-center">
+                <span class="material-symbols-outlined !text-xl text-violet">speed</span>
+                <p class="text-xl font-bold font-mono mt-1">8.2</p>
+                <p class="text-[9px] text-slate-500">VOLUME (t)</p>
+            </div>
+        </div>
+
+        <!-- Next Exercise Preview -->
+        <div class="mx-6 mt-4 glass rounded-2xl p-4">
+            <p class="text-[10px] text-slate-500 tracking-widest uppercase mb-2">Up Next</p>
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-violet/20 flex items-center justify-center">
+                    <span class="material-symbols-outlined !text-2xl text-violet">exercise</span>
+                </div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Cable Flyes</p>
+                    <p class="text-xs text-slate-500">3 sets × 12 reps · 15kg</p>
+                </div>
+                <span class="material-symbols-outlined !text-xl text-slate-600">chevron_right</span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="mt-auto px-6 py-8 flex items-center justify-center gap-6">
+            <button class="glass w-14 h-14 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-2xl text-slate-400">skip_previous</span></button>
+            <button
+                class="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/40 active:scale-90 transition-transform">
+                <span class="material-symbols-outlined !text-4xl text-bg-void">check</span>
+            </button>
+            <button class="glass w-14 h-14 rounded-full flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-2xl text-slate-400">skip_next</span></button>
+        </div>
+    </div>
+</body>
+
+</html>

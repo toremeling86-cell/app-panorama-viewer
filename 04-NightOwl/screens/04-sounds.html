@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Outfit:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#590df2",
+                        "background-light": "#f6f5f8",
+                        "background-dark": "#020208", // OLED True Void Black
+                        "void-card": "rgba(18, 12, 35, 0.4)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "header": ["Outfit", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(89, 13, 242, 0.15);
+        }
+        .bioluminescent-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #590df2;
+            border-radius: 50%;
+            filter: blur(1px);
+            box-shadow: 0 0 8px 2px rgba(89, 13, 242, 0.6);
+        }
+        .waveform-bar {
+            width: 2px;
+            background: #a78bfa; /* Lavender */
+            border-radius: 1px;
+        }
+        .active-glow {
+            filter: drop-shadow(0 0 8px rgba(89, 13, 242, 0.8));
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-dark font-display text-slate-100 min-h-screen relative overflow-x-hidden">
+<!-- Bioluminescent Particles Background -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden">
+<div class="bioluminescent-dot" style="top: 15%; left: 10%;"></div>
+<div class="bioluminescent-dot" style="top: 40%; left: 85%;"></div>
+<div class="bioluminescent-dot" style="top: 75%; left: 20%;"></div>
+<div class="bioluminescent-dot" style="top: 85%; left: 70%;"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-primary/5"></div>
+</div>
+<!-- Main Container (Mobile Form Factor) -->
+<div class="relative z-10 max-w-md mx-auto min-h-screen flex flex-col pb-24">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4">
+<h1 class="font-header text-2xl tracking-tight text-slate-100">Sounds</h1>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 border border-primary/20">
+<span class="material-symbols-outlined text-primary font-light" style="font-size: 20px;">search</span>
+</button>
+</header>
+<!-- Now Playing Mini Bar (Top Glass Card) -->
+<div class="px-4 mb-6">
+<div class="glass-card rounded-full px-4 py-2 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-white/10" data-alt="Misty evergreen forest in rain" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5ALL2qMggrUJav6m08gNVpCld52Ts0kPxRs-oLl3wJcxrcHJX2Ig8cagX9e50SerCjJqlpY7dhJug0sGTbyrHZzDKQkRU-BvuObcdL8MS2n5pFPNSTXF71vjQaQ0XBzcAWK3OJMcZzzASI8Ge89t1W2bgvlUAKuz-0I8iUNH7LKSIZokc10Y-9ESYEgWodeCLxPqwFLIDxxVZgPCrNzZFFD5iBG0uZ8AwVcKVBrszhttzh6WC5GE_g9LbObzBycgC0fxZ4B7-lsI');"></div>
+<div>
+<p class="text-sm font-semibold text-slate-100 leading-none">Forest Rain</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">45 min remaining</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Tiny Lavender Waveform -->
+<div class="flex items-end gap-[2px] h-4">
+<div class="waveform-bar h-2"></div>
+<div class="waveform-bar h-4"></div>
+<div class="waveform-bar h-3"></div>
+<div class="waveform-bar h-5"></div>
+<div class="waveform-bar h-2"></div>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-background-dark">
+<span class="material-symbols-outlined fill-1" style="font-size: 18px;">pause</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Categories Horizontal Scroll -->
+<div class="flex overflow-x-auto gap-5 px-6 no-scrollbar mb-8">
+<div class="flex flex-col items-center gap-2 flex-shrink-0">
+<div class="w-16 h-16 rounded-full border-2 border-[#2dd4bf] p-1 flex items-center justify-center bg-void-card">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Vibrant green forest canopy" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWDGdiGgVZFLZtK9J7U4GavAKRs4O7Jxdo6IsjD8U77Iy5D-9SxgZ7Ef-fXaY9DOTVS7GvuoMcsS4XjX1S9Q3h7zfCJlXmVcYPndrVoi_yCfpjOJbe3UwccnafQXuQKbbEWm_tRjTgNF9i15tzuvQnd-m98HZNkvl_4cgKbq1K9eRgmXODnG95X4DmYHUfEM4Wqgay4fywc2KQ9HPE0vALP6awwA1zNxPA9IeF6L9XVQBysEPf8JTHXhcUgzpenkdon337vMHYO9E');"></div>
+</div>
+<span class="text-[11px] font-medium text-[#2dd4bf]">Nature</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-shrink-0 opacity-60">
+<div class="w-16 h-16 rounded-full border border-primary/20 p-1 flex items-center justify-center bg-void-card">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Raindrops on a window pane" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuANM70__vFI76NdlPXn-LUmqdcgkhAZL96208uaaPnYeXTTUHt6TwEJyNyjxwExtYr27AdpRYJvPFIRuhUc3iq4Bz-kSs9-_cUh0RKkBi5jCPLrMIy3j4tM1HjhkWDnrTtoCc21yc_AtppcXlBpE1kuDksgJp2kzwcSMAOGy_wj3cd2UvReUYzAF3tXaRtK32In9t_zGwMZTKM7BDMd2B_i2FAWIB9akJiIPA1l9iqhyi05R7DfzwHcnK5lCr1rguNl6Ejj4jMDli4');"></div>
+</div>
+<span class="text-[11px] font-medium">Rain</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-shrink-0 opacity-60">
+<div class="w-16 h-16 rounded-full border border-primary/20 p-1 flex items-center justify-center bg-void-card">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Abstract TV static visual" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpeP53JG2DWzY2zpMq489NK3A6eMyYas4quasPUyt6Dz3eeQ5g2nVYnwu-VEROk42exA7UH70betoHTaenPuTXy3stRO1LJZVEAQ4jvqBErd0_jFqYqzbsJ1b3J7D9Tu_1fwuTwvRoRuEdZa3wm3B0ii4WiHpv4GVQlBBna5y_tEaeWV-FBbF2oG4R4rulhwyoIeTn8cRyc0d7q3kEIMFJGeuYaSPeinsNGgwmqPeTmGvgmBQg5ynaewqIuB6s-YzUq0vslYflpsY');"></div>
+</div>
+<span class="text-[11px] font-medium">White Noise</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-shrink-0 opacity-60">
+<div class="w-16 h-16 rounded-full border border-primary/20 p-1 flex items-center justify-center bg-void-card">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Minimalist musical notes art" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBbB_bCbxtYTpF4BX-jbj4G8JuWaK8y4xzyustl2Bkx-h4g3AfaaX-S-iQRX0Njf7-LlaOHexqYwhcAH9kxUqViwKz6rGiEH3nWo__1SExKPuzGspb0-UIS-k5kipU9O6M5ZN5jVF-Tjo7WBm3iZGdRtofezaUY0nzUJmH8FJqCoRsDye1J3LrDdvR1NNiWmtBet4MaI2BJWlVGTwHndxi4gdTvb71VJHqRtySMtbT4-ugyNnUmnh3G2FAF2oBOssU4lcc4YNLEaV0');"></div>
+</div>
+<span class="text-[11px] font-medium">Music</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-shrink-0 opacity-60">
+<div class="w-16 h-16 rounded-full border border-primary/20 p-1 flex items-center justify-center bg-void-card">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Close up of feathers" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCOv6-1vBSJeHGE1ZPHWqYzCCXpZVgrfIBpOfguBgA0NYQduSEKzzjlPEuMUQ8JYvzwFN_m2DTM-EmdPdYbe96mmwiN3b1wEnhA7LgspwWAmQQj21MuY2UPVMXgCVRiaEc8M9GtwAWz6ATSWU1onkn8dK2dFNc5MG8D0UaQ0P1qgnIJWGh0ICgdNo91Y7KSDLUUkUjwgk4sefp9kft5C0nXGqEk5X7B2on1bmMAnRbZmNhcUentPOPT273D1-N38jsnIF5tAWR-od8');"></div>
+</div>
+<span class="text-[11px] font-medium">ASMR</span>
+</div>
+</div>
+<!-- Featured Soundscape Hero Card -->
+<div class="px-4 mb-8">
+<div class="glass-card rounded-3xl overflow-hidden relative">
+<div class="h-48 bg-cover bg-center relative" data-alt="Moonlit rain falling on dark water" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA0Ssb3ycf3VhcrHnPkkh7mCOS1pcHHsGP1VAo5wK1LudTyEwS8dAokYS7s5bm5ARsj0pmpHA5JLh_-yWOn0eWceoLJw-ahMOfOGzmC2XJ40siEeYDc-AGueqZpvK148lIt1yRPOIzy4_kV-WYa8PBAZNM1RG1FGmUhMHx8TiK66wpRrV-TXpa6unGMcATyr4ipN4LJq89QR6ifKKp5WGY7b-2Ts0Pnsg7dnJh2ei6pxLfNbLR2HnWn25rTq9f3KdcdwVcduIz_TTs');">
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent"></div>
+<div class="absolute top-4 left-4">
+<span class="bg-primary/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-white">Popular</span>
+</div>
+</div>
+<div class="p-6 flex justify-between items-end">
+<div>
+<h3 class="text-xl font-semibold text-slate-100 mb-1">Midnight Rainfall</h3>
+<p class="text-slate-400 text-xs flex items-center gap-2">
+                             Lush lavender atmospheric waveforms
+                        </p>
+</div>
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/40">
+<span class="material-symbols-outlined fill-1" style="font-size: 24px;">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Sound Library -->
+<div class="px-4 grid grid-cols-2 gap-4 mb-8">
+<!-- Card 1 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary font-extralight">water_drop</span>
+<span class="text-[10px] text-slate-500 font-medium">30m</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold">Forest Stream</h4>
+<p class="text-[10px] text-slate-500">Gentle flow</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary font-extralight">waves</span>
+<span class="text-[10px] text-slate-500 font-medium">60m</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold">Ocean Waves</h4>
+<p class="text-[10px] text-slate-500">Deep rhythmic</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary font-extralight">thunderstorm</span>
+<span class="text-[10px] text-slate-500 font-medium">45m</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold">Thunderstorm</h4>
+<p class="text-[10px] text-slate-500">Distant rolls</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3 border-primary/40 bg-primary/5">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary font-extralight">blur_on</span>
+<span class="text-[10px] text-slate-500 font-medium">∞</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold">Brown Noise</h4>
+<p class="text-[10px] text-slate-500">Static warmth</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary font-extralight">piano</span>
+<span class="text-[10px] text-slate-500 font-medium">25m</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold">Piano Sleep</h4>
+<p class="text-[10px] text-slate-500">Melodic peace</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="glass-card p-4 rounded-2xl flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary font-extralight">local_fire_department</span>
+<span class="text-[10px] text-slate-500 font-medium">40m</span>
+</div>
+<div>
+<h4 class="text-sm font-semibold">Campfire</h4>
+<p class="text-[10px] text-slate-500">Wood crackling</p>
+</div>
+</div>
+</div>
+<!-- Mix Creator Section -->
+<div class="px-4 mb-12">
+<div class="glass-card p-6 rounded-3xl flex items-center justify-between">
+<div>
+<h3 class="text-lg font-semibold text-slate-100 mb-1">Create Your Mix</h3>
+<p class="text-xs text-slate-400">Combine up to 4 layers</p>
+</div>
+<button class="bg-gradient-to-br from-primary to-indigo-600 px-5 py-3 rounded-full flex items-center gap-2 shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined font-light text-sm">tune</span>
+<span class="text-xs font-semibold">Create Mix</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bottom Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 px-6 pb-8 pt-4 bg-background-dark/80 backdrop-blur-xl border-t border-primary/10">
+<div class="max-w-md mx-auto flex items-center justify-between">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary fill-1 active-glow">library_music</span>
+<span class="text-[10px] font-medium text-primary">Sounds</span>
+</a>
+<a class="flex flex-col items-center gap-1 opacity-40 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined font-light">auto_awesome</span>
+<span class="text-[10px] font-medium">Mixes</span>
+</a>
+<a class="flex flex-col items-center gap-1 opacity-40 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined font-light">schedule</span>
+<span class="text-[10px] font-medium">Timer</span>
+</a>
+<a class="flex flex-col items-center gap-1 opacity-40 hover:opacity-100 transition-opacity" href="#">
+<span class="material-symbols-outlined font-light">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>WaveRider — Concerts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "void": "#0A0A0F", "neon": "#FF2D78", "violet": "#8B5CF6", "electric": "#06B6D4", "gold": "#FFD700" }, fontFamily: { "display": ["Orbitron", "sans-serif"], "sans": ["Poppins", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0A0A0F
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider text-neon/50">Live Events</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">location_on</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Featured -->
+            <div
+                class="bg-gradient-to-br from-neon/15 via-violet/10 to-void rounded-2xl p-5 border border-neon/15 relative overflow-hidden">
+                <span
+                    class="absolute top-3 right-3 px-2 py-0.5 bg-neon text-void text-[9px] font-display font-bold rounded">TRENDING</span>
+                <p class="text-2xl mt-8">🎤</p>
+                <p class="text-xl font-display font-bold mt-2">The Weeknd</p>
+                <p class="text-xs text-white/20">After Hours Til Dawn Tour</p>
+                <div class="flex items-center gap-3 mt-2"><span class="text-[10px] text-white/15">📍 Madison Square
+                        Garden</span></div>
+                <div class="flex items-center gap-3 mt-1"><span class="text-[10px] text-white/15">📅 Mar 15, 2026 · 8:00
+                        PM</span></div>
+                <div class="flex gap-2 mt-3"><button
+                        class="flex-1 py-2.5 bg-neon text-void font-display font-bold rounded-xl text-xs">Get
+                        Tickets</button><button class="py-2.5 px-3 bg-white/5 rounded-xl"><span
+                            class="material-symbols-outlined !text-sm text-white/20">favorite_border</span></button>
+                </div>
+            </div>
+
+            <p class="text-[10px] text-white/10 uppercase tracking-wider">Upcoming Near You</p>
+
+            <div class="bg-white/3 rounded-2xl p-4 flex gap-3">
+                <div class="w-16 h-16 rounded-xl bg-violet/15 flex items-center justify-center text-2xl">🎸</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Arctic Monkeys</p>
+                    <p class="text-[10px] text-white/15">Barclays Center · Mar 22</p>
+                    <p class="text-xs text-neon font-bold mt-1">From $85</p>
+                </div>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-4 flex gap-3">
+                <div class="w-16 h-16 rounded-xl bg-electric/15 flex items-center justify-center text-2xl">🎹</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Billie Eilish</p>
+                    <p class="text-[10px] text-white/15">Brooklyn Steel · Apr 5</p>
+                    <p class="text-xs text-neon font-bold mt-1">From $120</p>
+                </div>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-4 flex gap-3">
+                <div class="w-16 h-16 rounded-xl bg-gold/15 flex items-center justify-center text-2xl">🎷</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Kendrick Lamar</p>
+                    <p class="text-[10px] text-white/15">MetLife Stadium · Apr 18</p>
+                    <p class="text-xs text-neon font-bold mt-1">From $95</p>
+                </div>
+            </div>
+
+            <div class="bg-white/3 rounded-2xl p-4 flex gap-3">
+                <div class="w-16 h-16 rounded-xl bg-neon/15 flex items-center justify-center text-2xl">🎵</div>
+                <div class="flex-1">
+                    <p class="text-sm font-semibold">Dua Lipa</p>
+                    <p class="text-[10px] text-white/15">Radio City · May 2</p>
+                    <p class="text-xs text-neon font-bold mt-1">From $110</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

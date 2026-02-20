@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Breathing Exercise</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0", "deep": "#2D1810" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+
+        .breath-ring {
+            animation: breathe 8s ease-in-out infinite
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(0.6);
+                opacity: 0.3
+            }
+
+            25% {
+                transform: scale(1);
+                opacity: 0.8
+            }
+
+            50% {
+                transform: scale(1);
+                opacity: 0.8
+            }
+
+            75% {
+                transform: scale(0.6);
+                opacity: 0.3
+            }
+        }
+
+        .breath-ring-delay {
+            animation-delay: -4s
+        }
+
+        .pulse-text {
+            animation: pulseText 8s ease-in-out infinite
+        }
+
+        @keyframes pulseText {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            12.5% {
+                opacity: 0
+            }
+
+            25% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 1
+            }
+
+            62.5% {
+                opacity: 0
+            }
+
+            75% {
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember items-center justify-center">
+        <!-- Close -->
+        <button class="absolute top-14 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center"><span
+                class="material-symbols-outlined !text-xl text-white/40">close</span></button>
+
+        <!-- Timer -->
+        <div class="absolute top-14 left-6">
+            <p class="text-xs text-glow/60 font-sans">4:32 <span class="text-white/20">remaining</span></p>
+        </div>
+
+        <!-- Canvas Particle Mandala -->
+        <canvas id="mandala" width="430" height="430" class="absolute"
+            style="top:50%;left:50%;transform:translate(-50%,-50%)"></canvas>
+
+        <!-- Breathing Rings -->
+        <div class="relative w-64 h-64 flex items-center justify-center z-10">
+            <div class="absolute w-64 h-64 rounded-full border border-glow/20 breath-ring"></div>
+            <div class="absolute w-48 h-48 rounded-full border border-glow/15 breath-ring breath-ring-delay"></div>
+            <div class="absolute w-32 h-32 rounded-full border border-dawn/10 breath-ring" style="animation-delay:-2s">
+            </div>
+
+            <!-- Center text -->
+            <div class="text-center z-10">
+                <p class="text-3xl font-serif font-light tracking-wider pulse-text" id="breathText">Inhale</p>
+                <p class="text-sm text-dawn/40 mt-2 font-light">4 seconds</p>
+            </div>
+        </div>
+
+        <!-- Pattern Selector -->
+        <div class="absolute bottom-32 flex gap-3 z-10">
+            <button
+                class="px-4 py-2 bg-glow/20 rounded-full text-xs font-medium text-glow border border-glow/30">4-7-8</button>
+            <button class="px-4 py-2 bg-white/5 rounded-full text-xs text-white/30">Box</button>
+            <button class="px-4 py-2 bg-white/5 rounded-full text-xs text-white/30">Calm</button>
+            <button class="px-4 py-2 bg-white/5 rounded-full text-xs text-white/30">Energy</button>
+        </div>
+
+        <!-- Session Count -->
+        <div class="absolute bottom-16 text-center z-10">
+            <p class="text-[10px] text-white/20">Session 3 of today · 12 min total</p>
+        </div>
+    </div>
+
+    <script>
+        const c = document.getElementById('mandala');
+        const ctx = c.getContext('2d');
+        const W = 430, H = 430;
+        const cx = W / 2, cy = H / 2;
+        let t = 0;
+        const particles = [];
+        for (let i = 0; i < 120; i++) {
+            particles.push({
+                angle: (Math.PI * 2 / 120) * i,
+                radius: 40 + Math.random() * 120,
+                speed: 0.001 + Math.random() * 0.003,
+                size: 1 + Math.random() * 2,
+                phase: Math.random() * Math.PI * 2,
+                hue: 25 + Math.random() * 20
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            t += 0.01;
+            const breathCycle = (Math.sin(t * 0.785) + 1) / 2; // 8s cycle
+
+            particles.forEach(p => {
+                const a = p.angle + t * p.speed;
+                const r = p.radius * (0.6 + breathCycle * 0.4);
+                const x = cx + Math.cos(a) * r;
+                const y = cy + Math.sin(a) * r;
+                const alpha = 0.2 + breathCycle * 0.5;
+                const s = p.size * (0.5 + breathCycle * 0.5);
+
+                ctx.beginPath();
+                ctx.arc(x, y, s, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${p.hue}, 80%, 60%, ${alpha})`;
+                ctx.fill();
+
+                // Mirror for mandala symmetry
+                const mx = cx + Math.cos(-a) * r;
+                const my = cy + Math.sin(-a) * r;
+                ctx.beginPath();
+                ctx.arc(mx, my, s * 0.7, 0, Math.PI * 2);
+                ctx.fillStyle = `hsla(${p.hue + 10}, 70%, 50%, ${alpha * 0.5})`;
+                ctx.fill();
+            });
+
+            // Central glow
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 60 + breathCycle * 40);
+            grad.addColorStop(0, `rgba(255,140,66,${0.05 + breathCycle * 0.08})`);
+            grad.addColorStop(1, 'rgba(255,140,66,0)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        // Breath text cycle
+        const phases = ['Inhale', 'Hold', 'Exhale', 'Hold'];
+        const durations = [4000, 7000, 8000, 4000];
+        let phase = 0;
+        function cycleBreath() {
+            document.getElementById('breathText').textContent = phases[phase];
+            setTimeout(() => { phase = (phase + 1) % 4; cycleBreath(); }, durations[phase]);
+        }
+        cycleBreath();
+    </script>
+</body>
+
+</html>

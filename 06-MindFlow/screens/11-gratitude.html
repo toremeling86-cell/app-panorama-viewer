@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>MindFlow — Gratitude</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Nunito+Sans:wght@200;300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "ember": "#1A0F0A", "glow": "#FF8C42", "sage": "#A0B090", "dawn": "#FFD4A0", "rose": "#FF7E7E", "aqua": "#67E8F9" }, fontFamily: { "serif": ["Cormorant Garamond", "serif"], "sans": ["Nunito Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #1A0F0A
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-ember">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-dawn/20">arrow_back</span></button>
+            <h1 class="font-serif text-base font-semibold text-dawn/70">Gratitude</h1>
+            <button class="text-xs text-glow/30">Streak: 🔥14</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Today -->
+            <div class="bg-glow/5 border border-glow/10 rounded-2xl p-5">
+                <p class="text-[10px] text-dawn/20 uppercase tracking-wider">Today's Prompt</p>
+                <p class="text-lg font-serif font-semibold text-dawn/50 mt-2 italic leading-relaxed">"What small moment
+                    made you smile this week?"</p>
+                <div class="mt-3 bg-white/3 rounded-xl p-3"><textarea
+                        class="w-full bg-transparent text-sm text-dawn/30 placeholder-dawn/10 outline-none resize-none"
+                        placeholder="Write your gratitude..."
+                        rows="3">My daughter's laughter when we played in the snow. The warmth of coffee on a cold morning. A kind word from a stranger.</textarea>
+                </div>
+                <div class="flex justify-between items-center mt-2">
+                    <div class="flex gap-1"><span
+                            class="px-2 py-0.5 bg-glow/10 rounded text-[9px] text-glow">Family</span><span
+                            class="px-2 py-0.5 bg-sage/10 rounded text-[9px] text-sage">Moments</span></div><button
+                        class="px-4 py-1.5 bg-glow text-ember text-xs font-bold rounded-lg">Save</button>
+                </div>
+            </div>
+
+            <!-- Past Entries -->
+            <p class="text-[10px] text-dawn/15 font-serif uppercase tracking-wider">Recent Entries</p>
+            <div class="bg-white/2 border border-white/3 rounded-2xl p-3">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-serif font-semibold text-dawn/30">Yesterday</p>
+                    <div class="flex gap-1"><span
+                            class="text-[8px] px-1.5 py-0.5 bg-rose/10 rounded text-rose">Health</span></div>
+                </div>
+                <p class="text-xs text-dawn/15 mt-1 italic">"Grateful for a pain-free morning and a clear mind after
+                    meditation."</p>
+            </div>
+            <div class="bg-white/2 border border-white/3 rounded-2xl p-3 opacity-70">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-serif font-semibold text-dawn/25">Feb 16</p>
+                    <div class="flex gap-1"><span
+                            class="text-[8px] px-1.5 py-0.5 bg-aqua/10 rounded text-aqua">Work</span></div>
+                </div>
+                <p class="text-xs text-dawn/12 mt-1 italic">"The team celebrated our project milestone. Feeling valued."
+                </p>
+            </div>
+            <div class="bg-white/2 border border-white/3 rounded-2xl p-3 opacity-50">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-serif font-semibold text-dawn/20">Feb 15</p>
+                    <div class="flex gap-1"><span
+                            class="text-[8px] px-1.5 py-0.5 bg-glow/10 rounded text-glow">Nature</span></div>
+                </div>
+                <p class="text-xs text-dawn/10 mt-1 italic">"Beautiful sunset on my evening walk. Golden light
+                    everywhere."</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="bg-white/2 border border-white/3 rounded-2xl p-4">
+                <p class="text-[10px] text-dawn/15 font-serif uppercase tracking-wider mb-2">Monthly Stats</p>
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div>
+                        <p class="text-lg font-serif font-bold text-glow">14</p>
+                        <p class="text-[9px] text-dawn/10">Day Streak</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-serif font-bold text-sage">47</p>
+                        <p class="text-[9px] text-dawn/10">Total Entries</p>
+                    </div>
+                    <div>
+                        <p class="text-lg font-serif font-bold text-dawn/30">🎯</p>
+                        <p class="text-[9px] text-dawn/10">Family ♥</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vitals — Telehealth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "medical": "#F8FAFB", "teal": "#0D9488", "navy": "#1E3A5F", "safe": "#22C55E", "amber": "#F59E0B" }, fontFamily: { "sans": ["DM Sans", "sans-serif"], "display": ["Inter", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F8FAFB
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.4
+            }
+        }
+
+        .pulse {
+            animation: pulse-dot 2s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-navy overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-medical" role="main">
+        <div class="flex items-center justify-between px-6 pt-14 pb-2"><button aria-label="Back"><span
+                    class="material-symbols-outlined !text-xl text-navy/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold">Telehealth</h1><button aria-label="Help"><span
+                    class="material-symbols-outlined !text-xl text-navy/20">help_outline</span></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Upcoming -->
+            <div class="bg-teal/5 border border-teal/10 rounded-2xl p-4" role="region"
+                aria-label="Upcoming appointment">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-2 h-2 rounded-full bg-safe pulse"></div><span
+                        class="text-[10px] text-safe font-bold uppercase">Upcoming</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-teal/10 flex items-center justify-center text-xl">👩‍⚕️</div>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold">Dr. Sarah Patel</p>
+                        <p class="text-[10px] text-navy/25">Internal Medicine</p>
+                        <p class="text-xs text-teal font-bold mt-0.5">Today · 3:30 PM</p>
+                    </div>
+                </div>
+                <button
+                    class="w-full mt-3 py-2.5 bg-teal text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2"><span
+                        class="material-symbols-outlined !text-lg">videocam</span> Join Video Call</button>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-3 gap-2">
+                <button class="bg-white rounded-2xl shadow-sm p-3 text-center"><span
+                        class="material-symbols-outlined !text-2xl text-teal">videocam</span>
+                    <p class="text-[9px] text-navy/25 mt-1">Video Visit</p>
+                </button>
+                <button class="bg-white rounded-2xl shadow-sm p-3 text-center"><span
+                        class="material-symbols-outlined !text-2xl text-teal">chat</span>
+                    <p class="text-[9px] text-navy/25 mt-1">Message</p>
+                </button>
+                <button class="bg-white rounded-2xl shadow-sm p-3 text-center"><span
+                        class="material-symbols-outlined !text-2xl text-teal">description</span>
+                    <p class="text-[9px] text-navy/25 mt-1">Prescriptions</p>
+                </button>
+            </div>
+
+            <!-- Doctors -->
+            <p class="text-[10px] text-navy/20 uppercase tracking-wider">Your Providers</p>
+
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full bg-teal/10 flex items-center justify-center text-lg">👩‍⚕️</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Dr. Sarah Patel</p>
+                    <p class="text-[10px] text-navy/20">Internal Medicine</p>
+                </div>
+                <div class="flex gap-1"><button
+                        class="w-8 h-8 rounded-lg bg-teal/5 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-teal">videocam</span></button><button
+                        class="w-8 h-8 rounded-lg bg-teal/5 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-teal">chat</span></button></div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full bg-amber/10 flex items-center justify-center text-lg">👨‍⚕️</div>
+                <div class="flex-1">
+                    <p class="text-sm font-display font-bold">Dr. James Kim</p>
+                    <p class="text-[10px] text-navy/20">Dermatology</p>
+                </div>
+                <div class="flex gap-1"><button
+                        class="w-8 h-8 rounded-lg bg-teal/5 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-teal">videocam</span></button><button
+                        class="w-8 h-8 rounded-lg bg-teal/5 flex items-center justify-center"><span
+                            class="material-symbols-outlined !text-sm text-teal">chat</span></button></div>
+            </div>
+
+            <!-- Past -->
+            <p class="text-[10px] text-navy/20 uppercase tracking-wider">Past Visits</p>
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-3 opacity-60">
+                <div class="w-10 h-10 rounded-full bg-navy/5 flex items-center justify-center text-lg">👩‍⚕️</div>
+                <div class="flex-1">
+                    <p class="text-xs font-medium">Dr. Patel · Check-up</p>
+                    <p class="text-[10px] text-navy/15">Feb 5, 2026 · 15 min</p>
+                </div><button class="text-[10px] text-teal font-bold">Notes</button>
+            </div>
+            <div class="bg-white rounded-2xl shadow-sm p-3 flex items-center gap-3 opacity-40">
+                <div class="w-10 h-10 rounded-full bg-navy/5 flex items-center justify-center text-lg">👨‍⚕️</div>
+                <div class="flex-1">
+                    <p class="text-xs font-medium">Dr. Kim · Skin consult</p>
+                    <p class="text-[10px] text-navy/15">Jan 22, 2026 · 20 min</p>
+                </div><button class="text-[10px] text-teal font-bold">Notes</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

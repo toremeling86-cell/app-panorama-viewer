@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AuraFit — Challenges</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "bg-void": "#05070F", "primary": "#00F0FF", "secondary": "#B24BF3", "rose": "#FF3CAC", "gold": "#FFD700" }, fontFamily: { "display": ["Outfit", "sans-serif"], "body": ["Space Grotesk", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #05070F
+        }
+
+        .glass-cyan {
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.06);
+            border-radius: 18px
+        }
+
+        @keyframes fireFlicker {
+
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.3)
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.6)
+            }
+        }
+
+        .fire-text {
+            animation: fireFlicker 2s ease-in-out infinite
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-bg-void">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-display font-bold tracking-wider uppercase text-primary/60">Challenges 🏆</h1>
+            <span class="text-xs text-gold/40 font-display fire-text">🔥 5 Active</span>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Featured Challenge -->
+            <div class="glass-cyan p-5 relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 px-3 py-1 bg-gold/20 rounded-bl-xl text-[9px] text-gold font-display font-bold">
+                    FEATURED</div>
+                <div class="flex items-center gap-3 mb-3"><span class="text-3xl">🏃‍♂️</span>
+                    <div>
+                        <p class="text-lg font-display font-bold">30-Day Run Streak</p>
+                        <p class="text-[10px] text-primary/30">Run at least 1km every day for 30 days</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="flex-1 h-2 rounded-full bg-white/5">
+                        <div class="h-full rounded-full bg-gradient-to-r from-primary to-secondary" style="width:60%">
+                        </div>
+                    </div><span class="text-xs font-display font-bold text-primary">18/30</span>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div class="flex -space-x-2">
+                        <div
+                            class="w-6 h-6 rounded-full bg-primary/20 border border-bg-void text-[8px] flex items-center justify-center">
+                            😊</div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-secondary/20 border border-bg-void text-[8px] flex items-center justify-center">
+                            👨</div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-rose/20 border border-bg-void text-[8px] flex items-center justify-center">
+                            👩</div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-white/10 border border-bg-void text-[8px] flex items-center justify-center text-white/30">
+                            +24</div>
+                    </div>
+                    <span class="px-3 py-1 bg-gold/10 rounded-full text-[9px] text-gold font-display font-bold">🏅 500
+                        XP</span>
+                </div>
+            </div>
+
+            <!-- Active Challenges -->
+            <p class="text-[10px] text-primary/20 font-display uppercase tracking-[0.2em]">Active</p>
+
+            <div class="glass-cyan p-4">
+                <div class="flex items-center gap-3"><span class="text-2xl">💪</span>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold">Push-up Century</p>
+                        <p class="text-[10px] text-white/20">100 push-ups in one session</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="flex-1 h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-rose" style="width:78%"></div>
+                            </div><span class="text-[10px] text-white/15">78/100</span>
+                        </div>
+                    </div><span class="text-lg">🥈</span>
+                </div>
+            </div>
+
+            <div class="glass-cyan p-4">
+                <div class="flex items-center gap-3"><span class="text-2xl">🚴</span>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold">Cycling Explorer</p>
+                        <p class="text-[10px] text-white/20">Ride 200km this month</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="flex-1 h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-primary" style="width:45%"></div>
+                            </div><span class="text-[10px] text-white/15">90/200km</span>
+                        </div>
+                    </div><span class="text-lg">🥉</span>
+                </div>
+            </div>
+
+            <div class="glass-cyan p-4">
+                <div class="flex items-center gap-3"><span class="text-2xl">🧘</span>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold">Flexibility Master</p>
+                        <p class="text-[10px] text-white/20">Complete 20 stretching sessions</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="flex-1 h-1.5 rounded-full bg-white/5">
+                                <div class="h-full rounded-full bg-secondary" style="width:35%"></div>
+                            </div><span class="text-[10px] text-white/15">7/20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed -->
+            <p class="text-[10px] text-gold/20 font-display uppercase tracking-[0.2em] mt-2">Completed ✅</p>
+
+            <div class="glass-cyan p-4 opacity-50">
+                <div class="flex items-center gap-3"><span class="text-2xl">🏊</span>
+                    <div class="flex-1">
+                        <p class="text-sm font-display font-bold text-white/50">Swim Week</p>
+                        <p class="text-[10px] text-white/10">Swim 5 times in one week</p>
+                    </div><span class="px-2 py-0.5 bg-primary/10 rounded text-[9px] text-primary font-bold">+200
+                        XP</span>
+                </div>
+            </div>
+
+            <!-- Browse More -->
+            <button
+                class="w-full py-3 border border-dashed border-primary/10 rounded-xl text-xs text-primary/30 flex items-center justify-center gap-1"><span
+                    class="material-symbols-outlined !text-sm">explore</span> Browse More Challenges</button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NightOwl — Dream Journal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { darkMode: 'class', theme: { extend: { colors: { "midnight": "#0B0D1A", "indigo": "#4F46E5", "lavender": "#A78BFA", "luna": "#C4B5FD", "dawn": "#F472B6", "dream": "#818CF8", "cloud": "#60A5FA" }, fontFamily: { "sans": ["Plus Jakarta Sans", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #0B0D1A
+        }
+
+        .dream-card {
+            background: rgba(79, 70, 229, 0.04);
+            border: 1px solid rgba(167, 139, 250, 0.08);
+            border-radius: 20px
+        }
+
+        .lucid-badge {
+            background: linear-gradient(90deg, rgba(129, 140, 248, 0.2), rgba(196, 181, 253, 0.2));
+            border-radius: 8px;
+            padding: 2px 8px
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-white overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-midnight">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <button><span class="material-symbols-outlined !text-xl text-white/20">arrow_back</span></button>
+            <h1 class="text-sm font-bold tracking-wider uppercase text-lavender/50">Dream Journal</h1>
+            <button><span class="material-symbols-outlined !text-xl text-white/20">search</span></button>
+        </div>
+
+        <!-- Month Stats -->
+        <div class="mx-6 dream-card p-4 mb-3">
+            <div class="flex items-center justify-between">
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-lavender">18</p>
+                    <p class="text-[9px] text-lavender/30">Dreams</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-dream">3</p>
+                    <p class="text-[9px] text-dream/30">Lucid</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-dawn">85%</p>
+                    <p class="text-[9px] text-dawn/30">Recall</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-2xl font-bold text-cloud">4.2</p>
+                    <p class="text-[9px] text-cloud/30">Avg Mood</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3">
+            <!-- Dream Entry 1 -->
+            <div class="dream-card p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">🌊</span><span
+                            class="text-xs font-bold text-lavender/50">Last Night</span><span
+                            class="lucid-badge text-[8px] text-dream font-bold">✨ Lucid</span></div>
+                    <span class="text-[10px] text-lavender/20">Feb 19, 3:42 AM</span>
+                </div>
+                <h3 class="text-sm font-bold mb-1">The Ocean Library</h3>
+                <p class="text-xs text-white/30 leading-relaxed">I was in a vast library that was somehow underwater.
+                    The books were floating and I could read them by touching the spines. Became lucid when I noticed I
+                    could breathe underwater...</p>
+                <div class="flex gap-1.5 mt-2 flex-wrap">
+                    <span class="px-2 py-0.5 bg-cloud/10 rounded-full text-[8px] text-cloud">Water</span>
+                    <span class="px-2 py-0.5 bg-lavender/10 rounded-full text-[8px] text-lavender">Books</span>
+                    <span class="px-2 py-0.5 bg-dream/10 rounded-full text-[8px] text-dream">Flying</span>
+                </div>
+                <div class="flex items-center gap-3 mt-3 pt-2 border-t border-lavender/5">
+                    <div class="flex items-center gap-0.5"><span class="text-[10px]">😌</span><span
+                            class="text-[9px] text-white/15">Peaceful</span></div>
+                    <div class="flex items-center gap-0.5"><span class="text-[10px]">⭐</span><span
+                            class="text-[9px] text-white/15">Vivid</span></div>
+                    <div class="flex items-center gap-0.5 ml-auto"><span class="text-[9px] text-lavender/20">Clarity:
+                            9/10</span></div>
+                </div>
+            </div>
+
+            <!-- Dream Entry 2 -->
+            <div class="dream-card p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">🏔️</span><span
+                            class="text-xs font-bold text-lavender/40">2 Nights Ago</span></div>
+                    <span class="text-[10px] text-lavender/15">Feb 18, 5:12 AM</span>
+                </div>
+                <h3 class="text-sm font-bold mb-1">Mountain Ascent</h3>
+                <p class="text-xs text-white/25 leading-relaxed">Climbing a purple mountain that kept growing taller.
+                    Other climbers were singing in a language I didn't know but could understand...</p>
+                <div class="flex gap-1.5 mt-2"><span
+                        class="px-2 py-0.5 bg-lavender/10 rounded-full text-[8px] text-lavender/60">Mountains</span><span
+                        class="px-2 py-0.5 bg-dawn/10 rounded-full text-[8px] text-dawn/60">Music</span></div>
+                <div class="flex items-center gap-3 mt-3 pt-2 border-t border-lavender/5">
+                    <div class="flex items-center gap-0.5"><span class="text-[10px]">🤔</span><span
+                            class="text-[9px] text-white/15">Curious</span></div>
+                    <div class="flex items-center gap-0.5"><span class="text-[10px]">💭</span><span
+                            class="text-[9px] text-white/15">Semi-vivid</span></div>
+                    <div class="flex items-center gap-0.5 ml-auto"><span class="text-[9px] text-lavender/15">Clarity:
+                            6/10</span></div>
+                </div>
+            </div>
+
+            <!-- Dream Entry 3 -->
+            <div class="dream-card p-4 opacity-60">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2"><span class="text-sm">🌀</span><span
+                            class="text-xs font-bold text-lavender/30">3 Nights Ago</span></div>
+                    <span class="text-[10px] text-lavender/10">Feb 17</span>
+                </div>
+                <h3 class="text-sm font-bold mb-1 text-white/60">The Spiral Staircase</h3>
+                <p class="text-xs text-white/15 leading-relaxed">A never-ending spiral staircase made of glass. Each
+                    step played a different musical note...</p>
+                <div class="flex gap-1.5 mt-2"><span
+                        class="px-2 py-0.5 bg-indigo/10 rounded-full text-[8px] text-indigo/40">Architecture</span>
+                </div>
+            </div>
+
+            <!-- AI Dream Pattern -->
+            <div class="dream-card p-4 border-dream/10">
+                <div class="flex items-center gap-2 mb-2"><span
+                        class="material-symbols-outlined !text-sm text-dream">psychology</span><span
+                        class="text-[10px] text-dream font-bold uppercase tracking-wider">Dream Patterns</span></div>
+                <p class="text-xs text-white/25">Your dreams frequently feature <span
+                        class="text-cloud font-medium">water</span> and <span
+                        class="text-lavender font-medium">music</span>. These elements have appeared in 72% of your logs
+                    this month. Water dreams often correlate with emotional processing.</p>
+            </div>
+        </div>
+
+        <!-- Record Dream FAB -->
+        <button
+            class="fixed bottom-24 right-8 w-14 h-14 bg-gradient-to-br from-indigo to-lavender rounded-full flex items-center justify-center shadow-xl shadow-indigo/30 active:scale-90 transition-transform"><span
+                class="material-symbols-outlined !text-2xl text-white">edit_note</span></button>
+    </div>
+</body>
+
+</html>

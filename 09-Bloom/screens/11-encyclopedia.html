@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bloom — Plant Encyclopedia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "cream": "#F6F1EB", "chloro": "#2D8B56", "terra": "#C67B5C", "bark": "#5C4033", "soil": "#3E2723", "water": "#5B9BD5" }, fontFamily: { "serif": ["Lora", "serif"], "sans": ["Raleway", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #F6F1EB
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-soil overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-cream">
+        <div class="px-6 pt-14 pb-2">
+            <h1 class="font-serif text-xl font-bold">Plant Encyclopedia 📖</h1>
+        </div>
+
+        <!-- Search -->
+        <div class="px-6 pb-2">
+            <div class="flex items-center gap-2 bg-white rounded-xl px-3 py-2.5 shadow-sm"><span
+                    class="material-symbols-outlined !text-lg text-bark/20">search</span><input
+                    class="flex-1 bg-transparent text-sm outline-none placeholder-bark/20"
+                    placeholder="Search 1,200+ plants..." /></div>
+        </div>
+
+        <div class="flex gap-2 px-6 overflow-x-auto no-scrollbar pb-2">
+            <button
+                class="px-3 py-1.5 bg-chloro text-white text-[10px] font-serif font-bold rounded-full whitespace-nowrap">Popular</button>
+            <button
+                class="px-3 py-1.5 bg-white text-bark/30 text-[10px] rounded-full shadow-sm whitespace-nowrap">Indoor</button>
+            <button
+                class="px-3 py-1.5 bg-white text-bark/30 text-[10px] rounded-full shadow-sm whitespace-nowrap">Outdoor</button>
+            <button
+                class="px-3 py-1.5 bg-white text-bark/30 text-[10px] rounded-full shadow-sm whitespace-nowrap">Succulents</button>
+            <button
+                class="px-3 py-1.5 bg-white text-bark/30 text-[10px] rounded-full shadow-sm whitespace-nowrap">Tropical</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-1">
+            <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div
+                    class="h-32 bg-gradient-to-br from-chloro/15 to-chloro/5 flex items-center justify-center text-5xl">
+                    🌿</div>
+                <div class="p-4">
+                    <p class="font-serif font-bold">Monstera Deliciosa</p>
+                    <p class="text-[10px] text-bark/25 italic">Swiss Cheese Plant</p>
+                    <div class="flex gap-3 mt-2">
+                        <div class="flex items-center gap-1 text-[9px] text-bark/30"><span
+                                class="material-symbols-outlined !text-xs text-water">water_drop</span>Weekly</div>
+                        <div class="flex items-center gap-1 text-[9px] text-bark/30"><span
+                                class="material-symbols-outlined !text-xs text-chloro">wb_sunny</span>Indirect</div>
+                        <div class="flex items-center gap-1 text-[9px] text-bark/30"><span
+                                class="material-symbols-outlined !text-xs text-chloro">straighten</span>Easy</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-white rounded-2xl shadow-sm p-3">
+                    <div class="h-20 bg-chloro/5 rounded-xl flex items-center justify-center text-3xl mb-2">🪴</div>
+                    <p class="text-sm font-serif font-bold">Fiddle Leaf</p>
+                    <p class="text-[9px] text-bark/20">Ficus lyrata</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3">
+                    <div class="h-20 bg-terra/5 rounded-xl flex items-center justify-center text-3xl mb-2">🌵</div>
+                    <p class="text-sm font-serif font-bold">Snake Plant</p>
+                    <p class="text-[9px] text-bark/20">Sansevieria</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3">
+                    <div class="h-20 bg-chloro/5 rounded-xl flex items-center justify-center text-3xl mb-2">🌱</div>
+                    <p class="text-sm font-serif font-bold">Pothos</p>
+                    <p class="text-[9px] text-bark/20">Epipremnum</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-sm p-3">
+                    <div class="h-20 bg-water/5 rounded-xl flex items-center justify-center text-3xl mb-2">🌺</div>
+                    <p class="text-sm font-serif font-bold">Peace Lily</p>
+                    <p class="text-[9px] text-bark/20">Spathiphyllum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

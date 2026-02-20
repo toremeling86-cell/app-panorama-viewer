@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Kinfolk — Memories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>tailwind.config = { theme: { extend: { colors: { "family": "#FFF5ED", "papa": "#5B8DEF", "mama": "#F472B6", "kid": "#34D399", "together": "#8B5CF6" }, fontFamily: { "display": ["Fredoka", "sans-serif"], "body": ["Nunito", "sans-serif"] } } } }</script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+            background: #FFF5ED
+        }
+
+        .clay-card {
+            box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.06), -3px -3px 10px rgba(255, 255, 255, 0.8), inset 1px 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 18px;
+            background: white
+        }
+    </style>
+</head>
+
+<body class="font-body antialiased text-gray-800 overflow-hidden">
+    <div class="relative flex flex-col min-h-screen w-full max-w-[430px] mx-auto bg-family">
+        <div class="flex items-center justify-between px-6 pt-14 pb-3">
+            <h1 class="text-xl font-display font-bold">Family Memories 📸</h1><button
+                class="w-9 h-9 rounded-full bg-together/10 flex items-center justify-center"><span
+                    class="material-symbols-outlined !text-lg text-together">add_a_photo</span></button>
+        </div>
+
+        <div class="flex gap-2 px-6 overflow-x-auto no-scrollbar pb-2">
+            <button
+                class="px-3 py-1.5 bg-together text-white text-[10px] font-display font-bold rounded-full whitespace-nowrap">All</button>
+            <button
+                class="px-3 py-1.5 bg-white text-gray-300 text-[10px] rounded-full shadow-sm whitespace-nowrap">2026</button>
+            <button
+                class="px-3 py-1.5 bg-white text-gray-300 text-[10px] rounded-full shadow-sm whitespace-nowrap">2025</button>
+            <button
+                class="px-3 py-1.5 bg-white text-gray-300 text-[10px] rounded-full shadow-sm whitespace-nowrap">Favorites</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto px-6 pb-24 space-y-3 mt-1">
+            <!-- Featured Memory -->
+            <div class="clay-card overflow-hidden">
+                <div
+                    class="h-40 bg-gradient-to-br from-together/15 via-mama/10 to-kid/10 flex items-center justify-center text-5xl">
+                    👨‍👩‍👧‍👦</div>
+                <div class="p-4">
+                    <p class="text-lg font-display font-bold">Disneyland Trip 2026</p>
+                    <p class="text-[10px] text-gray-300">January 15–18 · 142 photos · 3 videos</p>
+                    <div class="flex -space-x-1 mt-2">
+                        <div
+                            class="w-6 h-6 rounded-full bg-papa/20 border-2 border-white text-[8px] flex items-center justify-center">
+                            👨</div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-mama/20 border-2 border-white text-[8px] flex items-center justify-center">
+                            👩</div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-kid/20 border-2 border-white text-[8px] flex items-center justify-center">
+                            👧</div>
+                        <div
+                            class="w-6 h-6 rounded-full bg-together/20 border-2 border-white text-[8px] flex items-center justify-center">
+                            👦</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <p class="text-[10px] text-gray-300 font-display uppercase tracking-wider">February 2026</p>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="clay-card p-3">
+                    <div class="h-24 bg-kid/10 rounded-xl flex items-center justify-center text-3xl mb-2">🎂</div>
+                    <p class="text-sm font-display font-bold">Emma's Birthday</p>
+                    <p class="text-[9px] text-gray-300">Feb 12 · 48 photos</p>
+                </div>
+                <div class="clay-card p-3">
+                    <div class="h-24 bg-mama/10 rounded-xl flex items-center justify-center text-3xl mb-2">❤️</div>
+                    <p class="text-sm font-display font-bold">Valentine's Dinner</p>
+                    <p class="text-[9px] text-gray-300">Feb 14 · 12 photos</p>
+                </div>
+            </div>
+
+            <p class="text-[10px] text-gray-300 font-display uppercase tracking-wider">January 2026</p>
+            <div class="grid grid-cols-3 gap-2">
+                <div class="h-24 bg-papa/10 rounded-xl flex items-center justify-center text-2xl">⛷️</div>
+                <div class="h-24 bg-together/10 rounded-xl flex items-center justify-center text-2xl">🎄</div>
+                <div class="h-24 bg-kid/10 rounded-xl flex items-center justify-center text-2xl">🏠</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
