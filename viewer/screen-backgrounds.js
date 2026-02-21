@@ -383,10 +383,20 @@ const ScreenBackgrounds = {
         if (!this._panelEl) return;
         this._isOpen = true;
         this._currentScreenId = screenId || null;
-        const pos = FloatingWindows.getStaggeredPosition();
-        this._panelEl.style.right = pos.right + 'px';
-        this._panelEl.style.top = pos.top + 'px';
-        this._panelEl.style.left = 'auto';
+        // Use positionAway from last click if available, else staggered
+        const cx = typeof _lastClickX !== 'undefined' ? _lastClickX : window.innerWidth / 2;
+        const cy = typeof _lastClickY !== 'undefined' ? _lastClickY : 200;
+        if (typeof FloatingWindows !== 'undefined' && FloatingWindows.positionAway) {
+            const pos = FloatingWindows.positionAway(cx, cy);
+            this._panelEl.style.left = pos.left != null ? pos.left + 'px' : 'auto';
+            this._panelEl.style.right = pos.right != null ? pos.right + 'px' : 'auto';
+            this._panelEl.style.top = pos.top + 'px';
+        } else {
+            const pos = FloatingWindows.getStaggeredPosition();
+            this._panelEl.style.right = pos.right + 'px';
+            this._panelEl.style.top = pos.top + 'px';
+            this._panelEl.style.left = 'auto';
+        }
         this._panelEl.classList.add('open');
         FloatingWindows.bringToFront(this._panelEl);
         document.getElementById('btn-bg')?.classList.add('on');
@@ -463,9 +473,16 @@ const ScreenBackgrounds = {
      * UI elements (text, cards, buttons) remain fully visible.
      */
     _applyToScreen(screenId, bgDef) {
-        // Focused mode: apply directly to focused iframe (canvas slots still exist behind overlay)
+        // Focused mode: inject background ONLY into iframe, not on container
         if (this._focusedMode && this._currentScreenId === screenId) {
-            const iframe = document.querySelector('#focused-frame iframe');
+            const container = document.getElementById('focused-frame');
+            const iframe = container?.querySelector('iframe');
+            // Clear any previous container background — background belongs only in iframe
+            if (container) {
+                container.style.background = '';
+                container.style.backgroundSize = '';
+                container.style.backgroundPosition = '';
+            }
             if (iframe) {
                 this._injectBackgroundIntoIframe(iframe, screenId, bgDef.css);
             }
@@ -509,7 +526,22 @@ const ScreenBackgrounds = {
      *  Instead of making content transparent and hoping parent gradient shows through,
      *  we replace the body/wrapper backgrounds with our gradient directly.
      *  UI element backgrounds (cards, buttons, glass, etc.) are preserved. */
+    /** Resolve relative url() paths to absolute for cross-origin iframe injection */
+    _resolveImageUrl(cssValue) {
+        if (!cssValue || !cssValue.includes('url(')) return cssValue;
+        // Convert relative url() paths to absolute using the parent page's base URL
+        const baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
+        return cssValue.replace(/url\(['"]?([^'"\)]+)['"]?\)/g, (match, path) => {
+            // Skip data URIs and already-absolute URLs
+            if (path.startsWith('data:') || path.startsWith('http') || path.startsWith('blob:')) return match;
+            const absolutePath = new URL(path, baseUrl).href;
+            return `url('${absolutePath}')`;
+        });
+    },
+
     _injectBackgroundIntoIframe(iframe, screenId, gradientCSS) {
+        // Resolve relative image URLs to absolute before injecting into iframe
+        gradientCSS = this._resolveImageUrl(gradientCSS);
 
         const doInject = (force) => {
             try {
@@ -525,40 +557,70 @@ const ScreenBackgrounds = {
                 const cardIso = doc.getElementById('sb-card-isolation');
                 if (cardIso) cardIso.remove();
 
+                const isImageBg = gradientCSS && gradientCSS.includes('url(');
+
                 const s = doc.createElement('style');
                 s.id = 'sb-bg-inject';
                 s.dataset.gradient = gradientCSS;
                 s.dataset.cardOpacity = cardOpKey;
-                s.textContent = `
-                    /* ═══ Screen Backgrounds — Direct Gradient Injection ═══ */
 
-                    /* Set gradient on body */
-                    html {
-                        background: ${gradientCSS} !important;
-                    }
-                    body {
-                        background: transparent !important;
-                        background-color: transparent !important;
-                    }
-
-                    /* Replace full-page wrapper div background with gradient */
-                    body > div:first-child {
-                        background: ${gradientCSS} !important;
-                        background-color: transparent !important;
-                    }
-
-                    /* Remove competing background classes */
-                    [class*="glow"], [class*="aurora"], [class*="bio-glow"],
-                    [class*="bg-void"], [class*="bg-night"], [class*="bg-parchment"],
-                    [class*="night-glow"], [class*="sky-gradient"],
-                    [class*="bg-cream"], [class*="bg-warm"], [class*="bg-bg-"],
-                    [class*="sonic-"], [class*="zen-"], [class*="contour"],
-                    [class*="topo-"], [class*="map-bg"] {
-                        background: ${gradientCSS} !important;
-                        background-color: transparent !important;
-                    }
-                    ${this._buildCardIsolationCSS()}
-                `;
+                if (isImageBg) {
+                    // Extract the url() from the CSS value
+                    const urlMatch = gradientCSS.match(/url\(['"]?([^'")\s]+)['"]?\)/);
+                    const imageUrl = urlMatch ? urlMatch[1] : '';
+                    s.textContent = `
+                        /* ═══ Screen Backgrounds — Image Background Injection ═══ */
+                        html {
+                            background-image: url('${imageUrl}') !important;
+                            background-size: cover !important;
+                            background-position: center !important;
+                            background-repeat: no-repeat !important;
+                        }
+                        body {
+                            background: transparent !important;
+                            background-color: transparent !important;
+                        }
+                        body > div:first-child {
+                            background: transparent !important;
+                            background-color: transparent !important;
+                        }
+                        [class*="glow"], [class*="aurora"], [class*="bio-glow"],
+                        [class*="bg-void"], [class*="bg-night"], [class*="bg-parchment"],
+                        [class*="night-glow"], [class*="sky-gradient"],
+                        [class*="bg-cream"], [class*="bg-warm"], [class*="bg-bg-"],
+                        [class*="sonic-"], [class*="zen-"], [class*="contour"],
+                        [class*="topo-"], [class*="map-bg"] {
+                            background: transparent !important;
+                            background-color: transparent !important;
+                        }
+                        ${this._buildCardIsolationCSS()}
+                    `;
+                } else {
+                    s.textContent = `
+                        /* ═══ Screen Backgrounds — Direct Gradient Injection ═══ */
+                        html {
+                            background: ${gradientCSS} !important;
+                        }
+                        body {
+                            background: transparent !important;
+                            background-color: transparent !important;
+                        }
+                        body > div:first-child {
+                            background: ${gradientCSS} !important;
+                            background-color: transparent !important;
+                        }
+                        [class*="glow"], [class*="aurora"], [class*="bio-glow"],
+                        [class*="bg-void"], [class*="bg-night"], [class*="bg-parchment"],
+                        [class*="night-glow"], [class*="sky-gradient"],
+                        [class*="bg-cream"], [class*="bg-warm"], [class*="bg-bg-"],
+                        [class*="sonic-"], [class*="zen-"], [class*="contour"],
+                        [class*="topo-"], [class*="map-bg"] {
+                            background: ${gradientCSS} !important;
+                            background-color: transparent !important;
+                        }
+                        ${this._buildCardIsolationCSS()}
+                    `;
+                }
                 doc.head.appendChild(s);
                 console.log('[DS] bg injected into', screenId, '| gradient:', gradientCSS?.substring(0, 60));
                 return true;
@@ -601,7 +663,10 @@ const ScreenBackgrounds = {
         // Determine which background to use: per-screen → global → none
         const bgDef = this._backgrounds[screenId] || this._globalBg;
         if (bgDef) {
-            container.style.background = bgDef.css;
+            // Clear container background — background belongs only in iframe
+            container.style.background = '';
+            container.style.backgroundSize = '';
+            container.style.backgroundPosition = '';
             container.style.borderRadius = '40px';
             container.style.overflow = 'hidden';
 
@@ -645,6 +710,9 @@ const ScreenBackgrounds = {
             if (container) {
                 container.style.filter = '';
                 container.style.opacity = '';
+                container.style.background = '';
+                container.style.backgroundSize = '';
+                container.style.backgroundPosition = '';
             }
             return;
         }
@@ -760,7 +828,7 @@ const ScreenBackgrounds = {
      *  Non-opacity filters (brightness, contrast, etc.) → applied as CSS filter on .df
      *  Opacity → applied via .sb-bg-layer as a dimming overlay */
     _applyBgFiltersToScreen(screenId) {
-        // Focused mode: apply filters directly to the focused frame container
+        // Focused mode: apply filters to the iframe only, not the container
         if (this._focusedMode && this._currentScreenId === screenId) {
             const iframe = document.querySelector('#focused-frame iframe');
             if (iframe) {
@@ -774,11 +842,15 @@ const ScreenBackgrounds = {
                         filterParts.push(`${meta.key}(${val}${meta.unit})`);
                     }
                 }
+                // Apply filter/opacity on iframe, NOT container
+                iframe.style.filter = filterParts.length ? filterParts.join(' ') : '';
+                iframe.style.opacity = (f.opacity != null && f.opacity < 100)
+                    ? (f.opacity / 100).toString() : '';
+                // Ensure container stays clean
                 const container = document.getElementById('focused-frame');
                 if (container) {
-                    container.style.filter = filterParts.length ? filterParts.join(' ') : '';
-                    container.style.opacity = (f.opacity != null && f.opacity < 100)
-                        ? (f.opacity / 100).toString() : '';
+                    container.style.filter = '';
+                    container.style.opacity = '';
                 }
             }
             return;
@@ -1134,12 +1206,9 @@ const ScreenBackgrounds = {
             }
         }
 
-        // ── Image Backgrounds (placeholder) ──
+        // ── Image Backgrounds ──
         if (catFilter === 'all' || catFilter === 'images') {
-            html += `<div class="bg-sub-label" style="margin:12px 0 4px">Image Backgrounds</div>`;
-            html += `<div class="bg-empty" style="padding:16px;font-size:10px;color:#52525b;text-align:center;border:1px dashed rgba(255,255,255,0.08);border-radius:8px">
-                Image backgrounds — coming soon
-            </div>`;
+            html += this._renderImageBgSection(screenId, currentBg, catFilter === 'images');
         }
 
         // Custom CSS input
@@ -1157,8 +1226,240 @@ const ScreenBackgrounds = {
 
 
     // ═══════════════════════════════════════
-    //  BACKGROUND MODE — Editor (Gradient Builder)
+    //  IMAGE BACKGROUNDS — Gallery + Palette Matching
     // ═══════════════════════════════════════
+
+    _imgBgCatFilter: 'all',
+    _imgBgSearch: '',
+
+    IMAGE_BG_CATEGORIES: [
+        { id: 'all', name: 'All' },
+        { id: 'fluid', name: 'Fluid Art' },
+        { id: 'subtle', name: 'Subtle' },
+        { id: 'perspective', name: 'Perspective' },
+        { id: 'texture', name: 'Textures' },
+        { id: 'atmospheric', name: 'Atmospheric' },
+        { id: 'glass', name: 'Glass' }
+    ],
+
+    /** Render the Image Background section */
+    _renderImageBgSection(screenId, currentBg, isFullView) {
+        if (typeof IMAGE_BACKGROUNDS === 'undefined' || !IMAGE_BACKGROUNDS.length) {
+            return `<div class="bg-sub-label" style="margin:12px 0 4px">Image Backgrounds</div>
+                <div class="bg-empty" style="padding:16px;font-size:10px;color:#52525b;text-align:center">
+                    No image backgrounds loaded
+                </div>`;
+        }
+
+        let html = '';
+        const subCat = this._imgBgCatFilter || 'all';
+        const search = (this._imgBgSearch || '').toLowerCase();
+
+        // Section header with count
+        html += `<div class="bg-sub-label" style="margin:12px 0 4px;display:flex;justify-content:space-between;align-items:center">
+            <span>Image Backgrounds <span style="color:#52525b;font-weight:normal">(${IMAGE_BACKGROUNDS.length})</span></span>
+        </div>`;
+
+        // Sub-category filter chips
+        html += `<div class="bg-img-cat-strip" style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px">`;
+        this.IMAGE_BG_CATEGORIES.forEach(c => {
+            const count = c.id === 'all' ? IMAGE_BACKGROUNDS.length : IMAGE_BACKGROUNDS.filter(b => b.category === c.id).length;
+            html += `<span class="bg-cat-chip ${subCat === c.id ? 'active' : ''}" data-imgcat="${c.id}"
+                style="font-size:9px;padding:2px 8px">${c.name} <span style="opacity:0.5">${count}</span></span>`;
+        });
+        html += `</div>`;
+
+        // Search input
+        html += `<input type="text" id="img-bg-search" class="bg-custom-input"
+            placeholder="Search by name, color, or palette…" value="${this._imgBgSearch || ''}"
+            style="margin-bottom:8px;font-size:10px;padding:5px 8px" />`;
+
+        // Get palette match scores if a UI theme is active
+        const matchScores = this._getImageBgMatches();
+        const hasMatches = Object.keys(matchScores).length > 0;
+
+        // Filter backgrounds
+        let filtered = IMAGE_BACKGROUNDS;
+        if (subCat !== 'all') {
+            filtered = filtered.filter(b => b.category === subCat);
+        }
+        if (search) {
+            filtered = filtered.filter(b =>
+                b.name.toLowerCase().includes(search) ||
+                b.palettes.some(p => p.toLowerCase().includes(search)) ||
+                b.colors.some(c => c.toLowerCase().includes(search)) ||
+                b.category.toLowerCase().includes(search)
+            );
+        }
+
+        // Sort: palette matches first, then alphabetical
+        if (hasMatches) {
+            filtered.sort((a, b) => {
+                const sa = matchScores[a.id] || 0;
+                const sb = matchScores[b.id] || 0;
+                return sb - sa;
+            });
+        }
+
+        // Palette match indicator
+        if (hasMatches) {
+            html += `<div style="padding:4px 8px;margin-bottom:6px;background:rgba(34,197,94,0.08);border-radius:6px;font-size:9px;color:#22C55E;text-align:center">
+                <span class="material-symbols-outlined" style="font-size:11px;vertical-align:middle">auto_awesome</span>
+                Sorted by palette match — best matches shown first
+            </div>`;
+        }
+
+        // Limit display in 'all' view to keep panel manageable
+        const displayLimit = isFullView ? filtered.length : Math.min(filtered.length, 18);
+        const displayItems = filtered.slice(0, displayLimit);
+
+        // Thumbnail grid
+        if (displayItems.length > 0) {
+            html += `<div class="bg-img-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px">`;
+            displayItems.forEach(bg => {
+                const isActive = currentBg?.imageBgId === bg.id;
+                const matchScore = matchScores[bg.id] || 0;
+                const isMatch = matchScore > 0.3;
+                const isGreat = matchScore > 0.6;
+
+                html += `<div class="bg-img-thumb ${isActive ? 'active' : ''}" data-imgbg="${bg.id}"
+                    title="${bg.name}\n${bg.palettes.join(', ')}\n${bg.colors.join(', ')}"
+                    style="position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;
+                    border:2px solid ${isActive ? 'rgba(34,197,94,0.6)' : 'rgba(255,255,255,0.06)'};
+                    transition:all 0.2s ease">
+                    <img src="${bg.path}" alt="${bg.name}" loading="lazy"
+                        style="width:100%;height:100%;object-fit:cover;display:block" />
+                    <div style="position:absolute;bottom:0;left:0;right:0;padding:3px 5px;
+                        background:linear-gradient(transparent,rgba(0,0,0,0.7));font-size:8px;color:#e4e4e7;
+                        white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bg.name}</div>
+                    ${isActive ? '<div style="position:absolute;top:4px;right:4px;background:rgba(34,197,94,0.8);border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center"><span class="material-symbols-outlined" style="font-size:10px;color:#fff">check</span></div>' : ''}
+                    ${isGreat ? '<div style="position:absolute;top:4px;left:4px;background:rgba(34,197,94,0.8);border-radius:4px;padding:1px 4px;font-size:7px;color:#fff;font-weight:600">MATCH</div>' : isMatch ? '<div style="position:absolute;top:4px;left:4px;background:rgba(34,197,94,0.4);border-radius:50%;width:8px;height:8px"></div>' : ''}
+                </div>`;
+            });
+            html += `</div>`;
+        } else {
+            html += `<div class="bg-empty" style="padding:16px;font-size:10px;color:#52525b;text-align:center">
+                No matching backgrounds found
+            </div>`;
+        }
+
+        // Show "Show all" button if truncated
+        if (!isFullView && filtered.length > displayLimit) {
+            html += `<div style="text-align:center;margin-bottom:8px">
+                <button class="bg-palette-use" data-show-all-imgs="1"
+                    style="font-size:9px;padding:4px 12px">Show all ${filtered.length} images</button>
+            </div>`;
+        }
+
+        // Color swatches for selected image
+        if (currentBg?.imageBgId) {
+            const activeBg = IMAGE_BACKGROUNDS.find(b => b.id === currentBg.imageBgId);
+            if (activeBg) {
+                html += `<div style="display:flex;gap:4px;align-items:center;margin-bottom:6px">
+                    <span style="font-size:8px;color:#71717a">Colors:</span>
+                    ${activeBg.colors.map(c => `<div style="width:14px;height:14px;border-radius:3px;background:${c};border:1px solid rgba(255,255,255,0.1)" title="${c}"></div>`).join('')}
+                    <span style="font-size:8px;color:#71717a;margin-left:4px">Fits:</span>
+                    <span style="font-size:8px;color:#a1a1aa">${activeBg.palettes.slice(0, 3).join(', ')}</span>
+                </div>`;
+            }
+        }
+
+        return html;
+    },
+
+    /** Calculate palette-match scores for all image backgrounds */
+    _getImageBgMatches() {
+        const scores = {};
+        if (!this._activeTheme?.colors || typeof IMAGE_BACKGROUNDS === 'undefined') return scores;
+
+        const themeColors = this._activeTheme.colors.filter(c => c && c.startsWith('#'));
+        if (themeColors.length === 0) return scores;
+
+        const themeHSLs = themeColors.map(c => this._hexToHSL(c));
+
+        IMAGE_BACKGROUNDS.forEach(bg => {
+            if (!bg.colors.length) return;
+            const bgHSLs = bg.colors.map(c => this._hexToHSL(c));
+
+            // Calculate best match: compare each theme color to each bg color
+            let totalScore = 0;
+            let comparisons = 0;
+            themeHSLs.forEach(thsl => {
+                bgHSLs.forEach(bhsl => {
+                    const dist = this._colorDistance(thsl, bhsl);
+                    // Convert distance to score (0-1, where 1 = perfect match)
+                    const score = Math.max(0, 1 - dist / 180);
+                    totalScore += score;
+                    comparisons++;
+                });
+            });
+
+            const avgScore = comparisons > 0 ? totalScore / comparisons : 0;
+            if (avgScore > 0.15) {
+                scores[bg.id] = avgScore;
+            }
+        });
+
+        return scores;
+    },
+
+    /** Convert hex color to HSL */
+    _hexToHSL(hex) {
+        hex = hex.replace('#', '');
+        const r = parseInt(hex.substring(0, 2), 16) / 255;
+        const g = parseInt(hex.substring(2, 4), 16) / 255;
+        const b = parseInt(hex.substring(4, 6), 16) / 255;
+
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h = 0, s = 0, l = (max + min) / 2;
+
+        if (max !== min) {
+            const d = max - min;
+            s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+            if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+            else if (max === g) h = ((b - r) / d + 2) * 60;
+            else h = ((r - g) / d + 4) * 60;
+        }
+
+        return { h, s: s * 100, l: l * 100 };
+    },
+
+    /** Color distance in HSL space (weighted hue + lightness) */
+    _colorDistance(hsl1, hsl2) {
+        const hDiff = Math.min(Math.abs(hsl1.h - hsl2.h), 360 - Math.abs(hsl1.h - hsl2.h));
+        const sDiff = Math.abs(hsl1.s - hsl2.s);
+        const lDiff = Math.abs(hsl1.l - hsl2.l);
+        return hDiff * 0.5 + sDiff * 0.3 + lDiff * 0.2;
+    },
+
+    /** Apply an image background */
+    _applyImageBg(bgId, screenId) {
+        const bg = (typeof IMAGE_BACKGROUNDS !== 'undefined') && IMAGE_BACKGROUNDS.find(b => b.id === bgId);
+        if (!bg) return;
+
+        const cssValue = `url('${bg.path}') center/cover no-repeat`;
+        const bgDef = {
+            presetId: null,
+            imageBgId: bgId,
+            name: bg.name,
+            css: cssValue
+        };
+
+        if (screenId) {
+            this._backgrounds[screenId] = bgDef;
+            this._applyToScreen(screenId, bgDef);
+        } else {
+            this._globalBg = bgDef;
+            this._eachScreen(sid => {
+                if (!this._backgrounds[sid]) this._applyToScreen(sid, bgDef);
+            });
+        }
+        this._save();
+        this._refreshPanel();
+        if (this._focusedMode) this._syncFilmstripBackgrounds();
+    },
+
+
 
     _renderBgEditor(screenId) {
         const css = this._buildGradientCSS();
@@ -1639,6 +1940,27 @@ const ScreenBackgrounds = {
                 }
                 return;
             }
+            // ── Image Background handlers ──
+            // Image background thumbnail click
+            const imgBg = e.target.closest('[data-imgbg]');
+            if (imgBg) {
+                this._applyImageBg(imgBg.dataset.imgbg, screenId);
+                return;
+            }
+            // Image subcategory filter chip
+            const imgCat = e.target.closest('[data-imgcat]');
+            if (imgCat) {
+                this._imgBgCatFilter = imgCat.dataset.imgcat;
+                reRender();
+                return;
+            }
+            // Show all images button
+            const showAll = e.target.closest('[data-show-all-imgs]');
+            if (showAll) {
+                this._activeCatFilter = 'images';
+                reRender();
+                return;
+            }
             // Animation cards
             const anim = e.target.closest('[data-anim]');
             if (anim) {
@@ -1858,6 +2180,18 @@ const ScreenBackgrounds = {
             }
             this._save();
         };
+        // Image background search
+        const imgSearch = document.getElementById('img-bg-search');
+        if (imgSearch) {
+            let searchTimeout;
+            imgSearch.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this._imgBgSearch = e.target.value;
+                    reRender();
+                }, 300);
+            });
+        }
         document.getElementById('bg-builder-angle')?.addEventListener('input', (e) => {
             this._gradientAngle = parseInt(e.target.value);
             liveGrad();
@@ -2743,7 +3077,9 @@ svg circle[stroke]:not([stroke="none"]):not([stroke="rgba(255,255,255,0.04)"]) {
         // Update iframe
         const frame = document.getElementById('focused-frame');
         if (frame) {
-            frame.innerHTML = `<iframe src="${window.curApp.id}/screens/${scr}.html"
+            const focusedUrl = (typeof ScreenCreator !== 'undefined' && ScreenCreator.getScreenUrl(window.curApp.id, scr))
+                || `${window.curApp.id}/screens/${scr}.html`;
+            frame.innerHTML = `<iframe src="${focusedUrl}"
                 style="width:430px;height:884px;border-radius:40px;border:3px solid #2a2a35;background:#fff;pointer-events:auto"></iframe>`;
 
             // Apply backgrounds to focused iframe after load
@@ -2954,7 +3290,7 @@ svg circle[stroke]:not([stroke="none"]):not([stroke="rgba(255,255,255,0.04)"]) {
         const colorProps = ['color', 'background-color', 'border-color', 'border-top-color', 'border-bottom-color'];
 
         const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_ELEMENT, {
-            acceptNode: (n) => ['SCRIPT','STYLE','LINK','META','NOSCRIPT'].includes(n.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+            acceptNode: (n) => ['SCRIPT', 'STYLE', 'LINK', 'META', 'NOSCRIPT'].includes(n.tagName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
         });
         let el, count = 0;
         while (el = walker.nextNode()) {
@@ -2970,7 +3306,7 @@ svg circle[stroke]:not([stroke="none"]):not([stroke="rgba(255,255,255,0.04)"]) {
             const ff = cs.getPropertyValue('font-family');
             if (ff) {
                 const primary = ff.split(',')[0].trim().replace(/['"]/g, '');
-                if (primary && !['serif','sans-serif','monospace'].includes(primary)) {
+                if (primary && !['serif', 'sans-serif', 'monospace'].includes(primary)) {
                     fonts[primary] = (fonts[primary] || 0) + 1;
                 }
             }
@@ -3125,7 +3461,7 @@ svg circle[stroke]:not([stroke="none"]):not([stroke="rgba(255,255,255,0.04)"]) {
         const scr = this._currentScreenId;
         if (!scr || !window.curApp) return;
         const k = typeof aK === 'function' ? aK(window.curApp.id, scr) : `${window.curApp.id}/${scr}`;
-        const saveFn = typeof save === 'function' ? save : () => {};
+        const saveFn = typeof save === 'function' ? save : () => { };
 
         // Star
         body.querySelector('#fi-star')?.addEventListener('click', () => {
@@ -3217,7 +3553,7 @@ svg circle[stroke]:not([stroke="none"]):not([stroke="rgba(255,255,255,0.04)"]) {
             return `<div class="film-item">
                 <div class="film-label">${label}</div>
                 <div class="film-thumb ${isActive ? 'active' : ''}" data-film-idx="${i}" title="${label}">
-                    <iframe class="film-thumb-frame" src="${window.curApp.id}/screens/${s}.html" loading="lazy"></iframe>
+                    <iframe class="film-thumb-frame" src="${(typeof ScreenCreator !== 'undefined' && ScreenCreator.getScreenUrl(window.curApp.id, s)) || `${window.curApp.id}/screens/${s}.html`}" loading="lazy"></iframe>
                 </div>
             </div>`;
         }).join('');
@@ -3231,7 +3567,7 @@ svg circle[stroke]:not([stroke="none"]):not([stroke="rgba(255,255,255,0.04)"]) {
                     this._injectBackgroundIntoIframe(iframe, scrId, bgDef.css);
                 }
                 if (this._activeTheme) {
-                    try { this._injectThemeCSS(scrId, this._activeTheme.colors); } catch(e) {}
+                    try { this._injectThemeCSS(scrId, this._activeTheme.colors); } catch (e) { }
                 }
             }, { once: true });
         });

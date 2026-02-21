@@ -1,6 +1,6 @@
 // ── APP DATA ──
 const APP_TYPES = ['Mobile App']; // Extensible: 'Web App', 'Landing Page', etc.
-const APPS = [
+var APPS = [
     { id: '01-ZenVault', name: 'ZenVault', icon: 'account_balance', cat: 'Finance', color: '#00D4AA', type: 'Mobile App', screens: ['01-dashboard', '02-portfolio', '03-budget', '04-goals', '05-analytics', '06-onboarding', '07-cosmos', '08-crypto', '09-notifications', '10-investment-detail', '11-split-bill', '12-crypto', '13-tax-report', '14-subscriptions'] },
     { id: '02-AuraFit', name: 'AuraFit', icon: 'fitness_center', cat: 'Fitness', color: '#00F0FF', type: 'Mobile App', screens: ['01-dashboard', '02-workout', '03-progress', '04-exercises', '05-profile', '06-biometrics', '07-body-comp', '08-nutrition', '09-achievements', '10-challenges', '11-body-map', '12-social', '13-heart-rate'] },
     { id: '03-SkyLens', name: 'SkyLens', icon: 'partly_cloudy_day', cat: 'Weather', color: '#60A5FA', type: 'Mobile App', screens: ['01-sky-now', '02-forecast', '03-air-quality', '04-radar', '05-locations', '06-storm-tracker', '07-widgets', '08-alerts', '09-night-sky', '10-radar', '11-air-quality', '12-pollen'] },
@@ -13,7 +13,8 @@ const APPS = [
     { id: '10-Atlas', name: 'Atlas', icon: 'map', cat: 'Travel', color: '#D4A574', type: 'Mobile App', screens: ['01-timeline', '02-destination', '03-packing', '04-empty-state', '05-photo-journal', '06-booking', '07-itinerary', '08-currency', '09-phrase-book', '10-safety', '11-photos', '12-currency'] },
     { id: '11-Kinfolk', name: 'Kinfolk', icon: 'family_restroom', cat: 'Family', color: '#F97316', type: 'Mobile App', screens: ['01-dashboard', '02-chat', '03-chores', '04-memories', '05-calendar', '06-chores', '07-shared-lists', '08-budget', '09-memories', '10-recipes', '11-chores'] },
     { id: '12-Folio', name: 'Folio', icon: 'design_services', cat: 'Portfolio', color: '#E8553D', type: 'Mobile App', screens: ['01-portfolio', '02-case-study', '03-contact', '04-showcase', '05-settings', '06-analytics', '07-testimonials', '08-case-study', '09-contact', '10-skills'] },
-    { id: '13-Vitals', name: 'Vitals', icon: 'favorite', cat: 'Health', color: '#0D9488', type: 'Mobile App', screens: ['01-schedule', '02-emergency', '03-interactions', '04-dashboard', '05-onboarding', '06-medications', '07-emergency-card', '08-reports', '09-telehealth', '10-wearable', '11-lab-trends'] }
+    { id: '13-Vitals', name: 'Vitals', icon: 'favorite', cat: 'Health', color: '#0D9488', type: 'Mobile App', screens: ['01-schedule', '02-emergency', '03-interactions', '04-dashboard', '05-onboarding', '06-medications', '07-emergency-card', '08-reports', '09-telehealth', '10-wearable', '11-lab-trends'] },
+    { id: '15-PinSnap', name: 'PinSnap', icon: 'sports_score', cat: 'Sports', color: '#F97316', type: 'Mobile App', screens: ['01-scan-tab', '02-history-tab', '03-stats-tab', '04-cups-tab', '05-settings', '06-game-detail', '07-manual-entry'] }
 ];
 
 // ── STATE ──
@@ -27,6 +28,10 @@ const PW = 375, PH = 770, GAP = 12, SNAP_DIST = 8, GRID_SIZE = 20;
 
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
+
+// Global click position tracking for positionAway()
+let _lastClickX = 0, _lastClickY = 0;
+document.addEventListener('mousedown', e => { _lastClickX = e.clientX; _lastClickY = e.clientY; }, true);
 
 // ── FLOATING WINDOWS ──
 const FloatingWindows = {
@@ -72,6 +77,16 @@ const FloatingWindows = {
         const offset = (this._openCount % 5) * 30;
         this._openCount++;
         return { right: 20 + offset, top: 60 + offset };
+    },
+    /** Position a window on the opposite side from where the user clicked */
+    positionAway(clickX, clickY) {
+        const midX = window.innerWidth / 2;
+        const top = Math.max(60, Math.min(clickY - 100, window.innerHeight - 500));
+        if (clickX < midX) {
+            return { left: undefined, right: 20, top };
+        } else {
+            return { left: 20, right: undefined, top };
+        }
     }
 };
 function save() { localStorage.setItem('av-ann', JSON.stringify(annotations)); localStorage.setItem('av-pos', JSON.stringify(positions)); localStorage.setItem('av-conn', JSON.stringify(connections)); }
@@ -173,7 +188,10 @@ function renderCanvas() {
         const filtered = q && !lbl(scr).toLowerCase().includes(q) ? ' filtered-out' : '';
         const isSel = selScreen === scr ? ' selected' : '';
         const isMulti = multiSel.has(scr) ? ' multi-selected' : '';
-        return `<div class="ss${isSel}${isMulti}${filtered}" data-scr="${scr}" data-idx="${i}" style="left:${p.x}px;top:${p.y}px;z-index:${i + 1}"><div class="df"><div class="sb-bg-layer"></div><div class="notch"></div>${statusHTML}${dots.length ? `<div class="adots">${dots.join('')}</div>` : ''}<iframe src="${curApp.id}/screens/${scr}.html" loading="lazy" sandbox="allow-scripts allow-same-origin" style="pointer-events:${isInteract ? 'auto' : 'none'}"></iframe></div><div class="sl"><div class="sn">${i + 1}/${curApp.screens.length}${ann.grade ? ' · ' + ann.grade : ''}${ann.starred ? ' <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">star</span>' : ''}</div><div class="sm">${lbl(scr)}</div></div></div>`;
+        const screenUrl = (typeof ScreenCreator !== 'undefined' && ScreenCreator.getScreenUrl(curApp.id, scr)) || `${curApp.id}/screens/${scr}.html`;
+        const isCustom = typeof ScreenCreator !== 'undefined' && ScreenCreator.isCustomScreen(curApp.id, scr);
+        const customBadge = isCustom ? '<div class="custom-badge">CUSTOM</div>' : '';
+        return `<div class="ss${isSel}${isMulti}${filtered}" data-scr="${scr}" data-idx="${i}" style="left:${p.x}px;top:${p.y}px;z-index:${i + 1}"><div class="df"><div class="sb-bg-layer"></div><div class="notch"></div>${customBadge}${statusHTML}${dots.length ? `<div class="adots">${dots.join('')}</div>` : ''}<iframe src="${screenUrl}" loading="lazy" sandbox="allow-scripts allow-same-origin" style="pointer-events:${isInteract ? 'auto' : 'none'}"></iframe></div><div class="sl"><div class="sn">${i + 1}/${curApp.screens.length}${ann.grade ? ' · ' + ann.grade : ''}${ann.starred ? ' <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">star</span>' : ''}</div><div class="sm">${lbl(scr)}</div></div></div>`;
     }).join('');
     drawConnections();
     updateCam(); setupDrag(); renderSidebar(); updateMinimap();
@@ -540,7 +558,9 @@ function openPanel(scr) {
     $$('.pa-g').forEach(b => b.classList.toggle('on', b.dataset.g === ann.grade));
     $$('.status-btn').forEach(b => b.classList.toggle('on', b.dataset.s === ann.status));
     renderTags(ann.tags || []); renderImages(ann.images || []);
-    $('#pinfo').innerHTML = `<b>File:</b> ${scr}.html<br><b>App:</b> ${curApp.name}<br><b>Path:</b> ${curApp.id}/screens/${scr}.html<br><b>Status:</b> ${ann.status || 'None'}<br><b>Grade:</b> ${ann.grade || 'None'}`;
+    const isCustomScr = typeof ScreenCreator !== 'undefined' && ScreenCreator.isCustomScreen(curApp.id, scr);
+    const pathInfo = isCustomScr ? 'IndexedDB (custom)' : `${curApp.id}/screens/${scr}.html`;
+    $('#pinfo').innerHTML = `<b>File:</b> ${scr}.html<br><b>App:</b> ${curApp.name}<br><b>Path:</b> ${pathInfo}<br><b>Status:</b> ${ann.status || 'None'}<br><b>Grade:</b> ${ann.grade || 'None'}`;
 }
 function closePanel() { $('#ann-panel').classList.remove('open'); }
 
@@ -580,20 +600,140 @@ function handleFiles(files) {
 }
 
 // ── CONTEXT MENU ──
-function showCtx(x, y, scr) { const m = $('#ctx'); m.style.left = x + 'px'; m.style.top = y + 'px'; m.classList.add('show'); m._scr = scr; }
-document.addEventListener('click', () => $('#ctx').classList.remove('show'));
-$$('.ci').forEach(item => item.addEventListener('click', () => {
+function showCtx(x, y, scr) {
+    const m = $('#ctx'); m.style.left = x + 'px'; m.style.top = y + 'px'; m.classList.add('show'); m._scr = scr; m._clickX = x; m._clickY = y;
+    // Show/hide custom screen items
+    const isCustom = typeof ScreenCreator !== 'undefined' && ScreenCreator.isCustomScreen(curApp.id, scr);
+    m.querySelectorAll('.ci-custom').forEach(el => el.style.display = isCustom ? '' : 'none');
+    // Close background submenu
+    const bgSub = $('#ctx-bg-sub');
+    if (bgSub) bgSub.classList.remove('open');
+    // Keep menu in viewport
+    requestAnimationFrame(() => {
+        const rect = m.getBoundingClientRect();
+        if (rect.right > window.innerWidth) m.style.left = (window.innerWidth - rect.width - 8) + 'px';
+        if (rect.bottom > window.innerHeight) m.style.top = (window.innerHeight - rect.height - 8) + 'px';
+    });
+}
+
+/** Populate and toggle the background quick-pick submenu */
+function _toggleBgSubmenu() {
+    const bgSub = $('#ctx-bg-sub');
+    if (!bgSub) return;
+    if (bgSub.classList.contains('open')) { bgSub.classList.remove('open'); return; }
+
+    // Get first 8 gradient presets for quick-pick
+    const presets = (typeof ScreenBackgrounds !== 'undefined' && ScreenBackgrounds.PRESETS)
+        ? ScreenBackgrounds.PRESETS.slice(0, 8)
+        : [];
+
+    let html = '<div class="ctx-bg-grid">';
+    presets.forEach(p => {
+        html += `<div class="ctx-bg-thumb" data-preset="${p.id}" title="${p.name}" style="background:${p.css}"></div>`;
+    });
+    html += '</div>';
+    html += '<div class="ctx-bg-actions">';
+    html += '<div class="ctx-bg-action" data-bga="image"><span class="material-symbols-outlined">image</span> Image Backgrounds</div>';
+    html += '<div class="ctx-bg-action" data-bga="custom"><span class="material-symbols-outlined">gradient</span> Custom Gradient</div>';
+    html += '<div class="ctx-bg-action" data-bga="apply-all"><span class="material-symbols-outlined">select_all</span> Apply to All Screens</div>';
+    html += '<div class="ctx-bg-action" data-bga="clear"><span class="material-symbols-outlined">block</span> Clear Background</div>';
+    html += '</div>';
+
+    bgSub.innerHTML = html;
+    bgSub.classList.add('open');
+
+    // Wire quick-pick thumbnails
+    bgSub.querySelectorAll('.ctx-bg-thumb').forEach(thumb => {
+        thumb.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const presetId = thumb.dataset.preset;
+            const scr = $('#ctx')._scr;
+            if (typeof ScreenBackgrounds !== 'undefined' && scr) {
+                ScreenBackgrounds.applyPreset(presetId, scr);
+                toast('Background applied');
+            }
+            $('#ctx').classList.remove('show');
+        });
+    });
+
+    // Wire action items
+    bgSub.querySelectorAll('.ctx-bg-action').forEach(action => {
+        action.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const act = action.dataset.bga;
+            const scr = $('#ctx')._scr;
+            if (act === 'image' && typeof ScreenBackgrounds !== 'undefined') {
+                ScreenBackgrounds.enterFocusedMode(scr);
+                // Switch to image backgrounds tab after opening
+                setTimeout(() => {
+                    if (ScreenBackgrounds._activeSubTool !== 'gallery') ScreenBackgrounds._activeSubTool = 'gallery';
+                    ScreenBackgrounds._activeCatFilter = 'image';
+                    ScreenBackgrounds._refreshPanel();
+                }, 300);
+            }
+            if (act === 'custom' && typeof ScreenBackgrounds !== 'undefined') {
+                ScreenBackgrounds.enterFocusedMode(scr);
+                setTimeout(() => {
+                    ScreenBackgrounds._activeSubTool = 'editor';
+                    ScreenBackgrounds._refreshPanel();
+                }, 300);
+            }
+            if (act === 'apply-all' && typeof ScreenBackgrounds !== 'undefined') {
+                const bgDef = ScreenBackgrounds._backgrounds[scr];
+                if (bgDef) {
+                    if (bgDef.presetId) {
+                        ScreenBackgrounds.applyPreset(bgDef.presetId); // null screenId = global
+                    } else {
+                        ScreenBackgrounds.applyCustom(bgDef.css); // null screenId = global
+                    }
+                    toast('Background applied to all screens');
+                } else {
+                    toast('No background on this screen to apply globally');
+                }
+            }
+            if (act === 'clear' && typeof ScreenBackgrounds !== 'undefined') {
+                ScreenBackgrounds.clearBackground(scr);
+                toast('Background cleared');
+            }
+            $('#ctx').classList.remove('show');
+        });
+    });
+}
+document.addEventListener('click', (e) => {
+    if (e.target.closest('#ctx-bg-sub') || e.target.closest('.ci-has-sub')) return;
+    $('#ctx').classList.remove('show');
+});
+$$('.ci').forEach(item => item.addEventListener('click', (e) => {
     const scr = $('#ctx')._scr; if (!scr || !curApp) return; const act = item.dataset.a;
     if (act === 'annotate') { selScreen = scr; window.selScreen = scr; $$('.ss').forEach(s => s.classList.toggle('selected', s.dataset.scr === scr)); openPanel(scr); if (typeof AnnotationCanvas !== 'undefined') AnnotationCanvas.enter(scr); }
     if (act === 'inspect') { if (typeof ElementInspector !== 'undefined') { if (!ElementInspector.active) ElementInspector.activate(); } }
     if (act === 'star') { const k = aK(curApp.id, scr), a = getA(k); a.starred = !a.starred; annotations[k] = a; save(); renderCanvas(); toast(a.starred ? 'Starred' : 'Unstarred'); }
-    if (act === 'open') { window.open(`${curApp.id}/screens/${scr}.html`, '_blank'); }
+    if (act === 'open') { const openUrl = (typeof ScreenCreator !== 'undefined' && ScreenCreator.getScreenUrl(curApp.id, scr)) || `${curApp.id}/screens/${scr}.html`; window.open(openUrl, '_blank'); }
     if (act === 'front') { const s = document.querySelector(`.ss[data-scr="${scr}"]`); if (s) s.style.zIndex = ++maxZ; }
     if (act === 'back') { const s = document.querySelector(`.ss[data-scr="${scr}"]`); if (s) s.style.zIndex = 1; }
     if (act === 'connect') { toast('Click another screen to connect'); document.addEventListener('click', function handler(ev) { const tgt = ev.target.closest('.ss'); if (tgt && tgt.dataset.scr !== scr) { if (!connections[curApp.id]) connections[curApp.id] = []; connections[curApp.id].push({ from: scr, to: tgt.dataset.scr, type: 'tap' }); save(); drawConnections(); toast('Connected! Click the label to edit.'); } document.removeEventListener('click', handler); }, { once: true }); }
     if (act === 'reset') { const i = curApp.screens.indexOf(scr); if (!positions[pK(curApp.id)]) positions[pK(curApp.id)] = {}; positions[pK(curApp.id)][scr] = { x: i * (PW + GAP), y: 0 }; save(); renderCanvas(); }
     if (act === 'present') { startPresentation(curApp.screens.indexOf(scr)); }
     if (act === 'focused') { if (typeof ScreenBackgrounds !== 'undefined') ScreenBackgrounds.enterFocusedMode(scr); }
+    if (act === 'design-studio') {
+        if (typeof ScreenBackgrounds !== 'undefined') {
+            const cx = $('#ctx')._clickX || 0;
+            const cy = $('#ctx')._clickY || 200;
+            ScreenBackgrounds.open(scr);
+            // Position panel away from click
+            const pos = FloatingWindows.positionAway(cx, cy);
+            const panel = ScreenBackgrounds._panelEl;
+            if (panel) {
+                panel.style.left = pos.left != null ? pos.left + 'px' : 'auto';
+                panel.style.right = pos.right != null ? pos.right + 'px' : 'auto';
+                panel.style.top = pos.top + 'px';
+            }
+        }
+    }
+    if (act === 'change-bg') { e.stopPropagation(); _toggleBgSubmenu(); return; /* Don't close menu */ }
+    if (act === 'edit-html') { if (typeof ScreenCreator !== 'undefined') ScreenCreator.editScreenInPanel(curApp.id, scr); }
+    if (act === 'download-screen') { if (typeof ScreenCreator !== 'undefined') ScreenCreator.downloadScreen(curApp.id, scr); }
+    if (act === 'delete-screen') { if (typeof ScreenCreator !== 'undefined') { ScreenCreator.deleteScreen(curApp.id, scr).then(() => { renderCanvas(); toast('Deleted: ' + scr); }); } }
 }));
 
 // ── PRESENTATION MODE ──
@@ -606,7 +746,8 @@ function updatePres() {
     const scr = curApp.screens[presIdx];
     $('#pres-title').textContent = `${curApp.name} — ${lbl(scr)}`;
     $('#pres-counter').textContent = `${presIdx + 1} / ${curApp.screens.length}`;
-    $('#pres-frame').innerHTML = `<iframe src="${curApp.id}/screens/${scr}.html" style="width:430px;height:884px;border-radius:40px;border:3px solid #2a2a35;background:#fff;"></iframe>`;
+    const presScreenUrl = (typeof ScreenCreator !== 'undefined' && ScreenCreator.getScreenUrl(curApp.id, scr)) || `${curApp.id}/screens/${scr}.html`;
+    $('#pres-frame').innerHTML = `<iframe src="${presScreenUrl}" style="width:430px;height:884px;border-radius:40px;border:3px solid #2a2a35;background:#fff;"></iframe>`;
     // Apply Design Studio backgrounds to presentation iframe
     const presIframe = $('#pres-frame').querySelector('iframe');
     if (presIframe && typeof ScreenBackgrounds !== 'undefined') {
@@ -642,13 +783,14 @@ $('#search-input').addEventListener('input', () => renderCanvas());
 
 // ── KEYBOARD ──
 document.addEventListener('keydown', e => {
-    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
-    if (e.key === 'Escape') { if ($('#app-overlay').classList.contains('open')) { closeAppOverlay(); return; } if (typeof ScreenBackgrounds !== 'undefined' && ScreenBackgrounds._focusedMode) { ScreenBackgrounds.exitFocusedMode(); return; } if ($('#pres-overlay').classList.contains('on')) { $('#pres-overlay').classList.remove('on'); return; } if (typeof ResponsivePreview !== 'undefined' && ResponsivePreview._isOpen) { ResponsivePreview.close(); return; } if (typeof DesignCompare !== 'undefined' && DesignCompare._isOpen) { DesignCompare.close(); return; } if (typeof ElementInspector !== 'undefined' && ElementInspector.active) { ElementInspector.deactivate(); return; } if (typeof DesignTokens !== 'undefined' && DesignTokens._isOpen) { DesignTokens.close(); return; } if (typeof AccessibilityScanner !== 'undefined' && AccessibilityScanner._isOpen) { AccessibilityScanner.close(); return; } if (typeof CodeExport !== 'undefined' && CodeExport._isOpen) { CodeExport.close(); return; } if (typeof StylePresets !== 'undefined' && StylePresets._isOpen) { StylePresets.close(); return; } if (typeof ScreenBackgrounds !== 'undefined' && ScreenBackgrounds._isOpen) { ScreenBackgrounds.close(); return; } closePanel(); selScreen = null; window.selScreen = null; multiSel.clear(); $$('.ss').forEach(s => { s.classList.remove('selected'); s.classList.remove('multi-selected'); }); }
+    if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') { if (e.key !== 'Escape') return; }
+    if (e.key === 'Escape') { if (typeof ScreenCreator !== 'undefined' && ScreenCreator._isOpen) { ScreenCreator.close(); return; } if ($('#app-overlay').classList.contains('open')) { closeAppOverlay(); return; } if (typeof ScreenBackgrounds !== 'undefined' && ScreenBackgrounds._focusedMode) { ScreenBackgrounds.exitFocusedMode(); return; } if ($('#pres-overlay').classList.contains('on')) { $('#pres-overlay').classList.remove('on'); return; } if (typeof ResponsivePreview !== 'undefined' && ResponsivePreview._isOpen) { ResponsivePreview.close(); return; } if (typeof DesignCompare !== 'undefined' && DesignCompare._isOpen) { DesignCompare.close(); return; } if (typeof ElementInspector !== 'undefined' && ElementInspector.active) { ElementInspector.deactivate(); return; } if (typeof DesignTokens !== 'undefined' && DesignTokens._isOpen) { DesignTokens.close(); return; } if (typeof AccessibilityScanner !== 'undefined' && AccessibilityScanner._isOpen) { AccessibilityScanner.close(); return; } if (typeof CodeExport !== 'undefined' && CodeExport._isOpen) { CodeExport.close(); return; } if (typeof StylePresets !== 'undefined' && StylePresets._isOpen) { StylePresets.close(); return; } if (typeof ScreenBackgrounds !== 'undefined' && ScreenBackgrounds._isOpen) { ScreenBackgrounds.close(); return; } closePanel(); selScreen = null; window.selScreen = null; multiSel.clear(); $$('.ss').forEach(s => { s.classList.remove('selected'); s.classList.remove('multi-selected'); }); }
     if (e.key === 'm' || e.key === 'M') { if ($('#app-overlay').classList.contains('open')) closeAppOverlay(); else openAppOverlay(); }
     if (e.key === 'i' || e.key === 'I') { if (typeof ElementInspector !== 'undefined') ElementInspector.toggle(); }
     if (e.key === 't' || e.key === 'T') { if (typeof DesignTokens !== 'undefined') DesignTokens.toggle(); }
     if (e.key === 'a' || e.key === 'A') { if (typeof AccessibilityScanner !== 'undefined') AccessibilityScanner.toggle(); }
     if (e.key === 'r' || e.key === 'R') { if (typeof ResponsivePreview !== 'undefined') ResponsivePreview.toggle(); }
+    if (e.key === 'n' || e.key === 'N') { if (typeof ScreenCreator !== 'undefined') ScreenCreator.toggle(); }
     if (e.key === 'f') fitAll();
     if (e.key === '1') applyLayout('tight'); if (e.key === '2') applyLayout('grid'); if (e.key === '3') applyLayout('flow');
     if (e.key === 'd') { if (typeof ScreenBackgrounds !== 'undefined') { ScreenBackgrounds.enterFocusedMode(selScreen || null); } }
@@ -691,8 +833,14 @@ function loadApp(app) {
 }
 
 // ── INIT ──
-renderSidebar(); loadApp(APPS[0]);
+renderSidebar();
+// Initialize Screen Creator first (loads custom apps/screens from IndexedDB before first render)
+if (typeof ScreenCreator !== 'undefined') {
+    ScreenCreator.init().then(() => { loadApp(APPS[0]); });
+} else { loadApp(APPS[0]); }
+if (typeof AppPlanner !== 'undefined') AppPlanner.init();
 if (typeof ElementInspector !== 'undefined') ElementInspector.init();
+if (typeof VisualEditor !== 'undefined') VisualEditor.init();
 if (typeof DesignTokens !== 'undefined') DesignTokens.init();
 if (typeof StylePresets !== 'undefined') StylePresets.init();
 if (typeof ScreenBackgrounds !== 'undefined') ScreenBackgrounds.init();

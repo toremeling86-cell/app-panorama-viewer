@@ -19,7 +19,7 @@
     <aside id="sidebar">
         <div id="sidebar-header">
             <h1><span class="material-symbols-outlined">phone_iphone</span> App Panorama</h1>
-            <p>158 screens · 13 apps · drag & annotate</p>
+            <p>165 screens · 14 apps · drag & annotate</p>
         </div>
         <div id="app-list"></div>
         <div id="sidebar-footer">
@@ -52,11 +52,22 @@
             <div class="ao-grid" id="ao-grid"></div>
             <div class="ao-footer">
                 <div class="ao-footer-stats">
-                    <div class="ao-stat"><div class="ao-stat-v" id="ao-total">0</div><div class="ao-stat-l">Screens</div></div>
-                    <div class="ao-stat"><div class="ao-stat-v" id="ao-annotated">0</div><div class="ao-stat-l">Annotated</div></div>
-                    <div class="ao-stat"><div class="ao-stat-v" id="ao-starred">0</div><div class="ao-stat-l">Starred</div></div>
+                    <div class="ao-stat">
+                        <div class="ao-stat-v" id="ao-total">0</div>
+                        <div class="ao-stat-l">Screens</div>
+                    </div>
+                    <div class="ao-stat">
+                        <div class="ao-stat-v" id="ao-annotated">0</div>
+                        <div class="ao-stat-l">Annotated</div>
+                    </div>
+                    <div class="ao-stat">
+                        <div class="ao-stat-v" id="ao-starred">0</div>
+                        <div class="ao-stat-l">Starred</div>
+                    </div>
                 </div>
-                <button class="ao-close" id="ao-close"><span class="material-symbols-outlined" style="font-size:13px">close</span> Close <kbd style="font-size:9px;opacity:.5;margin-left:2px">Esc</kbd></button>
+                <button class="ao-close" id="ao-close"><span class="material-symbols-outlined"
+                        style="font-size:13px">close</span> Close <kbd
+                        style="font-size:9px;opacity:.5;margin-left:2px">Esc</kbd></button>
             </div>
         </div>
     </div>
@@ -117,6 +128,10 @@
                     class="material-symbols-outlined">devices</span></button>
             <button class="tb" id="btn-code-export" title="Code Export"><span
                     class="material-symbols-outlined">code</span></button>
+            <button class="tb" id="btn-create" title="Screen Creator (Key: N)"><span
+                    class="material-symbols-outlined">add_circle</span></button>
+            <button class="tb" id="btn-plan" title="App Planner"><span
+                    class="material-symbols-outlined">assignment</span></button>
             <div class="tbsep"></div>
             <button class="tb" id="btn-compare" title="Compare Screens"><span
                     class="material-symbols-outlined">compare</span></button>
@@ -151,7 +166,8 @@
             <div>
                 <div class="pl"><span class="material-symbols-outlined">star</span> Rating</div>
                 <div class="pa">
-                    <button class="pa-star" id="btn-star"><span class="material-symbols-outlined" style="font-size:13px">star_border</span> Star</button>
+                    <button class="pa-star" id="btn-star"><span class="material-symbols-outlined"
+                            style="font-size:13px">star_border</span> Star</button>
                     <button class="pa-g" data-g="A">A</button>
                     <button class="pa-g" data-g="B">B</button>
                     <button class="pa-g" data-g="C">C</button>
@@ -161,10 +177,14 @@
             <div>
                 <div class="pl"><span class="material-symbols-outlined">flag</span> Status</div>
                 <div class="status-sel">
-                    <button class="status-btn" data-s="approved"><span class="material-symbols-outlined" style="font-size:13px">check</span> Approved</button>
-                    <button class="status-btn" data-s="wip"><span class="material-symbols-outlined" style="font-size:13px">bolt</span> WIP</button>
-                    <button class="status-btn" data-s="needs-work"><span class="material-symbols-outlined" style="font-size:13px">close</span> Needs Work</button>
-                    <button class="status-btn" data-s="review"><span class="material-symbols-outlined" style="font-size:13px">visibility</span> Review</button>
+                    <button class="status-btn" data-s="approved"><span class="material-symbols-outlined"
+                            style="font-size:13px">check</span> Approved</button>
+                    <button class="status-btn" data-s="wip"><span class="material-symbols-outlined"
+                            style="font-size:13px">bolt</span> WIP</button>
+                    <button class="status-btn" data-s="needs-work"><span class="material-symbols-outlined"
+                            style="font-size:13px">close</span> Needs Work</button>
+                    <button class="status-btn" data-s="review"><span class="material-symbols-outlined"
+                            style="font-size:13px">visibility</span> Review</button>
                 </div>
             </div>
             <div>
@@ -180,7 +200,8 @@
             <div>
                 <div class="pl"><span class="material-symbols-outlined">image</span> Attachments</div>
                 <div id="img-drop">
-                    <div class="di"><span class="material-symbols-outlined" style="font-size:14px">attach_file</span></div>
+                    <div class="di"><span class="material-symbols-outlined" style="font-size:14px">attach_file</span>
+                    </div>
                     Drop screenshots or click to upload
                     <small>PNG, JPG — stored in browser</small>
                 </div>
@@ -203,11 +224,14 @@
     <!-- PRESENTATION MODE -->
     <div id="pres-overlay">
         <div id="pres-bar">
-            <button class="pres-btn" id="pres-prev"><span class="material-symbols-outlined" style="font-size:14px">arrow_back</span> Prev</button>
+            <button class="pres-btn" id="pres-prev"><span class="material-symbols-outlined"
+                    style="font-size:14px">arrow_back</span> Prev</button>
             <span id="pres-title"></span>
             <span id="pres-counter"></span>
-            <button class="pres-btn" id="pres-next">Next <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></button>
-            <button class="pres-btn" id="pres-close"><span class="material-symbols-outlined" style="font-size:14px">close</span></button>
+            <button class="pres-btn" id="pres-next">Next <span class="material-symbols-outlined"
+                    style="font-size:14px">arrow_forward</span></button>
+            <button class="pres-btn" id="pres-close"><span class="material-symbols-outlined"
+                    style="font-size:14px">close</span></button>
         </div>
         <div id="pres-frame"></div>
         <div id="pres-nav"></div>
@@ -216,14 +240,20 @@
     <!-- FOCUSED DESIGN MODE (Screen Editor) -->
     <div id="focused-overlay">
         <div id="focused-bar">
-            <button class="focused-btn" id="focused-prev"><span class="material-symbols-outlined" style="font-size:14px">arrow_back</span> Prev</button>
+            <button class="focused-btn" id="focused-prev"><span class="material-symbols-outlined"
+                    style="font-size:14px">arrow_back</span> Prev</button>
             <span id="focused-title"></span>
             <span id="focused-counter"></span>
-            <button class="focused-btn" id="focused-next">Next <span class="material-symbols-outlined" style="font-size:14px">arrow_forward</span></button>
-            <button class="focused-btn" id="focused-toggle-filmstrip" title="Toggle filmstrip"><span class="material-symbols-outlined" style="font-size:14px">movie</span> Screens</button>
-            <button class="focused-btn" id="focused-toggle-info" title="Toggle info"><span class="material-symbols-outlined" style="font-size:14px">info</span> Info</button>
-            <button class="focused-btn" id="focused-toggle-panel" title="Toggle panel"><span class="material-symbols-outlined" style="font-size:14px">tune</span> Panel</button>
-            <button class="focused-btn focused-btn-close" id="focused-close"><span class="material-symbols-outlined" style="font-size:14px">close</span></button>
+            <button class="focused-btn" id="focused-next">Next <span class="material-symbols-outlined"
+                    style="font-size:14px">arrow_forward</span></button>
+            <button class="focused-btn" id="focused-toggle-filmstrip" title="Toggle filmstrip"><span
+                    class="material-symbols-outlined" style="font-size:14px">movie</span> Screens</button>
+            <button class="focused-btn" id="focused-toggle-info" title="Toggle info"><span
+                    class="material-symbols-outlined" style="font-size:14px">info</span> Info</button>
+            <button class="focused-btn" id="focused-toggle-panel" title="Toggle panel"><span
+                    class="material-symbols-outlined" style="font-size:14px">tune</span> Panel</button>
+            <button class="focused-btn focused-btn-close" id="focused-close"><span class="material-symbols-outlined"
+                    style="font-size:14px">close</span></button>
         </div>
         <div id="focused-content">
             <aside id="focused-info-panel">
@@ -252,19 +282,30 @@
 
     <!-- CONTEXT MENU -->
     <div id="ctx">
-        <div class="ci" data-a="annotate"><span class="material-symbols-outlined">edit</span> Annotate</div>
-        <div class="ci" data-a="inspect"><span class="material-symbols-outlined">search</span> Inspect Element</div>
-        <div class="ci" data-a="star"><span class="material-symbols-outlined">star</span> Toggle Star</div>
-        <div class="ci" data-a="present"><span class="material-symbols-outlined">slideshow</span> Present from here
-        </div>
-        <div class="ci" data-a="focused"><span class="material-symbols-outlined">edit_square</span> Screen Editor</div>
-        <div class="ci" data-a="open"><span class="material-symbols-outlined">open_in_new</span> Open in Tab</div>
+        <!-- Tools -->
+        <div class="ci" data-a="inspect"><span class="material-symbols-outlined">search</span> Inspect Element <kbd class="ci-kbd">I</kbd></div>
+        <div class="ci" data-a="focused"><span class="material-symbols-outlined">edit_square</span> Screen Editor <kbd class="ci-kbd">D</kbd></div>
+        <div class="ci" data-a="design-studio"><span class="material-symbols-outlined">palette</span> Design Studio</div>
+        <div class="ci ci-has-sub" data-a="change-bg"><span class="material-symbols-outlined">wallpaper</span> Change Background... <span class="ci-arrow">&#9656;</span></div>
+        <!-- Background submenu (injected dynamically) -->
+        <div id="ctx-bg-sub" class="ctx-submenu"></div>
         <div class="csep"></div>
+        <!-- Actions -->
+        <div class="ci" data-a="star"><span class="material-symbols-outlined">star</span> Toggle Star</div>
+        <div class="ci" data-a="annotate"><span class="material-symbols-outlined">edit</span> Annotate</div>
+        <div class="ci" data-a="present"><span class="material-symbols-outlined">slideshow</span> Present from here</div>
         <div class="ci" data-a="connect"><span class="material-symbols-outlined">link</span> Connect to...</div>
+        <div class="csep"></div>
+        <!-- Custom Screen (shown only for custom screens) -->
+        <div class="ci ci-custom" data-a="edit-html"><span class="material-symbols-outlined">code</span> Edit HTML</div>
+        <div class="ci ci-custom" data-a="download-screen"><span class="material-symbols-outlined">download</span> Download Screen</div>
+        <div class="ci ci-custom ci-danger" data-a="delete-screen"><span class="material-symbols-outlined">delete</span> Delete Screen</div>
+        <div class="csep ci-custom"></div>
+        <!-- Layout -->
         <div class="ci" data-a="front"><span class="material-symbols-outlined">flip_to_front</span> Bring to Front</div>
         <div class="ci" data-a="back"><span class="material-symbols-outlined">flip_to_back</span> Send to Back</div>
-        <div class="csep"></div>
         <div class="ci" data-a="reset"><span class="material-symbols-outlined">restart_alt</span> Reset Position</div>
+        <div class="ci" data-a="open"><span class="material-symbols-outlined">open_in_new</span> Open in Tab</div>
     </div>
 
     <!-- ANNOTATION CANVAS (fullscreen overlay, hidden by default) -->
@@ -430,7 +471,8 @@
                 </button>
             </div>
         </div>
-        <div class="dt-edit-hint" style="padding:4px 12px;font-size:10px;color:var(--dim);background:var(--s2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;">
+        <div class="dt-edit-hint"
+            style="padding:4px 12px;font-size:10px;color:var(--dim);background:var(--s2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;">
             <span class="material-symbols-outlined" style="font-size:12px">edit</span>
             Double-click any token to edit · Changes apply live to all screens
         </div>
@@ -522,9 +564,293 @@
     <!-- CODE EXPORT PANEL: self-created by code-export.js -->
     <!-- RESPONSIVE PREVIEW: self-created by responsive-preview.js -->
 
+    <!-- SCREEN CREATOR PANEL -->
+    <aside id="sc-panel">
+        <div class="sc-header" id="sc-panel-header">
+            <div class="sc-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:var(--accent)">add_circle</span>
+                <span class="sc-title">Screen Creator</span>
+            </div>
+            <div class="sc-header-actions">
+                <button class="sc-hdr-btn" id="sc-new-app" title="New App">
+                    <span class="material-symbols-outlined" style="font-size:14px">library_add</span>
+                </button>
+                <button class="sc-hdr-btn" id="sc-close" title="Close">
+                    <span class="material-symbols-outlined" style="font-size:14px">close</span>
+                </button>
+            </div>
+        </div>
+        <!-- New App Dialog (inline, hidden by default) -->
+        <div id="sc-new-app-dialog">
+            <div class="sc-dialog-title">New App</div>
+            <div class="sc-dialog-row">
+                <label class="sc-dialog-label">Name</label>
+                <input type="text" id="sc-app-name" class="sc-dialog-input" placeholder="My App">
+            </div>
+            <div class="sc-dialog-row">
+                <label class="sc-dialog-label">Category</label>
+                <input type="text" id="sc-app-cat" class="sc-dialog-input" placeholder="Custom" value="Custom">
+            </div>
+            <div class="sc-dialog-row">
+                <label class="sc-dialog-label">Icon</label>
+                <select id="sc-app-icon" class="sc-dialog-input">
+                    <option value="add_circle">add_circle</option>
+                    <option value="phone_iphone">phone_iphone</option>
+                    <option value="dashboard">dashboard</option>
+                    <option value="shopping_cart">shopping_cart</option>
+                    <option value="palette">palette</option>
+                    <option value="chat">chat</option>
+                    <option value="map">map</option>
+                    <option value="music_note">music_note</option>
+                    <option value="fitness_center">fitness_center</option>
+                    <option value="school">school</option>
+                    <option value="work">work</option>
+                    <option value="rocket_launch">rocket_launch</option>
+                    <option value="bolt">bolt</option>
+                    <option value="star">star</option>
+                </select>
+            </div>
+            <div class="sc-dialog-row">
+                <label class="sc-dialog-label">Color</label>
+                <input type="color" id="sc-app-color" class="sc-dialog-color" value="#818cf8">
+            </div>
+            <div class="sc-dialog-actions">
+                <button class="sc-dialog-btn sc-dialog-btn-primary" id="sc-create-app-btn">Create</button>
+                <button class="sc-dialog-btn" id="sc-cancel-app-btn">Cancel</button>
+            </div>
+        </div>
+        <div class="sc-body">
+            <!-- App + Screen selection -->
+            <div class="sc-section">
+                <div class="sc-field-row">
+                    <label class="sc-label">App</label>
+                    <select id="sc-app-select" class="sc-select">
+                        <option value="">-- Select app --</option>
+                    </select>
+                </div>
+                <div class="sc-field-row">
+                    <label class="sc-label">Screen name</label>
+                    <input type="text" id="sc-screen-name" class="sc-input" placeholder="e.g. 01-dashboard">
+                </div>
+            </div>
+            <!-- HTML Editor -->
+            <div class="sc-section">
+                <div class="sc-editor-header">
+                    <span class="sc-label">HTML Editor</span>
+                    <button class="sc-small-btn" id="sc-template" title="Load template">
+                        <span class="material-symbols-outlined" style="font-size:12px">description</span> Template
+                    </button>
+                </div>
+                <textarea id="sc-editor" class="sc-editor" spellcheck="false" placeholder="Paste or write HTML here..."></textarea>
+            </div>
+            <!-- Action buttons -->
+            <div class="sc-actions">
+                <button class="sc-btn sc-btn-preview" id="sc-preview-btn">
+                    <span class="material-symbols-outlined" style="font-size:14px">play_arrow</span> Preview
+                </button>
+                <button class="sc-btn sc-btn-save" id="sc-save">
+                    <span class="material-symbols-outlined" style="font-size:14px">save</span> Save
+                </button>
+                <button class="sc-btn" id="sc-import">
+                    <span class="material-symbols-outlined" style="font-size:14px">upload</span> Import
+                </button>
+                <button class="sc-btn" id="sc-export">
+                    <span class="material-symbols-outlined" style="font-size:14px">download</span> Export
+                </button>
+            </div>
+            <!-- Live Preview -->
+            <div class="sc-section">
+                <span class="sc-label">Live Preview</span>
+                <div class="sc-preview-wrapper">
+                    <div class="sc-preview-device">
+                        <div class="sc-preview-notch"></div>
+                        <iframe id="sc-preview-iframe" class="sc-preview-frame" sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                </div>
+            </div>
+            <!-- Saved Screens List -->
+            <div class="sc-section">
+                <span class="sc-label">Saved Screens</span>
+                <div id="sc-screen-list" class="sc-screen-list">
+                    <div class="sc-empty">Select an app to see its custom screens</div>
+                </div>
+            </div>
+            <!-- Export to Project -->
+            <div class="sc-section">
+                <span class="sc-label">Export to Project</span>
+                <div class="sc-export-info">
+                    Exports to <code>{NN}-{AppName}/screens/*.html</code> + <code>design-spec.md</code>
+                </div>
+                <div class="sc-actions">
+                    <button class="sc-btn sc-btn-export-project" id="sc-export-project">
+                        <span class="material-symbols-outlined" style="font-size:14px">folder</span> Export App
+                    </button>
+                    <button class="sc-btn" id="sc-export-all-project">
+                        <span class="material-symbols-outlined" style="font-size:14px">drive_folder_upload</span> Export All
+                    </button>
+                </div>
+                <button class="sc-btn sc-btn-plan" id="sc-plan-app" style="width:100%;margin-top:6px;">
+                    <span class="material-symbols-outlined" style="font-size:14px">assignment</span> Plan App
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- APP PLANNER PANEL -->
+    <aside id="ap-panel">
+        <div class="ap-header" id="ap-panel-header">
+            <div class="ap-header-info">
+                <span class="material-symbols-outlined" style="font-size:14px;color:#F97316">assignment</span>
+                <span class="ap-title">App Planner</span>
+            </div>
+            <div class="ap-header-actions">
+                <button class="ap-hdr-btn" id="ap-close" title="Close">
+                    <span class="material-symbols-outlined" style="font-size:14px">close</span>
+                </button>
+            </div>
+        </div>
+        <div class="ap-body" id="ap-body">
+            <div class="ap-empty">Loading planner...</div>
+        </div>
+    </aside>
+
+    <!-- VISUAL EDITOR — Floating Toolbar -->
+    <div id="ve-toolbar">
+        <span id="ve-tb-type-badge" class="ve-tb-badge"></span>
+        <button class="ve-tb-btn" id="ve-tb-fill" data-role="fill" title="Fill color">
+            <span class="material-symbols-outlined" style="font-size:14px">format_color_fill</span>
+        </button>
+        <button class="ve-tb-btn" id="ve-tb-color" data-role="color" title="Text color">
+            <span class="material-symbols-outlined" style="font-size:14px">format_color_text</span>
+        </button>
+        <div class="ve-tb-sep"></div>
+        <button class="ve-tb-btn" id="ve-tb-bold" data-role="bold" title="Bold">
+            <span style="font-weight:800;font-size:13px">B</span>
+        </button>
+        <button class="ve-tb-btn" id="ve-tb-italic" data-role="italic" title="Italic">
+            <span style="font-style:italic;font-size:13px">I</span>
+        </button>
+        <div class="ve-tb-sep"></div>
+        <button class="ve-tb-btn" id="ve-tb-radius" data-role="radius" title="Border radius">
+            <span class="material-symbols-outlined" style="font-size:14px">rounded_corner</span>
+        </button>
+        <button class="ve-tb-btn" id="ve-tb-padding" data-role="padding" title="Padding">
+            <span class="material-symbols-outlined" style="font-size:14px">padding</span>
+        </button>
+        <button class="ve-tb-btn" id="ve-tb-shadow" data-role="shadow" title="Box shadow">
+            <span class="material-symbols-outlined" style="font-size:14px">shadow</span>
+        </button>
+        <button class="ve-tb-btn" id="ve-tb-opacity" data-role="opacity" title="Opacity">
+            <span class="material-symbols-outlined" style="font-size:14px">opacity</span>
+        </button>
+        <button class="ve-tb-btn" id="ve-tb-fontsize" data-role="fontsize" title="Font size">
+            <span class="material-symbols-outlined" style="font-size:14px">format_size</span>
+        </button>
+        <div class="ve-tb-sep"></div>
+        <button class="ve-tb-btn" id="ve-tb-imgbg" data-role="imgbg" title="Image background">
+            <span class="material-symbols-outlined" style="font-size:14px">image</span>
+        </button>
+        <div class="ve-tb-sep"></div>
+        <button class="ve-tb-btn" id="ve-tb-undo" data-role="undo" title="Undo (Ctrl+Z)">
+            <span class="material-symbols-outlined" style="font-size:14px">undo</span>
+        </button>
+        <button class="ve-tb-btn ve-tb-save" id="ve-tb-save" data-role="save" title="Save changes">
+            <span class="material-symbols-outlined" style="font-size:14px">save</span>
+        </button>
+    </div>
+
+    <!-- VISUAL EDITOR — Image Background Picker Popup -->
+    <div id="ve-imgbg-picker">
+        <div class="ve-imgbg-header">
+            <span class="ve-imgbg-title">Image Backgrounds</span>
+            <input type="text" id="ve-imgbg-search" class="ve-imgbg-search" placeholder="Search...">
+            <button class="ve-imgbg-close" onclick="this.closest('#ve-imgbg-picker').classList.remove('open')">&times;</button>
+        </div>
+        <div id="ve-imgbg-grid" class="ve-imgbg-grid"></div>
+        <div class="ve-imgbg-actions">
+            <button class="ve-imgbg-btn" id="ve-imgbg-clear">Clear Image</button>
+        </div>
+    </div>
+
+    <!-- VISUAL EDITOR — Color Picker Popup (HSL Canvas) -->
+    <div id="ve-color-picker">
+        <div class="ve-cp-header">
+            <span class="ve-cp-title">Color</span>
+            <button class="ve-cp-close" onclick="this.closest('#ve-color-picker').classList.remove('open')">&times;</button>
+        </div>
+        <div class="ve-cp-body">
+            <!-- Hidden native input for fallback -->
+            <input type="color" id="ve-cp-input" style="display:none" value="#818cf8">
+            <!-- HSL Saturation/Brightness Canvas -->
+            <div class="ve-cp-canvas-wrap" id="ve-cp-canvas-wrap">
+                <canvas id="ve-cp-canvas" width="296" height="160"></canvas>
+                <div class="ve-cp-canvas-cursor" id="ve-cp-cursor"></div>
+            </div>
+            <!-- Hue Slider -->
+            <div class="ve-cp-hue-wrap" id="ve-cp-hue-wrap">
+                <div class="ve-cp-hue-cursor" id="ve-cp-hue-cursor"></div>
+            </div>
+            <!-- Opacity Bar -->
+            <div class="ve-cp-opacity-wrap" id="ve-cp-opacity-wrap">
+                <div class="ve-cp-opacity-bg"></div>
+                <div class="ve-cp-opacity-grad" id="ve-cp-opacity-grad"></div>
+                <div class="ve-cp-opacity-cursor" id="ve-cp-opacity-cursor"></div>
+            </div>
+            <!-- Hex + Preview + Eyedropper -->
+            <div class="ve-cp-hex-row">
+                <span class="ve-cp-label">Hex</span>
+                <input type="text" id="ve-cp-hex" class="ve-cp-hex-input" value="#818cf8" maxlength="7">
+                <div class="ve-cp-preview-swatch" id="ve-cp-preview"></div>
+                <button class="ve-cp-eyedropper" id="ve-cp-eyedropper" title="Eyedropper">
+                    <span class="material-symbols-outlined" style="font-size:14px">colorize</span>
+                </button>
+            </div>
+            <!-- Quick Palette -->
+            <div class="ve-cp-palette">
+                <span class="ve-cp-swatch" data-color="#ef4444" style="background:#ef4444"></span>
+                <span class="ve-cp-swatch" data-color="#f97316" style="background:#f97316"></span>
+                <span class="ve-cp-swatch" data-color="#eab308" style="background:#eab308"></span>
+                <span class="ve-cp-swatch" data-color="#22c55e" style="background:#22c55e"></span>
+                <span class="ve-cp-swatch" data-color="#14b8a6" style="background:#14b8a6"></span>
+                <span class="ve-cp-swatch" data-color="#06b6d4" style="background:#06b6d4"></span>
+                <span class="ve-cp-swatch" data-color="#3b82f6" style="background:#3b82f6"></span>
+                <span class="ve-cp-swatch" data-color="#8b5cf6" style="background:#8b5cf6"></span>
+                <span class="ve-cp-swatch" data-color="#ec4899" style="background:#ec4899"></span>
+                <span class="ve-cp-swatch" data-color="#f43f5e" style="background:#f43f5e"></span>
+                <span class="ve-cp-swatch" data-color="#ffffff" style="background:#ffffff"></span>
+                <span class="ve-cp-swatch" data-color="#a1a1aa" style="background:#a1a1aa"></span>
+                <span class="ve-cp-swatch" data-color="#52525b" style="background:#52525b"></span>
+                <span class="ve-cp-swatch" data-color="#000000" style="background:#000000"></span>
+            </div>
+            <!-- Gradient link -->
+            <div class="ve-cp-gradient-link" id="ve-cp-gradient-link">
+                <span class="material-symbols-outlined" style="font-size:13px">gradient</span> Open Gradient Editor
+            </div>
+            <!-- Actions -->
+            <div class="ve-cp-actions">
+                <button class="ve-cp-btn ve-cp-btn-apply" id="ve-cp-apply">Apply</button>
+                <button class="ve-cp-btn" id="ve-cp-reset">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VISUAL EDITOR — Gradient Editor Popup -->
+    <div id="ve-gradient-editor">
+        <div class="ve-ge-header">
+            <span class="ve-ge-title">Gradient</span>
+            <button class="ve-ge-close" onclick="this.closest('#ve-gradient-editor').classList.remove('open')">&times;</button>
+        </div>
+        <div id="ve-ge-body" class="ve-ge-body"></div>
+        <div class="ve-ge-actions">
+            <button class="ve-ge-btn ve-ge-btn-apply" id="ve-ge-apply">Done</button>
+            <button class="ve-ge-btn" id="ve-ge-reset">Reset</button>
+        </div>
+    </div>
+
     <div id="toast"></div>
     <script src="viewer/design-tokens.js"></script>
     <script src="viewer/style-presets.js"></script>
+    <script src="viewer/image-backgrounds-data.js"></script>
     <script src="viewer/screen-backgrounds.js"></script>
     <script src="viewer/design-compare.js"></script>
     <script src="viewer/element-inspector.js"></script>
@@ -532,6 +858,9 @@
     <script src="viewer/accessibility-scanner.js"></script>
     <script src="viewer/responsive-preview.js"></script>
     <script src="viewer/code-export.js"></script>
+    <script src="viewer/screen-creator.js"></script>
+    <script src="viewer/app-planner.js"></script>
+    <script src="viewer/visual-editor.js"></script>
     <script src="viewer/engine.js"></script>
 </body>
 

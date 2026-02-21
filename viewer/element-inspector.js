@@ -444,6 +444,8 @@ const ElementInspector = {
         this.selectedEl = null;
         this.selectedIframe = null;
         this.selectedScreenId = null;
+        // Hide Visual Editor toolbar
+        if (typeof VisualEditor !== 'undefined') VisualEditor.hideToolbar();
     },
 
 
@@ -480,6 +482,12 @@ const ElementInspector = {
             h.addEventListener('click', () => h.parentElement.classList.toggle('collapsed'));
         });
 
+        // Hook Visual Editor into editable property values
+        if (typeof VisualEditor !== 'undefined' && VisualEditor.enabled) {
+            VisualEditor.hookIntoPanel(body);
+            VisualEditor.showToolbar(el, iframe);
+        }
+
         // Setup notes auto-save
         const notesArea = body.querySelector('#ei-notes');
         if (notesArea) {
@@ -507,19 +515,19 @@ const ElementInspector = {
         const pw = 320, ph = Math.min(panel.scrollHeight, window.innerHeight * 0.7);
 
         let x, y;
-        // Try: right of element
-        if (targetRect.right + pw + 20 < window.innerWidth) {
-            x = targetRect.right + 14;
-            y = Math.max(60, targetRect.top);
-        }
-        // Try: left of element
-        else if (targetRect.left - pw - 20 > 0) {
+        // Prefer LEFT of element (Inspector shouldn't cover what you're editing)
+        if (targetRect.left - pw - 20 > 0) {
             x = targetRect.left - pw - 14;
             y = Math.max(60, targetRect.top);
         }
-        // Fallback: right side of viewport
+        // Try: right of element if no space on left
+        else if (targetRect.right + pw + 20 < window.innerWidth) {
+            x = targetRect.right + 14;
+            y = Math.max(60, targetRect.top);
+        }
+        // Fallback: left side of viewport
         else {
-            x = window.innerWidth - pw - 16;
+            x = 16;
             y = 70;
         }
         // Clamp Y so panel doesn't go off bottom
@@ -620,7 +628,8 @@ const ElementInspector = {
             rows.push(
                 `<div class="ei-prop">` +
                 `<span class="ei-prop-name">${prop}</span>` +
-                `<span class="ei-prop-value">${colorSwatch}${this._escHtml(displayValue)}</span>` +
+                `<span class="ei-prop-value ve-editable" data-css-prop="${prop}" data-css-raw="${this._escHtml(value)}">` +
+                `${colorSwatch}<span class="ve-val-text">${this._escHtml(displayValue)}</span></span>` +
                 `</div>`
             );
         }
@@ -960,6 +969,22 @@ const ElementInspector = {
         const d = document.createElement('div');
         d.textContent = str;
         return d.innerHTML;
+    },
+
+    /** Get the currently selected element for external use (Visual Editor) */
+    getSelectedElement() {
+        return {
+            el: this.selectedEl,
+            iframe: this.selectedIframe,
+            screenId: this.selectedScreenId
+        };
+    },
+
+    /** Re-render Inspector panel after Visual Editor makes changes */
+    refreshAfterEdit() {
+        if (this.selectedEl && this.selectedIframe && this.selectedScreenId) {
+            this.showPanel(this.selectedEl, this.selectedIframe, this.selectedScreenId);
+        }
     },
 
     /** Get direct text content of an element (not children's text) */
